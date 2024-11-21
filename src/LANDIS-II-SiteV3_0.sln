@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LANDIS-II-SiteV3_0", "LANDIS-II-SiteV3_0.csproj", "{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA026972-7C2F-496C-BC19-5ED690179123}
+	EndGlobalSection
+EndGlobal

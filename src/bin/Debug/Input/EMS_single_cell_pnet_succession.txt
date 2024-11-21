@@ -1,0 +1,17 @@
+LandisData "PnET-Succession" 
+
+PnET-Succession		Value
+>>---------------------------------------------
+Timestep 		1 
+StartYear 	1991
+
+
+ 
+SeedingAlgorithm  	UniversalDispersal << WardSeedDispersal UniversalDispersal 
+Latitude  		44 
+PNEToutputsites 	"PNEToutputsites_single_cell.txt"
+InitialCommunities     "EMS_initial_community.txt"
+InitialCommunitiesMap   "single_cell_10_IC.img"
+PnETSpeciesParameters  "SPECIES_PNET_V200.txt"  
+EcoregionParameters 	"pnet_EcoregionParameters_EMS.txt"
+PnETGenericParameters	"GENERIC_PNET_V200.txt"

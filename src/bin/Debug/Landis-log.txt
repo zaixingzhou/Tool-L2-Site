@@ -1,0 +1,4 @@
+2024-11-18 16:27:04,271 - LANDIS-II 7.0 (7)
+2024-11-18 16:27:04,278 - 
+2024-11-18 16:27:04,326 - Loading scenario from file "EMS_scenario_pnet.txt" ...
+2024-11-18 16:27:04,339 - Error: The file EMS_scenario_pnet.txt does not exist
