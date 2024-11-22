@@ -8,13 +8,12 @@ C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\LANDIS-II-SiteV3_0\obj\Debug
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\LANDIS-II-SiteV3_0\obj\Debug\LANDIS-II-SiteV3_0.pdb
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\LANDIS-II-SiteV3_0\obj\Debug\LANDIS_II_Site.FormMain.resources
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\LANDIS-II-SiteV3_0\obj\Debug\LANDIS_II_Site.Properties.Resources.resources
+C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.AssemblyReference.cache
+C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.FormMain.resources
+C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.GenerateResource.cache
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\LANDIS-II-SiteV3_0.exe.config
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\LANDIS-II-SiteV3_0.exe
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\LANDIS-II-SiteV3_0.pdb
-C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.FormMain.resources
-C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.Properties.Resources.resources
-C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.GenerateResource.cache
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.CoreCompileInputs.cache
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.exe
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.pdb
-C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.AssemblyReference.cache
