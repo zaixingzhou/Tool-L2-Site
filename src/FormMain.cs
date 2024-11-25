@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
+using ZedGraph;
 
 using System.Windows.Forms;
 
@@ -21,7 +22,8 @@ namespace LANDIS_II_Site
 
             // set default values for some components
             InitializeComponentPlus();
-
+            // graph climate data
+           // chart_climate(); // 
 
         }
 
@@ -430,7 +432,7 @@ namespace LANDIS_II_Site
                 Text = caption
             };
 
-            Label textLabel = new Label { Left = 20, Top = 20, Text = text, AutoSize = true };
+            System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label { Left = 20, Top = 20, Text = text, AutoSize = true };
             TextBox inputBox = new TextBox { Left = 20, Top = 50, Width = 340 };
             Button confirmationButton = new Button
             {
@@ -637,6 +639,40 @@ namespace LANDIS_II_Site
             {
                 MessageBox.Show("Please select a row to delete.", "Delete Row", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void chart_climate()
+        {
+            // Read data from the CSV file
+            string filePath = @"Output\Site1\Site.csv"; // Path to the file
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
+
+                if (lines.Length > 1) // Ensure there's data
+                {
+                   // var series = chartPrecip.Series["Precip"]; // Get the existing series
+                    for (int i = 1; i < lines.Length; i++) // Skip header row
+                    {
+                        string[] columns = lines[i].Split(',');
+                        double.TryParse(columns[0], out double time); // First column is Year
+                        double.TryParse(columns[14], out double precip); // Fifth column is precip(mm)
+                        {
+                       //     series.Points.AddXY(time, precip);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("CSV file contains no data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("CSV file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
     }
   
