@@ -115,6 +115,7 @@
             this.tabPageCompare = new System.Windows.Forms.TabPage();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonExportOutput = new System.Windows.Forms.ToolStripButton();
+            this.buttonRunModel = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBoxPara.SuspendLayout();
@@ -1005,12 +1006,23 @@
             this.toolStripButtonExportOutput.Text = "Export Output";
             this.toolStripButtonExportOutput.ToolTipText = "Export output results";
             // 
+            // buttonRunModel
+            // 
+            this.buttonRunModel.Location = new System.Drawing.Point(965, 682);
+            this.buttonRunModel.Name = "buttonRunModel";
+            this.buttonRunModel.Size = new System.Drawing.Size(68, 39);
+            this.buttonRunModel.TabIndex = 43;
+            this.buttonRunModel.Text = "Run";
+            this.buttonRunModel.UseVisualStyleBackColor = true;
+            this.buttonRunModel.Click += new System.EventHandler(this.MenuRun_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1109, 1055);
+            this.Controls.Add(this.buttonRunModel);
             this.Controls.Add(this.tabControlGraph);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxAddEcoPara);
@@ -1134,6 +1146,7 @@
         private System.Windows.Forms.ToolStripMenuItem exportInputForLANDISIIToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonExportOutput;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.Button buttonRunModel;
     }
 }
 

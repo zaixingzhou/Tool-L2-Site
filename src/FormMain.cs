@@ -23,8 +23,7 @@ namespace LANDIS_II_Site
             // set default values for some components
             InitializeComponentPlus();
 
-            // load site results
-            LoadResultSite();
+       
             // graph climate data
             // chart_climate(); // 
             //checkedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -144,7 +143,8 @@ namespace LANDIS_II_Site
 
                 CopyDirectory(ResultDirectory, OutputDirectory);
 
-
+                // load site results
+                LoadResultSite();
 
             }
             catch (Exception ex)
@@ -300,7 +300,7 @@ namespace LANDIS_II_Site
             }
             else
             {
-                MessageBox.Show("The file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{filePath} does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -388,7 +388,7 @@ namespace LANDIS_II_Site
             }
             else
             {
-                MessageBox.Show("The file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{filePath} does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             cbSppGenericPara.SelectedIndex = 0;  // customize
 
@@ -520,7 +520,7 @@ namespace LANDIS_II_Site
             }
             else
             {
-                MessageBox.Show("The file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{filePath} does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -606,7 +606,7 @@ namespace LANDIS_II_Site
             }
             else
             {
-                MessageBox.Show("The file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{filePath}does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -712,7 +712,16 @@ namespace LANDIS_II_Site
         private void LoadResultSite()
         {
             // Read data from the CSV file
-            string filePath = @"Output\Site1\Site.csv"; // Path to the file
+            string filePath= @"Output\Site1\Site.csv";
+            if (cbExtensionOption.SelectedIndex == 0) 
+            {
+                filePath = @"Output\PNEToutputsites\Site1\Site.csv"; // Path to the file
+            }
+            if (cbExtensionOption.SelectedIndex == 1)
+            {
+                filePath = @"Output\Site1\Site.csv"; // Path to the file
+            }
+
             RecordsSite = ReadCsvAsDictionary(filePath);
 
         }

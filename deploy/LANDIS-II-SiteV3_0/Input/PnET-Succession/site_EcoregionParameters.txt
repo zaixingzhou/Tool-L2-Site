@@ -1,0 +1,39 @@
+LandisData	EcoregionParameters			
+							 
+EcoregionParameters	PrecLossFrac	climateFileName	SoilType	RootingDepth	LeakageFrac SnowSublimFrac
+>>---------------------------------------------------	
+>>Preclossfrac proportion of precip that does not enter soil.  Low value= more into soil.  High value=more lost.				
+>>Harvard Forest climate data.  PAR is average of 2005 to 2013 years except for those years which is observed from HEM tower in Wm2.	
+eco999	0.1	"site_climate.txt"	SALO	1000	1	.15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
