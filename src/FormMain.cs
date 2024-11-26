@@ -35,9 +35,9 @@ namespace LANDIS_II_Site
         {
             // set default values for some components
 
-            cbExtensionOption.SelectedIndex = 0;  // PnET-CN-Extension
+            cbExtensionOption.SelectedIndex = 0;  // PnET-Extension
 
-            cbSeedingAlg.SelectedIndex = 0;  // PnET-CN-Extension
+            cbSeedingAlg.SelectedIndex = 0;  // WardSeedDispersal
 
 
             InitializeCbEcoPara();  // intialize cbAddEcoPara
@@ -307,7 +307,7 @@ namespace LANDIS_II_Site
 
 
 
-            //cbEcoPara.SelectedIndex = 0;  // customize
+            cbEcoPara.SelectedIndex = 0;  // customize
 
 
         }
@@ -836,6 +836,26 @@ namespace LANDIS_II_Site
 
         }
 
+        private void buttonClearGraph_Click(object sender, EventArgs e)
+        {
+/*
+            zedGraphControlClimate.GraphPane.CurveList.Clear();
+            zedGraphControlCarbon.GraphPane.CurveList.Clear();
+ 
+            zedGraphControlClimate.Refresh();
+            zedGraphControlCarbon.Refresh();
+*/
+            for (int i = 0; i < checkedListBoxClimate.Items.Count; i++)
+            {
+                checkedListBoxClimate.SetItemChecked(i, false); // Uncheck the item
+            }
+            for (int i = 0; i < checkedListBoxCarbon.Items.Count; i++)
+            {
+                checkedListBoxCarbon.SetItemChecked(i, false); // Uncheck the item
+            }
+        }
+
+    
     }
 
 
