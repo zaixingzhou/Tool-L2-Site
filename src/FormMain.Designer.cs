@@ -38,8 +38,9 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportInputForLANDISIIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveOutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportOutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plotResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuUserGuide = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,11 +107,14 @@
             this.checkedListBoxClimate = new System.Windows.Forms.CheckedListBox();
             this.zedGraphControlClimate = new ZedGraph.ZedGraphControl();
             this.tabPageCarbon = new System.Windows.Forms.TabPage();
+            this.checkedListBoxCarbon = new System.Windows.Forms.CheckedListBox();
+            this.zedGraphControlCarbon = new ZedGraph.ZedGraphControl();
             this.tabPageWater = new System.Windows.Forms.TabPage();
             this.tabPageNitrogen = new System.Windows.Forms.TabPage();
             this.tabPageCohorts = new System.Windows.Forms.TabPage();
-            this.checkedListBoxCarbon = new System.Windows.Forms.CheckedListBox();
-            this.zedGraphControlCarbon = new ZedGraph.ZedGraphControl();
+            this.tabPageCompare = new System.Windows.Forms.TabPage();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonExportOutput = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBoxPara.SuspendLayout();
@@ -138,7 +142,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1085, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1109, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -187,30 +191,38 @@
             // 
             // toolsToolStripMenuItem
             // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportInputForLANDISIIToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
+            // exportInputForLANDISIIToolStripMenuItem
+            // 
+            this.exportInputForLANDISIIToolStripMenuItem.Name = "exportInputForLANDISIIToolStripMenuItem";
+            this.exportInputForLANDISIIToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
+            this.exportInputForLANDISIIToolStripMenuItem.Text = "&Export Input for LANDIS-II...";
+            // 
             // outputToolStripMenuItem
             // 
             this.outputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveOutputToolStripMenuItem,
+            this.exportOutputToolStripMenuItem,
             this.plotResultsToolStripMenuItem});
             this.outputToolStripMenuItem.Name = "outputToolStripMenuItem";
             this.outputToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             this.outputToolStripMenuItem.Text = "&Output";
             // 
-            // saveOutputToolStripMenuItem
+            // exportOutputToolStripMenuItem
             // 
-            this.saveOutputToolStripMenuItem.Name = "saveOutputToolStripMenuItem";
-            this.saveOutputToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
-            this.saveOutputToolStripMenuItem.Text = "&Save Output...";
-            this.saveOutputToolStripMenuItem.Click += new System.EventHandler(this.saveOutputToolStripMenuItem_Click);
+            this.exportOutputToolStripMenuItem.Name = "exportOutputToolStripMenuItem";
+            this.exportOutputToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.exportOutputToolStripMenuItem.Text = "&Export Output...";
+            this.exportOutputToolStripMenuItem.Click += new System.EventHandler(this.saveOutputToolStripMenuItem_Click);
             // 
             // plotResultsToolStripMenuItem
             // 
             this.plotResultsToolStripMenuItem.Name = "plotResultsToolStripMenuItem";
-            this.plotResultsToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.plotResultsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.plotResultsToolStripMenuItem.Text = "&Plot Results";
             // 
             // helpToolStripMenuItem
@@ -245,10 +257,12 @@
             this.toolStripSeparator2,
             this.toolStripRun,
             this.toolStripSeparator3,
+            this.toolStripButtonExportOutput,
+            this.toolStripSeparator4,
             this.toolStripButtonUserGuide});
             this.toolStrip.Location = new System.Drawing.Point(0, 28);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1085, 27);
+            this.toolStrip.Size = new System.Drawing.Size(1109, 27);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -314,7 +328,7 @@
             this.groupBoxPara.Controls.Add(this.label39);
             this.groupBoxPara.Controls.Add(this.tbSimYears);
             this.groupBoxPara.Controls.Add(this.label13);
-            this.groupBoxPara.Location = new System.Drawing.Point(298, 66);
+            this.groupBoxPara.Location = new System.Drawing.Point(290, 59);
             this.groupBoxPara.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxPara.Name = "groupBoxPara";
             this.groupBoxPara.Padding = new System.Windows.Forms.Padding(4);
@@ -464,11 +478,11 @@
             // 
             this.cbExtensionOption.FormattingEnabled = true;
             this.cbExtensionOption.Items.AddRange(new object[] {
-            "1 PnET-Succession",
-            "2 PnET-CN-Succession",
-            "3 Age-only",
-            "4 Biomass V3.5"});
-            this.cbExtensionOption.Location = new System.Drawing.Point(94, 24);
+            "PnET-Succession",
+            "PnET-CN-Succession",
+            "Age only",
+            "Biomass"});
+            this.cbExtensionOption.Location = new System.Drawing.Point(92, 24);
             this.cbExtensionOption.Name = "cbExtensionOption";
             this.cbExtensionOption.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbExtensionOption.Size = new System.Drawing.Size(175, 24);
@@ -490,7 +504,7 @@
             this.groupBoxExtensions.Controls.Add(this.checkedListBox1);
             this.groupBoxExtensions.Controls.Add(this.labelSuccession);
             this.groupBoxExtensions.Controls.Add(this.cbExtensionOption);
-            this.groupBoxExtensions.Location = new System.Drawing.Point(12, 66);
+            this.groupBoxExtensions.Location = new System.Drawing.Point(4, 59);
             this.groupBoxExtensions.Name = "groupBoxExtensions";
             this.groupBoxExtensions.Size = new System.Drawing.Size(280, 154);
             this.groupBoxExtensions.TabIndex = 26;
@@ -515,7 +529,7 @@
             "Base Wind",
             "Base Harvest",
             "Base BDA"});
-            this.checkedListBox1.Location = new System.Drawing.Point(94, 55);
+            this.checkedListBox1.Location = new System.Drawing.Point(92, 55);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(175, 89);
             this.checkedListBox1.TabIndex = 26;
@@ -530,7 +544,7 @@
             this.groupBoxEcoPara.Controls.Add(this.dataGridViewEcoPara);
             this.groupBoxEcoPara.Controls.Add(this.tbClimateFile);
             this.groupBoxEcoPara.Controls.Add(this.btClimate);
-            this.groupBoxEcoPara.Location = new System.Drawing.Point(541, 66);
+            this.groupBoxEcoPara.Location = new System.Drawing.Point(533, 59);
             this.groupBoxEcoPara.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxEcoPara.Name = "groupBoxEcoPara";
             this.groupBoxEcoPara.Padding = new System.Windows.Forms.Padding(4);
@@ -678,7 +692,7 @@
             this.groupBoxAddEcoPara.Controls.Add(this.dataGridViewSppGeneric);
             this.groupBoxAddEcoPara.Controls.Add(this.cbSppGenericPara);
             this.groupBoxAddEcoPara.Controls.Add(this.btAddSpeciesGenericPara);
-            this.groupBoxAddEcoPara.Location = new System.Drawing.Point(819, 66);
+            this.groupBoxAddEcoPara.Location = new System.Drawing.Point(811, 59);
             this.groupBoxAddEcoPara.Name = "groupBoxAddEcoPara";
             this.groupBoxAddEcoPara.Size = new System.Drawing.Size(266, 227);
             this.groupBoxAddEcoPara.TabIndex = 31;
@@ -762,7 +776,7 @@
             this.groupBoxSppLifeHistory.Controls.Add(this.btDeleteSppLifeHistoryPara);
             this.groupBoxSppLifeHistory.Controls.Add(this.dataGridViewSppLifeHistory);
             this.groupBoxSppLifeHistory.Controls.Add(this.btAddSppLifeHistoryPara);
-            this.groupBoxSppLifeHistory.Location = new System.Drawing.Point(12, 294);
+            this.groupBoxSppLifeHistory.Location = new System.Drawing.Point(4, 285);
             this.groupBoxSppLifeHistory.Name = "groupBoxSppLifeHistory";
             this.groupBoxSppLifeHistory.Size = new System.Drawing.Size(1073, 182);
             this.groupBoxSppLifeHistory.TabIndex = 40;
@@ -776,7 +790,7 @@
             this.groupBox1.Controls.Add(this.btDeleteSppEcophysiPara);
             this.groupBox1.Controls.Add(this.dataGridViewSppEcophysi);
             this.groupBox1.Controls.Add(this.btAddSppEcophysiPara);
-            this.groupBox1.Location = new System.Drawing.Point(12, 482);
+            this.groupBox1.Location = new System.Drawing.Point(4, 470);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1073, 182);
             this.groupBox1.TabIndex = 41;
@@ -845,12 +859,12 @@
             this.tabControlGraph.Controls.Add(this.tabPageWater);
             this.tabControlGraph.Controls.Add(this.tabPageNitrogen);
             this.tabControlGraph.Controls.Add(this.tabPageCohorts);
-            this.tabControlGraph.Location = new System.Drawing.Point(12, 670);
+            this.tabControlGraph.Controls.Add(this.tabPageCompare);
+            this.tabControlGraph.Location = new System.Drawing.Point(4, 657);
             this.tabControlGraph.Name = "tabControlGraph";
             this.tabControlGraph.SelectedIndex = 0;
-            this.tabControlGraph.Size = new System.Drawing.Size(941, 357);
+            this.tabControlGraph.Size = new System.Drawing.Size(933, 345);
             this.tabControlGraph.TabIndex = 42;
-            this.tabControlGraph.SelectedTab = this.tabPageCarbon; // set as default
             // 
             // tabPageClimate
             // 
@@ -859,7 +873,7 @@
             this.tabPageClimate.Location = new System.Drawing.Point(4, 25);
             this.tabPageClimate.Name = "tabPageClimate";
             this.tabPageClimate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageClimate.Size = new System.Drawing.Size(933, 328);
+            this.tabPageClimate.Size = new System.Drawing.Size(925, 316);
             this.tabPageClimate.TabIndex = 0;
             this.tabPageClimate.Tag = "";
             this.tabPageClimate.Text = "Climate";
@@ -892,8 +906,8 @@
             this.zedGraphControlClimate.ScrollMinX = 0D;
             this.zedGraphControlClimate.ScrollMinY = 0D;
             this.zedGraphControlClimate.ScrollMinY2 = 0D;
-            this.zedGraphControlClimate.Size = new System.Drawing.Size(787, 328);
-            this.zedGraphControlClimate.TabIndex = 0;
+            this.zedGraphControlClimate.Size = new System.Drawing.Size(778, 309);
+            this.zedGraphControlClimate.TabIndex = 44;
             // 
             // tabPageCarbon
             // 
@@ -901,37 +915,10 @@
             this.tabPageCarbon.Controls.Add(this.zedGraphControlCarbon);
             this.tabPageCarbon.Location = new System.Drawing.Point(4, 25);
             this.tabPageCarbon.Name = "tabPageCarbon";
-            this.tabPageCarbon.Size = new System.Drawing.Size(933, 328);
+            this.tabPageCarbon.Size = new System.Drawing.Size(925, 316);
             this.tabPageCarbon.TabIndex = 2;
             this.tabPageCarbon.Text = "Carbon";
             this.tabPageCarbon.UseVisualStyleBackColor = true;
-            // 
-            // tabPageWater
-            // 
-            this.tabPageWater.Location = new System.Drawing.Point(4, 25);
-            this.tabPageWater.Name = "tabPageWater";
-            this.tabPageWater.Size = new System.Drawing.Size(933, 328);
-            this.tabPageWater.TabIndex = 3;
-            this.tabPageWater.Text = "Water";
-            this.tabPageWater.UseVisualStyleBackColor = true;
-            // 
-            // tabPageNitrogen
-            // 
-            this.tabPageNitrogen.Location = new System.Drawing.Point(4, 25);
-            this.tabPageNitrogen.Name = "tabPageNitrogen";
-            this.tabPageNitrogen.Size = new System.Drawing.Size(933, 328);
-            this.tabPageNitrogen.TabIndex = 4;
-            this.tabPageNitrogen.Text = "Nitrogen";
-            this.tabPageNitrogen.UseVisualStyleBackColor = true;
-            // 
-            // tabPageCohorts
-            // 
-            this.tabPageCohorts.Location = new System.Drawing.Point(4, 25);
-            this.tabPageCohorts.Name = "tabPageCohorts";
-            this.tabPageCohorts.Size = new System.Drawing.Size(933, 328);
-            this.tabPageCohorts.TabIndex = 5;
-            this.tabPageCohorts.Text = "Cohorts";
-            this.tabPageCohorts.UseVisualStyleBackColor = true;
             // 
             // checkedListBoxCarbon
             // 
@@ -963,15 +950,67 @@
             this.zedGraphControlCarbon.ScrollMinX = 0D;
             this.zedGraphControlCarbon.ScrollMinY = 0D;
             this.zedGraphControlCarbon.ScrollMinY2 = 0D;
-            this.zedGraphControlCarbon.Size = new System.Drawing.Size(787, 328);
+            this.zedGraphControlCarbon.Size = new System.Drawing.Size(778, 309);
             this.zedGraphControlCarbon.TabIndex = 44;
+            // 
+            // tabPageWater
+            // 
+            this.tabPageWater.Location = new System.Drawing.Point(4, 25);
+            this.tabPageWater.Name = "tabPageWater";
+            this.tabPageWater.Size = new System.Drawing.Size(925, 316);
+            this.tabPageWater.TabIndex = 3;
+            this.tabPageWater.Text = "Water";
+            this.tabPageWater.UseVisualStyleBackColor = true;
+            // 
+            // tabPageNitrogen
+            // 
+            this.tabPageNitrogen.Location = new System.Drawing.Point(4, 25);
+            this.tabPageNitrogen.Name = "tabPageNitrogen";
+            this.tabPageNitrogen.Size = new System.Drawing.Size(925, 316);
+            this.tabPageNitrogen.TabIndex = 4;
+            this.tabPageNitrogen.Text = "Nitrogen";
+            this.tabPageNitrogen.UseVisualStyleBackColor = true;
+            // 
+            // tabPageCohorts
+            // 
+            this.tabPageCohorts.Location = new System.Drawing.Point(4, 25);
+            this.tabPageCohorts.Name = "tabPageCohorts";
+            this.tabPageCohorts.Size = new System.Drawing.Size(925, 316);
+            this.tabPageCohorts.TabIndex = 5;
+            this.tabPageCohorts.Text = "Cohorts";
+            this.tabPageCohorts.UseVisualStyleBackColor = true;
+            // 
+            // tabPageCompare
+            // 
+            this.tabPageCompare.Location = new System.Drawing.Point(4, 25);
+            this.tabPageCompare.Name = "tabPageCompare";
+            this.tabPageCompare.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCompare.Size = new System.Drawing.Size(925, 316);
+            this.tabPageCompare.TabIndex = 6;
+            this.tabPageCompare.Text = "Compare";
+            this.tabPageCompare.UseVisualStyleBackColor = true;
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonExportOutput
+            // 
+            this.toolStripButtonExportOutput.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonExportOutput.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonExportOutput.Image")));
+            this.toolStripButtonExportOutput.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonExportOutput.Name = "toolStripButtonExportOutput";
+            this.toolStripButtonExportOutput.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonExportOutput.Text = "Export Output";
+            this.toolStripButtonExportOutput.ToolTipText = "Export output results";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1098, 846);
+            this.ClientSize = new System.Drawing.Size(1109, 1055);
             this.Controls.Add(this.tabControlGraph);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxAddEcoPara);
@@ -1051,7 +1090,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButtonUserGuide;
         private System.Windows.Forms.ToolStripMenuItem outputToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveOutputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportOutputToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem plotResultsToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridViewSppLifeHistory;
         private System.Windows.Forms.Button btAddSppLifeHistorySpp;
@@ -1091,6 +1130,10 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxClimate;
         private System.Windows.Forms.CheckedListBox checkedListBoxCarbon;
         private ZedGraph.ZedGraphControl zedGraphControlCarbon;
+        private System.Windows.Forms.TabPage tabPageCompare;
+        private System.Windows.Forms.ToolStripMenuItem exportInputForLANDISIIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonExportOutput;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 
