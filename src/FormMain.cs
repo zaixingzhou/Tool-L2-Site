@@ -22,8 +22,13 @@ namespace LANDIS_II_Site
 
             // set default values for some components
             InitializeComponentPlus();
+
+            // load site results
+            LoadResultSite();
             // graph climate data
-           // chart_climate(); // 
+            // chart_climate(); // 
+            //checkedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+
 
         }
 
@@ -45,7 +50,19 @@ namespace LANDIS_II_Site
             InitializeDataGridViewSppEcophysi(); // intialize dataGridViewSppEcophysi
 
             //dataGridViewSppEcophysi.Rows.Clear(); // Clears all rows
+
         }
+
+        //
+        public class ResultData
+        {
+            public int Day { get; set; }
+            public double Precipitation { get; set; }
+            public double Temperature { get; set; }
+        }
+
+
+
 
         private void MenuExit_Click(object sender, EventArgs e)
         {
@@ -641,30 +658,29 @@ namespace LANDIS_II_Site
             }
         }
 
-        private void chart_climate()
+        public static List<Dictionary<string, object>> ReadCsvAsDictionary(string filePath)
         {
-            // Read data from the CSV file
-            string filePath = @"Output\Site1\Site.csv"; // Path to the file
+            var records = new List<Dictionary<string, object>>();
+
             if (File.Exists(filePath))
             {
                 string[] lines = File.ReadAllLines(filePath);
 
-                if (lines.Length > 1) // Ensure there's data
+                // Read the headers from the first line
+                string[] headers = lines[0].Split(',');
+
+                // Process each data row
+                for (int i = 1; i < lines.Length; i++)
                 {
-                   // var series = chartPrecip.Series["Precip"]; // Get the existing series
-                    for (int i = 1; i < lines.Length; i++) // Skip header row
+                    string[] values = lines[i].Split(',');
+                    var record = new Dictionary<string, object>();
+
+                    for (int j = 0; j < headers.Length; j++)
                     {
-                        string[] columns = lines[i].Split(',');
-                        double.TryParse(columns[0], out double time); // First column is Year
-                        double.TryParse(columns[14], out double precip); // Fifth column is precip(mm)
-                        {
-                       //     series.Points.AddXY(time, precip);
-                        }
+                        record[headers[j]] = values[j];
                     }
-                }
-                else
-                {
-                    MessageBox.Show("CSV file contains no data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    records.Add(record);
                 }
             }
             else
@@ -672,9 +688,135 @@ namespace LANDIS_II_Site
                 MessageBox.Show("CSV file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            return records;
+        }
+
+
+        List<Dictionary<string, object>> RecordsSite = new List<Dictionary<string, object>>();
+        private void LoadResultSite()
+        {
+            // Read data from the CSV file
+            string filePath = @"Output\Site1\Site.csv"; // Path to the file
+            RecordsSite = ReadCsvAsDictionary(filePath);
 
         }
+
+        private GraphPane CreateGraph(ZedGraphControl zgc, string yLabel, List<Dictionary<string, object>> records, string Xvar, string Yvar, Color c)
+        {
+            GraphPane myPane = zgc.GraphPane;
+
+            // Set the titles and axis labels
+            
+            myPane.XAxis.Title.Text = "Time";
+            myPane.YAxis.Title.Text = yLabel;
+
+            PointPairList list = new PointPairList();
+
+
+            foreach (var record in records)
+            {
+                double _x, _y;
+                double.TryParse((string)record[Xvar], out _x);
+                double.TryParse((string)record[Yvar], out _y);
+                //PointPair _pointPair = new PointPair(double.TryParse(Value, out OutVal)(]), (double)record[Yvar]);
+                list.Add(_x, _y);
+
+            }
+            //c = Color.FromArgb(2, 0, 0, 0);
+            LineItem curve = myPane.AddCurve(Yvar, list, c, SymbolType.None);
+
+            zgc.AxisChange();
+            zgc.Invalidate();
+            return myPane;
+        }
+
+        private void checkedListBoxClimate_ItemCheck(object sender, ItemCheckEventArgs e)
+        {          
+            ZedGraphControl zgc = zedGraphControlClimate;  // carbon zgc pane
+            CheckedListBox myclb = checkedListBoxClimate;    // carbon checked List Box
+
+            var mypane = zgc.GraphPane;            
+            mypane.Title.Text = string.Empty;
+
+            string Xvar = "Time";
+            // Check which item is toggled
+            string selectedItem = myclb.Items[e.Index].ToString();
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                // Show Temperature in Chart
+                Color c = colorPalette[e.Index];
+                mypane = CreateGraph(zgc, selectedItem, RecordsSite, Xvar, selectedItem, c);
+            }
+            else
+            {
+                // Clear Temperature Data
+                CurveItem curve = mypane.CurveList[selectedItem];
+                // Remove the curve from the list
+                mypane.CurveList.Remove(curve);
+
+                // Refresh the graph
+                zgc.AxisChange();
+                zgc.Invalidate();
+
+            }
+
+        }
+
+        Color[] colorPalette = new Color[]
+        {
+               Color.Red,
+               Color.Blue,
+               Color.Green,
+               Color.Orange,
+               Color.Purple,
+               Color.Black,
+               Color.Brown,
+               Color.Gray,
+               Color.Navy,
+               Color.Magenta
+        };
+        private void checkedListBoxCarbon_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ZedGraphControl zgc = zedGraphControlCarbon;  // carbon zgc pane
+            CheckedListBox myclb = checkedListBoxCarbon;    // carbon checked List Box
+
+            var mypane = zgc.GraphPane;
+            
+            mypane.Title.Text = string.Empty;
+
+            string Xvar = "Time";
+
+            // Check which item is toggled
+            string selectedItem = myclb.Items[e.Index].ToString();
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                // Show Temperature in Chart
+                Color c = colorPalette[e.Index];
+                mypane = CreateGraph(zgc, selectedItem, RecordsSite, Xvar, selectedItem, c);
+            }
+            else
+            {
+                // Clear Temperature Data
+                CurveItem curve = mypane.CurveList[selectedItem];
+                // Remove the curve from the list
+                mypane.CurveList.Remove(curve);
+
+                // Refresh the graph
+                zgc.AxisChange();
+                zgc.Invalidate();
+
+            }
+
+        }
+
+
+
+
+
+
     }
-  
-    
+
+
 }

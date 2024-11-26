@@ -103,13 +103,14 @@
             this.btAddSppEcophysiPara = new System.Windows.Forms.Button();
             this.tabControlGraph = new System.Windows.Forms.TabControl();
             this.tabPageClimate = new System.Windows.Forms.TabPage();
-            this.tabPageBimass = new System.Windows.Forms.TabPage();
+            this.checkedListBoxClimate = new System.Windows.Forms.CheckedListBox();
+            this.zedGraphControlClimate = new ZedGraph.ZedGraphControl();
             this.tabPageCarbon = new System.Windows.Forms.TabPage();
             this.tabPageWater = new System.Windows.Forms.TabPage();
             this.tabPageNitrogen = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.tabPageCohorts = new System.Windows.Forms.TabPage();
+            this.checkedListBoxCarbon = new System.Windows.Forms.CheckedListBox();
+            this.zedGraphControlCarbon = new ZedGraph.ZedGraphControl();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBoxPara.SuspendLayout();
@@ -124,6 +125,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSppEcophysi)).BeginInit();
             this.tabControlGraph.SuspendLayout();
             this.tabPageClimate.SuspendLayout();
+            this.tabPageCarbon.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -136,7 +138,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1103, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1085, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -246,7 +248,7 @@
             this.toolStripButtonUserGuide});
             this.toolStrip.Location = new System.Drawing.Point(0, 28);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1103, 27);
+            this.toolStrip.Size = new System.Drawing.Size(1085, 27);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -839,21 +841,21 @@
             // tabControlGraph
             // 
             this.tabControlGraph.Controls.Add(this.tabPageClimate);
-            this.tabControlGraph.Controls.Add(this.tabPageBimass);
             this.tabControlGraph.Controls.Add(this.tabPageCarbon);
             this.tabControlGraph.Controls.Add(this.tabPageWater);
             this.tabControlGraph.Controls.Add(this.tabPageNitrogen);
-            this.tabControlGraph.Controls.Add(this.tabPage1);
+            this.tabControlGraph.Controls.Add(this.tabPageCohorts);
             this.tabControlGraph.Location = new System.Drawing.Point(12, 670);
             this.tabControlGraph.Name = "tabControlGraph";
             this.tabControlGraph.SelectedIndex = 0;
             this.tabControlGraph.Size = new System.Drawing.Size(941, 357);
             this.tabControlGraph.TabIndex = 42;
+            this.tabControlGraph.SelectedTab = this.tabPageCarbon; // set as default
             // 
             // tabPageClimate
             // 
-            this.tabPageClimate.Controls.Add(this.checkedListBox2);
-            this.tabPageClimate.Controls.Add(this.zedGraphControl1);
+            this.tabPageClimate.Controls.Add(this.checkedListBoxClimate);
+            this.tabPageClimate.Controls.Add(this.zedGraphControlClimate);
             this.tabPageClimate.Location = new System.Drawing.Point(4, 25);
             this.tabPageClimate.Name = "tabPageClimate";
             this.tabPageClimate.Padding = new System.Windows.Forms.Padding(3);
@@ -863,21 +865,43 @@
             this.tabPageClimate.Text = "Climate";
             this.tabPageClimate.UseVisualStyleBackColor = true;
             // 
-            // tabPageBimass
+            // checkedListBoxClimate
             // 
-            this.tabPageBimass.Location = new System.Drawing.Point(4, 25);
-            this.tabPageBimass.Name = "tabPageBimass";
-            this.tabPageBimass.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBimass.Size = new System.Drawing.Size(926, 328);
-            this.tabPageBimass.TabIndex = 1;
-            this.tabPageBimass.Text = "Biomass";
-            this.tabPageBimass.UseVisualStyleBackColor = true;
+            this.checkedListBoxClimate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxClimate.FormattingEnabled = true;
+            this.checkedListBoxClimate.Items.AddRange(new object[] {
+            "Tmax(C)",
+            "Tmin(C)",
+            "Precip(mm/mo)",
+            "PAR0"});
+            this.checkedListBoxClimate.Location = new System.Drawing.Point(803, 16);
+            this.checkedListBoxClimate.Name = "checkedListBoxClimate";
+            this.checkedListBoxClimate.Size = new System.Drawing.Size(112, 85);
+            this.checkedListBoxClimate.TabIndex = 43;
+            this.checkedListBoxClimate.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxClimate_ItemCheck);
+            // 
+            // zedGraphControlClimate
+            // 
+            this.zedGraphControlClimate.Location = new System.Drawing.Point(0, 0);
+            this.zedGraphControlClimate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlClimate.Name = "zedGraphControlClimate";
+            this.zedGraphControlClimate.ScrollGrace = 0D;
+            this.zedGraphControlClimate.ScrollMaxX = 0D;
+            this.zedGraphControlClimate.ScrollMaxY = 0D;
+            this.zedGraphControlClimate.ScrollMaxY2 = 0D;
+            this.zedGraphControlClimate.ScrollMinX = 0D;
+            this.zedGraphControlClimate.ScrollMinY = 0D;
+            this.zedGraphControlClimate.ScrollMinY2 = 0D;
+            this.zedGraphControlClimate.Size = new System.Drawing.Size(787, 328);
+            this.zedGraphControlClimate.TabIndex = 0;
             // 
             // tabPageCarbon
             // 
+            this.tabPageCarbon.Controls.Add(this.checkedListBoxCarbon);
+            this.tabPageCarbon.Controls.Add(this.zedGraphControlCarbon);
             this.tabPageCarbon.Location = new System.Drawing.Point(4, 25);
             this.tabPageCarbon.Name = "tabPageCarbon";
-            this.tabPageCarbon.Size = new System.Drawing.Size(926, 328);
+            this.tabPageCarbon.Size = new System.Drawing.Size(933, 328);
             this.tabPageCarbon.TabIndex = 2;
             this.tabPageCarbon.Text = "Carbon";
             this.tabPageCarbon.UseVisualStyleBackColor = true;
@@ -886,7 +910,7 @@
             // 
             this.tabPageWater.Location = new System.Drawing.Point(4, 25);
             this.tabPageWater.Name = "tabPageWater";
-            this.tabPageWater.Size = new System.Drawing.Size(926, 328);
+            this.tabPageWater.Size = new System.Drawing.Size(933, 328);
             this.tabPageWater.TabIndex = 3;
             this.tabPageWater.Text = "Water";
             this.tabPageWater.UseVisualStyleBackColor = true;
@@ -895,55 +919,59 @@
             // 
             this.tabPageNitrogen.Location = new System.Drawing.Point(4, 25);
             this.tabPageNitrogen.Name = "tabPageNitrogen";
-            this.tabPageNitrogen.Size = new System.Drawing.Size(926, 328);
+            this.tabPageNitrogen.Size = new System.Drawing.Size(933, 328);
             this.tabPageNitrogen.TabIndex = 4;
             this.tabPageNitrogen.Text = "Nitrogen";
             this.tabPageNitrogen.UseVisualStyleBackColor = true;
             // 
-            // tabPage1
+            // tabPageCohorts
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1065, 328);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "Cohorts";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageCohorts.Location = new System.Drawing.Point(4, 25);
+            this.tabPageCohorts.Name = "tabPageCohorts";
+            this.tabPageCohorts.Size = new System.Drawing.Size(933, 328);
+            this.tabPageCohorts.TabIndex = 5;
+            this.tabPageCohorts.Text = "Cohorts";
+            this.tabPageCohorts.UseVisualStyleBackColor = true;
             // 
-            // zedGraphControl1
+            // checkedListBoxCarbon
             // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(0, 0);
-            this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.ScrollGrace = 0D;
-            this.zedGraphControl1.ScrollMaxX = 0D;
-            this.zedGraphControl1.ScrollMaxY = 0D;
-            this.zedGraphControl1.ScrollMaxY2 = 0D;
-            this.zedGraphControl1.ScrollMinX = 0D;
-            this.zedGraphControl1.ScrollMinY = 0D;
-            this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(787, 328);
-            this.zedGraphControl1.TabIndex = 0;
+            this.checkedListBoxCarbon.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxCarbon.FormattingEnabled = true;
+            this.checkedListBoxCarbon.Items.AddRange(new object[] {
+            "Wood(gDW)",
+            "Root(gDW)",
+            "Fol(gDW)",
+            "CWD(gDW_m2)",
+            "NSC(gC)",
+            "HOM",
+            "GrossPsn(gC_m2_mo)"});
+            this.checkedListBoxCarbon.Location = new System.Drawing.Point(803, 16);
+            this.checkedListBoxCarbon.Name = "checkedListBoxCarbon";
+            this.checkedListBoxCarbon.Size = new System.Drawing.Size(121, 153);
+            this.checkedListBoxCarbon.TabIndex = 45;
+            this.checkedListBoxCarbon.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxCarbon_ItemCheck);
             // 
-            // checkedListBox2
+            // zedGraphControlCarbon
             // 
-            this.checkedListBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Items.AddRange(new object[] {
-            "Tmax",
-            "Tmin",
-            "Precip",
-            "PAR"});
-            this.checkedListBox2.Location = new System.Drawing.Point(803, 16);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(112, 85);
-            this.checkedListBox2.TabIndex = 43;
+            this.zedGraphControlCarbon.Location = new System.Drawing.Point(0, 0);
+            this.zedGraphControlCarbon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlCarbon.Name = "zedGraphControlCarbon";
+            this.zedGraphControlCarbon.ScrollGrace = 0D;
+            this.zedGraphControlCarbon.ScrollMaxX = 0D;
+            this.zedGraphControlCarbon.ScrollMaxY = 0D;
+            this.zedGraphControlCarbon.ScrollMaxY2 = 0D;
+            this.zedGraphControlCarbon.ScrollMinX = 0D;
+            this.zedGraphControlCarbon.ScrollMinY = 0D;
+            this.zedGraphControlCarbon.ScrollMinY2 = 0D;
+            this.zedGraphControlCarbon.Size = new System.Drawing.Size(787, 328);
+            this.zedGraphControlCarbon.TabIndex = 44;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1103, 1122);
+            this.ClientSize = new System.Drawing.Size(1098, 846);
             this.Controls.Add(this.tabControlGraph);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxAddEcoPara);
@@ -974,6 +1002,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSppEcophysi)).EndInit();
             this.tabControlGraph.ResumeLayout(false);
             this.tabPageClimate.ResumeLayout(false);
+            this.tabPageCarbon.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1054,13 +1083,14 @@
         private System.Windows.Forms.Button btAddSppEcophysiPara;
         private System.Windows.Forms.TabControl tabControlGraph;
         private System.Windows.Forms.TabPage tabPageClimate;
-        private System.Windows.Forms.TabPage tabPageBimass;
-        private ZedGraph.ZedGraphControl zedGraphControl1;
+        private ZedGraph.ZedGraphControl zedGraphControlClimate;
         private System.Windows.Forms.TabPage tabPageCarbon;
         private System.Windows.Forms.TabPage tabPageWater;
         private System.Windows.Forms.TabPage tabPageNitrogen;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.TabPage tabPageCohorts;
+        private System.Windows.Forms.CheckedListBox checkedListBoxClimate;
+        private System.Windows.Forms.CheckedListBox checkedListBoxCarbon;
+        private ZedGraph.ZedGraphControl zedGraphControlCarbon;
     }
 }
 
