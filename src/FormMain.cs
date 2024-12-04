@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using ZedGraph;
+using System.Linq;
 
 using System.Windows.Forms;
 
@@ -21,12 +22,8 @@ namespace LANDIS_II_Site
             InitializeComponent();
 
             // set default values for some components
-            InitializeComponentPlus();
-
-       
-            // graph climate data
-            // chart_climate(); // 
-            //checkedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+            InitializeComponentPlus();      
+  
 
 
         }
@@ -51,20 +48,16 @@ namespace LANDIS_II_Site
             //dataGridViewSppEcophysi.Rows.Clear(); // Clears all rows
 
             // Set default selected tab (carbon)
+            
             tabControlGraph.SelectedTab = tabPageCarbon; // 
 
+
         }
 
-        //
-        public class ResultData
+        private void SetDefaultCharts()
         {
-            public int Day { get; set; }
-            public double Precipitation { get; set; }
-            public double Temperature { get; set; }
+            checkedListBoxClimate.SetItemChecked(0, true);
         }
-
-
-
 
         private void MenuExit_Click(object sender, EventArgs e)
         {
@@ -140,12 +133,16 @@ namespace LANDIS_II_Site
 
                 // copy results to Output directory
                 string ResultDirectory = InputDirectory + "\\output";
-
+                
                 CopyDirectory(ResultDirectory, OutputDirectory);
 
                 // load site results
                 LoadResultSite();
 
+                // set DefaultCharts
+                
+                //tabControlGraph.SelectedTab = tabPageCarbon; //
+               // SetDefaultCharts();
             }
             catch (Exception ex)
             {
@@ -188,14 +185,30 @@ namespace LANDIS_II_Site
 
         private void toolStripSave_Click(object sender, EventArgs e)
         {
+            SaveInputSite(); // to @"Inter\Site_input.csv"
+
+            // Open the SaveFileDialog to get the file path
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+                saveFileDialog.DefaultExt = "csv";
+                saveFileDialog.AddExtension = true;
+                saveFileDialog.Title = "Save Input CSV File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    //SaveInputSite(filePath);
+
+                    string sourceFilePath = @"Inter\Site_input.csv"; // Source file path                    
+                    File.Copy(sourceFilePath, filePath, overwrite: true);
+                }
+            }
+
 
         }
 
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
+       
         private void btClimate_Click(object sender, EventArgs e)
         {
             OpenFileDialog ClimateDialog = new OpenFileDialog();
@@ -855,7 +868,278 @@ namespace LANDIS_II_Site
             }
         }
 
-    
+        private void SaveInputSite(string filePath = @"Inter\Site_input.csv")
+        {
+            //filePath = "Inter\Site_input.csv"; // Path to the file
+
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                // Write the header row
+                string csvheader = "LANDIS-II-Site-input";
+                string strseperater="<<<<<<<<<<<<<<<<<";
+                writer.WriteLine(csvheader);
+
+
+                ///////////////// Succession Extention
+                writer.WriteLine(strseperater + "Succession Extention");
+                writer.WriteLine("SuccessionExtention,"+ cbExtensionOption.Text);
+
+                ///////////////// Disturbance Extentions
+                writer.WriteLine(strseperater + "Disturbance Extention");
+                foreach (var item in checkedListBoxDisturbance.CheckedItems)
+                {
+                    string disturb="Disturb";
+                    string value = item.ToString();
+                    
+                    int index = checkedListBoxDisturbance.Items.IndexOf(value);
+                    //int index = item.IndexOf(value);
+                    string strout = disturb + index.ToString() + "," + value;
+                    writer.WriteLine(strout);
+                }
+
+                ////////////////// Simulation Parameters
+                writer.WriteLine(strseperater + "Simulation Parameters");
+
+                writer.WriteLine("SimulationYears," + tbSimYears.Text);  // simulation years
+                writer.WriteLine("StartYear," + tbStartYr.Text);  // 
+                writer.WriteLine("TimeStep," + tbTimestep.Text);  // 
+                writer.WriteLine("SeedingAlgorithm," + cbSeedingAlg.Text);  // 
+
+                string strtemp = cbRandSeed.Checked ? "Yes" : "No";
+                writer.WriteLine("RandomSeedAuto," + strtemp); 
+                writer.WriteLine("RandomSeedManual," + tbRandSeed.Text);  // 
+
+                /////////////////save Ecoregion data
+                writer.WriteLine(strseperater + "Ecoregion Parameters");
+                writer.WriteLine("ClimateFile," + tbClimateFile.Text);  //
+                writer.WriteLine("Latitude," + tbLatitude.Text);  //
+                
+                SaveDataGridViewToCsv(writer, dataGridViewEcoPara,false);  // save all table data
+
+
+                /////////////////save species generic data
+                writer.WriteLine(strseperater + "Species Generic Parameters");
+                SaveDataGridViewToCsv(writer, dataGridViewSppGeneric,false);  // save all table data
+
+
+                ///////////////// save species life history data from the table
+                writer.WriteLine(strseperater + "Species Life History Parameters");
+                SaveDataGridViewToCsv(writer, dataGridViewSppLifeHistory);
+
+                //////////////// save species Ecophysiological data from the table
+                writer.WriteLine(strseperater + "Species Ecophysiological Parameters");
+                SaveDataGridViewToCsv(writer, dataGridViewSppEcophysi);
+
+
+ 
+            }
+            //MessageBox.Show("Data saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+
+        private void SaveDataGridViewToCsv(StreamWriter writer, DataGridView dataGridView,Boolean writeheader=true)
+        {
+
+            // Write the header row
+            if (writeheader) 
+            {
+                 for (int i = 0; i < dataGridView.ColumnCount; i++)
+                {
+                    writer.Write(dataGridView.Columns[i].Name);
+                    if (i < dataGridView.ColumnCount - 1) writer.Write(",");
+                }
+                 writer.WriteLine();          
+            
+            }  
+
+
+            // Write the data rows
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (!row.IsNewRow) // Skip the placeholder row
+                {
+                    for (int i = 0; i < dataGridView.ColumnCount; i++)
+                    {
+                        writer.Write(row.Cells[i].Value);
+                        if (i < dataGridView.ColumnCount - 1) writer.Write(",");
+                    }
+                    writer.WriteLine();
+                }
+            }              
+           
+
+        }
+
+        private void toolStripOpen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Title = "Open CSV File"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+               LoadDataFromCsv(openFileDialog.FileName);
+            }
+        }
+
+        private void LoadDataFromCsv(string filePath)
+        {
+            try
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                
+                string zzx = lines[2];
+                // Succession extention
+                string[] values = lines[2].Split(','); // succession extention
+                cbExtensionOption.SelectedItem = values[1];
+
+                string searchPhrase = "<<";
+
+
+
+                // Disturbance
+                int ii=0;  // number of records
+                int startline = 4;
+                int index = 0;
+                for (int i = startline; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i+1;  // new start line
+                        break;
+                    } 
+
+                    values = lines[i].Split(',');
+                    index = checkedListBoxDisturbance.Items.IndexOf(values[1]);
+                    if (index >= 0)
+                    {
+                        checkedListBoxDisturbance.SetItemChecked(index, true);
+                    }
+                    ii++;
+                }
+
+                ii = 0;
+                // Simulation Parameters
+                for (int i = startline; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i+1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    if (values[0] == "SimulationYears") tbSimYears.Text = values[1];
+                    if (values[0] == "StartYear") tbStartYr.Text = values[1];
+                    if (values[0] == "TimeStep") tbTimestep.Text = values[1];
+
+                    if (values[0] == "SeedingAlgorithm") cbSeedingAlg.SelectedItem = values[1];
+                    if (values[0] == "RandomSeedAuto") cbRandSeed.Checked = values[1].Equals("Yes");
+                    if (values[0] == "RandomSeedManual") tbRandSeed.Text = values[1];   
+
+                }
+
+                var record = new Dictionary<string, object>();
+               
+                // Ecoregion Parameters
+
+                dataGridViewEcoPara.Rows.Clear();
+                for (int i = startline; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i + 1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    if (values[0] == "ClimateFile") tbClimateFile.Text = values[1];
+                    if (values[0] == "Latitude") tbLatitude.Text = values[1];
+
+                    if (i > startline + 1) dataGridViewEcoPara.Rows.Add(values); // skip two lines above     
+
+                }
+
+                // Species Generic Parameters
+
+                dataGridViewSppGeneric.Rows.Clear();
+                for (int i = startline; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i + 1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    dataGridViewSppGeneric.Rows.Add(values); 
+
+                }
+
+
+                // Species Life History Parameters
+
+                dataGridViewSppLifeHistory.Rows.Clear();
+                dataGridViewSppLifeHistory.Columns.Clear();
+
+                for (int i = startline; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i + 1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    if (i == startline) 
+                    {
+                        foreach (string col in values)
+                        {
+                            dataGridViewSppLifeHistory.Columns.Add(col, col);
+                        }// first line is the headers for column names
+                    } 
+                    else dataGridViewSppLifeHistory.Rows.Add(values);
+
+                }
+
+
+                // Species Ecophysiological Parameters
+
+                dataGridViewSppEcophysi.Rows.Clear();
+                dataGridViewSppEcophysi.Columns.Clear();
+
+                for (int i = startline; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i + 1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    if (i == startline)
+                    {
+                        foreach (string col in values)
+                        {
+                            dataGridViewSppEcophysi.Columns.Add(col, col);
+                        }// first line is the headers for column names
+                    }
+                    else dataGridViewSppEcophysi.Rows.Add(values);
+
+                } 
+
+               // MessageBox.Show(zzx, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 
 
