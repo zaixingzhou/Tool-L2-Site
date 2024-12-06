@@ -3,6 +3,5 @@ Parameter		Value
 SoilType	SALO
 RootingDepth	1000
 PrecLossFrac	0.1
-LeakageFrac	1
+LeakageFrac	0.1
 SnowSublimFrac 0.15
--New  0.0

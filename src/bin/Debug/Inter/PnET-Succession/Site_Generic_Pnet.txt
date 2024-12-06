@@ -80,4 +80,3 @@ NImmobA			151
 NImmobB			-35
 FolNRetrans		0.5
 GRespFrac		0.25
--New  0.0
