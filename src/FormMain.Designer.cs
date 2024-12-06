@@ -114,7 +114,11 @@
             this.checkedListBoxCarbon = new System.Windows.Forms.CheckedListBox();
             this.zedGraphControlCarbon = new ZedGraph.ZedGraphControl();
             this.tabPageWater = new System.Windows.Forms.TabPage();
+            this.checkedListBoxWater = new System.Windows.Forms.CheckedListBox();
+            this.zedGraphControlWater = new ZedGraph.ZedGraphControl();
             this.tabPageNitrogen = new System.Windows.Forms.TabPage();
+            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
             this.tabPageCohorts = new System.Windows.Forms.TabPage();
             this.tabPageCompare = new System.Windows.Forms.TabPage();
             this.buttonRunModel = new System.Windows.Forms.Button();
@@ -130,6 +134,8 @@
             this.btDeleteCohortSpp = new System.Windows.Forms.Button();
             this.btAddCohortSpp = new System.Windows.Forms.Button();
             this.btAddReference = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBoxPara.SuspendLayout();
@@ -145,6 +151,8 @@
             this.tabControlGraph.SuspendLayout();
             this.tabPageClimate.SuspendLayout();
             this.tabPageCarbon.SuspendLayout();
+            this.tabPageWater.SuspendLayout();
+            this.tabPageNitrogen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInitialComm)).BeginInit();
             this.groupBoxInitialCommunity.SuspendLayout();
             this.SuspendLayout();
@@ -384,7 +392,7 @@
             this.groupBoxPara.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxPara.Name = "groupBoxPara";
             this.groupBoxPara.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxPara.Size = new System.Drawing.Size(235, 181);
+            this.groupBoxPara.Size = new System.Drawing.Size(235, 220);
             this.groupBoxPara.TabIndex = 2;
             this.groupBoxPara.TabStop = false;
             this.groupBoxPara.Text = "Simulation Parameters";
@@ -457,13 +465,13 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(8, 84);
+            this.label1.Location = new System.Drawing.Point(48, 84);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 23);
             this.label1.TabIndex = 8;
             this.label1.Text = "Timestep";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbTimestep
             // 
@@ -481,10 +489,10 @@
             this.label39.Location = new System.Drawing.Point(8, 57);
             this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(75, 23);
+            this.label39.Size = new System.Drawing.Size(115, 23);
             this.label39.TabIndex = 6;
             this.label39.Text = "Start Year";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbSimYears
             // 
@@ -505,6 +513,7 @@
             this.label13.Size = new System.Drawing.Size(115, 20);
             this.label13.TabIndex = 4;
             this.label13.Text = "Simulation Years";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
             // 
@@ -550,10 +559,12 @@
             this.labelSuccession.Size = new System.Drawing.Size(87, 18);
             this.labelSuccession.TabIndex = 25;
             this.labelSuccession.Text = "Succession";
-            this.labelSuccession.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelSuccession.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBoxExtensions
             // 
+            this.groupBoxExtensions.Controls.Add(this.label7);
+            this.groupBoxExtensions.Controls.Add(this.checkedListBox1);
             this.groupBoxExtensions.Controls.Add(this.labelDisturbance);
             this.groupBoxExtensions.Controls.Add(this.checkedListBoxDisturbance);
             this.groupBoxExtensions.Controls.Add(this.labelSuccession);
@@ -562,7 +573,7 @@
             this.groupBoxExtensions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxExtensions.Name = "groupBoxExtensions";
             this.groupBoxExtensions.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxExtensions.Size = new System.Drawing.Size(280, 154);
+            this.groupBoxExtensions.Size = new System.Drawing.Size(280, 220);
             this.groupBoxExtensions.TabIndex = 26;
             this.groupBoxExtensions.TabStop = false;
             this.groupBoxExtensions.Text = "Extensions";
@@ -575,7 +586,7 @@
             this.labelDisturbance.Size = new System.Drawing.Size(87, 18);
             this.labelDisturbance.TabIndex = 27;
             this.labelDisturbance.Text = "Disturbance";
-            this.labelDisturbance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelDisturbance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // checkedListBoxDisturbance
             // 
@@ -588,7 +599,7 @@
             this.checkedListBoxDisturbance.Location = new System.Drawing.Point(92, 55);
             this.checkedListBoxDisturbance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkedListBoxDisturbance.Name = "checkedListBoxDisturbance";
-            this.checkedListBoxDisturbance.Size = new System.Drawing.Size(175, 72);
+            this.checkedListBoxDisturbance.Size = new System.Drawing.Size(175, 89);
             this.checkedListBoxDisturbance.TabIndex = 26;
             // 
             // groupBoxEcoPara
@@ -1004,6 +1015,7 @@
             "Fol(gDW)",
             "CWD(gDW_m2)",
             "NSC(gC)",
+            "LAI(m2)",
             "HOM",
             "GrossPsn(gC_m2_mo)"});
             this.checkedListBoxCarbon.Location = new System.Drawing.Point(803, 16);
@@ -1030,6 +1042,8 @@
             // 
             // tabPageWater
             // 
+            this.tabPageWater.Controls.Add(this.checkedListBoxWater);
+            this.tabPageWater.Controls.Add(this.zedGraphControlWater);
             this.tabPageWater.Location = new System.Drawing.Point(4, 25);
             this.tabPageWater.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageWater.Name = "tabPageWater";
@@ -1038,8 +1052,42 @@
             this.tabPageWater.Text = "Water";
             this.tabPageWater.UseVisualStyleBackColor = true;
             // 
+            // checkedListBoxWater
+            // 
+            this.checkedListBoxWater.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxWater.FormattingEnabled = true;
+            this.checkedListBoxWater.Items.AddRange(new object[] {
+            "RunOff(mm/mo)",
+            "Evaporation(mm)",
+            "Transpiration(mm)",
+            "water(mm)",
+            "SnowPack(mm)"});
+            this.checkedListBoxWater.Location = new System.Drawing.Point(803, 20);
+            this.checkedListBoxWater.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBoxWater.Name = "checkedListBoxWater";
+            this.checkedListBoxWater.Size = new System.Drawing.Size(121, 136);
+            this.checkedListBoxWater.TabIndex = 47;
+            this.checkedListBoxWater.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxWater_ItemCheck);
+            // 
+            // zedGraphControlWater
+            // 
+            this.zedGraphControlWater.Location = new System.Drawing.Point(0, 4);
+            this.zedGraphControlWater.Margin = new System.Windows.Forms.Padding(5);
+            this.zedGraphControlWater.Name = "zedGraphControlWater";
+            this.zedGraphControlWater.ScrollGrace = 0D;
+            this.zedGraphControlWater.ScrollMaxX = 0D;
+            this.zedGraphControlWater.ScrollMaxY = 0D;
+            this.zedGraphControlWater.ScrollMaxY2 = 0D;
+            this.zedGraphControlWater.ScrollMinX = 0D;
+            this.zedGraphControlWater.ScrollMinY = 0D;
+            this.zedGraphControlWater.ScrollMinY2 = 0D;
+            this.zedGraphControlWater.Size = new System.Drawing.Size(779, 309);
+            this.zedGraphControlWater.TabIndex = 46;
+            // 
             // tabPageNitrogen
             // 
+            this.tabPageNitrogen.Controls.Add(this.checkedListBox2);
+            this.tabPageNitrogen.Controls.Add(this.zedGraphControl2);
             this.tabPageNitrogen.Location = new System.Drawing.Point(4, 25);
             this.tabPageNitrogen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageNitrogen.Name = "tabPageNitrogen";
@@ -1047,6 +1095,39 @@
             this.tabPageNitrogen.TabIndex = 4;
             this.tabPageNitrogen.Text = "Nitrogen";
             this.tabPageNitrogen.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox2
+            // 
+            this.checkedListBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBox2.FormattingEnabled = true;
+            this.checkedListBox2.Items.AddRange(new object[] {
+            "Wood(gDW)",
+            "Root(gDW)",
+            "Fol(gDW)",
+            "CWD(gDW_m2)",
+            "NSC(gC)",
+            "HOM",
+            "GrossPsn(gC_m2_mo)"});
+            this.checkedListBox2.Location = new System.Drawing.Point(803, 20);
+            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBox2.Name = "checkedListBox2";
+            this.checkedListBox2.Size = new System.Drawing.Size(121, 136);
+            this.checkedListBox2.TabIndex = 47;
+            // 
+            // zedGraphControl2
+            // 
+            this.zedGraphControl2.Location = new System.Drawing.Point(0, 4);
+            this.zedGraphControl2.Margin = new System.Windows.Forms.Padding(5);
+            this.zedGraphControl2.Name = "zedGraphControl2";
+            this.zedGraphControl2.ScrollGrace = 0D;
+            this.zedGraphControl2.ScrollMaxX = 0D;
+            this.zedGraphControl2.ScrollMaxY = 0D;
+            this.zedGraphControl2.ScrollMaxY2 = 0D;
+            this.zedGraphControl2.ScrollMinX = 0D;
+            this.zedGraphControl2.ScrollMinY = 0D;
+            this.zedGraphControl2.ScrollMinY2 = 0D;
+            this.zedGraphControl2.Size = new System.Drawing.Size(779, 309);
+            this.zedGraphControl2.TabIndex = 46;
             // 
             // tabPageCohorts
             // 
@@ -1148,7 +1229,7 @@
             this.label6.Size = new System.Drawing.Size(51, 28);
             this.label6.TabIndex = 44;
             this.label6.Text = "Age";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btDeleteCohortAge
             // 
@@ -1180,7 +1261,7 @@
             this.label5.Size = new System.Drawing.Size(61, 28);
             this.label5.TabIndex = 40;
             this.label5.Text = "Species";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btDeleteCohortSpp
             // 
@@ -1214,6 +1295,27 @@
             this.btAddReference.Text = "Add Reference";
             this.btAddReference.UseVisualStyleBackColor = true;
             this.btAddReference.Click += new System.EventHandler(this.btAddReference_Click);
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(40, 152);
+            this.label7.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 19);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Other";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "Climate"});
+            this.checkedListBox1.Location = new System.Drawing.Point(89, 152);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(175, 55);
+            this.checkedListBox1.TabIndex = 28;
             // 
             // FormMain
             // 
@@ -1257,6 +1359,8 @@
             this.tabControlGraph.ResumeLayout(false);
             this.tabPageClimate.ResumeLayout(false);
             this.tabPageCarbon.ResumeLayout(false);
+            this.tabPageWater.ResumeLayout(false);
+            this.tabPageNitrogen.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInitialComm)).EndInit();
             this.groupBoxInitialCommunity.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1366,6 +1470,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cohort;
         private System.Windows.Forms.DataGridViewTextBoxColumn CohortAge1;
         private System.Windows.Forms.Button btAddReference;
+        private System.Windows.Forms.CheckedListBox checkedListBoxWater;
+        private ZedGraph.ZedGraphControl zedGraphControlWater;
+        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private ZedGraph.ZedGraphControl zedGraphControl2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }
 

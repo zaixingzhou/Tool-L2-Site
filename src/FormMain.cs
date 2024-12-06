@@ -864,6 +864,42 @@ namespace LANDIS_II_Site
 
         }
 
+
+        private void checkedListBoxWater_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ZedGraphControl zgc = zedGraphControlWater;  // carbon zgc pane
+            CheckedListBox myclb = checkedListBoxWater;    // carbon checked List Box
+
+            var mypane = zgc.GraphPane;
+
+            mypane.Title.Text = string.Empty;
+
+            string Xvar = "Time";
+
+            // Check which item is toggled
+            string selectedItem = myclb.Items[e.Index].ToString();
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                // Show Temperature in Chart
+                Color c = colorPalette[e.Index];
+                mypane = CreateGraph(zgc, selectedItem, RecordsSite, Xvar, selectedItem, c);
+            }
+            else
+            {
+                // Clear Temperature Data
+                CurveItem curve = mypane.CurveList[selectedItem];
+                // Remove the curve from the list
+                mypane.CurveList.Remove(curve);
+
+                // Refresh the graph
+                zgc.AxisChange();
+                zgc.Invalidate();
+
+            }
+
+        }
+
         private void btClearGraph_Click(object sender, EventArgs e)
         {
             /*
