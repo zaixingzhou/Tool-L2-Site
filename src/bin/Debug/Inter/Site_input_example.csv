@@ -1,14 +1,16 @@
 LANDIS-II-Site-input
-<<<<<<<<<<<<<<<<<Succession Extention
-SuccessionExtention,PnET-Succession
-<<<<<<<<<<<<<<<<<Disturbance Extention
+<<<<<<<<<<<<<<<<<Succession Extension
+SuccessionExtension,PnET-Succession
+<<<<<<<<<<<<<<<<<Disturbance Extension
 <<<<<<<<<<<<<<<<<Simulation Parameters
 SimulationYears,50
 StartYear,2000
 TimeStep,10
 SeedingAlgorithm,WardSeedDispersal
-RandomSeedAuto,No
-RandomSeedManual,617788279
+RandomSeedCheck,Yes
+RandomSeedSet,617788279
+ReplicateCheck,No
+ReplicateNum,100
 <<<<<<<<<<<<<<<<<Ecoregion Parameters
 ClimateFile,C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Input\site_climate_example.txt
 Latitude,42

@@ -935,12 +935,12 @@ namespace LANDIS_II_Site
                 writer.WriteLine(csvheader);
 
 
-                ///////////////// Succession Extention
-                writer.WriteLine(strseperater + "Succession Extention");
-                writer.WriteLine("SuccessionExtention,"+ cbSuccessionOption.Text);
+                ///////////////// Succession Extension
+                writer.WriteLine(strseperater + "Succession Extension");
+                writer.WriteLine("SuccessionExtension,"+ cbSuccessionOption.Text);
 
-                ///////////////// Disturbance Extentions
-                writer.WriteLine(strseperater + "Disturbance Extention");
+                ///////////////// Disturbance Extensions
+                writer.WriteLine(strseperater + "Disturbance Extension");
                 foreach (var item in checkedListBoxDisturbance.CheckedItems)
                 {
                     string disturb="Disturb";
@@ -961,8 +961,12 @@ namespace LANDIS_II_Site
                 writer.WriteLine("SeedingAlgorithm," + cbSeedingAlg.Text);  // 
 
                 string strtemp = cbRandSeed.Checked ? "Yes" : "No";
-                writer.WriteLine("RandomSeedAuto," + strtemp); 
-                writer.WriteLine("RandomSeedManual," + tbRandSeed.Text);  // 
+                writer.WriteLine("RandomSeedCheck," + strtemp); 
+                writer.WriteLine("RandomSeedSet," + tbRandSeed.Text);  // 
+
+                strtemp = cbReplicate.Checked ? "Yes" : "No";
+                writer.WriteLine("ReplicateCheck," + strtemp);
+                writer.WriteLine("ReplicateNum," + tbReplicateNum.Text);  // 
 
                 /////////////////save Ecoregion data
                 writer.WriteLine(strseperater + "Ecoregion Parameters");
@@ -1082,8 +1086,8 @@ namespace LANDIS_II_Site
                 string[] lines = File.ReadAllLines(filePath);
                 
                 string zzx = lines[2];
-                // Succession extention
-                string[] values = lines[2].Split(','); // succession extention
+                // Succession extension
+                string[] values = lines[2].Split(','); // succession extension
                 cbSuccessionOption.SelectedItem = values[1];
 
                 string searchPhrase = "<<";
@@ -1127,8 +1131,10 @@ namespace LANDIS_II_Site
                     if (values[0] == "TimeStep") tbTimestep.Text = values[1];
 
                     if (values[0] == "SeedingAlgorithm") cbSeedingAlg.SelectedItem = values[1];
-                    if (values[0] == "RandomSeedAuto") cbRandSeed.Checked = values[1].Equals("Yes");
-                    if (values[0] == "RandomSeedManual") tbRandSeed.Text = values[1];   
+                    if (values[0] == "RandomSeedCheck") cbRandSeed.Checked = values[1].Equals("Yes");
+                    if (values[0] == "RandomSeedSet") tbRandSeed.Text = values[1];
+                    if (values[0] == "ReplicateCheck") cbReplicate.Checked = values[1].Equals("Yes");
+                    if (values[0] == "ReplicateNum") tbReplicateNum.Text = values[1];
 
                 }
 
@@ -1267,8 +1273,8 @@ namespace LANDIS_II_Site
             BuildLandisInput(); // build the input package
 
 
-            string strSuccession = cbSuccessionOption.Text;  // get the current succesion extention            
-          
+            string strSuccession = cbSuccessionOption.Text;  // get the current succesion Extension            
+
             string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory
 
 
@@ -1640,6 +1646,50 @@ namespace LANDIS_II_Site
                 //LoadInputFromCsv(openFileDialog.FileName);
             }
         }
+
+        private void MenuBatchRun_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Title = "Open CSV File"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //LoadInputFromCsv(openFileDialog.FileName);
+            }
+
+        }
+
+        // for Random seed
+        private void cbRandSeed_CheckedChanged(object sender, EventArgs e)
+        {
+            // Set the TextBox to enabled/disabled based on CheckBox's checked state
+            tbRandSeed.Enabled = cbRandSeed.Checked;
+        }
+
+        private void cbReplicate_CheckedChanged(object sender, EventArgs e)
+        {
+            // Set the TextBox to enabled/disabled based on CheckBox's checked state
+            tbReplicateNum.Enabled = cbReplicate.Checked;
+        }
+
+
+        // for climate libary
+        private void checkedListBoxExtensionOther_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            // Check if the specific item ("Climate") is being checked/unchecked
+            if (checkedListBoxExtensionOther.Items[e.Index].ToString() == "Climate")
+            {
+                // e.NewValue shows the *upcoming* state of the item (Checked or Unchecked)
+                // Disable both TextBox and Button based on upcoming check state
+                bool controlsEnabled = (e.NewValue != CheckState.Checked);
+                btClimate.Enabled = controlsEnabled;
+                tbClimateFile.Enabled = (e.NewValue != CheckState.Checked);
+            }
+        }
+
     }
 
 }
