@@ -57,6 +57,9 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonUserGuide = new System.Windows.Forms.ToolStripButton();
             this.groupBoxPara = new System.Windows.Forms.GroupBox();
+            this.cbReplicate = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbReplicateNum = new System.Windows.Forms.TextBox();
             this.cbRandSeed = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbRandSeed = new System.Windows.Forms.TextBox();
@@ -122,7 +125,7 @@
             this.checkedListBoxWater = new System.Windows.Forms.CheckedListBox();
             this.zedGraphControlWater = new ZedGraph.ZedGraphControl();
             this.tabPageNitrogen = new System.Windows.Forms.TabPage();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxNitrogen = new System.Windows.Forms.CheckedListBox();
             this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
             this.tabPageCohorts = new System.Windows.Forms.TabPage();
             this.tabPageCompare = new System.Windows.Forms.TabPage();
@@ -136,9 +139,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btDeleteCohortSpp = new System.Windows.Forms.Button();
             this.btAddCohortSpp = new System.Windows.Forms.Button();
-            this.cbReplicate = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbReplicateNum = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBoxPara.SuspendLayout();
@@ -190,33 +190,33 @@
             // MenuOpen
             // 
             this.MenuOpen.Name = "MenuOpen";
-            this.MenuOpen.Size = new System.Drawing.Size(224, 26);
+            this.MenuOpen.Size = new System.Drawing.Size(137, 26);
             this.MenuOpen.Text = "&Open...";
             this.MenuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
             // MenuSave
             // 
             this.MenuSave.Name = "MenuSave";
-            this.MenuSave.Size = new System.Drawing.Size(224, 26);
+            this.MenuSave.Size = new System.Drawing.Size(137, 26);
             this.MenuSave.Text = "&Save...";
             this.MenuSave.Click += new System.EventHandler(this.MenuSave_Click);
             // 
             // MenuRun
             // 
             this.MenuRun.Name = "MenuRun";
-            this.MenuRun.Size = new System.Drawing.Size(224, 26);
+            this.MenuRun.Size = new System.Drawing.Size(137, 26);
             this.MenuRun.Text = "&Run";
             this.MenuRun.Click += new System.EventHandler(this.MenuRun_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(134, 6);
             // 
             // MenuExit
             // 
             this.MenuExit.Name = "MenuExit";
-            this.MenuExit.Size = new System.Drawing.Size(224, 26);
+            this.MenuExit.Size = new System.Drawing.Size(137, 26);
             this.MenuExit.Text = "&Exit";
             this.MenuExit.Click += new System.EventHandler(this.MenuExit_Click);
             // 
@@ -403,6 +403,40 @@
             this.groupBoxPara.TabIndex = 2;
             this.groupBoxPara.TabStop = false;
             this.groupBoxPara.Text = "Simulation Parameters";
+            // 
+            // cbReplicate
+            // 
+            this.cbReplicate.AutoSize = true;
+            this.cbReplicate.Location = new System.Drawing.Point(7, 183);
+            this.cbReplicate.Margin = new System.Windows.Forms.Padding(4);
+            this.cbReplicate.Name = "cbReplicate";
+            this.cbReplicate.Size = new System.Drawing.Size(18, 17);
+            this.cbReplicate.TabIndex = 103;
+            this.toolTip.SetToolTip(this.cbReplicate, "Check for replicates");
+            this.cbReplicate.UseVisualStyleBackColor = true;
+            this.cbReplicate.CheckedChanged += new System.EventHandler(this.cbReplicate_CheckedChanged);
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(26, 180);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 23);
+            this.label8.TabIndex = 102;
+            this.label8.Text = "Replicates";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tbReplicateNum
+            // 
+            this.tbReplicateNum.Enabled = false;
+            this.tbReplicateNum.Location = new System.Drawing.Point(132, 178);
+            this.tbReplicateNum.Margin = new System.Windows.Forms.Padding(4);
+            this.tbReplicateNum.Name = "tbReplicateNum";
+            this.tbReplicateNum.Size = new System.Drawing.Size(42, 22);
+            this.tbReplicateNum.TabIndex = 101;
+            this.tbReplicateNum.Text = "100";
+            this.tbReplicateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip.SetToolTip(this.tbReplicateNum, "How many times to run the model ");
             // 
             // cbRandSeed
             // 
@@ -1042,7 +1076,7 @@
             this.checkedListBoxClimate.Location = new System.Drawing.Point(803, 16);
             this.checkedListBoxClimate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkedListBoxClimate.Name = "checkedListBoxClimate";
-            this.checkedListBoxClimate.Size = new System.Drawing.Size(112, 85);
+            this.checkedListBoxClimate.Size = new System.Drawing.Size(119, 136);
             this.checkedListBoxClimate.TabIndex = 43;
             this.checkedListBoxClimate.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxClimate_ItemCheck);
             // 
@@ -1154,7 +1188,7 @@
             // 
             // tabPageNitrogen
             // 
-            this.tabPageNitrogen.Controls.Add(this.checkedListBox2);
+            this.tabPageNitrogen.Controls.Add(this.checkedListBoxNitrogen);
             this.tabPageNitrogen.Controls.Add(this.zedGraphControl2);
             this.tabPageNitrogen.Location = new System.Drawing.Point(4, 25);
             this.tabPageNitrogen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1164,23 +1198,20 @@
             this.tabPageNitrogen.Text = "Nitrogen";
             this.tabPageNitrogen.UseVisualStyleBackColor = true;
             // 
-            // checkedListBox2
+            // checkedListBoxNitrogen
             // 
-            this.checkedListBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Items.AddRange(new object[] {
-            "Wood(gDW)",
-            "Root(gDW)",
-            "Fol(gDW)",
-            "CWD(gDW_m2)",
-            "NSC(gC)",
-            "HOM",
-            "GrossPsn(gC_m2_mo)"});
-            this.checkedListBox2.Location = new System.Drawing.Point(803, 20);
-            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(121, 136);
-            this.checkedListBox2.TabIndex = 47;
+            this.checkedListBoxNitrogen.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxNitrogen.FormattingEnabled = true;
+            this.checkedListBoxNitrogen.Items.AddRange(new object[] {
+            "Canopy%N",
+            "HON",
+            "NetNMin",
+            "NDrain"});
+            this.checkedListBoxNitrogen.Location = new System.Drawing.Point(803, 20);
+            this.checkedListBoxNitrogen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBoxNitrogen.Name = "checkedListBoxNitrogen";
+            this.checkedListBoxNitrogen.Size = new System.Drawing.Size(121, 136);
+            this.checkedListBoxNitrogen.TabIndex = 47;
             // 
             // zedGraphControl2
             // 
@@ -1330,40 +1361,6 @@
             this.btAddCohortSpp.Text = "Add";
             this.btAddCohortSpp.UseVisualStyleBackColor = true;
             this.btAddCohortSpp.Click += new System.EventHandler(this.btAddCohortSpp_Click);
-            // 
-            // cbReplicate
-            // 
-            this.cbReplicate.AutoSize = true;
-            this.cbReplicate.Location = new System.Drawing.Point(7, 183);
-            this.cbReplicate.Margin = new System.Windows.Forms.Padding(4);
-            this.cbReplicate.Name = "cbReplicate";
-            this.cbReplicate.Size = new System.Drawing.Size(18, 17);
-            this.cbReplicate.TabIndex = 103;
-            this.toolTip.SetToolTip(this.cbReplicate, "Check for replicates");
-            this.cbReplicate.UseVisualStyleBackColor = true;
-            this.cbReplicate.CheckedChanged += new System.EventHandler(this.cbReplicate_CheckedChanged);
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(26, 180);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 23);
-            this.label8.TabIndex = 102;
-            this.label8.Text = "Replicates";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tbReplicateNum
-            // 
-            this.tbReplicateNum.Enabled = false;
-            this.tbReplicateNum.Location = new System.Drawing.Point(132, 178);
-            this.tbReplicateNum.Margin = new System.Windows.Forms.Padding(4);
-            this.tbReplicateNum.Name = "tbReplicateNum";
-            this.tbReplicateNum.Size = new System.Drawing.Size(42, 22);
-            this.tbReplicateNum.TabIndex = 101;
-            this.tbReplicateNum.Text = "100";
-            this.tbReplicateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip.SetToolTip(this.tbReplicateNum, "How many times to run the model ");
             // 
             // FormMain
             // 
@@ -1520,7 +1517,7 @@
         private System.Windows.Forms.Button btAddReference;
         private System.Windows.Forms.CheckedListBox checkedListBoxWater;
         private ZedGraph.ZedGraphControl zedGraphControlWater;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.CheckedListBox checkedListBoxNitrogen;
         private ZedGraph.ZedGraphControl zedGraphControl2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckedListBox checkedListBoxExtensionOther;

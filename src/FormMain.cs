@@ -30,6 +30,10 @@ namespace LANDIS_II_Site
 
         }
 
+        public Dictionary<string, object> recordInput = new Dictionary<string, object>();
+
+
+
         private void InitializeComponentPlus()
         {
             // set default values for some components
@@ -63,6 +67,7 @@ namespace LANDIS_II_Site
 
         }
 
+
         private void SetDefaultCharts()
         {
             checkedListBoxClimate.SetItemChecked(0, true);
@@ -79,7 +84,9 @@ namespace LANDIS_II_Site
             try
             {
                 BuildLandisInput(); // build landis pacege
-                RunModel();
+                RunModel();  // run the model like the traditional landis way and copy the results to the sitetool output
+                // load site results from the sitetool output
+                LoadResultSite();
                 MessageBox.Show($"Model running ends", "Batch File Execution");
             }
             catch (Exception ex)
@@ -152,8 +159,7 @@ namespace LANDIS_II_Site
 
             CopyDirectory(ResultDirectory, OutputDirectory);
 
-            // load site results
-            LoadResultSite();
+
 
             // set DefaultCharts
 
@@ -1000,38 +1006,6 @@ namespace LANDIS_II_Site
 
         }
 
-        private void SaveDataGridViewToCsv_(StreamWriter writer, DataGridView dataGridView,Boolean writeheader=true)
-        {
-
-            // Write the header row
-            if (writeheader) 
-            {
-                 for (int i = 0; i < dataGridView.ColumnCount; i++)
-                {
-                    writer.Write(dataGridView.Columns[i].Name);
-                    if (i < dataGridView.ColumnCount - 1) writer.Write(",");
-                }
-                 writer.WriteLine();          
-            
-            }  
-
-
-            // Write the data rows
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                if (!row.IsNewRow) // Skip the placeholder row
-                {
-                    for (int i = 0; i < dataGridView.ColumnCount; i++)
-                    {
-                        writer.Write(row.Cells[i].Value);
-                        if (i < dataGridView.ColumnCount - 1) writer.Write(",");
-                    }
-                    writer.WriteLine();
-                }
-            }              
-           
-
-        }
         private void SaveDataGridViewToCsv(StreamWriter writer, DataGridView dataGridView, Boolean writeheader = true,string sep = ",")
         {
 
@@ -1085,7 +1059,7 @@ namespace LANDIS_II_Site
             {
                 string[] lines = File.ReadAllLines(filePath);
                 
-                string zzx = lines[2];
+                
                 // Succession extension
                 string[] values = lines[2].Split(','); // succession extension
                 cbSuccessionOption.SelectedItem = values[1];
@@ -1138,7 +1112,7 @@ namespace LANDIS_II_Site
 
                 }
 
-                var record = new Dictionary<string, object>();
+                //var record = new Dictionary<string, object>();
                
                 // Ecoregion Parameters
 
@@ -1267,6 +1241,15 @@ namespace LANDIS_II_Site
             return InputDirectory;
 
         }
+        private string InterDir(ComboBox cbSuccession)
+        {
+
+            string InputSuccession = cbSuccession.Text;
+            string InterDirectory = @".\Inter";
+            InterDirectory = InterDirectory + "\\" + InputSuccession;
+            return InterDirectory;
+
+        }
         private void MenuBuildLandisInput_Click(object sender, EventArgs e)
         {
 
@@ -1350,7 +1333,7 @@ namespace LANDIS_II_Site
                     writer.WriteLine(strout);
                 }
 
-                if (!cbRandSeed.Checked) writer.WriteLine($"RandomNumberSeed  {tbRandSeed.Text}");
+                if (cbRandSeed.Checked) writer.WriteLine($"RandomNumberSeed  {tbRandSeed.Text}");
                 ///////////////////////////////////// end of site_Scenario.txt
                 ///
             }
@@ -1635,16 +1618,22 @@ namespace LANDIS_II_Site
 
         private void btAddReference_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
-                Title = "Open CSV File"
-            };
+            /*
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                //LoadInputFromCsv(openFileDialog.FileName);
-            }
+             OpenFileDialog openFileDialog = new OpenFileDialog
+             {
+                 Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                 Title = "Open CSV File"
+             };
+
+             if (openFileDialog.ShowDialog() == DialogResult.OK)
+             {
+                 //LoadInputFromCsv(openFileDialog.FileName);
+             }
+
+             */
+            tabControlGraphSite();
+
         }
 
         private void MenuBatchRun_Click(object sender, EventArgs e)
@@ -1688,6 +1677,79 @@ namespace LANDIS_II_Site
                 btClimate.Enabled = controlsEnabled;
                 tbClimateFile.Enabled = (e.NewValue != CheckState.Checked);
             }
+        }
+
+        // load the tab graphs variables
+        private void tabControlGraphSite()
+        {
+            // set default values for cbSppGenericPara
+
+            // read the data file
+            string InterDirectory = InterDir(cbSuccessionOption);// get the current succesion inter directory
+            string fileName = "Site_Site.csv";
+            string filePath = Path.Combine(InterDirectory, fileName);
+            Dictionary<string, string> sitevars = new Dictionary<string, string>();
+
+
+
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
+
+                // Read the keys from the first line
+                string[] keys = lines[0].Trim().Split(',');
+                string[] values = lines[1].Trim().Split(',');
+                //sitevars.Add();
+                // Process each data row
+                for (int i = 1; i < keys.Length; i++)
+                {
+                    sitevars[keys[i]] = values[i];
+ 
+                    //records.Add(record);
+                }
+
+                // populate climate tab
+                // List of values to match
+                List<string> valuesToFind = new List<string> {"1"};
+                tabControlGraphSiteTab(sitevars, checkedListBoxClimate, valuesToFind);
+                
+                // populate carbon tab
+                // List of values to match
+                valuesToFind = new List<string> { "2" };   //         
+                tabControlGraphSiteTab(sitevars, checkedListBoxCarbon, valuesToFind);
+
+                // populate water tab
+                // List of values to match
+                valuesToFind = new List<string> { "3" };   // 
+                tabControlGraphSiteTab(sitevars, checkedListBoxWater, valuesToFind);
+
+                valuesToFind = new List<string> { "4" };   // 
+                tabControlGraphSiteTab(sitevars, checkedListBoxNitrogen, valuesToFind);               
+            }
+            else
+            {
+                MessageBox.Show("CSV file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }             
+  
+        }
+
+        private void tabControlGraphSiteTab(Dictionary<string, string> sitevars, CheckedListBox checkedListBoxTab, List<string> valuesToFind) 
+        {
+            //List<string> valuesToFind = new List<string> { "1" };
+            // Find keys whose values match the list
+            var matchingKeys = sitevars
+                .Where(pair => valuesToFind.Contains(pair.Value)) // Filter based on values
+                .Select(pair => pair.Key) // Select the keys
+                .ToList();
+            // Clear the CheckedListBox
+            checkedListBoxTab.Items.Clear();
+            //checkedListBoxClimate.Items.Add(matchingKeys);
+            // Add new items
+            foreach (string item in matchingKeys)
+            {
+                checkedListBoxTab.Items.Add(item);
+            }
+
         }
 
     }
