@@ -94,6 +94,8 @@
             this.buttonRunModel = new System.Windows.Forms.Button();
             this.btClearGraph = new System.Windows.Forms.Button();
             this.btAddReference = new System.Windows.Forms.Button();
+            this.comboBoxCohortName = new System.Windows.Forms.ComboBox();
+            this.comboBoxCohortVar = new System.Windows.Forms.ComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.dataGridViewSppLifeHistory = new System.Windows.Forms.DataGridView();
@@ -126,9 +128,17 @@
             this.zedGraphControlWater = new ZedGraph.ZedGraphControl();
             this.tabPageNitrogen = new System.Windows.Forms.TabPage();
             this.checkedListBoxNitrogen = new System.Windows.Forms.CheckedListBox();
-            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControlNitrogen = new ZedGraph.ZedGraphControl();
+            this.tabPageComp = new System.Windows.Forms.TabPage();
+            this.checkedListBoxComposition = new System.Windows.Forms.CheckedListBox();
+            this.zedGraphControlComp = new ZedGraph.ZedGraphControl();
             this.tabPageCohorts = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.zedGraphControlCohorts = new ZedGraph.ZedGraphControl();
             this.tabPageCompare = new System.Windows.Forms.TabPage();
+            this.checkedListBoxCompare = new System.Windows.Forms.CheckedListBox();
+            this.zedGraphControlCompare = new ZedGraph.ZedGraphControl();
             this.dataGridViewInitialComm = new System.Windows.Forms.DataGridView();
             this.Cohort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CohortAge1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -156,6 +166,9 @@
             this.tabPageCarbon.SuspendLayout();
             this.tabPageWater.SuspendLayout();
             this.tabPageNitrogen.SuspendLayout();
+            this.tabPageComp.SuspendLayout();
+            this.tabPageCohorts.SuspendLayout();
+            this.tabPageCompare.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInitialComm)).BeginInit();
             this.groupBoxInitialCommunity.SuspendLayout();
             this.SuspendLayout();
@@ -817,6 +830,30 @@
             this.btAddReference.UseVisualStyleBackColor = true;
             this.btAddReference.Click += new System.EventHandler(this.btAddReference_Click);
             // 
+            // comboBoxCohortName
+            // 
+            this.comboBoxCohortName.FormattingEnabled = true;
+            this.comboBoxCohortName.Location = new System.Drawing.Point(788, 45);
+            this.comboBoxCohortName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxCohortName.Name = "comboBoxCohortName";
+            this.comboBoxCohortName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBoxCohortName.Size = new System.Drawing.Size(116, 24);
+            this.comboBoxCohortName.TabIndex = 50;
+            this.toolTip.SetToolTip(this.comboBoxCohortName, "Parameters");
+            this.comboBoxCohortName.SelectedIndexChanged += new System.EventHandler(this.comboBoxCohortName_SelectedIndexChanged);
+            // 
+            // comboBoxCohortVar
+            // 
+            this.comboBoxCohortVar.FormattingEnabled = true;
+            this.comboBoxCohortVar.Location = new System.Drawing.Point(788, 107);
+            this.comboBoxCohortVar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxCohortVar.Name = "comboBoxCohortVar";
+            this.comboBoxCohortVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBoxCohortVar.Size = new System.Drawing.Size(116, 24);
+            this.comboBoxCohortVar.TabIndex = 51;
+            this.toolTip.SetToolTip(this.comboBoxCohortVar, "Parameters");
+            this.comboBoxCohortVar.SelectedIndexChanged += new System.EventHandler(this.comboBoxCohortVar_SelectedIndexChanged);
+            // 
             // dataGridViewSppLifeHistory
             // 
             this.dataGridViewSppLifeHistory.AllowUserToAddRows = false;
@@ -950,7 +987,7 @@
             this.groupBoxSppLifeHistory.Controls.Add(this.btDeleteSppLifeHistoryPara);
             this.groupBoxSppLifeHistory.Controls.Add(this.dataGridViewSppLifeHistory);
             this.groupBoxSppLifeHistory.Controls.Add(this.btAddSppLifeHistoryPara);
-            this.groupBoxSppLifeHistory.Location = new System.Drawing.Point(4, 281);
+            this.groupBoxSppLifeHistory.Location = new System.Drawing.Point(8, 281);
             this.groupBoxSppLifeHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxSppLifeHistory.Name = "groupBoxSppLifeHistory";
             this.groupBoxSppLifeHistory.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -966,7 +1003,7 @@
             this.groupBox1.Controls.Add(this.btDeleteSppEcophysiPara);
             this.groupBox1.Controls.Add(this.dataGridViewSppEcophysi);
             this.groupBox1.Controls.Add(this.btAddSppEcophysiPara);
-            this.groupBox1.Location = new System.Drawing.Point(4, 460);
+            this.groupBox1.Location = new System.Drawing.Point(8, 460);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1041,9 +1078,10 @@
             this.tabControlGraph.Controls.Add(this.tabPageCarbon);
             this.tabControlGraph.Controls.Add(this.tabPageWater);
             this.tabControlGraph.Controls.Add(this.tabPageNitrogen);
+            this.tabControlGraph.Controls.Add(this.tabPageComp);
             this.tabControlGraph.Controls.Add(this.tabPageCohorts);
             this.tabControlGraph.Controls.Add(this.tabPageCompare);
-            this.tabControlGraph.Location = new System.Drawing.Point(4, 649);
+            this.tabControlGraph.Location = new System.Drawing.Point(8, 650);
             this.tabControlGraph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControlGraph.Name = "tabControlGraph";
             this.tabControlGraph.SelectedIndex = 0;
@@ -1082,7 +1120,7 @@
             // 
             // zedGraphControlClimate
             // 
-            this.zedGraphControlClimate.Location = new System.Drawing.Point(0, 0);
+            this.zedGraphControlClimate.Location = new System.Drawing.Point(0, 2);
             this.zedGraphControlClimate.Margin = new System.Windows.Forms.Padding(5);
             this.zedGraphControlClimate.Name = "zedGraphControlClimate";
             this.zedGraphControlClimate.ScrollGrace = 0D;
@@ -1129,7 +1167,7 @@
             // 
             // zedGraphControlCarbon
             // 
-            this.zedGraphControlCarbon.Location = new System.Drawing.Point(0, 0);
+            this.zedGraphControlCarbon.Location = new System.Drawing.Point(0, 2);
             this.zedGraphControlCarbon.Margin = new System.Windows.Forms.Padding(5);
             this.zedGraphControlCarbon.Name = "zedGraphControlCarbon";
             this.zedGraphControlCarbon.ScrollGrace = 0D;
@@ -1173,7 +1211,7 @@
             // 
             // zedGraphControlWater
             // 
-            this.zedGraphControlWater.Location = new System.Drawing.Point(0, 4);
+            this.zedGraphControlWater.Location = new System.Drawing.Point(0, 2);
             this.zedGraphControlWater.Margin = new System.Windows.Forms.Padding(5);
             this.zedGraphControlWater.Name = "zedGraphControlWater";
             this.zedGraphControlWater.ScrollGrace = 0D;
@@ -1189,7 +1227,7 @@
             // tabPageNitrogen
             // 
             this.tabPageNitrogen.Controls.Add(this.checkedListBoxNitrogen);
-            this.tabPageNitrogen.Controls.Add(this.zedGraphControl2);
+            this.tabPageNitrogen.Controls.Add(this.zedGraphControlNitrogen);
             this.tabPageNitrogen.Location = new System.Drawing.Point(4, 25);
             this.tabPageNitrogen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageNitrogen.Name = "tabPageNitrogen";
@@ -1212,24 +1250,70 @@
             this.checkedListBoxNitrogen.Name = "checkedListBoxNitrogen";
             this.checkedListBoxNitrogen.Size = new System.Drawing.Size(121, 136);
             this.checkedListBoxNitrogen.TabIndex = 47;
+            this.checkedListBoxNitrogen.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxNitrogen_ItemCheck);
             // 
-            // zedGraphControl2
+            // zedGraphControlNitrogen
             // 
-            this.zedGraphControl2.Location = new System.Drawing.Point(0, 4);
-            this.zedGraphControl2.Margin = new System.Windows.Forms.Padding(5);
-            this.zedGraphControl2.Name = "zedGraphControl2";
-            this.zedGraphControl2.ScrollGrace = 0D;
-            this.zedGraphControl2.ScrollMaxX = 0D;
-            this.zedGraphControl2.ScrollMaxY = 0D;
-            this.zedGraphControl2.ScrollMaxY2 = 0D;
-            this.zedGraphControl2.ScrollMinX = 0D;
-            this.zedGraphControl2.ScrollMinY = 0D;
-            this.zedGraphControl2.ScrollMinY2 = 0D;
-            this.zedGraphControl2.Size = new System.Drawing.Size(779, 309);
-            this.zedGraphControl2.TabIndex = 46;
+            this.zedGraphControlNitrogen.Location = new System.Drawing.Point(0, 2);
+            this.zedGraphControlNitrogen.Margin = new System.Windows.Forms.Padding(5);
+            this.zedGraphControlNitrogen.Name = "zedGraphControlNitrogen";
+            this.zedGraphControlNitrogen.ScrollGrace = 0D;
+            this.zedGraphControlNitrogen.ScrollMaxX = 0D;
+            this.zedGraphControlNitrogen.ScrollMaxY = 0D;
+            this.zedGraphControlNitrogen.ScrollMaxY2 = 0D;
+            this.zedGraphControlNitrogen.ScrollMinX = 0D;
+            this.zedGraphControlNitrogen.ScrollMinY = 0D;
+            this.zedGraphControlNitrogen.ScrollMinY2 = 0D;
+            this.zedGraphControlNitrogen.Size = new System.Drawing.Size(779, 309);
+            this.zedGraphControlNitrogen.TabIndex = 46;
+            // 
+            // tabPageComp
+            // 
+            this.tabPageComp.Controls.Add(this.checkedListBoxComposition);
+            this.tabPageComp.Controls.Add(this.zedGraphControlComp);
+            this.tabPageComp.Location = new System.Drawing.Point(4, 25);
+            this.tabPageComp.Name = "tabPageComp";
+            this.tabPageComp.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageComp.Size = new System.Drawing.Size(925, 316);
+            this.tabPageComp.TabIndex = 7;
+            this.tabPageComp.Text = "Composition";
+            this.tabPageComp.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBoxComposition
+            // 
+            this.checkedListBoxComposition.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxComposition.FormattingEnabled = true;
+            this.checkedListBoxComposition.Items.AddRange(new object[] {
+            "Composition"});
+            this.checkedListBoxComposition.Location = new System.Drawing.Point(796, 24);
+            this.checkedListBoxComposition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBoxComposition.Name = "checkedListBoxComposition";
+            this.checkedListBoxComposition.Size = new System.Drawing.Size(112, 17);
+            this.checkedListBoxComposition.TabIndex = 50;
+            this.checkedListBoxComposition.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxComposition_ItemCheck);
+            // 
+            // zedGraphControlComp
+            // 
+            this.zedGraphControlComp.Location = new System.Drawing.Point(0, 2);
+            this.zedGraphControlComp.Margin = new System.Windows.Forms.Padding(5);
+            this.zedGraphControlComp.Name = "zedGraphControlComp";
+            this.zedGraphControlComp.ScrollGrace = 0D;
+            this.zedGraphControlComp.ScrollMaxX = 0D;
+            this.zedGraphControlComp.ScrollMaxY = 0D;
+            this.zedGraphControlComp.ScrollMaxY2 = 0D;
+            this.zedGraphControlComp.ScrollMinX = 0D;
+            this.zedGraphControlComp.ScrollMinY = 0D;
+            this.zedGraphControlComp.ScrollMinY2 = 0D;
+            this.zedGraphControlComp.Size = new System.Drawing.Size(779, 309);
+            this.zedGraphControlComp.TabIndex = 47;
             // 
             // tabPageCohorts
             // 
+            this.tabPageCohorts.Controls.Add(this.label10);
+            this.tabPageCohorts.Controls.Add(this.label9);
+            this.tabPageCohorts.Controls.Add(this.comboBoxCohortVar);
+            this.tabPageCohorts.Controls.Add(this.comboBoxCohortName);
+            this.tabPageCohorts.Controls.Add(this.zedGraphControlCohorts);
             this.tabPageCohorts.Location = new System.Drawing.Point(4, 25);
             this.tabPageCohorts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageCohorts.Name = "tabPageCohorts";
@@ -1238,8 +1322,45 @@
             this.tabPageCohorts.Text = "Cohorts";
             this.tabPageCohorts.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.Location = new System.Drawing.Point(816, 82);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 23);
+            this.label10.TabIndex = 53;
+            this.label10.Text = "Variable";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(816, 20);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 23);
+            this.label9.TabIndex = 52;
+            this.label9.Text = "Cohort";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // zedGraphControlCohorts
+            // 
+            this.zedGraphControlCohorts.Location = new System.Drawing.Point(0, 2);
+            this.zedGraphControlCohorts.Margin = new System.Windows.Forms.Padding(5);
+            this.zedGraphControlCohorts.Name = "zedGraphControlCohorts";
+            this.zedGraphControlCohorts.ScrollGrace = 0D;
+            this.zedGraphControlCohorts.ScrollMaxX = 0D;
+            this.zedGraphControlCohorts.ScrollMaxY = 0D;
+            this.zedGraphControlCohorts.ScrollMaxY2 = 0D;
+            this.zedGraphControlCohorts.ScrollMinX = 0D;
+            this.zedGraphControlCohorts.ScrollMinY = 0D;
+            this.zedGraphControlCohorts.ScrollMinY2 = 0D;
+            this.zedGraphControlCohorts.Size = new System.Drawing.Size(779, 309);
+            this.zedGraphControlCohorts.TabIndex = 48;
+            // 
             // tabPageCompare
             // 
+            this.tabPageCompare.Controls.Add(this.checkedListBoxCompare);
+            this.tabPageCompare.Controls.Add(this.zedGraphControlCompare);
             this.tabPageCompare.Location = new System.Drawing.Point(4, 25);
             this.tabPageCompare.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageCompare.Name = "tabPageCompare";
@@ -1248,6 +1369,37 @@
             this.tabPageCompare.TabIndex = 6;
             this.tabPageCompare.Text = "Compare";
             this.tabPageCompare.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBoxCompare
+            // 
+            this.checkedListBoxCompare.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.checkedListBoxCompare.FormattingEnabled = true;
+            this.checkedListBoxCompare.Items.AddRange(new object[] {
+            "Wood(gDW)",
+            "Root(gDW)",
+            "Fol(gDW)",
+            "CWD(gDW_m2)"});
+            this.checkedListBoxCompare.Location = new System.Drawing.Point(803, 20);
+            this.checkedListBoxCompare.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBoxCompare.Name = "checkedListBoxCompare";
+            this.checkedListBoxCompare.Size = new System.Drawing.Size(121, 136);
+            this.checkedListBoxCompare.TabIndex = 49;
+            this.checkedListBoxCompare.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxCompare_ItemCheck);
+            // 
+            // zedGraphControlCompare
+            // 
+            this.zedGraphControlCompare.Location = new System.Drawing.Point(0, 2);
+            this.zedGraphControlCompare.Margin = new System.Windows.Forms.Padding(5);
+            this.zedGraphControlCompare.Name = "zedGraphControlCompare";
+            this.zedGraphControlCompare.ScrollGrace = 0D;
+            this.zedGraphControlCompare.ScrollMaxX = 0D;
+            this.zedGraphControlCompare.ScrollMaxY = 0D;
+            this.zedGraphControlCompare.ScrollMaxY2 = 0D;
+            this.zedGraphControlCompare.ScrollMinX = 0D;
+            this.zedGraphControlCompare.ScrollMinY = 0D;
+            this.zedGraphControlCompare.ScrollMinY2 = 0D;
+            this.zedGraphControlCompare.Size = new System.Drawing.Size(779, 309);
+            this.zedGraphControlCompare.TabIndex = 48;
             // 
             // dataGridViewInitialComm
             // 
@@ -1406,6 +1558,9 @@
             this.tabPageCarbon.ResumeLayout(false);
             this.tabPageWater.ResumeLayout(false);
             this.tabPageNitrogen.ResumeLayout(false);
+            this.tabPageComp.ResumeLayout(false);
+            this.tabPageCohorts.ResumeLayout(false);
+            this.tabPageCompare.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInitialComm)).EndInit();
             this.groupBoxInitialCommunity.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1518,12 +1673,22 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxWater;
         private ZedGraph.ZedGraphControl zedGraphControlWater;
         private System.Windows.Forms.CheckedListBox checkedListBoxNitrogen;
-        private ZedGraph.ZedGraphControl zedGraphControl2;
+        private ZedGraph.ZedGraphControl zedGraphControlNitrogen;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckedListBox checkedListBoxExtensionOther;
         private System.Windows.Forms.CheckBox cbReplicate;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbReplicateNum;
+        private ZedGraph.ZedGraphControl zedGraphControlCohorts;
+        private System.Windows.Forms.CheckedListBox checkedListBoxCompare;
+        private ZedGraph.ZedGraphControl zedGraphControlCompare;
+        private System.Windows.Forms.ComboBox comboBoxCohortVar;
+        private System.Windows.Forms.ComboBox comboBoxCohortName;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TabPage tabPageComp;
+        private System.Windows.Forms.CheckedListBox checkedListBoxComposition;
+        private ZedGraph.ZedGraphControl zedGraphControlComp;
     }
 }
 
