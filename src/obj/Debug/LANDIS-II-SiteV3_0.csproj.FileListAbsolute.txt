@@ -18,4 +18,3 @@ C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.pdb
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\ZedGraph.dll
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.CopyComplete
-C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.AssemblyReference.cache

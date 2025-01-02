@@ -946,6 +946,11 @@ namespace LANDIS_II_Site
             zedGraphControlCohorts.Invalidate();
 
 
+            for (int i = 0; i < checkedListBoxReference.Items.Count; i++)
+            {
+                checkedListBoxReference.SetItemChecked(i, false); // Uncheck the item
+            }
+
         }
 
         private void SaveInputSite(string filePath = @"Inter\Site_input.csv")
@@ -1311,7 +1316,9 @@ namespace LANDIS_II_Site
 
         private void BuildLandisInput()
         {
-            BuildPnetSuccession(cbSuccessionOption);
+            string InputSuccession = cbSuccessionOption.Text;
+            if (InputSuccession == "PnET-Succession") BuildPnetSuccession(cbSuccessionOption);
+            if (InputSuccession == "PnET-CN-Succession") BuildPnetSuccession(cbSuccessionOption);
 
         }
 
@@ -1500,9 +1507,44 @@ namespace LANDIS_II_Site
 
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine("EcoregionParameters	PrecLossFrac	climateFileName	SoilType	RootingDepth	LeakageFrac SnowSublimFrac");
+                //writer.WriteLine("EcoregionParameters	PrecLossFrac	climateFileName	SoilType	RootingDepth	LeakageFrac SnowSublimFrac");
+               
+
+                Dictionary<String, String> Varlist = new Dictionary<String, String>();
+                
+                Varlist.Add("EcoregionParameters", "eco999");
+                Varlist.Add("climateFileName", "site_climate.txt");
+
+                foreach (var item in cbEcoPara.Items) 
+                {
+                    string[] words = item.ToString().Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (words[0]!="-New") Varlist.Add(words[0], words[1]); 
+                }
+                var dataGridView = dataGridViewEcoPara;
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (!row.IsNewRow) // Skip the placeholder row
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string keyToCheck = row.Cells[0].Value.ToString();
+                            if (Varlist.ContainsKey(keyToCheck))
+                            {
+                                Varlist[keyToCheck] = row.Cells[1].Value.ToString();
+                            }
+                            
+                        }
+                        
+                    }
+                }
+
+                // Write keys on one line, separated by spaces
+                writer.WriteLine(string.Join(" ", Varlist.Keys));
+
                 writer.WriteLine(">>---------------------------------------------------");
 
+                // Write values on the next line, separated by spaces
+                writer.WriteLine(string.Join(" ", Varlist.Values));
 
                 //SaveDataGridViewToCsv(writer, dataGridViewSppEcophysi, true, "   ");
             }
@@ -1536,15 +1578,15 @@ namespace LANDIS_II_Site
 
             string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory
 
-            BuildPnetSuccessionScenario(InputDirectory);
-            BuildPnetSuccessionSuccession(InputDirectory);
-            BuildPnetSuccessionSpecies(InputDirectory);
-            BuildPnetSuccessionPnETSpeciesParameters(InputDirectory);
-            BuildPnetSuccessionInitialComm(InputDirectory);
-            BuildPnetSuccessionClimate(InputDirectory);
-            //BuildPnetSuccessionEcoregionPara(InputDirectory);
+            BuildPnetSuccessionScenario(InputDirectory);                        // build scenario file
+            BuildPnetSuccessionSuccession(InputDirectory);                      // build Succession file
+            BuildPnetSuccessionSpecies(InputDirectory);                         // build Species file
+            BuildPnetSuccessionPnETSpeciesParameters(InputDirectory);           // build PnET Species file
+            BuildPnetSuccessionInitialComm(InputDirectory);                     // build initial community file
+            BuildPnetSuccessionClimate(InputDirectory);                         // build climate file
+            BuildPnetSuccessionEcoregionPara(InputDirectory);                 // build ecoregion file
 
-            BuildPnetSuccessionGenericPara(InputDirectory);
+            BuildPnetSuccessionGenericPara(InputDirectory);                     // build PnETGeneric file
             /*
 
             /////////////////save Ecoregion data
@@ -1636,8 +1678,7 @@ namespace LANDIS_II_Site
         }
 
         private void btAddReference_Click(object sender, EventArgs e)
-        {
-            
+        {            
 
              OpenFileDialog openFileDialog = new OpenFileDialog
              {
@@ -1648,29 +1689,41 @@ namespace LANDIS_II_Site
              if (openFileDialog.ShowDialog() == DialogResult.OK)
              {
                 RecordsRef = ReadCsvAsDictionary(openFileDialog.FileName);
-             }
 
-                       
-            string Xvar="Time";
-            int i = 0;
+                string Xvar="Time";
+                int i = 0;
+                checkedListBoxReference.Items.Clear();
 
-            foreach (var key in RecordsRef[0].Keys)
-            {
-                if (key.Contains('_')) 
+                foreach (var key in RecordsRef[0].Keys)
                 {
-                    string[] para = key.Split('_');                    
-                    Color c = colorPalette[i];
-                    CreateGraphRef(RecordsRef, Xvar, key, c,para[1]);// create dot graph
+                    if (key.Contains('_')) 
+                    {
+                        string[] para = key.Split('_');                    
+                        Color c = colorPalette[i];
+                        string item = para[0] + "_ref";
+                        //CreateGraphRef(RecordsRef, Xvar, key, c,para[1]);// create dot graph
+                        checkedListBoxReference.Items.Add(key);
+                    }
+                    i++;                     
                 }
-                i++;                     
+
+                for (i = 0; i < checkedListBoxReference.Items.Count; i++)
+                {
+                    checkedListBoxReference.SetItemChecked(i, true); // Set each item as checked
+                }
+
+
             }
+
+             
+
                        
+     
 
         }
 
-        private GraphPane CreateGraphRef(List<Dictionary<string, object>> records, string Xvar, string Yvar,  Color c, string tab)
+        private ZedGraphControl MatchZedGraph(string tab) 
         {
-
             ZedGraphControl zgc = new ZedGraphControl();
             if (tab == "2")
             {
@@ -1687,7 +1740,20 @@ namespace LANDIS_II_Site
                 zgc = zedGraphControlNitrogen;
             }
 
+            if (tab == "5")
+            {
+                zgc = zedGraphControlCompare;
+            }
 
+            //GraphPane myPane = zgc.GraphPane;
+            return zgc;
+
+        }
+        private GraphPane CreateGraphRef(List<Dictionary<string, object>> records, string Xvar, string Yvar,  Color c, string tab)
+        {
+
+            // get the zed
+            ZedGraphControl zgc = MatchZedGraph(tab);
             GraphPane myPane = zgc.GraphPane;
 
             // Set the titles and axis labels
@@ -2280,7 +2346,44 @@ namespace LANDIS_II_Site
 
         }
 
-       
+
+        private void checkedListBoxReference_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            
+            CheckedListBox myclb = checkedListBoxReference;    // carbon checked List Box
+
+            string Xvar = "Time";
+
+            // Check which item is toggled
+            string selectedItem = myclb.Items[e.Index].ToString();
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                Color c = colorPalette[e.Index];                
+                string[] para = selectedItem.Split('_');
+                CreateGraphRef(RecordsRef, Xvar, selectedItem, c, para[1]);// create dot graph
+            }
+            else
+            {
+                // Clear Data
+                string[] para = selectedItem.Split('_');
+                
+                ZedGraphControl zgc = MatchZedGraph(para[1]);
+                GraphPane myPane = zgc.GraphPane;        
+
+                CurveItem curve = myPane.CurveList[selectedItem];
+                // Remove the curve from the list
+                myPane.CurveList.Remove(curve);
+
+                // Refresh the graph
+                zgc.AxisChange();
+                zgc.Invalidate();
+
+            }
+
+        }
+
+
     }
 }
 

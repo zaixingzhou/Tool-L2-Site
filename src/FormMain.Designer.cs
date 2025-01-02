@@ -149,6 +149,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btDeleteCohortSpp = new System.Windows.Forms.Button();
             this.btAddCohortSpp = new System.Windows.Forms.Button();
+            this.checkedListBoxReference = new System.Windows.Forms.CheckedListBox();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBoxPara.SuspendLayout();
@@ -184,7 +185,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1260, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1260, 30);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -320,9 +321,9 @@
             this.toolStripButtonExportOutput,
             this.toolStripSeparator4,
             this.toolStripButtonUserGuide});
-            this.toolStrip.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip.Location = new System.Drawing.Point(0, 30);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1260, 27);
+            this.toolStrip.Size = new System.Drawing.Size(1260, 31);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -332,7 +333,7 @@
             this.toolStripOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripOpen.Image")));
             this.toolStripOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripOpen.Name = "toolStripOpen";
-            this.toolStripOpen.Size = new System.Drawing.Size(49, 24);
+            this.toolStripOpen.Size = new System.Drawing.Size(49, 28);
             this.toolStripOpen.Text = "Open";
             this.toolStripOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
@@ -823,7 +824,7 @@
             this.btAddReference.Location = new System.Drawing.Point(965, 808);
             this.btAddReference.Margin = new System.Windows.Forms.Padding(4);
             this.btAddReference.Name = "btAddReference";
-            this.btAddReference.Size = new System.Drawing.Size(84, 43);
+            this.btAddReference.Size = new System.Drawing.Size(117, 33);
             this.btAddReference.TabIndex = 46;
             this.btAddReference.Text = "Add Reference";
             this.toolTip.SetToolTip(this.btAddReference, "Add observated data for comparison");
@@ -1514,12 +1515,24 @@
             this.btAddCohortSpp.UseVisualStyleBackColor = true;
             this.btAddCohortSpp.Click += new System.EventHandler(this.btAddCohortSpp_Click);
             // 
+            // checkedListBoxReference
+            // 
+            this.checkedListBoxReference.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.checkedListBoxReference.FormattingEnabled = true;
+            this.checkedListBoxReference.Location = new System.Drawing.Point(965, 847);
+            this.checkedListBoxReference.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBoxReference.Name = "checkedListBoxReference";
+            this.checkedListBoxReference.Size = new System.Drawing.Size(117, 53);
+            this.checkedListBoxReference.TabIndex = 47;
+            this.checkedListBoxReference.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxReference_ItemCheck);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1260, 1006);
+            this.Controls.Add(this.checkedListBoxReference);
             this.Controls.Add(this.btAddReference);
             this.Controls.Add(this.groupBoxInitialCommunity);
             this.Controls.Add(this.btClearGraph);
@@ -1689,6 +1702,7 @@
         private System.Windows.Forms.TabPage tabPageComp;
         private System.Windows.Forms.CheckedListBox checkedListBoxComposition;
         private ZedGraph.ZedGraphControl zedGraphControlComp;
+        private System.Windows.Forms.CheckedListBox checkedListBoxReference;
     }
 }
 
