@@ -43,7 +43,8 @@
             this.MenuOpenLog = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBuildLandisInput = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuBatchRun = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuScenarios = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemLUI = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuUserGuide = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,12 +97,14 @@
             this.btAddReference = new System.Windows.Forms.Button();
             this.comboBoxCohortName = new System.Windows.Forms.ComboBox();
             this.comboBoxCohortVar = new System.Windows.Forms.ComboBox();
+            this.checkBoxDiagnosis = new System.Windows.Forms.CheckBox();
+            this.comboBoxDiagnosisVar = new System.Windows.Forms.ComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.dataGridViewSppLifeHistory = new System.Windows.Forms.DataGridView();
             this.btAddSppLifeHistorySpp = new System.Windows.Forms.Button();
             this.btAddSppLifeHistoryPara = new System.Windows.Forms.Button();
-            this.groupBoxAddEcoPara = new System.Windows.Forms.GroupBox();
+            this.groupBoxSppGeneric = new System.Windows.Forms.GroupBox();
             this.btDeleteSppGeneric = new System.Windows.Forms.Button();
             this.dataGridViewSppGeneric = new System.Windows.Forms.DataGridView();
             this.Parameter_spp = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -139,6 +142,9 @@
             this.tabPageCompare = new System.Windows.Forms.TabPage();
             this.checkedListBoxCompare = new System.Windows.Forms.CheckedListBox();
             this.zedGraphControlCompare = new ZedGraph.ZedGraphControl();
+            this.tabPageDiagnosis = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.zedGraphControlDiagnosis = new ZedGraph.ZedGraphControl();
             this.dataGridViewInitialComm = new System.Windows.Forms.DataGridView();
             this.Cohort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CohortAge1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -150,6 +156,14 @@
             this.btDeleteCohortSpp = new System.Windows.Forms.Button();
             this.btAddCohortSpp = new System.Windows.Forms.Button();
             this.checkedListBoxReference = new System.Windows.Forms.CheckedListBox();
+            this.groupBoxDiagnosis = new System.Windows.Forms.GroupBox();
+            this.radioButtonBayesian = new System.Windows.Forms.RadioButton();
+            this.radioButtonMultiple = new System.Windows.Forms.RadioButton();
+            this.radioButtonOnePara = new System.Windows.Forms.RadioButton();
+            this.dataGridViewDiagMulti = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxMin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxMax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBoxPara.SuspendLayout();
@@ -157,7 +171,7 @@
             this.groupBoxEcoPara.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEcoPara)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSppLifeHistory)).BeginInit();
-            this.groupBoxAddEcoPara.SuspendLayout();
+            this.groupBoxSppGeneric.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSppGeneric)).BeginInit();
             this.groupBoxSppLifeHistory.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -170,8 +184,11 @@
             this.tabPageComp.SuspendLayout();
             this.tabPageCohorts.SuspendLayout();
             this.tabPageCompare.SuspendLayout();
+            this.tabPageDiagnosis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInitialComm)).BeginInit();
             this.groupBoxInitialCommunity.SuspendLayout();
+            this.groupBoxDiagnosis.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDiagMulti)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -185,7 +202,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1260, 30);
+            this.menuStrip.Size = new System.Drawing.Size(1282, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -267,7 +284,8 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuBuildLandisInput,
-            this.MenuBatchRun});
+            this.MenuScenarios,
+            this.ToolStripMenuItemLUI});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -279,12 +297,19 @@
             this.MenuBuildLandisInput.Text = "&Build LANDIS Input Package...";
             this.MenuBuildLandisInput.Click += new System.EventHandler(this.MenuBuildLandisInput_Click);
             // 
-            // MenuBatchRun
+            // MenuScenarios
             // 
-            this.MenuBatchRun.Name = "MenuBatchRun";
-            this.MenuBatchRun.Size = new System.Drawing.Size(286, 26);
-            this.MenuBatchRun.Text = "&Batch Run";
-            this.MenuBatchRun.Click += new System.EventHandler(this.MenuBatchRun_Click);
+            this.MenuScenarios.Name = "MenuScenarios";
+            this.MenuScenarios.Size = new System.Drawing.Size(286, 26);
+            this.MenuScenarios.Text = "&Scenarios";
+            this.MenuScenarios.Click += new System.EventHandler(this.MenuScenarios_Click);
+            // 
+            // ToolStripMenuItemLUI
+            // 
+            this.ToolStripMenuItemLUI.Name = "ToolStripMenuItemLUI";
+            this.ToolStripMenuItemLUI.Size = new System.Drawing.Size(286, 26);
+            this.ToolStripMenuItemLUI.Text = "&Landis User Interface";
+            this.ToolStripMenuItemLUI.Click += new System.EventHandler(this.ToolStripMenuItemLUI_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -321,9 +346,9 @@
             this.toolStripButtonExportOutput,
             this.toolStripSeparator4,
             this.toolStripButtonUserGuide});
-            this.toolStrip.Location = new System.Drawing.Point(0, 30);
+            this.toolStrip.Location = new System.Drawing.Point(0, 28);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1260, 31);
+            this.toolStrip.Size = new System.Drawing.Size(1282, 27);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -333,7 +358,7 @@
             this.toolStripOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripOpen.Image")));
             this.toolStripOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripOpen.Name = "toolStripOpen";
-            this.toolStripOpen.Size = new System.Drawing.Size(49, 28);
+            this.toolStripOpen.Size = new System.Drawing.Size(49, 24);
             this.toolStripOpen.Text = "Open";
             this.toolStripOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
@@ -600,7 +625,6 @@
             this.cbSuccessionOption.Items.AddRange(new object[] {
             "PnET-Succession",
             "PnET-CN-Succession",
-            "AgeOnly",
             "Biomass"});
             this.cbSuccessionOption.Location = new System.Drawing.Point(92, 25);
             this.cbSuccessionOption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -855,6 +879,29 @@
             this.toolTip.SetToolTip(this.comboBoxCohortVar, "Parameters");
             this.comboBoxCohortVar.SelectedIndexChanged += new System.EventHandler(this.comboBoxCohortVar_SelectedIndexChanged);
             // 
+            // checkBoxDiagnosis
+            // 
+            this.checkBoxDiagnosis.AutoSize = true;
+            this.checkBoxDiagnosis.Location = new System.Drawing.Point(10, 0);
+            this.checkBoxDiagnosis.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxDiagnosis.Name = "checkBoxDiagnosis";
+            this.checkBoxDiagnosis.Size = new System.Drawing.Size(18, 17);
+            this.checkBoxDiagnosis.TabIndex = 104;
+            this.toolTip.SetToolTip(this.checkBoxDiagnosis, "Check for Diagnosis");
+            this.checkBoxDiagnosis.UseVisualStyleBackColor = true;
+            this.checkBoxDiagnosis.CheckedChanged += new System.EventHandler(this.checkBoxDiagnosis_CheckedChanged);
+            // 
+            // comboBoxDiagnosisVar
+            // 
+            this.comboBoxDiagnosisVar.FormattingEnabled = true;
+            this.comboBoxDiagnosisVar.Location = new System.Drawing.Point(796, 50);
+            this.comboBoxDiagnosisVar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxDiagnosisVar.Name = "comboBoxDiagnosisVar";
+            this.comboBoxDiagnosisVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBoxDiagnosisVar.Size = new System.Drawing.Size(116, 24);
+            this.comboBoxDiagnosisVar.TabIndex = 54;
+            this.toolTip.SetToolTip(this.comboBoxDiagnosisVar, "Parameters");
+            // 
             // dataGridViewSppLifeHistory
             // 
             this.dataGridViewSppLifeHistory.AllowUserToAddRows = false;
@@ -891,20 +938,20 @@
             this.btAddSppLifeHistoryPara.UseVisualStyleBackColor = true;
             this.btAddSppLifeHistoryPara.Click += new System.EventHandler(this.btAddSppLifeHistoryPara_Click);
             // 
-            // groupBoxAddEcoPara
+            // groupBoxSppGeneric
             // 
-            this.groupBoxAddEcoPara.Controls.Add(this.btDeleteSppGeneric);
-            this.groupBoxAddEcoPara.Controls.Add(this.dataGridViewSppGeneric);
-            this.groupBoxAddEcoPara.Controls.Add(this.cbSppGenericPara);
-            this.groupBoxAddEcoPara.Controls.Add(this.btAddSpeciesGenericPara);
-            this.groupBoxAddEcoPara.Location = new System.Drawing.Point(1023, 59);
-            this.groupBoxAddEcoPara.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxAddEcoPara.Name = "groupBoxAddEcoPara";
-            this.groupBoxAddEcoPara.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxAddEcoPara.Size = new System.Drawing.Size(227, 220);
-            this.groupBoxAddEcoPara.TabIndex = 31;
-            this.groupBoxAddEcoPara.TabStop = false;
-            this.groupBoxAddEcoPara.Text = "Species:Generic";
+            this.groupBoxSppGeneric.Controls.Add(this.btDeleteSppGeneric);
+            this.groupBoxSppGeneric.Controls.Add(this.dataGridViewSppGeneric);
+            this.groupBoxSppGeneric.Controls.Add(this.cbSppGenericPara);
+            this.groupBoxSppGeneric.Controls.Add(this.btAddSpeciesGenericPara);
+            this.groupBoxSppGeneric.Location = new System.Drawing.Point(1026, 59);
+            this.groupBoxSppGeneric.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxSppGeneric.Name = "groupBoxSppGeneric";
+            this.groupBoxSppGeneric.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxSppGeneric.Size = new System.Drawing.Size(227, 220);
+            this.groupBoxSppGeneric.TabIndex = 31;
+            this.groupBoxSppGeneric.TabStop = false;
+            this.groupBoxSppGeneric.Text = "Species:Generic";
             // 
             // btDeleteSppGeneric
             // 
@@ -1082,6 +1129,7 @@
             this.tabControlGraph.Controls.Add(this.tabPageComp);
             this.tabControlGraph.Controls.Add(this.tabPageCohorts);
             this.tabControlGraph.Controls.Add(this.tabPageCompare);
+            this.tabControlGraph.Controls.Add(this.tabPageDiagnosis);
             this.tabControlGraph.Location = new System.Drawing.Point(8, 650);
             this.tabControlGraph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControlGraph.Name = "tabControlGraph";
@@ -1402,6 +1450,44 @@
             this.zedGraphControlCompare.Size = new System.Drawing.Size(779, 309);
             this.zedGraphControlCompare.TabIndex = 48;
             // 
+            // tabPageDiagnosis
+            // 
+            this.tabPageDiagnosis.Controls.Add(this.label11);
+            this.tabPageDiagnosis.Controls.Add(this.comboBoxDiagnosisVar);
+            this.tabPageDiagnosis.Controls.Add(this.zedGraphControlDiagnosis);
+            this.tabPageDiagnosis.Location = new System.Drawing.Point(4, 25);
+            this.tabPageDiagnosis.Name = "tabPageDiagnosis";
+            this.tabPageDiagnosis.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDiagnosis.Size = new System.Drawing.Size(925, 316);
+            this.tabPageDiagnosis.TabIndex = 8;
+            this.tabPageDiagnosis.Text = "Diagnosis";
+            this.tabPageDiagnosis.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(824, 25);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(61, 23);
+            this.label11.TabIndex = 55;
+            this.label11.Text = "Variable";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // zedGraphControlDiagnosis
+            // 
+            this.zedGraphControlDiagnosis.Location = new System.Drawing.Point(0, 2);
+            this.zedGraphControlDiagnosis.Margin = new System.Windows.Forms.Padding(5);
+            this.zedGraphControlDiagnosis.Name = "zedGraphControlDiagnosis";
+            this.zedGraphControlDiagnosis.ScrollGrace = 0D;
+            this.zedGraphControlDiagnosis.ScrollMaxX = 0D;
+            this.zedGraphControlDiagnosis.ScrollMaxY = 0D;
+            this.zedGraphControlDiagnosis.ScrollMaxY2 = 0D;
+            this.zedGraphControlDiagnosis.ScrollMinX = 0D;
+            this.zedGraphControlDiagnosis.ScrollMinY = 0D;
+            this.zedGraphControlDiagnosis.ScrollMinY2 = 0D;
+            this.zedGraphControlDiagnosis.Size = new System.Drawing.Size(779, 309);
+            this.zedGraphControlDiagnosis.TabIndex = 49;
+            // 
             // dataGridViewInitialComm
             // 
             this.dataGridViewInitialComm.AllowUserToAddRows = false;
@@ -1526,12 +1612,100 @@
             this.checkedListBoxReference.TabIndex = 47;
             this.checkedListBoxReference.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxReference_ItemCheck);
             // 
+            // groupBoxDiagnosis
+            // 
+            this.groupBoxDiagnosis.Controls.Add(this.radioButtonBayesian);
+            this.groupBoxDiagnosis.Controls.Add(this.checkBoxDiagnosis);
+            this.groupBoxDiagnosis.Controls.Add(this.radioButtonMultiple);
+            this.groupBoxDiagnosis.Controls.Add(this.radioButtonOnePara);
+            this.groupBoxDiagnosis.Controls.Add(this.dataGridViewDiagMulti);
+            this.groupBoxDiagnosis.Location = new System.Drawing.Point(1026, 341);
+            this.groupBoxDiagnosis.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxDiagnosis.Name = "groupBoxDiagnosis";
+            this.groupBoxDiagnosis.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxDiagnosis.Size = new System.Drawing.Size(227, 212);
+            this.groupBoxDiagnosis.TabIndex = 44;
+            this.groupBoxDiagnosis.TabStop = false;
+            this.groupBoxDiagnosis.Text = "     Diagnosis";
+            // 
+            // radioButtonBayesian
+            // 
+            this.radioButtonBayesian.AutoSize = true;
+            this.radioButtonBayesian.Location = new System.Drawing.Point(13, 178);
+            this.radioButtonBayesian.Name = "radioButtonBayesian";
+            this.radioButtonBayesian.Size = new System.Drawing.Size(156, 21);
+            this.radioButtonBayesian.TabIndex = 46;
+            this.radioButtonBayesian.Text = "Bayesian calibration";
+            this.radioButtonBayesian.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonMultiple
+            // 
+            this.radioButtonMultiple.AutoSize = true;
+            this.radioButtonMultiple.Location = new System.Drawing.Point(13, 58);
+            this.radioButtonMultiple.Name = "radioButtonMultiple";
+            this.radioButtonMultiple.Size = new System.Drawing.Size(77, 21);
+            this.radioButtonMultiple.TabIndex = 45;
+            this.radioButtonMultiple.Text = "Multiple";
+            this.radioButtonMultiple.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonOnePara
+            // 
+            this.radioButtonOnePara.AutoSize = true;
+            this.radioButtonOnePara.Checked = true;
+            this.radioButtonOnePara.Location = new System.Drawing.Point(12, 31);
+            this.radioButtonOnePara.Name = "radioButtonOnePara";
+            this.radioButtonOnePara.Size = new System.Drawing.Size(56, 21);
+            this.radioButtonOnePara.TabIndex = 44;
+            this.radioButtonOnePara.TabStop = true;
+            this.radioButtonOnePara.Text = "One";
+            this.radioButtonOnePara.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewDiagMulti
+            // 
+            this.dataGridViewDiagMulti.AllowUserToAddRows = false;
+            this.dataGridViewDiagMulti.AllowUserToOrderColumns = true;
+            this.dataGridViewDiagMulti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewDiagMulti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDiagMulti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxMin,
+            this.dataGridViewTextBoxMax});
+            this.dataGridViewDiagMulti.Location = new System.Drawing.Point(26, 84);
+            this.dataGridViewDiagMulti.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewDiagMulti.Name = "dataGridViewDiagMulti";
+            this.dataGridViewDiagMulti.RowHeadersWidth = 20;
+            this.dataGridViewDiagMulti.RowTemplate.Height = 24;
+            this.dataGridViewDiagMulti.Size = new System.Drawing.Size(195, 78);
+            this.dataGridViewDiagMulti.TabIndex = 41;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.FillWeight = 140.2809F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Parameter";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxMin
+            // 
+            this.dataGridViewTextBoxMin.FillWeight = 77.00535F;
+            this.dataGridViewTextBoxMin.HeaderText = "Min";
+            this.dataGridViewTextBoxMin.MinimumWidth = 6;
+            this.dataGridViewTextBoxMin.Name = "dataGridViewTextBoxMin";
+            // 
+            // dataGridViewTextBoxMax
+            // 
+            this.dataGridViewTextBoxMax.FillWeight = 82.71372F;
+            this.dataGridViewTextBoxMax.HeaderText = "Max";
+            this.dataGridViewTextBoxMax.MinimumWidth = 6;
+            this.dataGridViewTextBoxMax.Name = "dataGridViewTextBoxMax";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1260, 1006);
+            this.ClientSize = new System.Drawing.Size(1282, 1006);
+            this.Controls.Add(this.groupBoxDiagnosis);
             this.Controls.Add(this.checkedListBoxReference);
             this.Controls.Add(this.btAddReference);
             this.Controls.Add(this.groupBoxInitialCommunity);
@@ -1539,7 +1713,7 @@
             this.Controls.Add(this.buttonRunModel);
             this.Controls.Add(this.tabControlGraph);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBoxAddEcoPara);
+            this.Controls.Add(this.groupBoxSppGeneric);
             this.Controls.Add(this.groupBoxEcoPara);
             this.Controls.Add(this.groupBoxExtensions);
             this.Controls.Add(this.groupBoxPara);
@@ -1561,7 +1735,7 @@
             this.groupBoxEcoPara.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEcoPara)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSppLifeHistory)).EndInit();
-            this.groupBoxAddEcoPara.ResumeLayout(false);
+            this.groupBoxSppGeneric.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSppGeneric)).EndInit();
             this.groupBoxSppLifeHistory.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -1574,8 +1748,12 @@
             this.tabPageComp.ResumeLayout(false);
             this.tabPageCohorts.ResumeLayout(false);
             this.tabPageCompare.ResumeLayout(false);
+            this.tabPageDiagnosis.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInitialComm)).EndInit();
             this.groupBoxInitialCommunity.ResumeLayout(false);
+            this.groupBoxDiagnosis.ResumeLayout(false);
+            this.groupBoxDiagnosis.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDiagMulti)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1631,7 +1809,7 @@
         private System.Windows.Forms.Button btAddSppLifeHistoryPara;
         private System.Windows.Forms.Button btAddEcoPara;
         private System.Windows.Forms.DataGridView dataGridViewEcoPara;
-        private System.Windows.Forms.GroupBox groupBoxAddEcoPara;        
+        private System.Windows.Forms.GroupBox groupBoxSppGeneric;        
         private System.Windows.Forms.ComboBox cbEcoPara;
         private System.Windows.Forms.Button btDeleteEcoPara;
         private System.Windows.Forms.Button btDeleteSppLifeHistoryPara;
@@ -1670,7 +1848,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.DataGridViewTextBoxColumn Parameter_spp;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value_spp;
-        private System.Windows.Forms.ToolStripMenuItem MenuBatchRun;
+        private System.Windows.Forms.ToolStripMenuItem MenuScenarios;
         private System.Windows.Forms.ToolStripMenuItem MenuOpenLog;
         private System.Windows.Forms.DataGridView dataGridViewInitialComm;
         private System.Windows.Forms.GroupBox groupBoxInitialCommunity;
@@ -1703,6 +1881,20 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxComposition;
         private ZedGraph.ZedGraphControl zedGraphControlComp;
         private System.Windows.Forms.CheckedListBox checkedListBoxReference;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemLUI;
+        private System.Windows.Forms.GroupBox groupBoxDiagnosis;
+        private System.Windows.Forms.DataGridView dataGridViewDiagMulti;
+        private System.Windows.Forms.RadioButton radioButtonOnePara;
+        private System.Windows.Forms.RadioButton radioButtonBayesian;
+        private System.Windows.Forms.RadioButton radioButtonMultiple;
+        private System.Windows.Forms.CheckBox checkBoxDiagnosis;
+        private System.Windows.Forms.TabPage tabPageDiagnosis;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBoxDiagnosisVar;
+        private ZedGraph.ZedGraphControl zedGraphControlDiagnosis;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxMin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxMax;
     }
 }
 

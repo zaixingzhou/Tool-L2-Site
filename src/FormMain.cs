@@ -63,7 +63,8 @@ namespace LANDIS_II_Site
             String FileExample = @".\Inter\Site_input_example.csv";
             LoadInputFromCsv(FileExample);
 
-
+            checkBoxDiagnosis.Checked = false;
+            checkBoxDiagnosis_CheckedChanged(checkBoxDiagnosis, EventArgs.Empty);
 
         }
 
@@ -81,6 +82,10 @@ namespace LANDIS_II_Site
 
         private void MenuRun_Click(object sender, EventArgs e)
         {
+            
+                     
+            GetSelectedDiagRadioButton();
+            
             try
             {
                 BuildLandisInput(); // build landis pacege
@@ -90,12 +95,15 @@ namespace LANDIS_II_Site
                 // update the chart tabs
                 tabControlGraphSite();
                 MessageBox.Show($"Model running ends", "Batch File Execution");
+                
             }
             catch (Exception ex)
             {
                 // Handle exceptions
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error");
             }
+
+
 
         }
 
@@ -1784,7 +1792,7 @@ namespace LANDIS_II_Site
             return myPane;
         }
 
-        private void MenuBatchRun_Click(object sender, EventArgs e)
+        private void MenuScenarios_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -1901,6 +1909,11 @@ namespace LANDIS_II_Site
                     checkedListBoxCompare.Items.Add(item);
                 }
                 if (checkedListBoxCompare.Items.Count > 0) checkedListBoxCompare.SetItemChecked(0, true);  // show default chart
+
+
+                // populate diagnosis tab
+                comboBoxDiagnosisVarFill();
+
 
 
             }
@@ -2383,7 +2396,80 @@ namespace LANDIS_II_Site
 
         }
 
+        private void ToolStripMenuItemLUI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Path to the LUI .exe file you want to run
+                string exePath = @".\Inter\Landis_User_Interface\LandisUserInterface.exe";
 
+                // Configure process start information
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = exePath,
+                    WindowStyle = ProcessWindowStyle.Normal // Normal window size (not maximized or minimized)
+                };
+
+                // Start the process
+                Process.Start(exePath);
+            }
+            catch (Exception ex)
+            {
+                // Display any errors
+                MessageBox.Show($"Failed to run the application.\n\nError: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void checkBoxDiagnosis_CheckedChanged(object sender, EventArgs e)
+        {
+            // Set the TextBox to enabled/disabled based on CheckBox's checked state
+            foreach (Control control in groupBoxDiagnosis.Controls)
+            {
+                if (control != checkBoxDiagnosis) control.Enabled = checkBoxDiagnosis.Checked;
+            }
+
+            if (checkBoxDiagnosis.Checked == true) tabControlGraph.SelectedTab = tabPageDiagnosis;
+            else tabControlGraph.SelectedTab = tabPageCarbon;
+        }
+
+        private void comboBoxDiagnosisVarFill()
+        {
+            // set default values for cbSppGenericPara
+
+            // read the data file
+
+            string OutputDirectory = OutputDir(cbSuccessionOption);// get the current succesion output directory
+            string fileName = comboBoxCohortName.Text;
+            string filePath = Path.Combine(OutputDirectory, fileName);
+
+            comboBoxDiagnosisVar.Items.Clear();
+
+            foreach (var item in checkedListBoxCompare.Items)
+            {
+                //string[] keys = item.ToString;
+                comboBoxDiagnosisVar.Items.Add(item.ToString());
+            }
+            comboBoxDiagnosisVar.Sorted = true; // Automatically sorts items alphabetically
+            comboBoxDiagnosisVar.SelectedIndex = 0;  // set default
+
+        }
+
+        private void GetSelectedDiagRadioButton()
+        {
+            if (checkBoxDiagnosis.Checked) 
+            {
+                foreach (Control control in groupBoxDiagnosis.Controls)
+                {
+                    if (control is RadioButton radioButton && radioButton.Checked)
+                    {
+                        MessageBox.Show($"Selected: {radioButton.Text}");
+                        break;
+                    }
+                }           
+            
+            }
+ 
+        }
     }
 }
 
