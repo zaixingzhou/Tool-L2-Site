@@ -1460,7 +1460,7 @@
             this.tabPageDiagnosis.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageDiagnosis.Size = new System.Drawing.Size(925, 316);
             this.tabPageDiagnosis.TabIndex = 8;
-            this.tabPageDiagnosis.Text = "Diagnosis";
+            this.tabPageDiagnosis.Text = "Calibration";
             this.tabPageDiagnosis.UseVisualStyleBackColor = true;
             // 
             // label11
@@ -1626,7 +1626,7 @@
             this.groupBoxDiagnosis.Size = new System.Drawing.Size(227, 212);
             this.groupBoxDiagnosis.TabIndex = 44;
             this.groupBoxDiagnosis.TabStop = false;
-            this.groupBoxDiagnosis.Text = "     Diagnosis";
+            this.groupBoxDiagnosis.Text = "     Calibration";
             // 
             // radioButtonBayesian
             // 

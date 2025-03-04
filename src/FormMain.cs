@@ -17,21 +17,28 @@ namespace LANDIS_II_Site
 {
     public partial class FormMain : Form
     {
+        SiteData Sitedata= new SiteData();  // Instance of the sitedata class 
         public FormMain()
         {
             InitializeComponent();
+              
+            //Sitedata // Initialize the sitedata class
 
             // set default values for some components
             InitializeComponentPlus();
-            //RunModel(); // default run
-            //SetDefaultCharts();
-
-
 
         }
 
         public Dictionary<string, object> recordInput = new Dictionary<string, object>();
+        public class SiteData
+        {
+            public int DiagnosisOption;
+            public string DiagNote;
+            public int DiagRunNum;  // the run sequence
 
+
+
+        }
 
 
         private void InitializeComponentPlus()
@@ -80,30 +87,58 @@ namespace LANDIS_II_Site
 
         }
 
+        private void ModelRun()
+        {
+            BuildLandisInput(); // build landis pacege
+            RunModel();  // run the model in the traditional landis way and copy the results to the sitetool output
+            // load site results from the sitetool output
+            LoadResultSite();
+            // update the chart tabs
+            tabControlGraphSite();
+
+        }
+
         private void MenuRun_Click(object sender, EventArgs e)
         {
-            
-                     
-            GetSelectedDiagRadioButton();
-            
-            try
-            {
-                BuildLandisInput(); // build landis pacege
-                RunModel();  // run the model in the traditional landis way and copy the results to the sitetool output
-                // load site results from the sitetool output
-                LoadResultSite();
-                // update the chart tabs
-                tabControlGraphSite();
-                MessageBox.Show($"Model running ends", "Batch File Execution");
-                
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
-            }
+            string message = "Run complete!";
 
+            /*  if (checkBoxDiagnosis.Checked)
+              {
+                  GetSelectedDiagRadioButton();
+                  if (Sitedata.DiagnosisOption == 1 && Sitedata.DiagRunNum == 0)
+                  {
+                      ModelRun();  // orginal parameters
+                      message = Sitedata.DiagNote;
+                      MessageBox.Show(message, "Success");
+                      Sitedata.DiagRunNum = 1;  // the run sequence
+                  }
+                  else
+                  {
+                      ModelRun();  // orginal parameters
+                      message = Sitedata.DiagNote;
+                      MessageBox.Show(message, "Success");
 
+                  }
+              }
+
+              else
+              {
+                  Sitedata.DiagNote = message;
+                  ModelRun();  // orginal parameters
+              }
+              */
+
+            ModelRun();  // orginal parameters
+            //message = Sitedata.DiagNote;
+            MessageBox.Show(message, "Success");
+            /*
+                        catch (Exception ex)
+                        {
+                            // Handle exceptions
+                            MessageBox.Show($"An error occurred: {ex.Message}", "Error");
+                        }
+
+            */
 
         }
 
@@ -2462,7 +2497,21 @@ namespace LANDIS_II_Site
                 {
                     if (control is RadioButton radioButton && radioButton.Checked)
                     {
-                        MessageBox.Show($"Selected: {radioButton.Text}");
+
+                        if (radioButton == radioButtonOnePara) 
+                        {
+                            Sitedata.DiagnosisOption = 1;
+                            Sitedata.DiagNote = "Diagnostic option One is selected.\r\nChange one parameter and run again.";
+                        }
+
+                        if (radioButton == radioButtonMultiple)
+                        {
+                            Sitedata.DiagnosisOption = 2;
+                            Sitedata.DiagNote = "Diagnostic option Mutilple is selected!" ;
+                        }
+
+
+
                         break;
                     }
                 }           
