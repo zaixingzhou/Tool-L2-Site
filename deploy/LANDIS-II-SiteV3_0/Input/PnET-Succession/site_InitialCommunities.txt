@@ -1,0 +1,5 @@
+LandisData  "Initial Communities"
+
+MapCode 10
+acerrubr   54   62   
+querrubr   52   62   97

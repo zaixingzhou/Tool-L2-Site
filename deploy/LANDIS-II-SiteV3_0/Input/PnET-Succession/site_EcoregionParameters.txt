@@ -1,0 +1,5 @@
+LandisData  EcoregionParameters
+
+EcoregionParameters climateFileName LeakageFrac PrecLossFrac RootingDepth SnowSublimFrac SoilType
+>>---------------------------------------------------
+eco999 site_climate.txt 1 0.1 1000 0.15 SALO
