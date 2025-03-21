@@ -39,8 +39,6 @@
             this.MenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.outputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
-            this.plotResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuOpenLog = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBuildLandisInput = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuScenarios = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,8 +95,8 @@
             this.btAddReference = new System.Windows.Forms.Button();
             this.comboBoxCohortName = new System.Windows.Forms.ComboBox();
             this.comboBoxCohortVar = new System.Windows.Forms.ComboBox();
-            this.checkBoxDiagnosis = new System.Windows.Forms.CheckBox();
-            this.comboBoxDiagnosisVar = new System.Windows.Forms.ComboBox();
+            this.checkBoxCalibration = new System.Windows.Forms.CheckBox();
+            this.comboBoxCalibrationVar = new System.Windows.Forms.ComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.dataGridViewSppLifeHistory = new System.Windows.Forms.DataGridView();
@@ -144,7 +142,7 @@
             this.zedGraphControlCompare = new ZedGraph.ZedGraphControl();
             this.tabPageDiagnosis = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.zedGraphControlDiagnosis = new ZedGraph.ZedGraphControl();
+            this.zedGraphControlCalibration = new ZedGraph.ZedGraphControl();
             this.dataGridViewInitialComm = new System.Windows.Forms.DataGridView();
             this.Cohort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CohortAge1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -254,9 +252,7 @@
             // outputToolStripMenuItem
             // 
             this.outputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuSaveOutput,
-            this.plotResultsToolStripMenuItem,
-            this.MenuOpenLog});
+            this.MenuSaveOutput});
             this.outputToolStripMenuItem.Name = "outputToolStripMenuItem";
             this.outputToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             this.outputToolStripMenuItem.Text = "&Output";
@@ -264,21 +260,9 @@
             // MenuSaveOutput
             // 
             this.MenuSaveOutput.Name = "MenuSaveOutput";
-            this.MenuSaveOutput.Size = new System.Drawing.Size(194, 26);
+            this.MenuSaveOutput.Size = new System.Drawing.Size(224, 26);
             this.MenuSaveOutput.Text = "&Export Output...";
             this.MenuSaveOutput.Click += new System.EventHandler(this.MenuSaveOutput_Click);
-            // 
-            // plotResultsToolStripMenuItem
-            // 
-            this.plotResultsToolStripMenuItem.Name = "plotResultsToolStripMenuItem";
-            this.plotResultsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
-            this.plotResultsToolStripMenuItem.Text = "&Plot Results";
-            // 
-            // MenuOpenLog
-            // 
-            this.MenuOpenLog.Name = "MenuOpenLog";
-            this.MenuOpenLog.Size = new System.Drawing.Size(194, 26);
-            this.MenuOpenLog.Text = "&Open Log";
             // 
             // toolsToolStripMenuItem
             // 
@@ -473,7 +457,7 @@
             this.tbReplicateNum.Name = "tbReplicateNum";
             this.tbReplicateNum.Size = new System.Drawing.Size(42, 22);
             this.tbReplicateNum.TabIndex = 101;
-            this.tbReplicateNum.Text = "100";
+            this.tbReplicateNum.Text = "30";
             this.tbReplicateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip.SetToolTip(this.tbReplicateNum, "How many times to run the model ");
             // 
@@ -858,6 +842,8 @@
             // comboBoxCohortName
             // 
             this.comboBoxCohortName.FormattingEnabled = true;
+            this.comboBoxCohortName.Items.AddRange(new object[] {
+            "Cohort 1"});
             this.comboBoxCohortName.Location = new System.Drawing.Point(788, 45);
             this.comboBoxCohortName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxCohortName.Name = "comboBoxCohortName";
@@ -870,6 +856,8 @@
             // comboBoxCohortVar
             // 
             this.comboBoxCohortVar.FormattingEnabled = true;
+            this.comboBoxCohortVar.Items.AddRange(new object[] {
+            "Variable 1"});
             this.comboBoxCohortVar.Location = new System.Drawing.Point(788, 107);
             this.comboBoxCohortVar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxCohortVar.Name = "comboBoxCohortVar";
@@ -879,28 +867,31 @@
             this.toolTip.SetToolTip(this.comboBoxCohortVar, "Parameters");
             this.comboBoxCohortVar.SelectedIndexChanged += new System.EventHandler(this.comboBoxCohortVar_SelectedIndexChanged);
             // 
-            // checkBoxDiagnosis
+            // checkBoxCalibration
             // 
-            this.checkBoxDiagnosis.AutoSize = true;
-            this.checkBoxDiagnosis.Location = new System.Drawing.Point(10, 0);
-            this.checkBoxDiagnosis.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBoxDiagnosis.Name = "checkBoxDiagnosis";
-            this.checkBoxDiagnosis.Size = new System.Drawing.Size(18, 17);
-            this.checkBoxDiagnosis.TabIndex = 104;
-            this.toolTip.SetToolTip(this.checkBoxDiagnosis, "Check for Diagnosis");
-            this.checkBoxDiagnosis.UseVisualStyleBackColor = true;
-            this.checkBoxDiagnosis.CheckedChanged += new System.EventHandler(this.checkBoxDiagnosis_CheckedChanged);
+            this.checkBoxCalibration.AutoSize = true;
+            this.checkBoxCalibration.Location = new System.Drawing.Point(10, 0);
+            this.checkBoxCalibration.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxCalibration.Name = "checkBoxCalibration";
+            this.checkBoxCalibration.Size = new System.Drawing.Size(18, 17);
+            this.checkBoxCalibration.TabIndex = 104;
+            this.toolTip.SetToolTip(this.checkBoxCalibration, "Check for Diagnosis");
+            this.checkBoxCalibration.UseVisualStyleBackColor = true;
+            this.checkBoxCalibration.CheckedChanged += new System.EventHandler(this.checkBoxCalibaration_CheckedChanged);
             // 
-            // comboBoxDiagnosisVar
+            // comboBoxCalibrationVar
             // 
-            this.comboBoxDiagnosisVar.FormattingEnabled = true;
-            this.comboBoxDiagnosisVar.Location = new System.Drawing.Point(796, 50);
-            this.comboBoxDiagnosisVar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBoxDiagnosisVar.Name = "comboBoxDiagnosisVar";
-            this.comboBoxDiagnosisVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.comboBoxDiagnosisVar.Size = new System.Drawing.Size(116, 24);
-            this.comboBoxDiagnosisVar.TabIndex = 54;
-            this.toolTip.SetToolTip(this.comboBoxDiagnosisVar, "Parameters");
+            this.comboBoxCalibrationVar.FormattingEnabled = true;
+            this.comboBoxCalibrationVar.Items.AddRange(new object[] {
+            "Variable 1"});
+            this.comboBoxCalibrationVar.Location = new System.Drawing.Point(796, 50);
+            this.comboBoxCalibrationVar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxCalibrationVar.Name = "comboBoxCalibrationVar";
+            this.comboBoxCalibrationVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBoxCalibrationVar.Size = new System.Drawing.Size(116, 24);
+            this.comboBoxCalibrationVar.TabIndex = 54;
+            this.toolTip.SetToolTip(this.comboBoxCalibrationVar, "Variables for comparion");
+            this.comboBoxCalibrationVar.SelectedIndexChanged += new System.EventHandler(this.comboBoxCalibrationVar_SelectedIndexChanged);
             // 
             // dataGridViewSppLifeHistory
             // 
@@ -1453,8 +1444,8 @@
             // tabPageDiagnosis
             // 
             this.tabPageDiagnosis.Controls.Add(this.label11);
-            this.tabPageDiagnosis.Controls.Add(this.comboBoxDiagnosisVar);
-            this.tabPageDiagnosis.Controls.Add(this.zedGraphControlDiagnosis);
+            this.tabPageDiagnosis.Controls.Add(this.comboBoxCalibrationVar);
+            this.tabPageDiagnosis.Controls.Add(this.zedGraphControlCalibration);
             this.tabPageDiagnosis.Location = new System.Drawing.Point(4, 25);
             this.tabPageDiagnosis.Name = "tabPageDiagnosis";
             this.tabPageDiagnosis.Padding = new System.Windows.Forms.Padding(3);
@@ -1473,20 +1464,20 @@
             this.label11.Text = "Variable";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // zedGraphControlDiagnosis
+            // zedGraphControlCalibration
             // 
-            this.zedGraphControlDiagnosis.Location = new System.Drawing.Point(0, 2);
-            this.zedGraphControlDiagnosis.Margin = new System.Windows.Forms.Padding(5);
-            this.zedGraphControlDiagnosis.Name = "zedGraphControlDiagnosis";
-            this.zedGraphControlDiagnosis.ScrollGrace = 0D;
-            this.zedGraphControlDiagnosis.ScrollMaxX = 0D;
-            this.zedGraphControlDiagnosis.ScrollMaxY = 0D;
-            this.zedGraphControlDiagnosis.ScrollMaxY2 = 0D;
-            this.zedGraphControlDiagnosis.ScrollMinX = 0D;
-            this.zedGraphControlDiagnosis.ScrollMinY = 0D;
-            this.zedGraphControlDiagnosis.ScrollMinY2 = 0D;
-            this.zedGraphControlDiagnosis.Size = new System.Drawing.Size(779, 309);
-            this.zedGraphControlDiagnosis.TabIndex = 49;
+            this.zedGraphControlCalibration.Location = new System.Drawing.Point(0, 2);
+            this.zedGraphControlCalibration.Margin = new System.Windows.Forms.Padding(5);
+            this.zedGraphControlCalibration.Name = "zedGraphControlCalibration";
+            this.zedGraphControlCalibration.ScrollGrace = 0D;
+            this.zedGraphControlCalibration.ScrollMaxX = 0D;
+            this.zedGraphControlCalibration.ScrollMaxY = 0D;
+            this.zedGraphControlCalibration.ScrollMaxY2 = 0D;
+            this.zedGraphControlCalibration.ScrollMinX = 0D;
+            this.zedGraphControlCalibration.ScrollMinY = 0D;
+            this.zedGraphControlCalibration.ScrollMinY2 = 0D;
+            this.zedGraphControlCalibration.Size = new System.Drawing.Size(779, 309);
+            this.zedGraphControlCalibration.TabIndex = 49;
             // 
             // dataGridViewInitialComm
             // 
@@ -1615,7 +1606,7 @@
             // groupBoxDiagnosis
             // 
             this.groupBoxDiagnosis.Controls.Add(this.radioButtonBayesian);
-            this.groupBoxDiagnosis.Controls.Add(this.checkBoxDiagnosis);
+            this.groupBoxDiagnosis.Controls.Add(this.checkBoxCalibration);
             this.groupBoxDiagnosis.Controls.Add(this.radioButtonMultiple);
             this.groupBoxDiagnosis.Controls.Add(this.radioButtonOnePara);
             this.groupBoxDiagnosis.Controls.Add(this.dataGridViewDiagMulti);
@@ -1637,6 +1628,7 @@
             this.radioButtonBayesian.TabIndex = 46;
             this.radioButtonBayesian.Text = "Bayesian calibration";
             this.radioButtonBayesian.UseVisualStyleBackColor = true;
+            this.radioButtonBayesian.Visible = false;
             // 
             // radioButtonMultiple
             // 
@@ -1803,7 +1795,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonUserGuide;
         private System.Windows.Forms.ToolStripMenuItem outputToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MenuSaveOutput;
-        private System.Windows.Forms.ToolStripMenuItem plotResultsToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridViewSppLifeHistory;
         private System.Windows.Forms.Button btAddSppLifeHistorySpp;
         private System.Windows.Forms.Button btAddSppLifeHistoryPara;
@@ -1849,7 +1840,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Parameter_spp;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value_spp;
         private System.Windows.Forms.ToolStripMenuItem MenuScenarios;
-        private System.Windows.Forms.ToolStripMenuItem MenuOpenLog;
         private System.Windows.Forms.DataGridView dataGridViewInitialComm;
         private System.Windows.Forms.GroupBox groupBoxInitialCommunity;
         private System.Windows.Forms.Button btDeleteCohortSpp;
@@ -1887,11 +1877,11 @@
         private System.Windows.Forms.RadioButton radioButtonOnePara;
         private System.Windows.Forms.RadioButton radioButtonBayesian;
         private System.Windows.Forms.RadioButton radioButtonMultiple;
-        private System.Windows.Forms.CheckBox checkBoxDiagnosis;
+        private System.Windows.Forms.CheckBox checkBoxCalibration;
         private System.Windows.Forms.TabPage tabPageDiagnosis;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comboBoxDiagnosisVar;
-        private ZedGraph.ZedGraphControl zedGraphControlDiagnosis;
+        private System.Windows.Forms.ComboBox comboBoxCalibrationVar;
+        private ZedGraph.ZedGraphControl zedGraphControlCalibration;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxMin;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxMax;

@@ -10,6 +10,9 @@ using System.Diagnostics;
 using System.IO;
 using ZedGraph;
 using System.IO.Compression;
+using CsvHelper;
+using System.Globalization;
+
 
 using System.Windows.Forms;
 
@@ -29,14 +32,15 @@ namespace LANDIS_II_Site
 
         }
 
-        public Dictionary<string, object> recordInput = new Dictionary<string, object>();
+        
         public class SiteData
         {
             public int DiagnosisOption;
             public string DiagNote;
             public int DiagRunNum;  // the run sequence
-
-
+            
+            public Dictionary<string, object> recordInput = new Dictionary<string, object> ();
+            public Dictionary<string, List<int>> tabControlGraphSiteSelect = new Dictionary<string, List<int>>();
 
         }
 
@@ -66,12 +70,22 @@ namespace LANDIS_II_Site
 
             tabControlGraph.SelectedTab = tabPageCarbon; // 
 
+            checkedListBoxClimate.SetItemChecked(0,true);
+            checkedListBoxCarbon.SetItemChecked(2, true);
+            checkedListBoxComposition.SetItemChecked(0, true);
+
+            //comboBoxCohortName.SelectedIndex = 0;
+            //comboBoxCohortVar.SelectedIndex = 0;
+            comboBoxCalibrationVar.SelectedIndex = 0;
+
             // load the example 
             String FileExample = @".\Inter\Site_input_example.csv";
             LoadInputFromCsv(FileExample);
 
-            checkBoxDiagnosis.Checked = false;
-            checkBoxDiagnosis_CheckedChanged(checkBoxDiagnosis, EventArgs.Empty);
+            checkBoxCalibration.Checked = false;
+            checkBoxCalibaration_CheckedChanged(checkBoxCalibration, EventArgs.Empty);  // manurally set
+
+
 
         }
 
@@ -87,14 +101,70 @@ namespace LANDIS_II_Site
 
         }
 
-        private void ModelRun()
+        private void RunSiteTool()
         {
-            BuildLandisInput(); // build landis pacege
-            RunModel();  // run the model in the traditional landis way and copy the results to the sitetool output
-            // load site results from the sitetool output
-            LoadResultSite();
-            // update the chart tabs
-            tabControlGraphSite();
+            BuildLandisInput();                    // build landis package
+
+            RunLandis();                         // run the model in the traditional landis way
+
+            CopyResultsFromLandis();              //  copy the results to the sitetool output
+            
+            LoadResultSite();                     // load site results from the sitetool output
+                        
+            tabControlGraphSite();                // update the chart tabs
+
+        }
+        private string StoreReplicate(int rep) 
+        {
+            
+            string SourceDirectory = OutputParentDir(cbSuccessionOption); 
+            string RepDirectory = OutputParentDir(cbSuccessionOption,false);    // Site Tool default output folder
+            //List<string> StoredDir = new List<string>();
+           // if (Directory.Exists(RepDirectory))Directory.Delete(RepDirectory, true); // true to delete recursively
+            //Directory.CreateDirectory(RepDirectory);
+            RepDirectory = RepDirectory + "\\Output"+rep.ToString();
+            CopyDirectory(SourceDirectory, RepDirectory);
+            
+            return RepDirectory;
+        }
+
+        private void DeletNonReplicate(List<string> StoredDir)
+        {
+           
+            string targetDirectory = OutputParentDir(cbSuccessionOption, false);    // Site Tool default output folder
+            foreach (string dir in Directory.GetDirectories(targetDirectory))
+            {
+                //string dirName = new DirectoryInfo(dir).Name;
+                if (!StoredDir.Contains(dir, StringComparer.OrdinalIgnoreCase))
+                {
+                    Directory.Delete(dir, true); // true to delete recursively
+                    
+                }
+            }
+
+        }
+
+
+        private void RunSiteToolReplicate()
+        {
+
+            int repnum = int.Parse(tbReplicateNum.Text);
+            List<string> StoredDir = new List<string>();
+
+            BuildLandisInput();                    // build landis package 
+            for (int i=0;i< repnum; i++)
+            {
+                RunLandis();                            // run the model in the traditional landis way
+                CopyResultsFromLandis();              //  copy the results to the sitetool output
+                StoredDir.Add(StoreReplicate(i+1)); //store sitetool output 
+
+
+            }
+            DeletNonReplicate(StoredDir);
+
+            LoadResultSiteRep();                     // load site results from the sitetool output
+
+            tabControlGraphSite();                // update the chart tabs
 
         }
 
@@ -102,58 +172,36 @@ namespace LANDIS_II_Site
         {
             string message = "Run complete!";
 
-            /*  if (checkBoxDiagnosis.Checked)
-              {
-                  GetSelectedDiagRadioButton();
-                  if (Sitedata.DiagnosisOption == 1 && Sitedata.DiagRunNum == 0)
-                  {
-                      ModelRun();  // orginal parameters
-                      message = Sitedata.DiagNote;
-                      MessageBox.Show(message, "Success");
-                      Sitedata.DiagRunNum = 1;  // the run sequence
-                  }
-                  else
-                  {
-                      ModelRun();  // orginal parameters
-                      message = Sitedata.DiagNote;
-                      MessageBox.Show(message, "Success");
+ 
+            try 
+            {
+                if (cbReplicate.Checked)
+                {
+                    RunSiteToolReplicate();  // replicate run
+                }
+                else RunSiteTool();  // orginal parameters
 
-                  }
-              }
+                //message = Sitedata.DiagNote;
+                MessageBox.Show(message, "Success");           
+            }
 
-              else
-              {
-                  Sitedata.DiagNote = message;
-                  ModelRun();  // orginal parameters
-              }
-              */
+            
+             catch (Exception ex)
+             {
+                // Handle exceptions
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
+             }
 
-            ModelRun();  // orginal parameters
-            //message = Sitedata.DiagNote;
-            MessageBox.Show(message, "Success");
-            /*
-                        catch (Exception ex)
-                        {
-                            // Handle exceptions
-                            MessageBox.Show($"An error occurred: {ex.Message}", "Error");
-                        }
-
-            */
+            
 
         }
 
-        private void RunModel()
+        private void RunLandis()
         {
 
             string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory
             // Get the case file generated by the win interface
-            string batFilePath = InputDirectory + "\\site_run.bat";
-
-            string OutputDirectory = @".\Output";
-
-            //MessageBox.Show($"Current Directory: {currentDirectory}", "Message");          
-            // Path to the .bat file
-            //string batFilePath = @"C:\Path\To\YourFile.bat";
+            string batFilePath = InputDirectory + "\\site_run.bat";    
 
             // Create a new process
             Process process = new Process
@@ -181,23 +229,41 @@ namespace LANDIS_II_Site
             // Display the output or errors in a message box
             //MessageBox.Show($"Output:\n{output}\n\nError:\n{error}", "Batch File Execution");
 
-            // MessageBox.Show($"Model running ends", "Batch File Execution");
-
-            // copy results to Output directory
-            string ResultDirectory = InputDirectory + "\\output";
-
-            CopyDirectory(ResultDirectory, OutputDirectory);
-
-
-
-            // set DefaultCharts
-
-            //tabControlGraph.SelectedTab = tabPageCarbon; //
-            // SetDefaultCharts();
-
+            // MessageBox.Show($"Model running ends", "Batch File Execution");         
 
 
         }
+
+        private void CopyResultsFromLandis()
+        {
+            string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory            
+            string ResultDirectory = InputDirectory + "\\output";  // Landis results
+
+            // copy Landis results to Output directory
+            string OutputDirectory = @".\Output";   // Site Tool output folder
+
+
+
+            if (checkBoxCalibration.Checked)
+            {
+                OutputDirectory = OutputParentDir(cbSuccessionOption, false);
+                CopyDirectory(ResultDirectory, OutputDirectory);
+
+                LoadRecordsCalOne(OutputDirectory);
+
+            }
+            else
+            {
+                OutputDirectory = OutputParentDir(cbSuccessionOption);    // Site Tool default output folder
+                CopyDirectory(ResultDirectory, OutputDirectory);
+
+            }
+
+            
+
+
+        }
+
 
         static void CopyDirectory(string sourceDir, string destinationDir, bool overwrite = true)
         {
@@ -207,17 +273,27 @@ namespace LANDIS_II_Site
                 throw new DirectoryNotFoundException($"Source directory does not exist: {sourceDir}");
             }
 
-            // Create the destination directory if it does not exist
-            if (Directory.Exists(destinationDir)) Directory.Delete(destinationDir, recursive: true);
+            if (Directory.Exists(destinationDir))
+            {
+                Directory.Delete(destinationDir, true); // true to delete recursively
+
+            }
+      
             Directory.CreateDirectory(destinationDir);
+            
+            
 
             // Copy all files
+            
             foreach (string file in Directory.GetFiles(sourceDir))
             {
                 string fileName = Path.GetFileName(file);
                 string destFile = Path.Combine(destinationDir, fileName);
                 File.Copy(file, destFile, overwrite);
             }
+
+   
+
 
             // Copy all subdirectories
             foreach (string subDir in Directory.GetDirectories(sourceDir))
@@ -774,6 +850,7 @@ namespace LANDIS_II_Site
         List<Dictionary<string, object>> RecordsSite = new List<Dictionary<string, object>>();
         List<Dictionary<string, object>> RecordsCohort = new List<Dictionary<string, object>>();
         List<Dictionary<string, object>> RecordsRef = new List<Dictionary<string, object>>();
+        List<Dictionary<string, object>> RecordsCalOne = new List<Dictionary<string, object>>();
         private void LoadResultSite(string sitename = "Site.csv")
         {
             string OutputDirectory = OutputDir(cbSuccessionOption);// get the current succesion output directory
@@ -782,7 +859,165 @@ namespace LANDIS_II_Site
 
         }
 
-        private GraphPane CreateGraph(ZedGraphControl zgc, string yLabel, List<Dictionary<string, object>> records, string Xvar, string Yvar, Color c)
+        private void LoadResultSiteRep(string sitename = "Site.csv")
+        {
+            //string OutputDirectory = OutputDir(cbSuccessionOption);// get the current succesion output directory
+            
+
+            string InputSuccession = cbSuccessionOption.Text;
+            string OutputDirectory = OutputParentDir(cbSuccessionOption,false);
+
+
+            List<Dictionary<string, double>> numericalData = new List<Dictionary<string, double>>();
+            List<string> headers = new List<string>();
+
+            List<dynamic[]> allRecords = new List<dynamic[]>(); // Store all rows from each CSV file
+
+            int repnum = int.Parse(tbReplicateNum.Text);
+            //List<string> StoredDir = new List<string>();
+
+            for (int i = 0; i < repnum; i++)
+            {
+
+                //StoredDir.Add(StoreReplicate(i + 1)); //store sitetool output 
+                string RepDirectory = OutputDirectory + "\\Output" + (i + 1).ToString();
+                string filePath = RepDirectory + @"\PNEToutputsites\Site1";
+                if (InputSuccession == "PnET-Succession")
+                {
+                    filePath = RepDirectory + @"\PNEToutputsites\Site1";
+                }
+
+                filePath = Path.Combine(filePath, sitename);
+
+                using (var reader = new StreamReader(filePath))
+                {
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        var records = csv.GetRecords<dynamic>().ToList();
+
+                        if (records.Count > 0)
+                        {
+                            headers = ((IDictionary<string, object>)records.FirstOrDefault()).Keys.ToList(); // Get column names
+                            allRecords.Add(records.ToArray());
+                        }
+                    }
+                }
+            }
+            if (allRecords.Count == 0)
+            {
+                //Console.WriteLine("No data found.");
+                return ;
+            }
+            int numFiles = allRecords.Count;
+            int numRows = allRecords[0].Length; // Assuming all files have the same row count
+
+            // Dictionary to store sum of numeric fields
+            List<Dictionary<string, double>> rowSums = new List<Dictionary<string, double>>();
+
+            for (int i = 0; i < numRows; i++)
+            {
+                rowSums.Add(new Dictionary<string, double>());
+
+                foreach (string column in headers)
+                {
+                    rowSums[i][column] = 0; // Initialize with zero
+                }
+            }
+
+            // Aggregate numeric values row-wise
+            foreach (var fileRecords in allRecords)
+            {
+                for (int rowIndex = 0; rowIndex < fileRecords.Length; rowIndex++)
+                {
+                    var row = (IDictionary<string, object>)fileRecords[rowIndex];
+
+                    foreach (var key in headers)
+                    {
+                        if (double.TryParse(row[key]?.ToString(), out double value)) // Only sum numeric values
+                        {
+                            rowSums[rowIndex][key] += value;
+                        }
+                    }
+                }
+            }
+
+
+            // Compute averages
+            //Console.WriteLine("Averaged Data:");
+            foreach (var row in rowSums)
+            {
+                var keys = row.Keys.ToList(); // Make a copy of keys to avoid modifying during iteration
+                foreach (var key in keys)
+                {
+                    if (double.TryParse(row[key].ToString(), out _)) // Ignore string fields
+                    {
+                        row[key] /= numFiles;
+                    }
+                }
+                
+            }
+
+            //RecordsSite = (List < Dictionary<string, object> >) rowSums.Select(row => row.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value)).ToList();
+            string filePath2 = InterDir(cbSuccessionOption);
+            filePath2 = filePath2 + "\\output.csv";
+            
+            SaveToCsv(rowSums, filePath2);
+            RecordsSite = ReadCsvAsDictionary(filePath2);
+
+        }
+
+
+        private static void SaveToCsv(List<Dictionary<string, double>> data, string filePath)
+        {
+            using (var writer = new StreamWriter(filePath))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                if (data.Count == 0)
+                {
+                   // Console.WriteLine("No data to write.");
+                    return;
+                }
+
+                // Write headers (column names)
+                var headers = data.First().Keys;
+                foreach (var header in headers)
+                {
+                    csv.WriteField(header);
+                }
+                csv.NextRecord();
+
+                // Write data rows
+                foreach (var row in data)
+                {
+                    foreach (var key in headers)
+                    {
+                        csv.WriteField(row[key]);
+                    }
+                    csv.NextRecord();
+                }
+            }
+        }
+
+
+
+        private void LoadRecordsCalOne(string OutputDirectory,string sitename = "Site.csv")
+        {
+            string InputSuccession = cbSuccessionOption.Text;
+            string OutputDirectory2 = @".\Output";
+            if (InputSuccession == "PnET-Succession")
+            {
+                OutputDirectory2 = OutputDirectory + @"\PNEToutputsites\Site1";
+            }
+ 
+            string filePath = Path.Combine(OutputDirectory2, sitename);
+            RecordsCalOne = ReadCsvAsDictionary(filePath);
+
+        }
+
+
+
+
+        private GraphPane CreateGraph(ZedGraphControl zgc, string yLabel, List<Dictionary<string, object>> records, string Xvar, string Yvar, Color c, string LegendLabel = "Default")
         {
             GraphPane myPane = zgc.GraphPane;
 
@@ -804,7 +1039,8 @@ namespace LANDIS_II_Site
 
             }
             //c = Color.FromArgb(2, 0, 0, 0);
-            LineItem curve = myPane.AddCurve(Yvar, list, c, SymbolType.None);
+            if (LegendLabel == "Default") LegendLabel = Yvar;
+            LineItem curve = myPane.AddCurve(LegendLabel, list, c, SymbolType.None);
 
             zgc.AxisChange();
             zgc.Invalidate();
@@ -987,6 +1223,12 @@ namespace LANDIS_II_Site
             zedGraphControlCohorts.GraphPane.GraphObjList.Clear(); // Clear any additional objects like titles or markers
             zedGraphControlCohorts.AxisChange();
             zedGraphControlCohorts.Invalidate();
+
+            zedGraphControlCalibration.GraphPane.CurveList.Clear();
+            // Update the graph
+            zedGraphControlCalibration.GraphPane.GraphObjList.Clear(); // Clear any additional objects like titles or markers
+            zedGraphControlCalibration.AxisChange();
+            zedGraphControlCalibration.Invalidate();
 
 
             for (int i = 0; i < checkedListBoxReference.Items.Count; i++)
@@ -1837,9 +2079,19 @@ namespace LANDIS_II_Site
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //LoadInputFromCsv(openFileDialog.FileName);
-            }
+                string filePath = openFileDialog.FileName;
+                try
+                {
+                    string[] lines = File.ReadAllLines(filePath);
 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+            }
         }
 
         // for Random seed
@@ -1852,9 +2104,27 @@ namespace LANDIS_II_Site
         private void cbReplicate_CheckedChanged(object sender, EventArgs e)
         {
             // Set the TextBox to enabled/disabled based on CheckBox's checked state
-            tbReplicateNum.Enabled = cbReplicate.Checked;
-            cbRandSeed.Checked = !cbReplicate.Checked;
+             tbReplicateNum.Enabled = cbReplicate.Checked;
+            //cbRandSeed.Checked = !cbReplicate.Checked;            
             //cbRandSeed.Enabled = !cbReplicate.Checked;
+            //Boolean randseedstatus = cbRandSeed.Checked;
+
+            if (cbReplicate.Checked)
+            {
+                //tbReplicateNum.Enabled = false;
+                cbRandSeed.Checked = false;
+                cbRandSeed.Enabled = false;
+
+                checkBoxCalibration.Checked = false;
+                checkBoxCalibration.Enabled = false;
+            }
+            else 
+            {
+                cbRandSeed.Enabled = true;
+                //cbRandSeed.Checked = randseedstatus;
+                checkBoxCalibration.Enabled = true;
+            }
+            
 
         }
 
@@ -1873,10 +2143,115 @@ namespace LANDIS_II_Site
             }
         }
 
+
+        private void Get_tabControlGraphSite_selection()
+        {
+     
+            // Store checked indexes for each CheckedListBox in separate lists
+            List<int> Climate = GetCheckedIndexes(checkedListBoxClimate);
+            List<int> Carbon = GetCheckedIndexes(checkedListBoxCarbon);
+            List<int> Water = GetCheckedIndexes(checkedListBoxWater);
+
+
+            List<int> Nitrogen = GetCheckedIndexes(checkedListBoxNitrogen);
+            List<int> Composition = GetCheckedIndexes(checkedListBoxComposition);
+            List<int> Compare = GetCheckedIndexes(checkedListBoxCompare);
+
+            List<int> Reference = GetCheckedIndexes(checkedListBoxReference);
+
+            List<int> addnew = new List<int>();
+
+
+
+
+            Sitedata.tabControlGraphSiteSelect["Climate"] = Climate;
+            Sitedata.tabControlGraphSiteSelect["Carbon"] = Carbon;
+            Sitedata.tabControlGraphSiteSelect["Water"] = Water;
+
+            Sitedata.tabControlGraphSiteSelect["Nitrogen"] = Nitrogen;
+            Sitedata.tabControlGraphSiteSelect["Composition"] = Composition;
+            Sitedata.tabControlGraphSiteSelect["Compare"] = Compare;
+
+            Sitedata.tabControlGraphSiteSelect["Reference"] = Reference;
+
+          
+            addnew.Add(comboBoxCalibrationVar.SelectedIndex);
+            Sitedata.tabControlGraphSiteSelect["CalibVar"] = addnew;
+            
+            /*
+            addnew.Clear();
+            addnew.Add(comboBoxCohortName.SelectedIndex);
+            Sitedata.tabControlGraphSiteSelect["CohortName"] = addnew;
+
+            addnew.Clear();
+            addnew.Add(comboBoxCohortVar.SelectedIndex);
+            Sitedata.tabControlGraphSiteSelect["CohortVar"] = addnew;
+            */
+            //comboBoxCohortName.SelectedIndex = 0;
+            //comboBoxCohortVar.SelectedIndex = 0;
+
+
+        }
+
+
+        private void Set_tabControlGraphSite_selection()
+        {
+            SetCheckedIndexes(checkedListBoxClimate, Sitedata.tabControlGraphSiteSelect["Climate"]);
+            SetCheckedIndexes(checkedListBoxCarbon, Sitedata.tabControlGraphSiteSelect["Carbon"]);
+            SetCheckedIndexes(checkedListBoxWater, Sitedata.tabControlGraphSiteSelect["Water"]);
+
+            SetCheckedIndexes(checkedListBoxNitrogen, Sitedata.tabControlGraphSiteSelect["Nitrogen"]);
+            SetCheckedIndexes(checkedListBoxComposition, Sitedata.tabControlGraphSiteSelect["Composition"]);
+            SetCheckedIndexes(checkedListBoxCompare, Sitedata.tabControlGraphSiteSelect["Compare"]);
+
+            SetCheckedIndexes(checkedListBoxReference, Sitedata.tabControlGraphSiteSelect["Reference"]);
+
+            comboBoxCalibrationVar.SelectedIndex = Sitedata.tabControlGraphSiteSelect["CalibVar"][0];  //
+
+            //comboBoxCohortName.SelectedIndex = Sitedata.tabControlGraphSiteSelect["CohortName"][0];  // 
+            //comboBoxCohortVar.SelectedIndex = Sitedata.tabControlGraphSiteSelect["CohortVar"][0];  // 
+        }
+
+        private List<int> GetCheckedIndexes(CheckedListBox checkedListBox)
+        {
+            List<int> checkedIndexes = new List<int>();
+            foreach (int index in checkedListBox.CheckedIndices)
+            {
+                checkedIndexes.Add(index);
+            }
+            return checkedIndexes;
+        }
+
+
+        private void SetCheckedIndexes(CheckedListBox checkedListBox,List<int> indexesToCheck)
+        {
+            // Uncheck all first (optional)
+            for (int i = 0; i < checkedListBox.Items.Count; i++)
+            {
+                checkedListBox.SetItemChecked(i, false);
+            }
+
+            // Check specific items based on index
+            foreach (int index in indexesToCheck)
+            {
+                if (index >= 0 && index < checkedListBox.Items.Count) // Ensure index is within range
+                {
+                    checkedListBox.SetItemChecked(index, true);
+                }
+            }
+
+        }
         // load the tab graphs variables
         private void tabControlGraphSite()
         {
-            // set default values for cbSppGenericPara
+            // store current variable selections in each graph
+            Get_tabControlGraphSite_selection();
+
+            //clear the graphs first 
+
+            btClearGraph_Click(null, EventArgs.Empty);
+
+
 
             // read the data file
             string InterDirectory = InterDir(cbSuccessionOption);// get the current succesion inter directory
@@ -1926,7 +2301,7 @@ namespace LANDIS_II_Site
 
                 // populate composition tab
                 //checkedListBoxComposition.Items.Clear();
-                if (checkedListBoxComposition.Items.Count > 0) checkedListBoxComposition.SetItemChecked(0, true);  // show default chart
+               // if (checkedListBoxComposition.Items.Count > 0) checkedListBoxComposition.SetItemChecked(0, true);  // show default chart
 
 
                 // populate cohort tab
@@ -1943,13 +2318,15 @@ namespace LANDIS_II_Site
                 {
                     checkedListBoxCompare.Items.Add(item);
                 }
-                if (checkedListBoxCompare.Items.Count > 0) checkedListBoxCompare.SetItemChecked(0, true);  // show default chart
+              //  if (checkedListBoxCompare.Items.Count > 0) checkedListBoxCompare.SetItemChecked(0, true);  // show default chart
 
 
                 // populate diagnosis tab
-                comboBoxDiagnosisVarFill();
+                comboBoxCalibrationVarFill();
 
 
+                // set all selected curves
+                Set_tabControlGraphSite_selection();
 
             }
             else
@@ -1976,7 +2353,7 @@ namespace LANDIS_II_Site
                 checkedListBoxTab.Items.Add(item);
             }
 
-            if (checkedListBoxTab.Items.Count > 0) checkedListBoxTab.SetItemChecked(0, true);  // show default chart
+           // if (checkedListBoxTab.Items.Count > 0) checkedListBoxTab.SetItemChecked(0, true);  // show default chart
 
         }
 
@@ -2055,11 +2432,57 @@ namespace LANDIS_II_Site
         {
 
             string InputSuccession = cbSuccession.Text;
-            string OutputDirectory = @".\Output";
+            string OutputDirectory = OutputParentDir(cbSuccession);
+
             if (InputSuccession == "PnET-Succession")
             {
                 OutputDirectory = OutputDirectory + @"\PNEToutputsites\Site1";
             }
+
+            return OutputDirectory;
+
+        }
+
+        private string OutputParentDir(ComboBox cbSuccession,Boolean control = true)
+        {
+
+            string InputSuccession = cbSuccession.Text;
+            string OutputDirectory = @".\Output\Output";
+
+            if (checkBoxCalibration.Checked)
+            {
+                //GetSelectedDiagRadioButton();
+                if (radioButtonOnePara.Checked)
+
+                {
+                    OutputDirectory = @".\Output\Output_CalOne";   // Site Tool default output folder
+                }
+                if (radioButtonMultiple.Checked)
+
+                {
+                    OutputDirectory = @".\Output\Output_CalMul";   // Site Tool default output folder
+                }
+                if (radioButtonBayesian.Checked)
+                {
+                    OutputDirectory = @".\Output\Output_CalBay";   // Site Tool default output folder
+                }
+               
+
+            }
+            else
+            {
+                if (cbReplicate.Checked)
+                {
+                    OutputDirectory = @".\Output\Output_Rep"; // Replication
+                }
+                else
+                {
+                    OutputDirectory = @".\Output\Output";   // Site Tool default output folder
+                }
+            }
+
+
+            if (control) OutputDirectory = @".\Output\Output";
 
             return OutputDirectory;
 
@@ -2140,7 +2563,7 @@ namespace LANDIS_II_Site
 
         private void comboBoxCohortVar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ZedGraphControl zgc = zedGraphControlCohorts;  // carbon zgc pane
+            ZedGraphControl zgc = zedGraphControlCohorts;  //  zgc pane
             //CheckedListBox myclb = checkedListBoxNitrogen;    // carbon checked List Box
 
             var mypane = zgc.GraphPane;
@@ -2156,6 +2579,29 @@ namespace LANDIS_II_Site
             mypane = CreateGraph(zgc, selectedItem, RecordsCohort, Xvar, selectedItem, c);
 
         }
+
+
+        private void comboBoxCalibrationVar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ZedGraphControl zgc = zedGraphControlCalibration;  //  zgc pane            
+
+            var mypane = zgc.GraphPane;
+
+            mypane.Title.Text = string.Empty;
+
+            string Xvar = "Time";
+
+            mypane.CurveList.Clear();
+            // Check which item is toggled
+            string selectedItem = comboBoxCalibrationVar.Text;
+            Color c = Color.Red;
+
+            mypane = CreateGraph(zgc, selectedItem, RecordsSite, Xvar, selectedItem, c,"Control");  // control
+            mypane = CreateGraph(zgc, selectedItem, RecordsCalOne, Xvar, selectedItem, Color.Blue, "Calibrated");  // control
+            
+
+        }
+
 
         // get the species composition based on Yvar value
         private void CohortComposition(string Yvar)
@@ -2455,19 +2901,19 @@ namespace LANDIS_II_Site
             }
         }
 
-        private void checkBoxDiagnosis_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxCalibaration_CheckedChanged(object sender, EventArgs e)
         {
             // Set the TextBox to enabled/disabled based on CheckBox's checked state
             foreach (Control control in groupBoxDiagnosis.Controls)
             {
-                if (control != checkBoxDiagnosis) control.Enabled = checkBoxDiagnosis.Checked;
+                if (control != checkBoxCalibration) control.Enabled = checkBoxCalibration.Checked;
             }
 
-            if (checkBoxDiagnosis.Checked == true) tabControlGraph.SelectedTab = tabPageDiagnosis;
+            if (checkBoxCalibration.Checked == true) tabControlGraph.SelectedTab = tabPageDiagnosis;
             else tabControlGraph.SelectedTab = tabPageCarbon;
         }
 
-        private void comboBoxDiagnosisVarFill()
+        private void comboBoxCalibrationVarFill()
         {
             // set default values for cbSppGenericPara
 
@@ -2477,21 +2923,21 @@ namespace LANDIS_II_Site
             string fileName = comboBoxCohortName.Text;
             string filePath = Path.Combine(OutputDirectory, fileName);
 
-            comboBoxDiagnosisVar.Items.Clear();
+            comboBoxCalibrationVar.Items.Clear();
 
             foreach (var item in checkedListBoxCompare.Items)
             {
                 //string[] keys = item.ToString;
-                comboBoxDiagnosisVar.Items.Add(item.ToString());
+                comboBoxCalibrationVar.Items.Add(item.ToString());
             }
-            comboBoxDiagnosisVar.Sorted = true; // Automatically sorts items alphabetically
-            comboBoxDiagnosisVar.SelectedIndex = 0;  // set default
+            comboBoxCalibrationVar.Sorted = true; // Automatically sorts items alphabetically
+            //comboBoxCalibrationVar.SelectedIndex = 0;  // set default
 
         }
 
         private void GetSelectedDiagRadioButton()
         {
-            if (checkBoxDiagnosis.Checked) 
+            if (checkBoxCalibration.Checked) 
             {
                 foreach (Control control in groupBoxDiagnosis.Controls)
                 {
@@ -2519,6 +2965,8 @@ namespace LANDIS_II_Site
             }
  
         }
+
+        
     }
 }
 
