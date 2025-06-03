@@ -75,15 +75,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormBiomass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBiomass.Designer.cs">
+      <DependentUpon>FormBiomass.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPnET.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPnET.Designer.cs">
+      <DependentUpon>FormPnET.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
+    <EmbeddedResource Include="FormBiomass.resx">
+      <DependentUpon>FormBiomass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPnET.resx">
+      <DependentUpon>FormPnET.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

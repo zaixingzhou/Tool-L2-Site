@@ -67,14 +67,16 @@
             this.tbStartYr = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbTimestep = new System.Windows.Forms.TextBox();
-            this.label39 = new System.Windows.Forms.Label();
+            this.labelStartYr = new System.Windows.Forms.Label();
             this.tbSimYears = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelLatitude = new System.Windows.Forms.Label();
             this.tbLatitude = new System.Windows.Forms.TextBox();
             this.cbSuccessionOption = new System.Windows.Forms.ComboBox();
             this.labelSuccession = new System.Windows.Forms.Label();
             this.groupBoxExtensions = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.checkedListBoxExtensionOther = new System.Windows.Forms.CheckedListBox();
             this.labelDisturbance = new System.Windows.Forms.Label();
@@ -162,6 +164,7 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxMin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxMax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelExtension = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.groupBoxPara.SuspendLayout();
@@ -260,7 +263,7 @@
             // MenuSaveOutput
             // 
             this.MenuSaveOutput.Name = "MenuSaveOutput";
-            this.MenuSaveOutput.Size = new System.Drawing.Size(224, 26);
+            this.MenuSaveOutput.Size = new System.Drawing.Size(194, 26);
             this.MenuSaveOutput.Text = "&Export Output...";
             this.MenuSaveOutput.Click += new System.EventHandler(this.MenuSaveOutput_Click);
             // 
@@ -415,7 +418,7 @@
             this.groupBoxPara.Controls.Add(this.tbStartYr);
             this.groupBoxPara.Controls.Add(this.label1);
             this.groupBoxPara.Controls.Add(this.tbTimestep);
-            this.groupBoxPara.Controls.Add(this.label39);
+            this.groupBoxPara.Controls.Add(this.labelStartYr);
             this.groupBoxPara.Controls.Add(this.tbSimYears);
             this.groupBoxPara.Controls.Add(this.label13);
             this.groupBoxPara.Location = new System.Drawing.Point(291, 59);
@@ -426,6 +429,7 @@
             this.groupBoxPara.TabIndex = 2;
             this.groupBoxPara.TabStop = false;
             this.groupBoxPara.Text = "Simulation Parameters";
+            
             // 
             // cbReplicate
             // 
@@ -551,15 +555,15 @@
             this.tbTimestep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip.SetToolTip(this.tbTimestep, "Years for each time step");
             // 
-            // label39
+            // labelStartYr
             // 
-            this.label39.Location = new System.Drawing.Point(8, 57);
-            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(115, 23);
-            this.label39.TabIndex = 6;
-            this.label39.Text = "Start Year";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelStartYr.Location = new System.Drawing.Point(8, 57);
+            this.labelStartYr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStartYr.Name = "labelStartYr";
+            this.labelStartYr.Size = new System.Drawing.Size(115, 23);
+            this.labelStartYr.TabIndex = 6;
+            this.labelStartYr.Text = "Start Year";
+            this.labelStartYr.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbSimYears
             // 
@@ -582,15 +586,15 @@
             this.label13.Text = "Simulation Years";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label3
+            // labelLatitude
             // 
-            this.label3.Location = new System.Drawing.Point(9, 58);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 23);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Latitude";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelLatitude.Location = new System.Drawing.Point(9, 58);
+            this.labelLatitude.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLatitude.Name = "labelLatitude";
+            this.labelLatitude.Size = new System.Drawing.Size(61, 23);
+            this.labelLatitude.TabIndex = 13;
+            this.labelLatitude.Text = "Latitude";
+            this.labelLatitude.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbLatitude
             // 
@@ -616,6 +620,7 @@
             this.cbSuccessionOption.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbSuccessionOption.Size = new System.Drawing.Size(175, 24);
             this.cbSuccessionOption.TabIndex = 3;
+            this.cbSuccessionOption.SelectedIndexChanged += new System.EventHandler(this.cbSuccessionOption_SelectedIndexChanged);
             // 
             // labelSuccession
             // 
@@ -629,6 +634,8 @@
             // 
             // groupBoxExtensions
             // 
+            this.groupBoxExtensions.Controls.Add(this.label12);
+            this.groupBoxExtensions.Controls.Add(this.checkedListBox1);
             this.groupBoxExtensions.Controls.Add(this.label7);
             this.groupBoxExtensions.Controls.Add(this.checkedListBoxExtensionOther);
             this.groupBoxExtensions.Controls.Add(this.labelDisturbance);
@@ -643,10 +650,33 @@
             this.groupBoxExtensions.TabIndex = 26;
             this.groupBoxExtensions.TabStop = false;
             this.groupBoxExtensions.Text = "Extensions";
+            this.groupBoxExtensions.Enter += new System.EventHandler(this.groupBoxExtensions_Enter);
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(24, 110);
+            this.label12.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(63, 22);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Output";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "Output Biomass",
+            "Output PnET"});
+            this.checkedListBox1.Location = new System.Drawing.Point(91, 114);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(175, 55);
+            this.checkedListBox1.TabIndex = 30;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(40, 152);
+            this.label7.Location = new System.Drawing.Point(40, 177);
             this.label7.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 19);
@@ -659,10 +689,10 @@
             this.checkedListBoxExtensionOther.FormattingEnabled = true;
             this.checkedListBoxExtensionOther.Items.AddRange(new object[] {
             "Climate"});
-            this.checkedListBoxExtensionOther.Location = new System.Drawing.Point(89, 152);
+            this.checkedListBoxExtensionOther.Location = new System.Drawing.Point(89, 177);
             this.checkedListBoxExtensionOther.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkedListBoxExtensionOther.Name = "checkedListBoxExtensionOther";
-            this.checkedListBoxExtensionOther.Size = new System.Drawing.Size(178, 55);
+            this.checkedListBoxExtensionOther.Size = new System.Drawing.Size(178, 38);
             this.checkedListBoxExtensionOther.TabIndex = 28;
             this.checkedListBoxExtensionOther.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxExtensionOther_ItemCheck);
             // 
@@ -682,19 +712,20 @@
             this.checkedListBoxDisturbance.Items.AddRange(new object[] {
             "Fire",
             "Wind",
+            "MaximumAge",
             "Harvest",
             "BDA"});
             this.checkedListBoxDisturbance.Location = new System.Drawing.Point(92, 55);
             this.checkedListBoxDisturbance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkedListBoxDisturbance.Name = "checkedListBoxDisturbance";
-            this.checkedListBoxDisturbance.Size = new System.Drawing.Size(175, 89);
+            this.checkedListBoxDisturbance.Size = new System.Drawing.Size(175, 55);
             this.checkedListBoxDisturbance.TabIndex = 26;
             // 
             // groupBoxEcoPara
             // 
             this.groupBoxEcoPara.Controls.Add(this.btDeleteEcoPara);
             this.groupBoxEcoPara.Controls.Add(this.tbLatitude);
-            this.groupBoxEcoPara.Controls.Add(this.label3);
+            this.groupBoxEcoPara.Controls.Add(this.labelLatitude);
             this.groupBoxEcoPara.Controls.Add(this.cbEcoPara);
             this.groupBoxEcoPara.Controls.Add(this.btAddEcoPara);
             this.groupBoxEcoPara.Controls.Add(this.dataGridViewEcoPara);
@@ -708,6 +739,7 @@
             this.groupBoxEcoPara.TabIndex = 27;
             this.groupBoxEcoPara.TabStop = false;
             this.groupBoxEcoPara.Text = "Ecoregion Parameters";
+            this.groupBoxEcoPara.Enter += new System.EventHandler(this.groupBoxEcoPara_Enter);
             // 
             // btDeleteEcoPara
             // 
@@ -1567,7 +1599,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 28);
             this.label5.TabIndex = 40;
-            this.label5.Text = "Species";
+            this.label5.Text = "Cohort";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btDeleteCohortSpp
@@ -1691,12 +1723,20 @@
             this.dataGridViewTextBoxMax.MinimumWidth = 6;
             this.dataGridViewTextBoxMax.Name = "dataGridViewTextBoxMax";
             // 
+            // panelExtension
+            // 
+            this.panelExtension.Location = new System.Drawing.Point(13, 1010);
+            this.panelExtension.Name = "panelExtension";
+            this.panelExtension.Size = new System.Drawing.Size(1257, 196);
+            this.panelExtension.TabIndex = 49;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1282, 1006);
+            this.ClientSize = new System.Drawing.Size(1282, 1255);
+            this.Controls.Add(this.panelExtension);
             this.Controls.Add(this.groupBoxDiagnosis);
             this.Controls.Add(this.checkedListBoxReference);
             this.Controls.Add(this.btAddReference);
@@ -1769,7 +1809,7 @@
         private System.Windows.Forms.ToolStripButton toolStripRun;
         private System.Windows.Forms.GroupBox groupBoxPara;
         private System.Windows.Forms.TextBox tbTimestep;
-        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label labelStartYr;
         private System.Windows.Forms.TextBox tbSimYears;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cbSuccessionOption;
@@ -1780,7 +1820,7 @@
         private System.Windows.Forms.TextBox tbStartYr;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbSeedingAlg;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelLatitude;
         private System.Windows.Forms.TextBox tbLatitude;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBoxEcoPara;
@@ -1885,6 +1925,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxMin;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxMax;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Panel panelExtension;
     }
 }
 

@@ -13,3 +13,4 @@ PnET-Succession    site_Succession.txt
 
 >> Disturbance Extensions     Initialization File
 >> --------------------     -------------------
+RandomNumberSeed  617788279

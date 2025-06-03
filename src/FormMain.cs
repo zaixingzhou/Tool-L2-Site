@@ -103,7 +103,7 @@ namespace LANDIS_II_Site
 
         private void RunSiteTool()
         {
-            BuildLandisInput();                    // build landis package
+            //BuildLandisInput();                    // build landis package
 
             RunLandis();                         // run the model in the traditional landis way
 
@@ -237,14 +237,14 @@ namespace LANDIS_II_Site
         private void CopyResultsFromLandis()
         {
             string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory            
-            string ResultDirectory = InputDirectory + "\\output";  // Landis results
+            string ResultDirectory = InputDirectory; //+ "\\output";  // Landis results
 
             // copy Landis results to Output directory
             string OutputDirectory = @".\Output";   // Site Tool output folder
 
 
 
-            if (checkBoxCalibration.Checked)
+            if (checkBoxCalibration.Checked)  // if calibration, save to a different location
             {
                 OutputDirectory = OutputParentDir(cbSuccessionOption, false);
                 CopyDirectory(ResultDirectory, OutputDirectory);
@@ -854,6 +854,13 @@ namespace LANDIS_II_Site
         private void LoadResultSite(string sitename = "Site.csv")
         {
             string OutputDirectory = OutputDir(cbSuccessionOption);// get the current succesion output directory
+            string InputSuccession = cbSuccessionOption.Text;
+
+            if (InputSuccession == "Biomass")
+            {
+                sitename = "spp-biomass-log.csv";
+            }
+
             string filePath = Path.Combine(OutputDirectory, sitename);
             RecordsSite = ReadCsvAsDictionary(filePath);
 
@@ -1410,7 +1417,7 @@ namespace LANDIS_II_Site
 
                     values = lines[i].Split(',');
                     if (values[0] == "SimulationYears") tbSimYears.Text = values[1];
-                    if (values[0] == "StartYear") tbStartYr.Text = values[1];
+                    if (values[0] == "StartYear" ) tbStartYr.Text = values[1];
                     if (values[0] == "TimeStep") tbTimestep.Text = values[1];
 
                     if (values[0] == "SeedingAlgorithm") cbSeedingAlg.SelectedItem = values[1];
@@ -1601,13 +1608,14 @@ namespace LANDIS_II_Site
 
         private void BuildLandisInput()
         {
-            string InputSuccession = cbSuccessionOption.Text;
+           string InputSuccession = cbSuccessionOption.Text;
             if (InputSuccession == "PnET-Succession") BuildPnetSuccession(cbSuccessionOption);
             if (InputSuccession == "PnET-CN-Succession") BuildPnetSuccession(cbSuccessionOption);
+            if (InputSuccession == "Biomass") BuildBiomassSuccession(cbSuccessionOption); 
 
         }
 
-        private void BuildPnetSuccessionScenario(string InputDirectory)
+        private void BuildSuccessionScenario(string InputDirectory)
         {
             //////////////////// build site_Scenario.txt
             string fileName = "site_Scenario.txt";
@@ -1615,7 +1623,7 @@ namespace LANDIS_II_Site
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 // Write the header row
-                writer.WriteLine("LandisData  Scenario");
+                writer.WriteLine("LandisData  \"Scenario\"");
 
                 writer.WriteLine(); // empty line
 
@@ -1632,7 +1640,11 @@ namespace LANDIS_II_Site
 
                 writer.WriteLine(">> Succession Extension     Initialization File");
                 writer.WriteLine(">> --------------------     -------------------");
-                writer.WriteLine(cbSuccessionOption.Text + "    site_Succession.txt");
+                
+                string successiontext = cbSuccessionOption.Text;
+                if (successiontext == "Biomass") successiontext = "Biomass Succession";
+
+                writer.WriteLine("\""+successiontext+ "\"" + "    site_Succession.txt");
 
                 writer.WriteLine(); // empty line
                 writer.WriteLine(">> Disturbance Extensions     Initialization File");
@@ -1643,7 +1655,14 @@ namespace LANDIS_II_Site
                     string strout = "\"" + value + "\"" + "     " + "site_" + value + ".txt";
                     writer.WriteLine(strout);
                 }
+                
+               // if (cbRandSeed.Checked) writer.WriteLine($"DisturbancesRandomOrder  {tbRandSeed.Text}");
 
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">> Output Extensions     Initialization File");
+                writer.WriteLine(">> --------------------     -------------------");
+
+                writer.WriteLine(); // empty line
                 if (cbRandSeed.Checked) writer.WriteLine($"RandomNumberSeed  {tbRandSeed.Text}");
                 ///////////////////////////////////// end of site_Scenario.txt
                 ///
@@ -1693,6 +1712,52 @@ namespace LANDIS_II_Site
             }
 
         }
+
+
+        private void BuildBiomassSuccessionSuccession(string InputDirectory)
+        {
+            //////////////////// build site_Succession.txt
+            string fileName = "site_Succession.txt";
+            string filePath = Path.Combine(InputDirectory, fileName);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                // Write the header row
+                writer.WriteLine("LandisData  \"Biomass Succession\"");
+
+                writer.WriteLine(); // empty line
+
+                //writer.WriteLine("PnET-Succession		Value");
+                writer.WriteLine(">>-------------------------------------");
+                writer.WriteLine($"Timestep          {tbTimestep.Text}");
+               // writer.WriteLine($"StartYear         {tbStartYr.Text}");
+                writer.WriteLine($"SeedingAlgorithm  {cbSeedingAlg.Text}");
+               // writer.WriteLine($"Latitude          {tbLatitude.Text}");
+
+                writer.WriteLine(); // empty line
+
+                writer.WriteLine("PNEToutputsites		site_PNEToutputsites.txt");
+
+                writer.WriteLine(); // empty line
+
+                writer.WriteLine("InitialCommunities      site_InitialCommunities.txt");
+                writer.WriteLine("InitialCommunitiesMap   site_InitialCommunitiesMap.img");
+
+                writer.WriteLine(); // empty line
+
+                writer.WriteLine("PnETGenericParameters		site_PnETGenericParameters.txt");
+                writer.WriteLine("PnETSpeciesParameters		site_PnETSpeciesParameters.txt");
+
+
+                writer.WriteLine(); // empty line
+
+                writer.WriteLine("EcoregionParameters 	site_EcoregionParameters.txt");
+
+                ///////////////////////////////////// end of site_Succession.txt
+                ///
+            }
+
+        }
+
 
         private void BuildPnetSuccessionSpecies(string InputDirectory)
         {
@@ -1863,7 +1928,7 @@ namespace LANDIS_II_Site
 
             string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory
 
-            BuildPnetSuccessionScenario(InputDirectory);                        // build scenario file
+            BuildSuccessionScenario(InputDirectory);                        // build scenario file
             BuildPnetSuccessionSuccession(InputDirectory);                      // build Succession file
             BuildPnetSuccessionSpecies(InputDirectory);                         // build Species file
             BuildPnetSuccessionPnETSpeciesParameters(InputDirectory);           // build PnET Species file
@@ -1872,6 +1937,36 @@ namespace LANDIS_II_Site
             BuildPnetSuccessionEcoregionPara(InputDirectory);                 // build ecoregion file
 
             BuildPnetSuccessionGenericPara(InputDirectory);                     // build PnETGeneric file
+            /*
+
+            /////////////////save Ecoregion data
+
+            SaveDataGridViewToCsv(writer, dataGridViewEcoPara, false);  // save all table data
+
+            */
+
+        }
+
+
+        private void BuildBiomassSuccession(ComboBox cbSuccession)
+        {
+
+            string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory
+
+            BuildSuccessionScenario(InputDirectory);                        // build scenario file
+                  
+            BuildPnetSuccessionSuccession(InputDirectory);                      // build Succession file
+
+/*
+            BuildPnetSuccessionSpecies(InputDirectory);                         // build Species file
+            BuildPnetSuccessionPnETSpeciesParameters(InputDirectory);           // build PnET Species file
+            BuildPnetSuccessionInitialComm(InputDirectory);                     // build initial community file
+            BuildPnetSuccessionClimate(InputDirectory);                         // build climate file
+            BuildPnetSuccessionEcoregionPara(InputDirectory);                 // build ecoregion file
+
+            BuildPnetSuccessionGenericPara(InputDirectory);                     // build PnETGeneric file
+
+            */
             /*
 
             /////////////////save Ecoregion data
@@ -2242,15 +2337,117 @@ namespace LANDIS_II_Site
 
         }
         // load the tab graphs variables
-        private void tabControlGraphSite()
+        private void tabControlGraphSite() 
         {
+
+  
+            string InputSuccession = cbSuccessionOption.Text;
+            if (InputSuccession == "PnET-Succession") tabControlGraphSitePnET();
+            if (InputSuccession == "PnET-CN-Succession") tabControlGraphSitePnET();
+            if (InputSuccession == "Biomass") tabControlGraphSiteBiomass();
+
+
+        }
+        private void tabControlGraphSiteBiomass()
+        {
+            
+            //clear the graphs first 
+
+            btClearGraph_Click(null, EventArgs.Empty);
+
+
+            // read the data file
+            string InterDirectory = InterDir(cbSuccessionOption);// get the current succesion inter directory
+            string fileName = "Site_Site.csv";
+            string filePath = Path.Combine(InterDirectory, fileName);
+            Dictionary<string, string> sitevars = new Dictionary<string, string>();
+
+
+
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
+
+                // Read the keys from the first line
+                string[] keys = lines[0].Trim().Split(',');
+                string[] values = lines[1].Trim().Split(',');
+                //sitevars.Add();
+                // Process each data row
+                for (int i = 0; i < keys.Length; i++) // 
+                {
+                    sitevars[keys[i]] = values[i];
+
+                    //records.Add(record);
+                }
+
+                // populate climate tab
+                // List of values to match
+                List<string> valuesToFind = new List<string> { "1" };
+                tabControlGraphSiteTab(sitevars, checkedListBoxClimate, valuesToFind);
+                //checkedListBoxClimate.SetItemChecked(0, true);  // show default chart
+
+                // populate carbon tab
+                // List of values to match
+                valuesToFind = new List<string> { "2" };   //         
+                tabControlGraphSiteTab(sitevars, checkedListBoxCarbon, valuesToFind);
+                //checkedListBoxClimate.SetItemChecked(0, true);  // show default chart
+
+                // populate water tab
+                // List of values to match
+                valuesToFind = new List<string> { "3" };   // 
+                tabControlGraphSiteTab(sitevars, checkedListBoxWater, valuesToFind);
+
+                /*
+                // populate nitrogen tab
+                valuesToFind = new List<string> { "4" };   // 
+                tabControlGraphSiteTab(sitevars, checkedListBoxNitrogen, valuesToFind);
+
+                // populate composition tab
+                //checkedListBoxComposition.Items.Clear();
+                // if (checkedListBoxComposition.Items.Count > 0) checkedListBoxComposition.SetItemChecked(0, true);  // show default chart
+
+
+                // populate cohort tab
+                // List of values to match
+                comboBoxCohortNameFill();
+
+
+                // populate compare tab
+
+                // Clear the CheckedListBox
+                checkedListBoxCompare.Items.Clear();
+                ICollection<string> compkeys = sitevars.Keys;// Retrieve all the keys
+                foreach (string item in compkeys)
+                {
+                    checkedListBoxCompare.Items.Add(item);
+                }
+                //  if (checkedListBoxCompare.Items.Count > 0) checkedListBoxCompare.SetItemChecked(0, true);  // show default chart
+
+                */
+                // populate diagnosis tab
+                comboBoxCalibrationVarFill();
+
+
+                // set all selected curves
+                Set_tabControlGraphSite_selection();
+
+            }
+            else
+            {
+                MessageBox.Show("CSV file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void tabControlGraphSitePnET()
+        {
+
             // store current variable selections in each graph
             Get_tabControlGraphSite_selection();
 
             //clear the graphs first 
 
             btClearGraph_Click(null, EventArgs.Empty);
-
 
 
             // read the data file
@@ -2437,6 +2634,10 @@ namespace LANDIS_II_Site
             if (InputSuccession == "PnET-Succession")
             {
                 OutputDirectory = OutputDirectory + @"\PNEToutputsites\Site1";
+            }
+            if (InputSuccession == "Biomass")
+            {
+                OutputDirectory = OutputDirectory;
             }
 
             return OutputDirectory;
@@ -2966,7 +3167,83 @@ namespace LANDIS_II_Site
  
         }
 
-        
+        private void cbSuccessionOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedItem = cbSuccessionOption.Text;
+            if (selectedItem == "Biomass") GUI_Biommass();
+            if (selectedItem == "PnET-Succession") GUI_PnET();
+            if (selectedItem == "PnET-CN-Succession") GUI_PnET();
+        }
+
+        private void GUI_Biommass()
+        {
+            tabControlGraph.TabPages.Remove(tabPageWater);
+            tabControlGraph.TabPages.Remove(tabPageNitrogen);
+            tabControlGraph.TabPages.Remove(tabPageComp);
+            tabControlGraph.TabPages.Remove(tabPageCohorts);
+            tabControlGraph.TabPages.Remove(tabPageCompare);
+            
+            tbStartYr.Visible = false;
+            labelStartYr.Visible = false;
+            tbLatitude.Visible = false;
+            labelLatitude.Visible = false;
+
+            dataGridViewInitialComm.Columns.Clear();
+            // 2. Add new columns
+            dataGridViewInitialComm.Columns.Add("Species", "Species");
+            dataGridViewInitialComm.Columns.Add("Age", "Age");
+            dataGridViewInitialComm.Columns.Add("Biomass", "Biomass");
+
+            dataGridViewInitialComm.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+
+            //ChildForm FormBiomass = new ChildForm();
+            LoadForm(new FormBiomass());
+            //this.Controls.Remove(tbStartYr);
+            //tbStartYr.Dispose();
+            //tbStartYr = null;
+
+
+
+
+
+        }
+
+        private void GUI_PnET()
+        {
+            if (!tabControlGraph.TabPages.Contains(tabPageWater)) tabControlGraph.TabPages.Add(tabPageWater);
+            if (!tabControlGraph.TabPages.Contains(tabPageNitrogen)) tabControlGraph.TabPages.Add(tabPageNitrogen);
+            if (!tabControlGraph.TabPages.Contains(tabPageComp)) tabControlGraph.TabPages.Add(tabPageComp);
+            if (!tabControlGraph.TabPages.Contains(tabPageCohorts)) tabControlGraph.TabPages.Add(tabPageCohorts);
+            if (!tabControlGraph.TabPages.Contains(tabPageCompare)) tabControlGraph.TabPages.Add(tabPageCompare);
+            tbStartYr.Visible = true;
+            labelStartYr.Visible = true;
+            tbLatitude.Visible = true;
+            labelLatitude.Visible = true;
+
+            LoadForm(new FormPnET());
+        }
+
+
+        private void LoadForm(Form form)
+        {
+            panelExtension.Controls.Clear();  // Clear previous form if any
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            panelExtension.Controls.Add(form);
+            form.Show();
+        }
+
+        private void groupBoxExtensions_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxEcoPara_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
