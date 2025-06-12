@@ -37,3 +37,4 @@ C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\System.Runtime.Com
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.FormBiomass.resources
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.FormPnET.resources
+C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.FormOutputBiomass.resources

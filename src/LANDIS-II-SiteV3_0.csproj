@@ -87,6 +87,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOutputBiomass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOutputBiomass.Designer.cs">
+      <DependentUpon>FormOutputBiomass.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPnET.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOutputBiomass.resx">
+      <DependentUpon>FormOutputBiomass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPnET.resx">
       <DependentUpon>FormPnET.cs</DependentUpon>
