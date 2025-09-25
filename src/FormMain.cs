@@ -20,17 +20,38 @@ namespace LANDIS_II_Site
 {
     public partial class FormMain : Form
     {
-        
+        public FormPnET GUIPnET = new FormPnET();      
         public FormBiomass GUIBiomass = new FormBiomass();
-        public FormPnET GUIPnET = new FormPnET();
+ 
+        //public FormPnET GUIPnETCN = new FormPnET();
+
+        private string InputSuccession
+        {
+            get { return cbSuccessionOption.Text; }
+        } 
+        private string InputDirectory
+        {
+            get 
+            {
+                string temp;
+                if (InputSuccession == "PnET-Succession")
+                {
+                    if (GUIPnET.InputPnETSuccession == "PnET-CN-Succession") temp = InputDir("PnET-CN-Succession");
+                    else temp = InputDir("PnET-Succession");
+                }
+                else { temp= InputDir(InputSuccession); }
+
+                return temp;
+            }
+        }
+
         public FormMain()
         {
             InitializeComponent();
 
 
-
             // set default values for some components
-            cbSuccessionOption.SelectedIndex = 1;  // PnET-Extension
+            cbSuccessionOption.SelectedIndex = 0;  // PnET-Extension
             
 
         }
@@ -48,8 +69,13 @@ namespace LANDIS_II_Site
             if (InputSuccession == "Biomass")
             {
                 GUIBiomass.RunSiteTool();
+            }
+            if (InputSuccession == "PnET-Succession")
+            {
+                GUIPnET.RunSiteTool();
 
-            }           
+            }
+
 
         }
   
@@ -70,7 +96,7 @@ namespace LANDIS_II_Site
 
         private void MenuRun_Click(object sender, EventArgs e)
         {
-            string message = "Run complete!";
+            string message = "Run successfully!";
 
  
             try 
@@ -83,8 +109,8 @@ namespace LANDIS_II_Site
              catch (Exception ex)
              {
                 // Handle exceptions
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
-             }
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             
 
@@ -139,7 +165,7 @@ namespace LANDIS_II_Site
         {
             string selectedItem = cbSuccessionOption.Text;
             if (selectedItem == "Biomass") GUIBiomass.SaveInputSite();
-            //if (selectedItem == "PnET-Succession") GUIPnET.SaveInputSite();
+            if (selectedItem == "PnET-Succession") GUIPnET.SaveInputSite();
            // if (selectedItem == "PnET-CN-Succession") GUI_PnET();
 
             //SaveInputSite(); // to @"Inter\Site_input.csv"
@@ -292,7 +318,8 @@ namespace LANDIS_II_Site
             }
             else
             {
-                MessageBox.Show("CSV file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string error = filePath + " not found.";
+                MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return records;
@@ -346,14 +373,36 @@ namespace LANDIS_II_Site
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //LoadInputFromCsv(openFileDialog.FileName);
+                try 
+                {
+                    string filename = openFileDialog.FileName;
+                    string[] lines = File.ReadAllLines(filename);
+
+                    // Succession extension
+                    string[] values = lines[2].Split(','); // succession extension
+                    cbSuccessionOption.SelectedItem = values[1];
+                    
+                    string strSuccession = cbSuccessionOption.Text;  // get the current succesion Extension
+                   
+                    if (strSuccession == "PnET-Succession") GUIPnET.LoadInputFromCsv(filename);
+                    if (strSuccession == "Biomass") GUIBiomass.LoadInputFromCsv(filename);
+                    
+
+
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
         }
 
-        private string InputDir(ComboBox cbSuccession)
+        private string InputDir(string InputSuccession)
         {
 
-            string InputSuccession = cbSuccession.Text;
+            //string InputSuccession = cbSuccession.Text;
             string InputDirectory = @".\Input";
             InputDirectory = InputDirectory + "\\" + InputSuccession;
             return InputDirectory;
@@ -374,7 +423,7 @@ namespace LANDIS_II_Site
             
             string strSuccession = cbSuccessionOption.Text;  // get the current succesion Extension            
 
-            string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory
+            //string InputDirectory = InputDir(cbSuccessionOption);// get the current succesion input directory
             if (strSuccession == "Biomass") GUIBiomass.BuildLandisInput();
 
             // set current directory as default
@@ -520,9 +569,18 @@ namespace LANDIS_II_Site
         private void cbSuccessionOption_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedItem = cbSuccessionOption.Text;
-            if (selectedItem == "Biomass") GUI_Biommass();
-            if (selectedItem == "PnET-Succession") GUI_PnET();
-            if (selectedItem == "PnET-CN-Succession") GUI_PnET();
+            if (selectedItem == "Biomass") 
+            {                               
+                GUI_Biommass();                
+            }
+            else
+            {
+                GUIBiomass.OutputForm.Hide();
+                if (selectedItem == "PnET-Succession") GUI_PnET();
+                if (selectedItem == "PnET-CN-Succession") GUI_PnET();
+
+            } 
+ 
         }
 
         private void GUI_Biommass()
@@ -532,8 +590,9 @@ namespace LANDIS_II_Site
 
         private void GUI_PnET()
         {
-
+            
             LoadFormIntoPanel(GUIPnET);
+            
         }
 
 
@@ -555,7 +614,29 @@ namespace LANDIS_II_Site
             //this.ClientSize = panelExtension.Size;
         }
 
-     
+        private void buttonLandislog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string fileName = "Landis-log.txt";
+                string filePath = Path.Combine(InputDirectory, fileName);
+                if (File.Exists(filePath))
+                {
+                    // Open file in Notepad
+                    Process.Start("notepad.exe", filePath);
+                }
+                else
+                {
+                    MessageBox.Show("File not found: " + filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+        }
+
     }
 }
 

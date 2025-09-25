@@ -1,0 +1,21 @@
+LandisData  "Scenario"
+
+Duration  100
+
+Species         site_SpeciesCore.txt
+Ecoregions      site_Ecoregions.txt
+EcoregionsMap   site_EcoregionsMap.img
+CellLength  100 << meters, 100 x 100 m = 1 ha
+
+>> Succession Extension     Initialization File
+>> --------------------     -------------------
+"Biomass Succession"    site_Succession.txt
+
+>> Disturbance Extensions     Initialization File
+>> --------------------     -------------------
+
+>> Output Extensions     Initialization File
+>> --------------------     -------------------
+"Output Biomass"     site_Output_Extension.txt
+
+RandomNumberSeed  617788279

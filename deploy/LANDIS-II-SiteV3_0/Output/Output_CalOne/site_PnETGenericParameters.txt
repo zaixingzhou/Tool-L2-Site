@@ -1,0 +1,13 @@
+LandisData  PnETGenericParameters
+
+PnETGenericParameters		Value
+FracBelowG   0.2
+CanopySumScale   0.2
+ETMethod   Original
+FolNConRange   0.5
+MaxNStore   21
+Kho   0.075
+NImmobA   151
+NImmobB   -35
+FolNRetrans   0.5
+GRespFrac   0.25

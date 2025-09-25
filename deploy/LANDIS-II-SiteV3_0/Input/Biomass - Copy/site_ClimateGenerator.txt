@@ -1,0 +1,15 @@
+LandisData "Climate Config"				
+		
+ClimateTimeSeries			Monthly_AverageAllYears
+ClimateFile				site_climate.csv
+
+SpinUpClimateTimeSeries			Monthly_AverageAllYears
+SpinUpClimateFile			site_climate.csv
+
+GenerateClimateOutputFiles		yes
+UsingFireClimate			no  << Optional parameter; default is no.
+>>FineFuelMoistureCode			100
+>>DuffMoistureCode			100
+>>DroughtCode				100
+>>FirstDayFire				30
+>>LastDayFire				320

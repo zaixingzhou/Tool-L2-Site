@@ -8,6 +8,7 @@ echo Changed to Batch File Directory: %CD%
 
 rmdir /s /q output
 
-call landis-ii-7 site_Scenario.txt
+REM call landis-ii-8 site_Scenario.txt
+dotnet C:\Users\zzhou\Documents\GitHub\Core-Model-v7\Tool-Console\src\bin\Debug\Landis.console.dll site_Scenario.txt
 
 pause

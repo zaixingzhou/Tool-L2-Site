@@ -1,12 +1,5 @@
-LandisData "Initial Communities"
-MapCode 0 <<
-MapCode 1 << water, ag, pavement, etc
-MapCode 2 << potential forest
+LandisData  "Initial Communities"
 
-MapCode 10 
-acerrubr 54 62
-querrubr 52 62 97
-
-
-
-
+MapCode 10
+acerrubr   54   62   
+querrubr   52   62   97

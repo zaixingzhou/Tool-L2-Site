@@ -1,0 +1,58 @@
+2025-09-25 16:49:48,149 - LANDIS-II 7.0 (7)
+2025-09-25 16:49:48,155 - 
+2025-09-25 16:49:48,199 - Loading scenario from file "site_Scenario.txt" ...
+2025-09-25 16:49:48,240 - Initialized random number generator with user-supplied seed = 617,788,279
+2025-09-25 16:49:48,241 - Loading species data from file "site_Species.txt" ...
+2025-09-25 16:49:48,254 - Loading ecoregions from file "site_Ecoregions.txt" ...
+2025-09-25 16:49:48,264 - Initializing landscape from ecoregions map "site_EcoregionsMap.img" ...
+2025-09-25 16:49:48,286 - Cell length = 100 m, cell area = 1 ha
+2025-09-25 16:49:48,287 - Map dimensions: 1 row by 1 column = 1 cell
+2025-09-25 16:49:48,291 - Sites: 1 active (100.0%), 0 inactive (0.0%)
+2025-09-25 16:49:48,296 - Loading PnET-Succession extension ...
+2025-09-25 16:49:48,336 - Initializing PnET-Succession version 5.1.0.0
+2025-09-25 16:49:48,357 -    Registering Data:  Succession.WoodyDebris.
+2025-09-25 16:49:48,357 -    Registering Data:  Succession.Litter.
+2025-09-25 16:49:48,357 -    Registering Data:  Succession.FineFuels.
+2025-09-25 16:49:48,357 -    Registering Data:  Succession.PressureHead.
+2025-09-25 16:49:48,357 -    Registering Data:  Succession.ExtremeMinTemp.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.PET.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.CWD.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.SmolderConsumption.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.FlamingConsumption.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.HOMSite.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.HONSite.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.NO3Site.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.NH4Site.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.NRatioSite.
+2025-09-25 16:49:48,358 -    Registering Data:  Succession.NRatioNit.
+2025-09-25 16:49:48,360 -   MaxParallelThreads = 1.
+2025-09-25 16:49:48,360 -   No ClimateConfigFile provided. Using climate files in ecoregion parameters: site_EcoregionParameters.txt.
+2025-09-25 16:49:48,381 - Eco	Soiltype	WiltPnt		FieldCap	FC-WP		Porosity
+2025-09-25 16:49:48,382 - eco999	SALO		0.08105644	0.1839697	0.1029133	0.4511843
+2025-09-25 16:49:48,388 - Using PAR units of umol/m2/s.
+2025-09-25 16:49:48,390 -    Registering Data:  TimeOfLastSuccession.
+2025-09-25 16:49:48,390 -    Registering Data:  Shade.
+2025-09-25 16:49:48,391 -    Creating Dispersal Neighborhood List.
+2025-09-25 16:49:48,391 -    Dispersal:  NeighborRadius=5050, CellLength=100, numCellRadius=50
+2025-09-25 16:49:48,394 - Spinning up biomass or reading from maps...
+2025-09-25 16:49:48,396 -    Loading initial communities from file "site_InitialCommunities.txt" ...
+2025-09-25 16:49:48,406 -    Reading initial communities map "site_InitialCommunitiesMap.img" ...
+2025-09-25 16:49:49,130 -    Registering Data:  Succession.BiomassCohorts.
+2025-09-25 16:49:49,130 -    Registering Data:  Succession.AgeCohorts.
+2025-09-25 16:49:49,130 -    Registering Data:  Succession.CohortsPnET.
+2025-09-25 16:49:49,132 - Using the following extensions ...
+   Extension Name            Extension Filename       
+   --------------            ------------------       
+   PnET-Succession           site_Succession.txt      
+
+2025-09-25 16:49:49,132 - Current time: 10
+2025-09-25 16:49:49,132 - Running PnET-Succession ...
+2025-09-25 16:49:49,221 - Current time: 20
+2025-09-25 16:49:49,221 - Running PnET-Succession ...
+2025-09-25 16:49:49,296 - Current time: 30
+2025-09-25 16:49:49,296 - Running PnET-Succession ...
+2025-09-25 16:49:49,382 - Current time: 40
+2025-09-25 16:49:49,382 - Running PnET-Succession ...
+2025-09-25 16:49:49,456 - Current time: 50
+2025-09-25 16:49:49,456 - Running PnET-Succession ...
+2025-09-25 16:49:49,531 - Model run is complete.

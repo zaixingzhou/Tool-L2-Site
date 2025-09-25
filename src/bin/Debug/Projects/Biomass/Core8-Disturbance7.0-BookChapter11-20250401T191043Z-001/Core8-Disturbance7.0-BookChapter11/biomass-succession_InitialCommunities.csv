@@ -1,0 +1,13 @@
+MapCode,SpeciesName,CohortAge,CohortBiomass
+1,abiebals,10,2500
+1,pinuresi,10,3000
+1,poputrem,10,3250
+2,abiebals,30,5000
+2,pinuresi,30,6500
+2,poputrem,30,7000
+3,abiebals,60,6250
+3,pinuresi,60,8250
+3,poputrem,60,8000
+4,abiebals,90,7000
+4,pinuresi,90,11000
+4,poputrem,90,1000
