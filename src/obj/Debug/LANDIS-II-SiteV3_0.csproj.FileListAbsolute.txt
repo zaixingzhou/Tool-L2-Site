@@ -17,7 +17,6 @@ C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.exe
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.pdb
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\ZedGraph.dll
-C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.CopyComplete
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\CsvHelper.dll
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Microsoft.Bcl.HashCode.dll
@@ -38,3 +37,5 @@ C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.For
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.FormPnET.resources
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS_II_Site.FormOutputBiomass.resources
 C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.csproj.AssemblyReference.cache
+C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-II-SiteV3_0.exe.config
+C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\obj\Debug\LANDIS-I.2806F0C7.Up2Date

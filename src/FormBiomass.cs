@@ -1,18 +1,14 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Diagnostics;
-using System.IO;
-using ZedGraph;
-using System.IO.Compression;
-using CsvHelper;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using ZedGraph;
 
 namespace LANDIS_II_Site
 {
@@ -31,12 +27,12 @@ namespace LANDIS_II_Site
             get { return InputDir(); }
         }
 
-        private string OutputFolder = @"\output\Site1";
+        private string OutputFolder = @"\output";
 
         public FormBiomass()
         {
             InitializeComponent();
-            
+
             //FormOutputBiomass OutputForm = new FormOutputBiomass();
 
             InitializeComponentPlus();
@@ -44,13 +40,14 @@ namespace LANDIS_II_Site
 
 
 
-       
+
         private void InitializeComponentPlus()
         {
             // set default values for some components
-                       
+
             // load the example for initilization
-            String FileExample = @".\Inter\Biomass\Site_input_example.csv";
+            string fileName = "Site_input_example.csv";
+            string FileExample = Path.Combine(InterDirectory, fileName);
             LoadInputFromCsv(FileExample);
 
             // Set default selected tab (carbon)
@@ -81,23 +78,27 @@ namespace LANDIS_II_Site
             checkedListBoxClimate.SetItemChecked(0, true);
         }
 
-        private void MenuExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-
-        }
 
         public void RunSiteTool(string InputSuccession = "Biomass")
         {
-            BuildLandisInput();                    // build landis package
+            if (!cbReplicate.Checked) // single run
+            {
+                BuildLandisInput();                    // build landis package
 
-            RunLandis();                         // run the model in the traditional landis way
+                RunLandis();                         // run the model in the traditional landis way
 
-            CopyResultsFromLandis();              //  copy the results to the sitetool output
+                CopyResultsFromLandis();              //  copy the results to the sitetool output
 
-            LoadResultSite();                     // load site results from the sitetool output
+                LoadResultSite();                     // load site results from the sitetool output
 
-            tabControlGraphSite();                // update the chart tabs
+                tabControlGraphSite();                // update the chart tabs
+
+            }
+            else
+            {
+                RunSiteToolReplicate(); // replicate runs
+            }
+
 
         }
         private string StoreReplicate(int rep)
@@ -105,9 +106,9 @@ namespace LANDIS_II_Site
 
             string SourceDirectory = OutputParentDir();
             string RepDirectory = OutputParentDir(false);    // Site Tool default output folder
-                                                                                 //List<string> StoredDir = new List<string>();
-                                                                                 // if (Directory.Exists(RepDirectory))Directory.Delete(RepDirectory, true); // true to delete recursively
-                                                                                 //Directory.CreateDirectory(RepDirectory);
+                                                             //List<string> StoredDir = new List<string>();
+                                                             // if (Directory.Exists(RepDirectory))Directory.Delete(RepDirectory, true); // true to delete recursively
+                                                             //Directory.CreateDirectory(RepDirectory);
             RepDirectory = RepDirectory + "\\Output" + rep.ToString();
             CopyDirectory(SourceDirectory, RepDirectory);
 
@@ -195,7 +196,7 @@ namespace LANDIS_II_Site
 
         private void CopyResultsFromLandis()
         {
-            string InputDirectory = InputDir();// get the current succesion input directory            
+            //string InputDirectory = InputDir();// get the current succesion input directory            
             string ResultDirectory = InputDirectory; //+ "\\output";  // Landis results
 
             // copy Landis results to Output directory
@@ -346,9 +347,9 @@ namespace LANDIS_II_Site
         }
 
 
-    
 
-  
+
+
 
         private void btAddSppLifeHistoryPara_Click(object sender, EventArgs e)
         {
@@ -626,11 +627,19 @@ namespace LANDIS_II_Site
         public void LoadResultSite(string sitename = "Site.csv")
         {
             string OutputDirectory = OutputDir();// get the current succesion output directory
-                      
-            sitename = "spp-biomass-log.csv";          
+
+            sitename = "spp-biomass-log.csv";
 
             string filePath = Path.Combine(OutputDirectory, sitename);
+
+            //var allresults = ReadCsvAsDictionary(filePath);
             RecordsSite = ReadCsvAsDictionary(filePath);
+
+            //string[] keysToFind = { "AboveGroundBiomass_acerrubr", "AboveGroundBiomass_querrubr" };
+
+            // RecordsSite = allresults
+            //           .Where(d => keysToFind.Any(key => d.ContainsKey(key)))
+            //           .ToList();
 
         }
 
@@ -656,11 +665,8 @@ namespace LANDIS_II_Site
 
                 //StoredDir.Add(StoreReplicate(i + 1)); //store sitetool output 
                 string RepDirectory = OutputDirectory + "\\Output" + (i + 1).ToString();
-                string filePath = RepDirectory + @"\PNEToutputsites\Site1";
-                if (InputSuccession == "PnET-Succession")
-                {
-                    filePath = RepDirectory + @"\PNEToutputsites\Site1";
-                }
+                string filePath = RepDirectory;
+                sitename = "spp-biomass-log.csv";
 
                 filePath = Path.Combine(filePath, sitename);
 
@@ -733,8 +739,7 @@ namespace LANDIS_II_Site
             }
 
             //RecordsSite = (List < Dictionary<string, object> >) rowSums.Select(row => row.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value)).ToList();
-            string filePath2 = InterDir();
-            filePath2 = filePath2 + "\\output.csv";
+            string filePath2 = OutputDirectory + "\\output.csv";
 
             SaveToCsv(rowSums, filePath2);
             RecordsSite = ReadCsvAsDictionary(filePath2);
@@ -779,11 +784,9 @@ namespace LANDIS_II_Site
         {
             string InputSuccession = "Biomass";
             string OutputDirectory2 = @".\Output";
-            if (InputSuccession == "PnET-Succession")
-            {
-                OutputDirectory2 = OutputDirectory + @"\PNEToutputsites\Site1";
-            }
+            sitename = "spp-biomass-log.csv";
 
+            OutputDirectory2 = OutputDirectory;
             string filePath = Path.Combine(OutputDirectory2, sitename);
             RecordsCalOne = ReadCsvAsDictionary(filePath);
 
@@ -1007,7 +1010,7 @@ namespace LANDIS_II_Site
         public void SaveInputSite(string filePath = @"Inter\Site_input.csv")
         {
             //filePath = "Inter\Site_input.csv"; // Path to the file
-            string SuccessionOption = "Biomass" ; // set for different succession extension
+            string SuccessionOption = "Biomass"; // set for different succession extension
 
             string Fieldname = " ";
 
@@ -1042,7 +1045,7 @@ namespace LANDIS_II_Site
                 string strtemp = cbOutputBiomass.Checked ? "Yes" : "No";
                 writer.WriteLine("OutputExtension," + strtemp);
                 //writer.WriteLine("RandomSeedSet," + tbRandSeed.Text);  // 
- 
+
 
                 ///////////////// Other Extensions
                 writer.WriteLine(strseperater + "Other Extension");
@@ -1078,7 +1081,7 @@ namespace LANDIS_II_Site
                 writer.WriteLine("ClimateFile," + tbClimateFile.Text);  //
                 writer.WriteLine("AET(mm)," + tbAET.Text);  //
 
-               // SaveDataGridViewToCsv(writer, dataGridViewLightTable, false);  // save all table data
+                // SaveDataGridViewToCsv(writer, dataGridViewLightTable, false);  // save all table data
 
                 /////////////////save Initial communities 
                 writer.WriteLine(strseperater + "Initial communities");
@@ -1087,7 +1090,7 @@ namespace LANDIS_II_Site
 
                 /////////////////save Sufficient Light Table
                 writer.WriteLine(strseperater + "Sufficient Light Table");
-               // SaveDataGridViewToCsv(writer, dataGridViewLightTable, false);  // save all table data
+                // SaveDataGridViewToCsv(writer, dataGridViewLightTable, false);  // save all table data
                 SaveDataGridViewToCsv(writer, dataGridViewLightTable);  // save all table data
 
                 /////////////////save Minimum Biomass by Shade
@@ -1168,20 +1171,20 @@ namespace LANDIS_II_Site
         {
             try
             {
-                
+
                 string[] lines = File.ReadAllLines(filePath);
 
 
                 // Succession extension
                 string[] values = lines[2].Split(','); // succession extension
-               // cbSuccessionOption.SelectedItem = values[1];  ZZX
+                                                       // cbSuccessionOption.SelectedItem = values[1];  ZZX
 
                 string searchPhrase = "<<";
 
 
 
                 // Disturbance
-                
+
                 int startline = 4;
                 int index = 0;
 
@@ -1190,7 +1193,7 @@ namespace LANDIS_II_Site
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
-                        
+
                         startline = i + 1;  // new start line
                         break;
                     }
@@ -1201,7 +1204,7 @@ namespace LANDIS_II_Site
                     {
                         checkedListBoxDisturbance.SetItemChecked(index, true);
                     }
-                    
+
                 }
 
                 // Output extension
@@ -1218,7 +1221,7 @@ namespace LANDIS_II_Site
                     values = lines[i].Split(',');
                     if (values[0] == "OutputExtension") cbOutputBiomass.Checked = values[1].Equals("Yes");
 
-                   
+
                 }
                 // Other extension
                 for (int ii = 0; ii < checkedListBoxExtensionOther.Items.Count; ii++) checkedListBoxExtensionOther.SetItemChecked(ii, false);
@@ -1226,7 +1229,7 @@ namespace LANDIS_II_Site
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
-                       // for (int ii = 0; ii < checkedListBoxExtensionOther.Items.Count; ii++) checkedListBoxExtensionOther.SetItemChecked(ii, false);
+                        // for (int ii = 0; ii < checkedListBoxExtensionOther.Items.Count; ii++) checkedListBoxExtensionOther.SetItemChecked(ii, false);
                         startline = i + 1;  // new start line
                         break;
                     }
@@ -1251,7 +1254,7 @@ namespace LANDIS_II_Site
 
                     values = lines[i].Split(',');
                     if (values[0] == "SimulationYears") tbSimYears.Text = values[1];
-                   // if (values[0] == "StartYear") tbStartYr.Text = values[1];
+                    // if (values[0] == "StartYear") tbStartYr.Text = values[1];
                     if (values[0] == "TimeStep") tbTimestep.Text = values[1];
 
                     if (values[0] == "SeedingAlgorithm") cbSeedingAlg.SelectedItem = values[1];
@@ -1279,7 +1282,7 @@ namespace LANDIS_II_Site
                     if (values[0] == "ClimateFile") tbClimateFile.Text = values[1];
                     if (values[0] == "AET(mm)") tbAET.Text = values[1];
 
-                   // if (i > startline + 1) dataGridViewEcoPara.Rows.Add(values); // skip two lines above     
+                    // if (i > startline + 1) dataGridViewEcoPara.Rows.Add(values); // skip two lines above     
 
                 }
 
@@ -1319,7 +1322,7 @@ namespace LANDIS_II_Site
                         startline = i + 1;  // new start line
                         break;
                     }
-                    
+
                     values = lines[i].Split(',');
                     if (i == startline)
                     {
@@ -1356,7 +1359,7 @@ namespace LANDIS_II_Site
                     }
                     else dataGridViewMinRelativeBiomass.Rows.Add(values);
 
-                }            
+                }
 
                 dataGridViewMinRelativeBiomass.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
 
@@ -1473,14 +1476,14 @@ namespace LANDIS_II_Site
             }
         }
         private string InputDir(string InputSuccession = "Biomass")
-        {            
+        {
             string InputDirectory = @".\Input";
             InputDirectory = InputDirectory + "\\" + InputSuccession;
             return InputDirectory;
 
         }
         private string InterDir(string InputSuccession = "Biomass")
-        {            
+        {
             string InterDirectory = @".\Inter";
             InterDirectory = InterDirectory + "\\" + InputSuccession;
             return InterDirectory;
@@ -1527,19 +1530,19 @@ namespace LANDIS_II_Site
         }
 
 
-        private void BuildRunBatch(string InputDirectory)
+        private void BuildRunBatch()
         {
             string fileName = "site_run.bat";
             string filePath = Path.Combine(InputDirectory, fileName);
 
-            string InterDirectory = @".\Inter";
+            //string InterDirectory = @".\Inter";
             string Sourcefile = Path.Combine(InterDirectory, fileName); ;
 
             File.Copy(Sourcefile, filePath, true);
 
 
             fileName = "site_run_console.bat";
-            filePath = Path.Combine(InputDirectory, fileName);            
+            filePath = Path.Combine(InputDirectory, fileName);
             Sourcefile = Path.Combine(InterDirectory, fileName); ;
 
             File.Copy(Sourcefile, filePath, true);
@@ -1547,7 +1550,7 @@ namespace LANDIS_II_Site
 
         }
 
-        private void BuildSuccessionScenario(string InputDirectory)
+        private void BuildSuccessionScenario()
         {
             //////////////////// build site_Scenario.txt
             string fileName = "site_Scenario.txt";
@@ -1574,7 +1577,7 @@ namespace LANDIS_II_Site
                 writer.WriteLine(">> --------------------     -------------------");
 
                 string successiontext = "Biomass Succession";
-                
+
 
                 writer.WriteLine("\"" + successiontext + "\"" + "    site_Succession.txt");
 
@@ -1609,7 +1612,7 @@ namespace LANDIS_II_Site
             }
 
         }
-        private void BuildSuccessionSuccession(string InputDirectory)
+        private void BuildSuccessionSuccession()
         {
             //////////////////// build site_Succession.txt
             string fileName = "site_Succession.txt";
@@ -1623,14 +1626,14 @@ namespace LANDIS_II_Site
 
                 writer.WriteLine(">>-------------------------------------");
                 writer.WriteLine($"Timestep          {tbTimestep.Text}");
-                
+
                 writer.WriteLine($"SeedingAlgorithm  {cbSeedingAlg.Text}");
 
-               
+
 
                 writer.WriteLine(); // empty line
 
-                
+
 
                 writer.WriteLine("InitialCommunities      site_InitialCommunities.csv");
                 writer.WriteLine("InitialCommunitiesMap   site_InitialCommunitiesMap.img");
@@ -1647,7 +1650,7 @@ namespace LANDIS_II_Site
                 writer.WriteLine(">>-------------------------------------");
                 writer.WriteLine(); // empty line
                 // MinRelativeBiomass
-                writer.WriteLine("MinRelativeBiomass");                                
+                writer.WriteLine("MinRelativeBiomass");
                 writer.WriteLine(">> Shading %MaxBiomass");
                 writer.WriteLine(">>-------------------------------------");
                 writer.WriteLine("     eco999");
@@ -1657,7 +1660,7 @@ namespace LANDIS_II_Site
                 // SufficientLight
                 writer.WriteLine("SufficientLight");
                 writer.WriteLine(">> ShadeTol.,Shading0,Shading1,Shading2,Shading3,Shading4,Shading5");
-                writer.WriteLine(">>-------------------------------------");                
+                writer.WriteLine(">>-------------------------------------");
                 SaveDataGridViewToCsv(writer, dataGridViewLightTable, false, "   ");
                 writer.WriteLine(); // empty line
 
@@ -1690,9 +1693,9 @@ namespace LANDIS_II_Site
 
         }
 
-        
-        
-        private void BuildSuccessionSpecies(string InputDirectory)
+
+
+        private void BuildSuccessionSpecies()
         {
             //////////////////// build site_Species.txt
             string fileName = "site_SpeciesCore.txt";
@@ -1719,10 +1722,10 @@ namespace LANDIS_II_Site
         private DataGridView SubsetDataGridView(DataGridView dataGridView, string[] selectedColumns)
         {
             DataGridView dataGridViewSubset = new DataGridView();
-    
+
             // Add selected columns to the new table
             foreach (string colName in selectedColumns)
-            {                
+            {
                 dataGridViewSubset.Columns.Add(colName, colName);
             }
 
@@ -1738,7 +1741,7 @@ namespace LANDIS_II_Site
                     newRowLeft.Cells[colIndex1].Value = row.Cells[colIndex].Value;
                 }
                 dataGridViewSubset.Rows.Add(newRowLeft);
-            }            
+            }
 
             return dataGridViewSubset;
 
@@ -1746,7 +1749,7 @@ namespace LANDIS_II_Site
         }
 
 
-        private void BuildSuccessionSpeciesPhysiology(string InputDirectory)
+        private void BuildSuccessionSpeciesPhysiology()
         {
 
 
@@ -1754,28 +1757,28 @@ namespace LANDIS_II_Site
 
             // Choose the column names you want to include
             // SpeciesCode,LeafLongevity,WoodDecayRate,MortalityCurve,GrowthCurve,LeafLignin,ShadeTolerance,FireTolerance,
-            string[] selectedColumns = { "SpeciesCode", "LeafLongevity", "WoodDecayRate" , "MortalityCurve", 
+            string[] selectedColumns = { "SpeciesCode", "LeafLongevity", "WoodDecayRate" , "MortalityCurve",
                                         "GrowthCurve", "LeafLignin", "ShadeTolerance", "FireTolerance"};
-             // "ShadeTolerance", "FireTolerance","ProbEstablish","ProbMortality"};
+            // "ShadeTolerance", "FireTolerance","ProbEstablish","ProbMortality"};
 
 
-        //////////////////// build site_PnETSpeciesParameters.txt
-        string fileName = "site_SpeciesPhysiology.csv";
+            //////////////////// build site_PnETSpeciesParameters.txt
+            string fileName = "site_SpeciesPhysiology.csv";
             string filePath = Path.Combine(InputDirectory, fileName);
             using (StreamWriter writer = new StreamWriter(filePath))
-            { 
-                SaveDataGridViewToCsv(writer, SubsetDataGridView(dataGridViewSppEcophysi, selectedColumns), true, ",");   
+            {
+                SaveDataGridViewToCsv(writer, SubsetDataGridView(dataGridViewSppEcophysi, selectedColumns), true, ",");
 
             }
 
             ///////////////////////////////////// end of site_PnETSpeciesParameters.txt
         }
 
-        private void BuildSuccessionSppEcoregionData(string InputDirectory)
+        private void BuildSuccessionSppEcoregionData()
         {
             // Choose the column names you want to include
             // SpeciesCode,LeafLongevity,WoodDecayRate,MortalityCurve,GrowthCurve,LeafLignin,ShadeTolerance,FireTolerance,
-            string[] selectedColumns = { "SpeciesCode", "ProbEstablish", "ProbMortality", "ANPPmax","BiomassMax"};
+            string[] selectedColumns = { "SpeciesCode", "ProbEstablish", "ProbMortality", "ANPPmax", "BiomassMax" };
 
             var dataGridView = dataGridViewSppEcophysi;
 
@@ -1819,14 +1822,14 @@ namespace LANDIS_II_Site
             ///////////////////////////////////// end of site_PnETSpeciesParameters.txt
         }
 
-        private void BuildSuccessionInitialComm(string InputDirectory)
+        private void BuildSuccessionInitialComm()
         {
             //////////////////// build site_InitialCommunities
             string fileName = "site_InitialCommunities.csv";
             string filePath = Path.Combine(InputDirectory, fileName);
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-    
+
                 writer.WriteLine("MapCode,SpeciesName,CohortAge,CohortBiomass");
 
 
@@ -1839,7 +1842,7 @@ namespace LANDIS_II_Site
                     {
                         writer.Write("10,");
                         for (int i = 0; i < dataGridView.ColumnCount; i++)
-                        {                            
+                        {
                             writer.Write(row.Cells[i].Value);
                             if (i < dataGridView.ColumnCount - 1) writer.Write(",");
                         }
@@ -1847,7 +1850,7 @@ namespace LANDIS_II_Site
                     }
                 }
 
-               
+
 
                 ///////////////////////////////////// end of BuildPnetSuccessionInitialComm.txt
                 ///
@@ -1855,7 +1858,7 @@ namespace LANDIS_II_Site
 
         }
 
-        private void BuildSuccessionClimate(string InputDirectory)
+        private void BuildSuccessionClimate()
         {
             //////////////////// build site_climate.txt
             string fileName = "site_climate.csv";
@@ -1875,14 +1878,14 @@ namespace LANDIS_II_Site
                                                //string fileName = "Site_Site.csv";
             Sourcefile = Path.Combine(InterDirectory, fileName);
 
-            
+
 
             File.Copy(Sourcefile, filePath, true);
 
             ///////////////////////////////////// end of site_climate.txt
         }
 
-        private void BuildSuccessionGISMap(string InputDirectory)
+        private void BuildSuccessionGISMap()
         {
             string InterDirectory = InterDir();// get the current succesion inter directory
             //////////////////// EcoregionsMap.img
@@ -1903,8 +1906,8 @@ namespace LANDIS_II_Site
 
             //////////////////// build InitialCommunitiesMap.img
             fileName = "site_InitialCommunitiesMap.img";
-            filePath = Path.Combine(InputDirectory, fileName);            
-                                              
+            filePath = Path.Combine(InputDirectory, fileName);
+
             Sourcefile = Path.Combine(InterDirectory, fileName);
 
             File.Copy(Sourcefile, filePath, true);
@@ -1913,10 +1916,10 @@ namespace LANDIS_II_Site
         }
 
 
-        private void BuildOutputExtension(string InputDirectory)
+        private void BuildOutputExtension()
         {
             //////////////////// site_Output_Extension.txt
-            string fileName = "site_Output_Extension.txt";            
+            string fileName = "site_Output_Extension.txt";
             string filePath = Path.Combine(InputDirectory, fileName);
             using (StreamWriter writer = new StreamWriter(filePath))
             {
@@ -1938,34 +1941,34 @@ namespace LANDIS_II_Site
             }
 
 
-                ///////////////////////////////////// end of
+            ///////////////////////////////////// end of
 
-         }
+        }
 
         public void BuildLandisInput()
         {
 
-            string InputDirectory = InputDir();// get the current succesion input directory
+            //string InputDirectory = InputDir();// get the current succesion input directory
 
-            BuildRunBatch(InputDirectory);  // build the running batch file
-            BuildSuccessionScenario(InputDirectory);                        // build scenario file
+            BuildRunBatch();  // build the running batch file
+            BuildSuccessionScenario();                        // build scenario file
 
-            BuildSuccessionSuccession(InputDirectory);                      // build Succession file
+            BuildSuccessionSuccession();                      // build Succession file
 
-            BuildSuccessionClimate(InputDirectory);                         // build climate file
-            BuildSuccessionGISMap(InputDirectory);                          // build ecoregion and initial community maps
+            BuildSuccessionClimate();                         // build climate file
+            BuildSuccessionGISMap();                          // build ecoregion and initial community maps
 
-            BuildSuccessionSpecies(InputDirectory);                         // build Species life history file
+            BuildSuccessionSpecies();                         // build Species life history file
 
-            BuildSuccessionSpeciesPhysiology(InputDirectory);           // build Species physiology file
-            BuildSuccessionInitialComm(InputDirectory);                     // build initial community file
-            BuildSuccessionSppEcoregionData(InputDirectory);                // build ecoregion spp file
+            BuildSuccessionSpeciesPhysiology();           // build Species physiology file
+            BuildSuccessionInitialComm();                     // build initial community file
+            BuildSuccessionSppEcoregionData();                // build ecoregion spp file
 
             //
-            BuildOutputExtension(InputDirectory);                // build ecoregion spp file
+            BuildOutputExtension();                // build ecoregion spp file
 
 
-         }
+        }
 
 
 
@@ -2107,7 +2110,7 @@ namespace LANDIS_II_Site
                 zgc = zedGraphControlWater;
             }
 
-  
+
 
             if (tab == "5")
             {
@@ -2237,7 +2240,7 @@ namespace LANDIS_II_Site
             List<int> Water = GetCheckedIndexes(checkedListBoxWater);
 
 
-            
+
             List<int> Composition = GetCheckedIndexes(checkedListBoxComposition);
             List<int> Compare = GetCheckedIndexes(checkedListBoxCompare);
 
@@ -2245,13 +2248,13 @@ namespace LANDIS_II_Site
 
             List<int> addnew = new List<int>();
 
-                                  
+
 
 
         }
 
 
-       
+
 
         private List<int> GetCheckedIndexes(CheckedListBox checkedListBox)
         {
@@ -2321,8 +2324,10 @@ namespace LANDIS_II_Site
 
                     //records.Add(record);
                 }
-
+                ///////////////////////////////////////////
                 // populate climate tab
+                ////////////////////////////////////////////
+
                 // List of values to match
                 List<string> valuesToFind = new List<string> { "1" };
                 tabControlGraphSiteTab(sitevars, checkedListBoxClimate, valuesToFind);
@@ -2330,11 +2335,43 @@ namespace LANDIS_II_Site
 
                 // populate carbon tab
                 // List of values to match
-                valuesToFind = new List<string> { "2" };   //         
+                valuesToFind = new List<string> { "2" };   //
+                List<string> speciesList = new List<string>();
+                foreach (DataGridViewRow row in dataGridViewInitialComm.Rows) // Get species from initial communities
+                {
+                    // Skip the new row placeholder (the empty row at the end)
+                    if (row.IsNewRow) continue;
+
+                    // Get the value from the "Species" column
+                    var cellValue = row.Cells["Species"].Value;
+
+                    if (cellValue != null)
+                    {
+                        string speciesName = cellValue.ToString().Trim();
+
+                        // Add to list if not empty
+                        if (!string.IsNullOrEmpty(speciesName))
+                        {
+                            speciesList.Add(speciesName);
+                        }
+                    }
+                }
+
+                // Update all matching keys
+                foreach (var key in sitevars.Keys.ToList()) // Use ToList() to avoid modifying during iteration
+                {
+                    if (speciesList.Any(s => key.Contains(s)))
+                    {
+                        sitevars[key] = "2";
+                    }
+                }
+
                 tabControlGraphSiteTab(sitevars, checkedListBoxCarbon, valuesToFind);
                 //checkedListBoxClimate.SetItemChecked(0, true);  // show default chart
 
+                ///////////////////////////////////////////
                 // populate water tab
+                ////////////////////////////////////////////
                 // List of values to match
                 valuesToFind = new List<string> { "3" };   // 
                 tabControlGraphSiteTab(sitevars, checkedListBoxWater, valuesToFind);
@@ -2352,7 +2389,7 @@ namespace LANDIS_II_Site
                 // populate cohort tab
                 // List of values to match
                 comboBoxCohortNameFill();
-
+*/
 
                 // populate compare tab
 
@@ -2365,7 +2402,8 @@ namespace LANDIS_II_Site
                 }
                 //  if (checkedListBoxCompare.Items.Count > 0) checkedListBoxCompare.SetItemChecked(0, true);  // show default chart
 
-                */
+
+
                 // populate diagnosis tab
                 comboBoxCalibrationVarFill();
 
@@ -2402,7 +2440,7 @@ namespace LANDIS_II_Site
 
         }
 
-    
+
 
 
         private void checkedListBoxCompare_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -2444,17 +2482,17 @@ namespace LANDIS_II_Site
         private string OutputDir()
         {
 
-            
+
             string OutputDirectory = OutputParentDir();
-            
+
             return OutputDirectory;
 
         }
 
-        private string OutputParentDir( Boolean control = true,string InputSuccession ="Biomass")
+        private string OutputParentDir(Boolean control = true, string InputSuccession = "Biomass")
         {
 
-            
+
             string OutputDirectory = @".\Output\Output";
 
             if (checkBoxCalibration.Checked)
@@ -2658,11 +2696,11 @@ namespace LANDIS_II_Site
             // get the composition points
             int timepoint = 5;
             int timeinterval = Convert.ToInt32(tbSimYears.Text) / timepoint;
-           // int startyr = Convert.ToInt32(tbStartYr.Text);
+            // int startyr = Convert.ToInt32(tbStartYr.Text);
             List<int> points = new List<int>();  // the years of composition
             for (int i = 0; i < timepoint + 1; i++)
             {
-               // points.Add(startyr + i * timeinterval - 1);// minus 1 to include the final year of simulation
+                // points.Add(startyr + i * timeinterval - 1);// minus 1 to include the final year of simulation
 
             }
 
@@ -2885,7 +2923,7 @@ namespace LANDIS_II_Site
 
         }
 
-      
+
         private void checkBoxCalibaration_CheckedChanged(object sender, EventArgs e)
         {
             // Set the TextBox to enabled/disabled based on CheckBox's checked state
@@ -2905,7 +2943,7 @@ namespace LANDIS_II_Site
             // read the data file
 
             string OutputDirectory = OutputDir();// get the current succesion output directory
-            string fileName = comboBoxCohortName.Text;
+            string fileName = "spp-biomass-log.csv";
             string filePath = Path.Combine(OutputDirectory, fileName);
 
             comboBoxCalibrationVar.Items.Clear();
@@ -2925,14 +2963,14 @@ namespace LANDIS_II_Site
         {
             //OutputForm.Visible = cbOutputBiomass.Checked;
             if (cbOutputBiomass.Checked)
-            { 
+            {
                 /*if (OutputForm == null || OutputForm.IsDisposed)
                  {
                      OutputForm = new FormOutputBiomass();
                      OutputForm.Show();
                  }*/
 
-                
+
                 OutputForm.StartPosition = FormStartPosition.CenterScreen;
                 //OutputForm.Owner = this;       // 'this' is the parent form
                 //form2.Show();
@@ -2940,25 +2978,27 @@ namespace LANDIS_II_Site
                 OutputForm.BringToFront();
 
             }
-            else 
+            else
             {
                 if (OutputForm != null && OutputForm.Visible)
                 {
                     OutputForm.Hide();
-                    
+
                 }
-                
+
 
             }
-            
+
         }
 
         private void buttonResetInput_Click(object sender, EventArgs e)
         {
             // load the example for initilization
-            String FileExample = @".\Inter\Biomass\Site_input_example.csv";
+            string fileName = "Site_input_example.csv";
+            string FileExample = Path.Combine(InterDirectory, fileName);
             LoadInputFromCsv(FileExample);
 
         }
+
     }
 }

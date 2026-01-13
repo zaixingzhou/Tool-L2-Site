@@ -1,7 +1,0 @@
-LandisData	PNEToutputsites
-
-PNEToutputsites	Row	Column	
->>----------------------------------------------------------------------------------------
-Site1		1  	1 
-
- 	

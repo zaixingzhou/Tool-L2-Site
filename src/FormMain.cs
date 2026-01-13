@@ -51,8 +51,9 @@ namespace LANDIS_II_Site
 
 
             // set default values for some components
-            cbSuccessionOption.SelectedIndex = 0;  // PnET-Extension
-            
+          //  cbSuccessionOption.SelectedIndex = 0;  // PnET-Extension
+            cbSuccessionOption.SelectedIndex = 1;  // Biomass-Extension
+
 
         }
 
@@ -259,106 +260,7 @@ namespace LANDIS_II_Site
 
         }
 
-        private string Prompt(string text, string caption)
-        {
-            // Create a prompt dialog to get input from the user
-            Form prompt = new Form
-            {
-                Width = 400,
-                Height = 150,
-                Text = caption
-            };
-
-            System.Windows.Forms.Label textLabel = new System.Windows.Forms.Label { Left = 20, Top = 20, Text = text, AutoSize = true };
-            TextBox inputBox = new TextBox { Left = 20, Top = 50, Width = 340 };
-            Button confirmationButton = new Button
-            {
-                Text = "OK",
-                Left = 270,
-                Width = 90,
-                Top = 80,
-                DialogResult = DialogResult.OK
-            };
-
-            confirmationButton.Click += (sender, e) => { prompt.Close(); };
-
-            prompt.Controls.Add(textLabel);
-            prompt.Controls.Add(inputBox);
-            prompt.Controls.Add(confirmationButton);
-            prompt.AcceptButton = confirmationButton;
-
-            return prompt.ShowDialog() == DialogResult.OK ? inputBox.Text : null;
-        }
-
-        
-        public static List<Dictionary<string, object>> ReadCsvAsDictionary(string filePath)
-        {
-            var records = new List<Dictionary<string, object>>();
-
-            if (File.Exists(filePath))
-            {
-                string[] lines = File.ReadAllLines(filePath);
-
-                // Read the headers from the first line
-                string[] headers = lines[0].Split(',');
-
-                // Process each data row
-                for (int i = 1; i < lines.Length; i++)
-                {
-                    string[] values = lines[i].Split(',');
-                    var record = new Dictionary<string, object>();
-
-                    for (int j = 0; j < headers.Length; j++)
-                    {
-                        record[headers[j]] = values[j];
-                    }
-
-                    records.Add(record);
-                }
-            }
-            else
-            {
-                string error = filePath + " not found.";
-                MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return records;
-        }
-
-
-  
-
-
-        private static void SaveToCsv(List<Dictionary<string, double>> data, string filePath)
-        {
-            using (var writer = new StreamWriter(filePath))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-            {
-                if (data.Count == 0)
-                {
-                   // Console.WriteLine("No data to write.");
-                    return;
-                }
-
-                // Write headers (column names)
-                var headers = data.First().Keys;
-                foreach (var header in headers)
-                {
-                    csv.WriteField(header);
-                }
-                csv.NextRecord();
-
-                // Write data rows
-                foreach (var row in data)
-                {
-                    foreach (var key in headers)
-                    {
-                        csv.WriteField(row[key]);
-                    }
-                    csv.NextRecord();
-                }
-            }
-        }
+      
 
 
 
@@ -408,15 +310,7 @@ namespace LANDIS_II_Site
             return InputDirectory;
 
         }
-        private string InterDir(ComboBox cbSuccession)
-        {
-
-            string InputSuccession = cbSuccession.Text;
-            string InterDirectory = @".\Inter";
-            InterDirectory = InterDirectory + "\\" + InputSuccession;
-            return InterDirectory;
-
-        }
+  
         private void MenuBuildLandisInput_Click(object sender, EventArgs e)
         {
 

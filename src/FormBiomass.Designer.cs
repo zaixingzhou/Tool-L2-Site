@@ -1077,6 +1077,7 @@ namespace LANDIS_II_Site
             this.comboBoxCalibrationVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxCalibrationVar.Size = new System.Drawing.Size(116, 24);
             this.comboBoxCalibrationVar.TabIndex = 54;
+            this.comboBoxCalibrationVar.SelectedIndexChanged += new System.EventHandler(this.comboBoxCalibrationVar_SelectedIndexChanged);
             // 
             // zedGraphControlCalibration
             // 

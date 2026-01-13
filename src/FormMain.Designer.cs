@@ -57,10 +57,10 @@
             this.labelSuccession = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.buttonRunModel = new System.Windows.Forms.Button();
+            this.buttonLandislog = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelExtension = new System.Windows.Forms.Panel();
-            this.buttonLandislog = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -89,7 +89,7 @@
             this.toolStripSeparator1,
             this.MenuExit});
             this.MenuProject.Name = "MenuProject";
-            this.MenuProject.Size = new System.Drawing.Size(69, 26);
+            this.MenuProject.Size = new System.Drawing.Size(69, 24);
             this.MenuProject.Text = "&Project";
             // 
             // MenuOpen
@@ -130,7 +130,7 @@
             this.outputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuSaveOutput});
             this.outputToolStripMenuItem.Name = "outputToolStripMenuItem";
-            this.outputToolStripMenuItem.Size = new System.Drawing.Size(69, 26);
+            this.outputToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             this.outputToolStripMenuItem.Text = "&Output";
             // 
             // MenuSaveOutput
@@ -147,7 +147,7 @@
             this.MenuScenarios,
             this.ToolStripMenuItemLUI});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 26);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // MenuBuildLandisInput
@@ -177,7 +177,7 @@
             this.MenuUserGuide,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // MenuUserGuide
@@ -226,14 +226,14 @@
             this.toolStripSave.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSave.Image")));
             this.toolStripSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSave.Name = "toolStripSave";
-            this.toolStripSave.Size = new System.Drawing.Size(44, 28);
+            this.toolStripSave.Size = new System.Drawing.Size(44, 24);
             this.toolStripSave.Text = "Save";
             this.toolStripSave.Click += new System.EventHandler(this.MenuSave_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonExportOutput
             // 
@@ -241,7 +241,7 @@
             this.toolStripButtonExportOutput.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonExportOutput.Image")));
             this.toolStripButtonExportOutput.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonExportOutput.Name = "toolStripButtonExportOutput";
-            this.toolStripButtonExportOutput.Size = new System.Drawing.Size(106, 28);
+            this.toolStripButtonExportOutput.Size = new System.Drawing.Size(106, 24);
             this.toolStripButtonExportOutput.Text = "Export Output";
             this.toolStripButtonExportOutput.ToolTipText = "Export output results";
             this.toolStripButtonExportOutput.Click += new System.EventHandler(this.MenuSaveOutput_Click);
@@ -249,7 +249,7 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonUserGuide
             // 
@@ -257,7 +257,7 @@
             this.toolStripButtonUserGuide.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUserGuide.Image")));
             this.toolStripButtonUserGuide.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonUserGuide.Name = "toolStripButtonUserGuide";
-            this.toolStripButtonUserGuide.Size = new System.Drawing.Size(85, 28);
+            this.toolStripButtonUserGuide.Size = new System.Drawing.Size(85, 24);
             this.toolStripButtonUserGuide.Text = "User Guide";
             this.toolStripButtonUserGuide.Click += new System.EventHandler(this.MenuUserGuide_Click);
             // 
@@ -266,7 +266,8 @@
             this.cbSuccessionOption.FormattingEnabled = true;
             this.cbSuccessionOption.Items.AddRange(new object[] {
             "PnET-Succession",
-            "Biomass"});
+            "Biomass",
+            "Density-Succession"});
             this.cbSuccessionOption.Location = new System.Drawing.Point(104, 71);
             this.cbSuccessionOption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbSuccessionOption.Name = "cbSuccessionOption";
@@ -297,13 +298,6 @@
             this.buttonRunModel.UseVisualStyleBackColor = true;
             this.buttonRunModel.Click += new System.EventHandler(this.MenuRun_Click);
             // 
-            // panelExtension
-            // 
-            this.panelExtension.Location = new System.Drawing.Point(13, 97);
-            this.panelExtension.Name = "panelExtension";
-            this.panelExtension.Size = new System.Drawing.Size(1265, 1086);
-            this.panelExtension.TabIndex = 49;
-            // 
             // buttonLandislog
             // 
             this.buttonLandislog.Location = new System.Drawing.Point(426, 67);
@@ -315,6 +309,13 @@
             this.toolTip.SetToolTip(this.buttonLandislog, "Landis-log");
             this.buttonLandislog.UseVisualStyleBackColor = true;
             this.buttonLandislog.Click += new System.EventHandler(this.buttonLandislog_Click);
+            // 
+            // panelExtension
+            // 
+            this.panelExtension.Location = new System.Drawing.Point(13, 97);
+            this.panelExtension.Name = "panelExtension";
+            this.panelExtension.Size = new System.Drawing.Size(1265, 1086);
+            this.panelExtension.TabIndex = 49;
             // 
             // FormMain
             // 
