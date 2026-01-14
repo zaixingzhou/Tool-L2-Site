@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|c:\\users\\zzhou\\documents\\github\\tool-l2-site-zz\\src\\formdensity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|solutionrelative:formdensity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|c:\\users\\zzhou\\documents\\github\\tool-l2-site-zz\\src\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|solutionrelative:formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|c:\\users\\zzhou\\documents\\github\\tool-l2-site-zz\\src\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|solutionrelative:formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|c:\\users\\zzhou\\documents\\github\\tool-l2-site-zz\\src\\formdensity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|solutionrelative:formdensity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|c:\\users\\zzhou\\documents\\github\\tool-l2-site-zz\\src\\threedtoolstriprenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|solutionrelative:threedtoolstriprenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|c:\\users\\zzhou\\documents\\github\\tool-l2-site-zz\\src\\formmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73BAA584-84A5-4B88-9FFD-9978BB1F6A23}|LANDIS-II-SiteV3_0.csproj|solutionrelative:formmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FormDensity.cs",
+              "DocumentMoniker": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormDensity.cs",
+              "RelativeDocumentMoniker": "FormDensity.cs",
+              "ToolTip": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormDensity.cs",
+              "RelativeToolTip": "FormDensity.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAgwDEAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T16:26:13.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormMain.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormMain.cs",
+              "RelativeDocumentMoniker": "FormMain.cs",
+              "ToolTip": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormMain.cs [Design]",
+              "RelativeToolTip": "FormMain.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T16:21:08.441Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FormDensity.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormDensity.cs",
+              "RelativeDocumentMoniker": "FormDensity.cs",
+              "ToolTip": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormDensity.cs [Design]",
+              "RelativeToolTip": "FormDensity.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-14T16:13:08.908Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ThreeDToolStripRenderer.cs",
+              "DocumentMoniker": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\ThreeDToolStripRenderer.cs",
+              "RelativeDocumentMoniker": "ThreeDToolStripRenderer.cs",
+              "ToolTip": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\ThreeDToolStripRenderer.cs",
+              "RelativeToolTip": "ThreeDToolStripRenderer.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAYwH4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-13T22:47:36.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FormMain.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormMain.Designer.cs",
+              "RelativeDocumentMoniker": "FormMain.Designer.cs",
+              "ToolTip": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormMain.Designer.cs",
+              "RelativeToolTip": "FormMain.Designer.cs",
+              "ViewState": "AgIAAAsBAAAAAAAAAAAIwBQBAACAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-13T22:09:29.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FormMain.cs",
+              "DocumentMoniker": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormMain.cs",
+              "RelativeDocumentMoniker": "FormMain.cs",
+              "ToolTip": "C:\\Users\\zzhou\\Documents\\GitHub\\Tool-L2-Site-ZZ\\src\\FormMain.cs",
+              "RelativeToolTip": "FormMain.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAAAFQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-13T22:04:29.693Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

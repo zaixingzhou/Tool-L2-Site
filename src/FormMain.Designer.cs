@@ -268,7 +268,7 @@
             "PnET-Succession",
             "Biomass",
             "Density-Succession"});
-            this.cbSuccessionOption.Location = new System.Drawing.Point(104, 71);
+            this.cbSuccessionOption.Location = new System.Drawing.Point(107, 71);
             this.cbSuccessionOption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbSuccessionOption.Name = "cbSuccessionOption";
             this.cbSuccessionOption.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -278,7 +278,7 @@
             // 
             // labelSuccession
             // 
-            this.labelSuccession.Location = new System.Drawing.Point(13, 70);
+            this.labelSuccession.Location = new System.Drawing.Point(16, 70);
             this.labelSuccession.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.labelSuccession.Name = "labelSuccession";
             this.labelSuccession.Size = new System.Drawing.Size(87, 22);
@@ -288,7 +288,7 @@
             // 
             // buttonRunModel
             // 
-            this.buttonRunModel.Location = new System.Drawing.Point(306, 67);
+            this.buttonRunModel.Location = new System.Drawing.Point(309, 67);
             this.buttonRunModel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRunModel.Name = "buttonRunModel";
             this.buttonRunModel.Size = new System.Drawing.Size(82, 30);
@@ -300,7 +300,7 @@
             // 
             // buttonLandislog
             // 
-            this.buttonLandislog.Location = new System.Drawing.Point(426, 67);
+            this.buttonLandislog.Location = new System.Drawing.Point(429, 67);
             this.buttonLandislog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonLandislog.Name = "buttonLandislog";
             this.buttonLandislog.Size = new System.Drawing.Size(93, 30);

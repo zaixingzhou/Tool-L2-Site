@@ -75,6 +75,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDensity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDensity.Designer.cs">
+      <DependentUpon>FormDensity.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormBiomass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,10 @@
       <DependentUpon>FormPnET.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="ThreeDToolStripRenderer.cs" />
+    <EmbeddedResource Include="FormDensity.resx">
+      <DependentUpon>FormDensity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormBiomass.resx">
       <DependentUpon>FormBiomass.cs</DependentUpon>
     </EmbeddedResource>

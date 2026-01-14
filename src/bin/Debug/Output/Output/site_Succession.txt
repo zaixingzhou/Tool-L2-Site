@@ -1,55 +1,25 @@
-LandisData  "Biomass Succession"
+LandisData  "Density-Succession"											
+	
+Density-Succession		Value
+<<-----------------------------
+										
+Timestep  10	
+StartYear	2000																					
+SeedingAlgorithm	DensitySeeding						
+								
+InitialCommunities      site_InitialCommunities.txt											
+InitialCommunitiesMap   site_InitialCommunitiesMap.img	
 
->>-------------------------------------
-Timestep          10
-SeedingAlgorithm  WardSeedDispersal
+DensitySpeciesParameters	site_Density_speciesparameters.txt		
+											
+EcoregionParameters		site_EcoregionParameters.txt	
 
-InitialCommunities      site_InitialCommunities.csv
-InitialCommunitiesMap   site_InitialCommunitiesMap.img
+DynamicEcoregionFile 	site_DynamicEcoregionInput.txt
 
-ClimateConfigFile		site_ClimateGenerator.txt
+DynamicInputFile	site_Establishment_probability.txt
 
->> CalibrateMode 		yes
->> LIFE HISTORY PARAMETERS
->>-------------------------------------
-
-MinRelativeBiomass
->> Shading %MaxBiomass
->>-------------------------------------
-     eco999
-1   25%
-2   45%
-3   56%
-4   70%
-5   90%
-
-SufficientLight
->> ShadeTol.,Shading0,Shading1,Shading2,Shading3,Shading4,Shading5
->>-------------------------------------
-1   1   0.5   0.25   0   0   0
-2   1   1   0.5   0.25   0   0
-3   1   1   1   0.5   0.25   0
-4   1   1   1   1   0.5   0.25
-5   0.1   0.5   1   1   1   1
-
-SpeciesDataFile site_SpeciesPhysiology.csv
-
-EcoregionParameters
->>	AET (mm)
-eco999   601
-
-SpeciesEcoregionDataFile   site_SppEcoregionData.csv
-
-FireReductionParameters
->> Severity WoodLitterRemove LitterRemove
->>-------------------------------------
-1   0   0.5
-2   0   0.75
-3   0   1
-
-HarvestReductionParameters
->> Method WoodLitterRemove LitterRemove WoodRemove LeafRemove
->>-------------------------------------
-MaxAgeClearcut   0.5   0.15   0.8   0
-PatchCutting   1   1   1   0
-
+DiameterInputFile	site_Ecoregion_diameter_table.txt
+   								
+DisturbanceReductions	site_Disturbance_reductions.txt
+ 											
+BiomassVariableFile		site_BioMassCoef.txt

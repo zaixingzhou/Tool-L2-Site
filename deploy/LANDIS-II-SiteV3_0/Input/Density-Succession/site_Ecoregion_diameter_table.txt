@@ -1,0 +1,39 @@
+LandisData	"EcoregionDiameterTable"
+
+>> Ecoregion Species 	Age	Diameter 
+>> ----------------------------------
+eco999	querrubr	1	3 
+eco999	querrubr	10	7.5 
+eco999	querrubr	20	11 
+eco999	querrubr	30	15 
+eco999	querrubr	40	20 
+eco999	querrubr	50	25 
+eco999	querrubr	60	30 
+eco999	querrubr	70	35 
+eco999	querrubr	80	40 
+eco999	querrubr	90	44 
+eco999	querrubr	100	48 
+eco999	querrubr	110	51 
+eco999	querrubr	120	54 
+eco999	querrubr	130	57 
+eco999	querrubr	140	59 
+eco999	querrubr	150	61 
+eco999	querrubr	160	63 
+eco999	querrubr	170	64 
+eco999	querrubr	180	64.5 
+eco999	querrubr	190	65
+eco999	pinubank	1	3 
+eco999	pinubank	20	13 
+eco999	pinubank	30	19 
+eco999	pinubank	40	25 
+eco999	pinubank	50	32 
+eco999	pinubank	60	38 
+eco999	pinubank	70	44 
+eco999	pinubank	80	49 
+eco999	pinubank	90	54 
+eco999	pinubank	100	59 
+eco999	pinubank	110	64 
+eco999	pinubank	120	66 
+eco999	pinubank	130	68 
+eco999	pinubank	140	69 
+eco999	pinubank	150	70 

@@ -22,7 +22,8 @@ namespace LANDIS_II_Site
     {
         public FormPnET GUIPnET = new FormPnET();      
         public FormBiomass GUIBiomass = new FormBiomass();
- 
+        public FormDensity GUIDensity = new FormDensity();
+
         //public FormPnET GUIPnETCN = new FormPnET();
 
         private string InputSuccession
@@ -49,10 +50,14 @@ namespace LANDIS_II_Site
         {
             InitializeComponent();
 
-
+            // Apply the custom 3D renderer to the ToolStrip
+            this.toolStrip.RenderMode = ToolStripRenderMode.Professional;
+            this.toolStrip.Renderer = new ThreeDToolStripRenderer();
+  
             // set default values for some components
           //  cbSuccessionOption.SelectedIndex = 0;  // PnET-Extension
             cbSuccessionOption.SelectedIndex = 1;  // Biomass-Extension
+            cbSuccessionOption.SelectedIndex = 2;  // Density-Extension
 
 
         }
@@ -65,7 +70,7 @@ namespace LANDIS_II_Site
 
         private void RunSiteTool()
         {
-            string InputSuccession = cbSuccessionOption.Text;
+           // string InputSuccession = cbSuccessionOption.Text;
 
             if (InputSuccession == "Biomass")
             {
@@ -74,6 +79,10 @@ namespace LANDIS_II_Site
             if (InputSuccession == "PnET-Succession")
             {
                 GUIPnET.RunSiteTool();
+            }
+            if (InputSuccession == "Density-Succession")
+            {
+                GUIDensity.RunSiteTool();
 
             }
 
@@ -85,8 +94,6 @@ namespace LANDIS_II_Site
 
             string InputSuccession = cbSuccession.Text;
             string OutputDirectory = @".\Output\Output";
-
-
 
             if (control) OutputDirectory = @".\Output\Output";
 
@@ -378,28 +385,7 @@ namespace LANDIS_II_Site
         }
 
           
-       
-        // get output directory based on succession extentsion
-        private string OutputDir(ComboBox cbSuccession)
-        {
-
-            string InputSuccession = cbSuccession.Text;
-            string OutputDirectory = OutputParentDir(cbSuccession);
-
-            if (InputSuccession == "PnET-Succession")
-            {
-                OutputDirectory = OutputDirectory + @"\PNEToutputsites\Site1";
-            }
-            if (InputSuccession == "Biomass")
-            {
-                OutputDirectory = OutputDirectory;
-            }
-
-            return OutputDirectory;
-
-        }
-
-      
+         
 
         static void ListDictionaryToCsv(List<Dictionary<string, object>> data, string filePath)
         {
@@ -472,6 +458,7 @@ namespace LANDIS_II_Site
                 GUIBiomass.OutputForm.Hide();
                 if (selectedItem == "PnET-Succession") GUI_PnET();
                 if (selectedItem == "PnET-CN-Succession") GUI_PnET();
+                if (selectedItem == "Density-Succession") GUI_Density();
 
             } 
  
@@ -488,7 +475,12 @@ namespace LANDIS_II_Site
             LoadFormIntoPanel(GUIPnET);
             
         }
+        private void GUI_Density()
+        {
 
+            LoadFormIntoPanel(GUIDensity);
+
+        }
 
         private void LoadFormIntoPanel(Form form)
         {
@@ -533,6 +525,20 @@ namespace LANDIS_II_Site
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
