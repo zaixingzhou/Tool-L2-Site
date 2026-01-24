@@ -56,7 +56,7 @@ namespace LANDIS_II_Site
   
             // set default values for some components
           //  cbSuccessionOption.SelectedIndex = 0;  // PnET-Extension
-            cbSuccessionOption.SelectedIndex = 1;  // Biomass-Extension
+            //cbSuccessionOption.SelectedIndex = 1;  // Biomass-Extension
             cbSuccessionOption.SelectedIndex = 2;  // Density-Extension
 
 
@@ -174,7 +174,7 @@ namespace LANDIS_II_Site
             string selectedItem = cbSuccessionOption.Text;
             if (selectedItem == "Biomass") GUIBiomass.SaveInputSite();
             if (selectedItem == "PnET-Succession") GUIPnET.SaveInputSite();
-           // if (selectedItem == "PnET-CN-Succession") GUI_PnET();
+            if (selectedItem == "Density-Succession") GUIDensity.SaveInputSite();
 
             //SaveInputSite(); // to @"Inter\Site_input.csv"
 

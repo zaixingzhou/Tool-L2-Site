@@ -39,6 +39,8 @@ namespace LANDIS_II_Site
             this.tbClimateFile = new System.Windows.Forms.TextBox();
             this.btClimate = new System.Windows.Forms.Button();
             this.groupBoxPara = new System.Windows.Forms.GroupBox();
+            this.tbStartYr = new System.Windows.Forms.TextBox();
+            this.labelStartYr = new System.Windows.Forms.Label();
             this.cbReplicate = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tbReplicateNum = new System.Windows.Forms.TextBox();
@@ -52,21 +54,18 @@ namespace LANDIS_II_Site
             this.tbSimYears = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBoxEcoPara = new System.Windows.Forms.GroupBox();
-            this.tbAET = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBoxSppGeneric = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dataGridViewLightTable = new System.Windows.Forms.DataGridView();
+            this.tbLatitude = new System.Windows.Forms.TextBox();
+            this.labelLatitude = new System.Windows.Forms.Label();
+            this.groupBoxDisturance = new System.Windows.Forms.GroupBox();
+            this.dataGridViewDistubTable = new System.Windows.Forms.DataGridView();
             this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxExtensions = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cbOutputBiomass = new System.Windows.Forms.CheckBox();
+            this.cbOutputDensity = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btDeleteSppEcophysiSpp = new System.Windows.Forms.Button();
             this.btAddSppEcophysiSpp = new System.Windows.Forms.Button();
@@ -125,26 +124,35 @@ namespace LANDIS_II_Site
             this.radioButtonBayesian = new System.Windows.Forms.RadioButton();
             this.checkedListBoxReference = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewMinRelativeBiomass = new System.Windows.Forms.DataGridView();
+            this.btDeleteDiameter = new System.Windows.Forms.Button();
+            this.btAddDiameter = new System.Windows.Forms.Button();
+            this.dataGridViewDiameterTable = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewFireRemove = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Diameter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewHarvestRemove = new System.Windows.Forms.DataGridView();
+            this.dataGridViewMassAllo = new System.Windows.Forms.DataGridView();
+            this.buttonResetInput = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.textBoxGSO4 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBoxGSO3 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBoxGSO2 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxGSO1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxMinDBH = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonResetInput = new System.Windows.Forms.Button();
+            this.btMassAlloReset = new System.Windows.Forms.Button();
             this.groupBoxPara.SuspendLayout();
             this.groupBoxEcoPara.SuspendLayout();
-            this.groupBoxSppGeneric.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLightTable)).BeginInit();
+            this.groupBoxDisturance.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDistubTable)).BeginInit();
             this.groupBoxExtensions.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSppEcophysi)).BeginInit();
@@ -164,11 +172,10 @@ namespace LANDIS_II_Site
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDiagMulti)).BeginInit();
             this.groupBoxDiagnosis.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMinRelativeBiomass)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFireRemove)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDiameterTable)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHarvestRemove)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMassAllo)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // btAddSppEcophysiPara
@@ -261,6 +268,8 @@ namespace LANDIS_II_Site
             // 
             // groupBoxPara
             // 
+            this.groupBoxPara.Controls.Add(this.tbStartYr);
+            this.groupBoxPara.Controls.Add(this.labelStartYr);
             this.groupBoxPara.Controls.Add(this.cbReplicate);
             this.groupBoxPara.Controls.Add(this.label8);
             this.groupBoxPara.Controls.Add(this.tbReplicateNum);
@@ -281,6 +290,26 @@ namespace LANDIS_II_Site
             this.groupBoxPara.TabIndex = 62;
             this.groupBoxPara.TabStop = false;
             this.groupBoxPara.Text = "Simulation Parameters";
+            // 
+            // tbStartYr
+            // 
+            this.tbStartYr.Location = new System.Drawing.Point(133, 70);
+            this.tbStartYr.Margin = new System.Windows.Forms.Padding(4);
+            this.tbStartYr.Name = "tbStartYr";
+            this.tbStartYr.Size = new System.Drawing.Size(52, 22);
+            this.tbStartYr.TabIndex = 105;
+            this.tbStartYr.Text = "2000";
+            this.tbStartYr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // labelStartYr
+            // 
+            this.labelStartYr.Location = new System.Drawing.Point(4, 64);
+            this.labelStartYr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStartYr.Name = "labelStartYr";
+            this.labelStartYr.Size = new System.Drawing.Size(115, 23);
+            this.labelStartYr.TabIndex = 104;
+            this.labelStartYr.Text = "Start Year";
+            this.labelStartYr.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbReplicate
             // 
@@ -351,7 +380,8 @@ namespace LANDIS_II_Site
             this.cbSeedingAlg.FormattingEnabled = true;
             this.cbSeedingAlg.Items.AddRange(new object[] {
             "WardSeedDispersal",
-            "UniversalDispersal "});
+            "UniversalDispersal",
+            "DensitySeeding"});
             this.cbSeedingAlg.Location = new System.Drawing.Point(93, 96);
             this.cbSeedingAlg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbSeedingAlg.Name = "cbSeedingAlg";
@@ -371,7 +401,7 @@ namespace LANDIS_II_Site
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(48, 64);
+            this.label1.Location = new System.Drawing.Point(48, 43);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 23);
@@ -381,7 +411,7 @@ namespace LANDIS_II_Site
             // 
             // tbTimestep
             // 
-            this.tbTimestep.Location = new System.Drawing.Point(133, 64);
+            this.tbTimestep.Location = new System.Drawing.Point(133, 46);
             this.tbTimestep.Margin = new System.Windows.Forms.Padding(4);
             this.tbTimestep.Name = "tbTimestep";
             this.tbTimestep.Size = new System.Drawing.Size(52, 22);
@@ -391,7 +421,7 @@ namespace LANDIS_II_Site
             // 
             // tbSimYears
             // 
-            this.tbSimYears.Location = new System.Drawing.Point(133, 31);
+            this.tbSimYears.Location = new System.Drawing.Point(133, 23);
             this.tbSimYears.Margin = new System.Windows.Forms.Padding(4);
             this.tbSimYears.Name = "tbSimYears";
             this.tbSimYears.Size = new System.Drawing.Size(52, 22);
@@ -401,7 +431,7 @@ namespace LANDIS_II_Site
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(8, 31);
+            this.label13.Location = new System.Drawing.Point(8, 23);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(115, 20);
@@ -411,8 +441,8 @@ namespace LANDIS_II_Site
             // 
             // groupBoxEcoPara
             // 
-            this.groupBoxEcoPara.Controls.Add(this.tbAET);
-            this.groupBoxEcoPara.Controls.Add(this.label3);
+            this.groupBoxEcoPara.Controls.Add(this.tbLatitude);
+            this.groupBoxEcoPara.Controls.Add(this.labelLatitude);
             this.groupBoxEcoPara.Controls.Add(this.tbClimateFile);
             this.groupBoxEcoPara.Controls.Add(this.btClimate);
             this.groupBoxEcoPara.Location = new System.Drawing.Point(540, 7);
@@ -424,118 +454,91 @@ namespace LANDIS_II_Site
             this.groupBoxEcoPara.TabStop = false;
             this.groupBoxEcoPara.Text = "Ecoregion Parameters";
             // 
-            // tbAET
+            // tbLatitude
             // 
-            this.tbAET.Location = new System.Drawing.Point(112, 61);
-            this.tbAET.Margin = new System.Windows.Forms.Padding(4);
-            this.tbAET.Name = "tbAET";
-            this.tbAET.Size = new System.Drawing.Size(52, 22);
-            this.tbAET.TabIndex = 104;
-            this.tbAET.Text = "600";
-            this.tbAET.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbLatitude.Location = new System.Drawing.Point(111, 59);
+            this.tbLatitude.Margin = new System.Windows.Forms.Padding(4);
+            this.tbLatitude.Name = "tbLatitude";
+            this.tbLatitude.Size = new System.Drawing.Size(52, 22);
+            this.tbLatitude.TabIndex = 37;
+            this.tbLatitude.Text = "42";
+            this.tbLatitude.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label3
+            // labelLatitude
             // 
-            this.label3.Location = new System.Drawing.Point(32, 61);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 23);
-            this.label3.TabIndex = 105;
-            this.label3.Text = "AET(mm)";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelLatitude.Location = new System.Drawing.Point(48, 60);
+            this.labelLatitude.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLatitude.Name = "labelLatitude";
+            this.labelLatitude.Size = new System.Drawing.Size(61, 23);
+            this.labelLatitude.TabIndex = 38;
+            this.labelLatitude.Text = "Latitude";
+            this.labelLatitude.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // groupBoxSppGeneric
+            // groupBoxDisturance
             // 
-            this.groupBoxSppGeneric.Controls.Add(this.label5);
-            this.groupBoxSppGeneric.Controls.Add(this.dataGridViewLightTable);
-            this.groupBoxSppGeneric.Location = new System.Drawing.Point(823, 11);
-            this.groupBoxSppGeneric.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxSppGeneric.Name = "groupBoxSppGeneric";
-            this.groupBoxSppGeneric.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxSppGeneric.Size = new System.Drawing.Size(437, 204);
-            this.groupBoxSppGeneric.TabIndex = 65;
-            this.groupBoxSppGeneric.TabStop = false;
-            this.groupBoxSppGeneric.Text = "Sufficient Light Table";
+            this.groupBoxDisturance.Controls.Add(this.dataGridViewDistubTable);
+            this.groupBoxDisturance.Location = new System.Drawing.Point(823, 77);
+            this.groupBoxDisturance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxDisturance.Name = "groupBoxDisturance";
+            this.groupBoxDisturance.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxDisturance.Size = new System.Drawing.Size(437, 138);
+            this.groupBoxDisturance.TabIndex = 65;
+            this.groupBoxDisturance.TabStop = false;
+            this.groupBoxDisturance.Text = "Disturbance Reduction Table";
             // 
-            // label5
+            // dataGridViewDistubTable
             // 
-            this.label5.Location = new System.Drawing.Point(1, 18);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(359, 23);
-            this.label5.TabIndex = 106;
-            this.label5.Text = "Probability of Establishment by Shading Condition (0-5)";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dataGridViewLightTable
-            // 
-            this.dataGridViewLightTable.AllowUserToAddRows = false;
-            this.dataGridViewLightTable.AllowUserToOrderColumns = true;
-            this.dataGridViewLightTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewLightTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewLightTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewDistubTable.AllowUserToAddRows = false;
+            this.dataGridViewDistubTable.AllowUserToOrderColumns = true;
+            this.dataGridViewDistubTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewDistubTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDistubTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column0,
             this.Column1,
             this.Column2,
             this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
-            this.dataGridViewLightTable.Location = new System.Drawing.Point(4, 43);
-            this.dataGridViewLightTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewLightTable.Name = "dataGridViewLightTable";
-            this.dataGridViewLightTable.RowHeadersWidth = 20;
-            this.dataGridViewLightTable.RowTemplate.Height = 24;
-            this.dataGridViewLightTable.Size = new System.Drawing.Size(427, 152);
-            this.dataGridViewLightTable.TabIndex = 41;
+            this.Column4});
+            this.dataGridViewDistubTable.Location = new System.Drawing.Point(6, 22);
+            this.dataGridViewDistubTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewDistubTable.Name = "dataGridViewDistubTable";
+            this.dataGridViewDistubTable.RowHeadersWidth = 20;
+            this.dataGridViewDistubTable.RowTemplate.Height = 24;
+            this.dataGridViewDistubTable.Size = new System.Drawing.Size(426, 109);
+            this.dataGridViewDistubTable.TabIndex = 41;
             // 
             // Column0
             // 
             this.Column0.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Column0.FillWeight = 1F;
-            this.Column0.HeaderText = "ShadeTol.";
+            this.Column0.HeaderText = "Reduction";
             this.Column0.MinimumWidth = 6;
             this.Column0.Name = "Column0";
-            this.Column0.ToolTipText = "Species Shade Tolerance";
             this.Column0.Width = 110;
             // 
             // Column1
             // 
-            this.Column1.HeaderText = "Shading0";
+            this.Column1.HeaderText = "Fire";
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.ToolTipText = "Full sunlight";
             // 
             // Column2
             // 
-            this.Column2.HeaderText = "Shading1";
+            this.Column2.HeaderText = "Wind";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             // 
             // Column3
             // 
-            this.Column3.HeaderText = "Shading2";
+            this.Column3.HeaderText = "Harvest";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
             // 
             // Column4
             // 
-            this.Column4.HeaderText = "Shading3";
+            this.Column4.HeaderText = "BDA";
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Shading4";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Shading5";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.ToolTipText = "Full shaded";
             // 
             // groupBoxExtensions
             // 
@@ -556,7 +559,7 @@ namespace LANDIS_II_Site
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.cbOutputBiomass);
+            this.groupBox5.Controls.Add(this.cbOutputDensity);
             this.groupBox5.Controls.Add(this.label6);
             this.groupBox5.Location = new System.Drawing.Point(92, 106);
             this.groupBox5.Name = "groupBox5";
@@ -564,16 +567,15 @@ namespace LANDIS_II_Site
             this.groupBox5.TabIndex = 106;
             this.groupBox5.TabStop = false;
             // 
-            // cbOutputBiomass
+            // cbOutputDensity
             // 
-            this.cbOutputBiomass.AutoSize = true;
-            this.cbOutputBiomass.Location = new System.Drawing.Point(6, 16);
-            this.cbOutputBiomass.Margin = new System.Windows.Forms.Padding(4);
-            this.cbOutputBiomass.Name = "cbOutputBiomass";
-            this.cbOutputBiomass.Size = new System.Drawing.Size(18, 17);
-            this.cbOutputBiomass.TabIndex = 105;
-            this.cbOutputBiomass.UseVisualStyleBackColor = true;
-            this.cbOutputBiomass.CheckedChanged += new System.EventHandler(this.cbOutputBiomass_CheckedChanged);
+            this.cbOutputDensity.AutoSize = true;
+            this.cbOutputDensity.Location = new System.Drawing.Point(6, 16);
+            this.cbOutputDensity.Margin = new System.Windows.Forms.Padding(4);
+            this.cbOutputDensity.Name = "cbOutputDensity";
+            this.cbOutputDensity.Size = new System.Drawing.Size(18, 17);
+            this.cbOutputDensity.TabIndex = 105;
+            this.cbOutputDensity.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -582,7 +584,7 @@ namespace LANDIS_II_Site
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(116, 23);
             this.label6.TabIndex = 104;
-            this.label6.Text = "Output Biomass";
+            this.label6.Text = "Output Density";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btDeleteSppEcophysiSpp
@@ -1153,7 +1155,7 @@ namespace LANDIS_II_Site
             this.Cohort.HeaderText = "Species";
             this.Cohort.MinimumWidth = 6;
             this.Cohort.Name = "Cohort";
-            this.Cohort.Width = 87;
+            this.Cohort.Width = 86;
             // 
             // CohortAge
             // 
@@ -1167,7 +1169,7 @@ namespace LANDIS_II_Site
             // 
             this.CohortBiomass.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.CohortBiomass.FillWeight = 0.8892727F;
-            this.CohortBiomass.HeaderText = "Biomass";
+            this.CohortBiomass.HeaderText = "TreeNumber";
             this.CohortBiomass.MinimumWidth = 6;
             this.CohortBiomass.Name = "CohortBiomass";
             // 
@@ -1209,7 +1211,7 @@ namespace LANDIS_II_Site
             this.radioButtonOnePara.Checked = true;
             this.radioButtonOnePara.Location = new System.Drawing.Point(12, 21);
             this.radioButtonOnePara.Name = "radioButtonOnePara";
-            this.radioButtonOnePara.Size = new System.Drawing.Size(56, 21);
+            this.radioButtonOnePara.Size = new System.Drawing.Size(53, 20);
             this.radioButtonOnePara.TabIndex = 44;
             this.radioButtonOnePara.TabStop = true;
             this.radioButtonOnePara.Text = "One";
@@ -1236,7 +1238,7 @@ namespace LANDIS_II_Site
             // checkBoxCalibration
             // 
             this.checkBoxCalibration.AutoSize = true;
-            this.checkBoxCalibration.Location = new System.Drawing.Point(10, 0);
+            this.checkBoxCalibration.Location = new System.Drawing.Point(7, 0);
             this.checkBoxCalibration.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxCalibration.Name = "checkBoxCalibration";
             this.checkBoxCalibration.Size = new System.Drawing.Size(18, 17);
@@ -1249,7 +1251,7 @@ namespace LANDIS_II_Site
             this.radioButtonMultiple.AutoSize = true;
             this.radioButtonMultiple.Location = new System.Drawing.Point(13, 42);
             this.radioButtonMultiple.Name = "radioButtonMultiple";
-            this.radioButtonMultiple.Size = new System.Drawing.Size(77, 21);
+            this.radioButtonMultiple.Size = new System.Drawing.Size(74, 20);
             this.radioButtonMultiple.TabIndex = 45;
             this.radioButtonMultiple.Text = "Multiple";
             this.radioButtonMultiple.UseVisualStyleBackColor = true;
@@ -1261,11 +1263,11 @@ namespace LANDIS_II_Site
             this.groupBoxDiagnosis.Controls.Add(this.radioButtonMultiple);
             this.groupBoxDiagnosis.Controls.Add(this.radioButtonOnePara);
             this.groupBoxDiagnosis.Controls.Add(this.dataGridViewDiagMulti);
-            this.groupBoxDiagnosis.Location = new System.Drawing.Point(1039, 593);
+            this.groupBoxDiagnosis.Location = new System.Drawing.Point(1052, 597);
             this.groupBoxDiagnosis.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDiagnosis.Name = "groupBoxDiagnosis";
             this.groupBoxDiagnosis.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxDiagnosis.Size = new System.Drawing.Size(215, 175);
+            this.groupBoxDiagnosis.Size = new System.Drawing.Size(202, 175);
             this.groupBoxDiagnosis.TabIndex = 68;
             this.groupBoxDiagnosis.TabStop = false;
             this.groupBoxDiagnosis.Text = "     Calibration";
@@ -1275,7 +1277,7 @@ namespace LANDIS_II_Site
             this.radioButtonBayesian.AutoSize = true;
             this.radioButtonBayesian.Location = new System.Drawing.Point(13, 148);
             this.radioButtonBayesian.Name = "radioButtonBayesian";
-            this.radioButtonBayesian.Size = new System.Drawing.Size(156, 21);
+            this.radioButtonBayesian.Size = new System.Drawing.Size(150, 20);
             this.radioButtonBayesian.TabIndex = 46;
             this.radioButtonBayesian.Text = "Bayesian calibration";
             this.radioButtonBayesian.UseVisualStyleBackColor = true;
@@ -1294,153 +1296,257 @@ namespace LANDIS_II_Site
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridViewMinRelativeBiomass);
+            this.groupBox2.Controls.Add(this.btDeleteDiameter);
+            this.groupBox2.Controls.Add(this.btAddDiameter);
+            this.groupBox2.Controls.Add(this.dataGridViewDiameterTable);
             this.groupBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.groupBox2.Location = new System.Drawing.Point(1034, 216);
+            this.groupBox2.Location = new System.Drawing.Point(1020, 216);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(219, 142);
+            this.groupBox2.Size = new System.Drawing.Size(233, 218);
             this.groupBox2.TabIndex = 74;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Shading Class Threshold";
+            this.groupBox2.Text = "Diameter Table";
             // 
-            // dataGridViewMinRelativeBiomass
+            // btDeleteDiameter
             // 
-            this.dataGridViewMinRelativeBiomass.AllowUserToAddRows = false;
-            this.dataGridViewMinRelativeBiomass.AllowUserToOrderColumns = true;
-            this.dataGridViewMinRelativeBiomass.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewMinRelativeBiomass.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewMinRelativeBiomass.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.btDeleteDiameter.Location = new System.Drawing.Point(213, 77);
+            this.btDeleteDiameter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btDeleteDiameter.Name = "btDeleteDiameter";
+            this.btDeleteDiameter.Size = new System.Drawing.Size(19, 28);
+            this.btDeleteDiameter.TabIndex = 45;
+            this.btDeleteDiameter.Text = "-";
+            this.btDeleteDiameter.UseVisualStyleBackColor = true;
+            this.btDeleteDiameter.Click += new System.EventHandler(this.btDeleteDiameter_Click);
+            // 
+            // btAddDiameter
+            // 
+            this.btAddDiameter.Location = new System.Drawing.Point(214, 32);
+            this.btAddDiameter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btAddDiameter.Name = "btAddDiameter";
+            this.btAddDiameter.Size = new System.Drawing.Size(16, 28);
+            this.btAddDiameter.TabIndex = 44;
+            this.btAddDiameter.Text = "+";
+            this.btAddDiameter.UseVisualStyleBackColor = true;
+            this.btAddDiameter.Click += new System.EventHandler(this.btAddDiameter_Click);
+            // 
+            // dataGridViewDiameterTable
+            // 
+            this.dataGridViewDiameterTable.AllowUserToAddRows = false;
+            this.dataGridViewDiameterTable.AllowUserToOrderColumns = true;
+            this.dataGridViewDiameterTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewDiameterTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDiameterTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
-            this.dataGridViewMinRelativeBiomass.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dataGridViewMinRelativeBiomass.Location = new System.Drawing.Point(6, 22);
-            this.dataGridViewMinRelativeBiomass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewMinRelativeBiomass.Name = "dataGridViewMinRelativeBiomass";
-            this.dataGridViewMinRelativeBiomass.RowHeadersWidth = 20;
-            this.dataGridViewMinRelativeBiomass.RowTemplate.Height = 24;
-            this.dataGridViewMinRelativeBiomass.Size = new System.Drawing.Size(207, 114);
-            this.dataGridViewMinRelativeBiomass.TabIndex = 41;
+            this.dataGridViewTextBoxColumn3,
+            this.Diameter});
+            this.dataGridViewDiameterTable.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dataGridViewDiameterTable.Location = new System.Drawing.Point(6, 21);
+            this.dataGridViewDiameterTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewDiameterTable.Name = "dataGridViewDiameterTable";
+            this.dataGridViewDiameterTable.RowHeadersWidth = 20;
+            this.dataGridViewDiameterTable.RowTemplate.Height = 24;
+            this.dataGridViewDiameterTable.Size = new System.Drawing.Size(201, 193);
+            this.dataGridViewDiameterTable.TabIndex = 41;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn2.FillWeight = 1F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Shading";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Species";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ToolTipText = "Site-level shading condition";
             this.dataGridViewTextBoxColumn2.Width = 65;
             // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.dataGridViewTextBoxColumn3.FillWeight = 1F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "%MaxBiomass";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Age";
             this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ToolTipText = "Relative to the ecoregion’s maximum possible biomass";
-            this.dataGridViewTextBoxColumn3.Width = 127;
+            this.dataGridViewTextBoxColumn3.Width = 61;
             // 
-            // groupBox3
+            // Diameter
             // 
-            this.groupBox3.Controls.Add(this.dataGridViewFireRemove);
-            this.groupBox3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.groupBox3.Location = new System.Drawing.Point(1034, 357);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(220, 115);
-            this.groupBox3.TabIndex = 75;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Fire";
-            // 
-            // dataGridViewFireRemove
-            // 
-            this.dataGridViewFireRemove.AllowUserToAddRows = false;
-            this.dataGridViewFireRemove.AllowUserToOrderColumns = true;
-            this.dataGridViewFireRemove.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewFireRemove.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewFireRemove.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.Column7});
-            this.dataGridViewFireRemove.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dataGridViewFireRemove.Location = new System.Drawing.Point(6, 19);
-            this.dataGridViewFireRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewFireRemove.Name = "dataGridViewFireRemove";
-            this.dataGridViewFireRemove.RowHeadersWidth = 20;
-            this.dataGridViewFireRemove.RowTemplate.Height = 24;
-            this.dataGridViewFireRemove.Size = new System.Drawing.Size(207, 90);
-            this.dataGridViewFireRemove.TabIndex = 41;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn4.FillWeight = 1F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Severity";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ToolTipText = "Fire Severity";
-            this.dataGridViewTextBoxColumn4.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn5.FillWeight = 1F;
-            this.dataGridViewTextBoxColumn5.HeaderText = "WoodLitterRemove";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ToolTipText = "WoodLitterReduction";
-            this.dataGridViewTextBoxColumn5.Width = 158;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "LitterRemove";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 121;
+            this.Diameter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Diameter.HeaderText = "Diameter";
+            this.Diameter.MinimumWidth = 6;
+            this.Diameter.Name = "Diameter";
+            this.Diameter.Width = 91;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.dataGridViewHarvestRemove);
+            this.groupBox4.Controls.Add(this.btMassAlloReset);
+            this.groupBox4.Controls.Add(this.textBoxMinDBH);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.dataGridViewMassAllo);
             this.groupBox4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.groupBox4.Location = new System.Drawing.Point(1034, 470);
+            this.groupBox4.Location = new System.Drawing.Point(1020, 438);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox4.Size = new System.Drawing.Size(219, 117);
+            this.groupBox4.Size = new System.Drawing.Size(233, 149);
             this.groupBox4.TabIndex = 76;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Harvest";
+            this.groupBox4.Text = "Mass Allometry";
             // 
-            // dataGridViewHarvestRemove
+            // dataGridViewMassAllo
             // 
-            this.dataGridViewHarvestRemove.AllowUserToAddRows = false;
-            this.dataGridViewHarvestRemove.AllowUserToOrderColumns = true;
-            this.dataGridViewHarvestRemove.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewHarvestRemove.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewHarvestRemove.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewMassAllo.AllowUserToAddRows = false;
+            this.dataGridViewMassAllo.AllowUserToOrderColumns = true;
+            this.dataGridViewMassAllo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewMassAllo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMassAllo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
             this.Column8,
-            this.Column9,
-            this.Column10});
-            this.dataGridViewHarvestRemove.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dataGridViewHarvestRemove.Location = new System.Drawing.Point(6, 25);
-            this.dataGridViewHarvestRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewHarvestRemove.Name = "dataGridViewHarvestRemove";
-            this.dataGridViewHarvestRemove.RowHeadersWidth = 20;
-            this.dataGridViewHarvestRemove.RowTemplate.Height = 24;
-            this.dataGridViewHarvestRemove.Size = new System.Drawing.Size(207, 92);
-            this.dataGridViewHarvestRemove.TabIndex = 41;
+            this.Column9});
+            this.dataGridViewMassAllo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dataGridViewMassAllo.Location = new System.Drawing.Point(6, 44);
+            this.dataGridViewMassAllo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewMassAllo.Name = "dataGridViewMassAllo";
+            this.dataGridViewMassAllo.RowHeadersWidth = 20;
+            this.dataGridViewMassAllo.RowTemplate.Height = 24;
+            this.dataGridViewMassAllo.Size = new System.Drawing.Size(221, 99);
+            this.dataGridViewMassAllo.TabIndex = 41;
+            // 
+            // buttonResetInput
+            // 
+            this.buttonResetInput.Location = new System.Drawing.Point(1162, 896);
+            this.buttonResetInput.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonResetInput.Name = "buttonResetInput";
+            this.buttonResetInput.Size = new System.Drawing.Size(97, 34);
+            this.buttonResetInput.TabIndex = 77;
+            this.buttonResetInput.Text = "Reset Input";
+            this.buttonResetInput.UseVisualStyleBackColor = true;
+            this.buttonResetInput.Click += new System.EventHandler(this.buttonResetInput_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.textBoxGSO4);
+            this.groupBox6.Controls.Add(this.label15);
+            this.groupBox6.Controls.Add(this.textBoxGSO3);
+            this.groupBox6.Controls.Add(this.label14);
+            this.groupBox6.Controls.Add(this.textBoxGSO2);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.textBoxGSO1);
+            this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.Location = new System.Drawing.Point(823, 9);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox6.Size = new System.Drawing.Size(292, 68);
+            this.groupBox6.TabIndex = 66;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Competition Status by GSO";
+            // 
+            // textBoxGSO4
+            // 
+            this.textBoxGSO4.Location = new System.Drawing.Point(231, 37);
+            this.textBoxGSO4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxGSO4.Name = "textBoxGSO4";
+            this.textBoxGSO4.Size = new System.Drawing.Size(46, 22);
+            this.textBoxGSO4.TabIndex = 45;
+            this.textBoxGSO4.Text = "0.8";
+            this.textBoxGSO4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(232, 16);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(55, 23);
+            this.label15.TabIndex = 46;
+            this.label15.Text = "GSO4";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxGSO3
+            // 
+            this.textBoxGSO3.Location = new System.Drawing.Point(156, 37);
+            this.textBoxGSO3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxGSO3.Name = "textBoxGSO3";
+            this.textBoxGSO3.Size = new System.Drawing.Size(46, 22);
+            this.textBoxGSO3.TabIndex = 43;
+            this.textBoxGSO3.Text = "0.65";
+            this.textBoxGSO3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label14
+            // 
+            this.label14.Location = new System.Drawing.Point(160, 15);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(55, 23);
+            this.label14.TabIndex = 44;
+            this.label14.Text = "GSO3";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxGSO2
+            // 
+            this.textBoxGSO2.Location = new System.Drawing.Point(85, 37);
+            this.textBoxGSO2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxGSO2.Name = "textBoxGSO2";
+            this.textBoxGSO2.Size = new System.Drawing.Size(46, 22);
+            this.textBoxGSO2.TabIndex = 41;
+            this.textBoxGSO2.Text = "0.55";
+            this.textBoxGSO2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(88, 15);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 23);
+            this.label5.TabIndex = 42;
+            this.label5.Text = "GSO2";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxGSO1
+            // 
+            this.textBoxGSO1.Location = new System.Drawing.Point(19, 38);
+            this.textBoxGSO1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxGSO1.Name = "textBoxGSO1";
+            this.textBoxGSO1.Size = new System.Drawing.Size(46, 22);
+            this.textBoxGSO1.TabIndex = 39;
+            this.textBoxGSO1.Text = "0.35";
+            this.textBoxGSO1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(22, 16);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 23);
+            this.label3.TabIndex = 40;
+            this.label3.Text = "GSO1";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxMinDBH
+            // 
+            this.textBoxMinDBH.Location = new System.Drawing.Point(111, 16);
+            this.textBoxMinDBH.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxMinDBH.Name = "textBoxMinDBH";
+            this.textBoxMinDBH.Size = new System.Drawing.Size(37, 22);
+            this.textBoxMinDBH.TabIndex = 42;
+            this.textBoxMinDBH.Text = "2.54";
+            this.textBoxMinDBH.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label16
+            // 
+            this.label16.Location = new System.Drawing.Point(3, 16);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(100, 23);
+            this.label16.TabIndex = 43;
+            this.label16.Text = "Minimum DBH";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn6.FillWeight = 1F;
-            this.dataGridViewTextBoxColumn6.HeaderText = "Method";
+            this.dataGridViewTextBoxColumn6.HeaderText = "SpType";
             this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ToolTipText = "Harvesting approach";
@@ -1450,52 +1556,46 @@ namespace LANDIS_II_Site
             // 
             this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.dataGridViewTextBoxColumn7.FillWeight = 1F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "WoodLitterRemove";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Species";
             this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Width = 158;
+            this.dataGridViewTextBoxColumn7.Width = 86;
             // 
             // Column8
             // 
-            this.Column8.HeaderText = "LitterRemove";
+            this.Column8.HeaderText = "V0";
             this.Column8.MinimumWidth = 6;
             this.Column8.Name = "Column8";
             // 
             // Column9
             // 
-            this.Column9.HeaderText = "WoodRemove";
+            this.Column9.HeaderText = "V1";
             this.Column9.MinimumWidth = 6;
             this.Column9.Name = "Column9";
             // 
-            // Column10
+            // btMassAlloReset
             // 
-            this.Column10.HeaderText = "LeafRemove";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
+            this.btMassAlloReset.Location = new System.Drawing.Point(171, 15);
+            this.btMassAlloReset.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.btMassAlloReset.Name = "btMassAlloReset";
+            this.btMassAlloReset.Size = new System.Drawing.Size(59, 25);
+            this.btMassAlloReset.TabIndex = 50;
+            this.btMassAlloReset.Text = "Reset";
+            this.btMassAlloReset.UseVisualStyleBackColor = true;
+            this.btMassAlloReset.Click += new System.EventHandler(this.btMassAlloReset_Click);
             // 
-            // buttonResetInput
-            // 
-            this.buttonResetInput.Location = new System.Drawing.Point(1097, 787);
-            this.buttonResetInput.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonResetInput.Name = "buttonResetInput";
-            this.buttonResetInput.Size = new System.Drawing.Size(97, 34);
-            this.buttonResetInput.TabIndex = 77;
-            this.buttonResetInput.Text = "Reset Input";
-            this.buttonResetInput.UseVisualStyleBackColor = true;
-            this.buttonResetInput.Click += new System.EventHandler(this.buttonResetInput_Click);
-            // 
-            // FormBiomass
+            // FormDensity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1272, 953);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.buttonResetInput);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBoxPara);
             this.Controls.Add(this.groupBoxEcoPara);
-            this.Controls.Add(this.groupBoxSppGeneric);
+            this.Controls.Add(this.groupBoxDisturance);
             this.Controls.Add(this.groupBoxExtensions);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxSppLifeHistory);
@@ -1505,14 +1605,14 @@ namespace LANDIS_II_Site
             this.Controls.Add(this.groupBoxInitialCommunity);
             this.Controls.Add(this.groupBoxDiagnosis);
             this.Controls.Add(this.checkedListBoxReference);
-            this.Name = "FormBiomass";
+            this.Name = "FormDensity";
             this.Text = "FormBiomass";
             this.groupBoxPara.ResumeLayout(false);
             this.groupBoxPara.PerformLayout();
             this.groupBoxEcoPara.ResumeLayout(false);
             this.groupBoxEcoPara.PerformLayout();
-            this.groupBoxSppGeneric.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLightTable)).EndInit();
+            this.groupBoxDisturance.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDistubTable)).EndInit();
             this.groupBoxExtensions.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -1534,11 +1634,12 @@ namespace LANDIS_II_Site
             this.groupBoxDiagnosis.ResumeLayout(false);
             this.groupBoxDiagnosis.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMinRelativeBiomass)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFireRemove)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDiameterTable)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHarvestRemove)).EndInit();
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMassAllo)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1567,8 +1668,8 @@ namespace LANDIS_II_Site
         private System.Windows.Forms.TextBox tbSimYears;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBoxEcoPara;
-        private System.Windows.Forms.GroupBox groupBoxSppGeneric;
-        private System.Windows.Forms.DataGridView dataGridViewLightTable;
+        private System.Windows.Forms.GroupBox groupBoxDisturance;
+        private System.Windows.Forms.DataGridView dataGridViewDistubTable;
         private System.Windows.Forms.GroupBox groupBoxExtensions;
         private System.Windows.Forms.Button btDeleteSppEcophysiSpp;
         private System.Windows.Forms.Button btAddSppEcophysiSpp;
@@ -1622,39 +1723,47 @@ namespace LANDIS_II_Site
         private System.Windows.Forms.RadioButton radioButtonMultiple;
         private System.Windows.Forms.GroupBox groupBoxDiagnosis;
         private System.Windows.Forms.CheckedListBox checkedListBoxReference;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbAET;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridViewMinRelativeBiomass;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView dataGridViewDiameterTable;
+        private System.Windows.Forms.RadioButton radioButtonBayesian;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.DataGridView dataGridViewMassAllo;
+        private System.Windows.Forms.CheckBox cbOutputDensity;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button buttonResetInput;
+        private System.Windows.Forms.TextBox tbStartYr;
+        private System.Windows.Forms.Label labelStartYr;
+        private System.Windows.Forms.TextBox tbLatitude;
+        private System.Windows.Forms.Label labelLatitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cohort;
         private System.Windows.Forms.DataGridViewTextBoxColumn CohortAge;
         private System.Windows.Forms.DataGridViewTextBoxColumn CohortBiomass;
-        private System.Windows.Forms.RadioButton radioButtonBayesian;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dataGridViewFireRemove;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.DataGridView dataGridViewHarvestRemove;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox textBoxGSO1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxGSO4;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBoxGSO3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBoxGSO2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btDeleteDiameter;
+        private System.Windows.Forms.Button btAddDiameter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Diameter;
+        private System.Windows.Forms.TextBox textBoxMinDBH;
+        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.CheckBox cbOutputBiomass;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button buttonResetInput;
+        private System.Windows.Forms.Button btMassAlloReset;
     }
 }

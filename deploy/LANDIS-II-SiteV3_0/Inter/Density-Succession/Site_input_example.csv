@@ -1,6 +1,6 @@
 LANDIS-II-Site-input
 <<<<<<<<<<<<<<<<<Succession Extension
-SuccessionExtension,Biomass
+SuccessionExtension,Density-Succession
 <<<<<<<<<<<<<<<<<Disturbance Extension
 <<<<<<<<<<<<<<<<<Output Extension
 OutputExtension,Yes
@@ -8,77 +8,94 @@ OutputExtension,Yes
 <<<<<<<<<<<<<<<<<Simulation Parameters
 SimulationYears,100
 TimeStep,10
-SeedingAlgorithm,WardSeedDispersal
+StartYear,2000
+SeedingAlgorithm,DensitySeeding
 RandomSeedCheck,Yes
-RandomSeedSet,617788279
+RandomSeedSet,6177882
 ReplicateCheck,No
-ReplicateNum,30
+ReplicateNum,5
 <<<<<<<<<<<<<<<<<Ecoregion Parameters
-ClimateFile,C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Inter\Biomass\site_climate.csv
-AET(mm),601
+ClimateFile,C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Inter\Density-Succession\site_Climate.txt
+Latitude,45
 <<<<<<<<<<<<<<<<<Initial communities
-Species,Age,Biomass
-acerrubr,20,1800
-acerrubr,30,3600
-querrubr,15,1800
-querrubr,20,1800
-querrubr,35,9000
-<<<<<<<<<<<<<<<<<Sufficient Light Table
-ShadeTol.,Shading0,Shading1,Shading2,Shading3,Shading4,Shading5
-1,1,0.5,0.25,0,0,0
-2,1,1,0.5,0.25,0,0
-3,1,1,1,0.5,0.25,0
-4,1,1,1,1,0.5,0.25
-5,0.1,0.5,1,1,1,1
-<<<<<<<<<<<<<<<<<Minimum Biomass by Shade
-Shading,%MaxBiomass
-1,25%
-2,45%
-3,56%
-4,70%
-5,90%
-<<<<<<<<<<<<<<<<<FireReductionParameters
-Severity,WoodLitterRemove,LitterRemove
-1,0,0.5
-2,0,0.75
-3,0,1
-<<<<<<<<<<<<<<<<<HarvestReductionParameters
-Method,WoodLitterRemove,LitterRemove,WoodRemove,LeafRemove
-MaxAgeClearcut,0.5,0.15,0.8,0
-PatchCutting,1,1,1,0
+Species,Age,TreeNumber
+querrubr,10,10
+querrubr,50,1
+pinubank,10,1
 <<<<<<<<<<<<<<<<<Species Life History Parameters
-SpeciesCode,Longevity,sex_Maturity,seed_disper_Effective,seed_disp_Maximum,veg_ReprodProb,sprout_age_Min,sprout_age_Max,post_fire_Regen
-abiebals,200,25,30,160,0,0,0,none
-acerrubr,150,10,100,200,0.5,0,100,none
-acersacc,300,40,100,200,0.1,0,60,none
-betualle,300,40,100,400,0.1,0,180,none
-betupapy,100,30,200,5000,0.5,0,70,resprout
-fraxamer,300,30,70,140,0.1,0,70,none
-piceglau,300,25,30,200,0,0,0,none
-pinubank,100,15,20,100,0,0,0,serotiny
-pinuresi,200,35,20,275,0,0,0,none
-pinustro,400,40,60,210,0,0,0,none
-poputrem,100,20,1000,5000,0.9,0,100,resprout
-querelli,300,35,30,3000,0.5,20,280,resprout
-querrubr,250,25,30,3000,0.5,20,200,resprout
-thujocci,400,30,45,60,0.5,50,400,none
-tiliamer,250,30,30,120,0.1,0,200,none
-tsugcana,500,30,30,100,0,0,0,none
+SpeciesCode,Longevity,sex_Maturity,shade_Tol.,fire_Tol.,seed_disper_Effective,seed_disp_Maximum,veg_ReprodProb,sprout_age_Min,sprout_age_Max,post_fire_Regen
+pinubank,100,15,1,3,20,100,0,0,0,serotiny
+querrubr,250,25,3,2,30,3000,0.5,20,200,resprout
 <<<<<<<<<<<<<<<<<Species Ecophysiological Parameters
-SpeciesCode,LeafLongevity,WoodDecayRate,MortalityCurve,GrowthCurve,LeafLignin,ShadeTolerance,FireTolerance,ProbEstablish,ProbMortality,ANPPmax,BiomassMax
-abiebals,3,0.1,10,0.25,0.252,5,1,0.9,0.05,886,26000
-acerrubr,1,0.1,10,0.25,0.183,3,1,1,0.05,1175,26000
-acersacc,1,0.1,10,0.25,0.175,5,1,0.82,0.05,1106,26000
-betualle,1,0.1,10,0.25,0.219,3,2,0.64,0.05,1202,26000
-betupapy,1,0.1,10,0.25,0.201,2,2,1,0.05,1202,26000
-fraxamer,1,0.1,10,0.25,0.144,4,2,0.18,0.05,1202,26000
-piceglau,3,0.1,10,0.25,0.249,4,2,0.58,0.05,969,26000
-pinubank,2,0.1,10,0.25,0.266,1,3,1,0.05,1130,26000
-pinuresi,3,0.1,10,0.25,0.266,2,4,0.56,0.05,1017,26000
-pinustro,2,0.1,10,0.25,0.263,3,3,0.72,0.05,1090,26000
-poputrem,1,0.1,10,0.25,0.256,1,2,1,0.05,1078,26000
-querelli,1,0.1,10,0.25,0.249,3,2,0.96,0.05,1096,26000
-querrubr,1,0.1,10,0.25,0.149,2,3,0.66,0.05,1017,26000
-thujocci,3,0.1,10,0.25,0.262,4,1,0.76,0.05,1090,26000
-tiliamer,1,0.1,10,0.25,0.17,4,2,0.54,0.05,1078,26000
-tsugcana,5,0.1,10,0.25,0.25,5,2,0.9,0.05,886,26000
+DensitySpeciesParameters,SpType,BiomassClass,MaxDia,MaxSDI,TotalSeed,CarbonCoef,ProbEst
+pinubank,1,17,70,1100,0,0.5,0.22
+querrubr,0,11,65,570,0,0.5,1.0
+<<<<<<<<<<<<<<<<<Disturbance Table
+Reduction,Fire,Wind,Harvest,BDA
+WoodReduction,0.33,0,0.70,0
+FolReduction,1,0,0,0
+RootReduction,0,0,0,0
+DeadWoodReduction,0.7,0,0,0
+LitterReduction,0.9,0,0.1,0
+<<<<<<<<<<<<<<<<<GSO threshold
+GSO1,GSO2,GSO3,GSO4
+0.35,0.54,0.65,0.8
+<<<<<<<<<<<<<<<<<Diameter table
+Species,Age,Diameter 
+querrubr,1,3
+querrubr,10,7.5
+querrubr,20,11
+querrubr,30,15
+querrubr,40,20
+querrubr,50,25
+querrubr,60,30
+querrubr,70,35
+querrubr,80,40
+querrubr,90,44
+querrubr,100,48
+querrubr,110,51
+querrubr,120,54
+querrubr,130,57
+querrubr,140,59
+querrubr,150,61
+querrubr,160,63
+querrubr,170,64
+querrubr,180,64.5
+querrubr,190,65
+pinubank,1,3
+pinubank,20,13
+pinubank,30,19
+pinubank,40,25
+pinubank,50,32
+pinubank,60,38
+pinubank,70,44
+pinubank,80,49
+pinubank,90,54
+pinubank,100,59
+pinubank,110,64
+pinubank,120,66
+pinubank,130,68
+pinubank,140,69
+pinubank,150,70
+<<<<<<<<<<<<<<<<<Biomass Allometry
+minimum_DBH,2.54
+SpType,Species,V0,V1  
+1,Aspen,-2.2094,2.3867
+2,Alder,-2.2094,2.3867
+3,Cottonwood,-2.2094,2.3867
+4,Willow,-2.2094,2.3867
+5,Soft maple,-1.9123,2.3651
+6,Birch,-1.9123,2.3651
+7,Mixed hardwood,-2.48,2.4835
+8,Hard maple,-2.0127,2.4342
+9,Hickory,-2.0127,2.4342
+10,Beech,-2.0127,2.4342
+11,Oak,-2.0127,2.4342
+12,Cedar,-2.0336,2.2592
+13,Larch,-2.0336,2.2592
+14,Douglas-fir,-2.2304,2.4435
+15,True fir,-2.5384,2.4814
+16,Hemlock,-2.5384,2.4814
+17,Pine,-2.5356,2.4349
+18,Spruce,-2.0773,2.3323
+19,Grass,-1.00,1.00

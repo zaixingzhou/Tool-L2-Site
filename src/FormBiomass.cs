@@ -648,7 +648,7 @@ namespace LANDIS_II_Site
             //string OutputDirectory = OutputDir(cbSuccessionOption);// get the current succesion output directory
 
 
-            string InputSuccession = "Biomass";
+            
             string OutputDirectory = OutputParentDir(false);
 
 
@@ -782,7 +782,7 @@ namespace LANDIS_II_Site
 
         private void LoadRecordsCalOne(string OutputDirectory, string sitename = "Site.csv")
         {
-            string InputSuccession = "Biomass";
+            
             string OutputDirectory2 = @".\Output";
             sitename = "spp-biomass-log.csv";
 
@@ -1254,7 +1254,7 @@ namespace LANDIS_II_Site
 
                     values = lines[i].Split(',');
                     if (values[0] == "SimulationYears") tbSimYears.Text = values[1];
-                    // if (values[0] == "StartYear") tbStartYr.Text = values[1];
+                    //if (values[0] == "StartYear") tbStartYr.Text = values[1];
                     if (values[0] == "TimeStep") tbTimestep.Text = values[1];
 
                     if (values[0] == "SeedingAlgorithm") cbSeedingAlg.SelectedItem = values[1];

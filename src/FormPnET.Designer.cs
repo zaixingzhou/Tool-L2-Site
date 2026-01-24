@@ -182,7 +182,7 @@ namespace LANDIS_II_Site
             this.radioButtonBayesian.AutoSize = true;
             this.radioButtonBayesian.Location = new System.Drawing.Point(13, 178);
             this.radioButtonBayesian.Name = "radioButtonBayesian";
-            this.radioButtonBayesian.Size = new System.Drawing.Size(156, 21);
+            this.radioButtonBayesian.Size = new System.Drawing.Size(150, 20);
             this.radioButtonBayesian.TabIndex = 46;
             this.radioButtonBayesian.Text = "Bayesian calibration";
             this.radioButtonBayesian.UseVisualStyleBackColor = true;
@@ -204,7 +204,7 @@ namespace LANDIS_II_Site
             this.radioButtonMultiple.AutoSize = true;
             this.radioButtonMultiple.Location = new System.Drawing.Point(13, 58);
             this.radioButtonMultiple.Name = "radioButtonMultiple";
-            this.radioButtonMultiple.Size = new System.Drawing.Size(154, 21);
+            this.radioButtonMultiple.Size = new System.Drawing.Size(147, 20);
             this.radioButtonMultiple.TabIndex = 45;
             this.radioButtonMultiple.Text = "Multiple Parameters";
             this.radioButtonMultiple.UseVisualStyleBackColor = true;
@@ -215,7 +215,7 @@ namespace LANDIS_II_Site
             this.radioButtonOnePara.Checked = true;
             this.radioButtonOnePara.Location = new System.Drawing.Point(12, 31);
             this.radioButtonOnePara.Name = "radioButtonOnePara";
-            this.radioButtonOnePara.Size = new System.Drawing.Size(126, 21);
+            this.radioButtonOnePara.Size = new System.Drawing.Size(119, 20);
             this.radioButtonOnePara.TabIndex = 44;
             this.radioButtonOnePara.TabStop = true;
             this.radioButtonOnePara.Text = "One Parameter";
@@ -1232,7 +1232,7 @@ namespace LANDIS_II_Site
             // 
             // tbStartYr
             // 
-            this.tbStartYr.Location = new System.Drawing.Point(133, 57);
+            this.tbStartYr.Location = new System.Drawing.Point(133, 80);
             this.tbStartYr.Margin = new System.Windows.Forms.Padding(4);
             this.tbStartYr.Name = "tbStartYr";
             this.tbStartYr.Size = new System.Drawing.Size(52, 22);
@@ -1242,7 +1242,7 @@ namespace LANDIS_II_Site
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(48, 84);
+            this.label1.Location = new System.Drawing.Point(48, 55);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 23);
@@ -1252,7 +1252,7 @@ namespace LANDIS_II_Site
             // 
             // tbTimestep
             // 
-            this.tbTimestep.Location = new System.Drawing.Point(133, 84);
+            this.tbTimestep.Location = new System.Drawing.Point(133, 55);
             this.tbTimestep.Margin = new System.Windows.Forms.Padding(4);
             this.tbTimestep.Name = "tbTimestep";
             this.tbTimestep.Size = new System.Drawing.Size(52, 22);
@@ -1262,7 +1262,7 @@ namespace LANDIS_II_Site
             // 
             // labelStartYr
             // 
-            this.labelStartYr.Location = new System.Drawing.Point(8, 57);
+            this.labelStartYr.Location = new System.Drawing.Point(8, 80);
             this.labelStartYr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStartYr.Name = "labelStartYr";
             this.labelStartYr.Size = new System.Drawing.Size(115, 23);

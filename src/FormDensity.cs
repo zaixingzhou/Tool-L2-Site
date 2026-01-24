@@ -45,7 +45,8 @@ namespace LANDIS_II_Site
         private void InitializeComponentPlus()
         {
             // set default values for some components
-
+                        
+            
             // load the example for initilization
             string fileName = "Site_input_example.csv";
             string FileExample = Path.Combine(InterDirectory, fileName);
@@ -84,11 +85,11 @@ namespace LANDIS_II_Site
         {
             if (!cbReplicate.Checked) // single run
             {
-             //   BuildLandisInput();                    // build landis package
+                BuildLandisInput();                    // build landis package
 
-                RunLandis();                         // run the model in the traditional landis way
+               // RunLandis();                         // run the model in the traditional landis way
 
-                CopyResultsFromLandis();              //  copy the results to the sitetool output
+             ////   CopyResultsFromLandis();              //  copy the results to the sitetool output
 
              //   LoadResultSite();                     // load site results from the sitetool output
 
@@ -467,25 +468,7 @@ namespace LANDIS_II_Site
         private void btDeleteSppLifeHistorySpp_Click(object sender, EventArgs e)
         {
             // Check if a row is selected
-            if (dataGridViewSppLifeHistory.SelectedRows.Count > 0)
-            {
-                // Delete the selected rows
-                foreach (DataGridViewRow row in dataGridViewSppLifeHistory.SelectedRows)
-                {
-                    if (!row.IsNewRow) // Ensure it is not the "new row" placeholder
-                    {
-                        dataGridViewSppLifeHistory.Rows.Remove(row);
-                    }
-                }
-
-                // Update row numbers after deletion
-                //UpdateRowNumbers();
-            }
-            else
-            {
-                MessageBox.Show("Please select a row to delete.", "Delete Row", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
+            DGVDeleteRow(dataGridViewSppLifeHistory);            
         }
 
         // initialize dataGridViewSppEcophysi
@@ -566,24 +549,7 @@ namespace LANDIS_II_Site
         private void btDeleteSppEcophysiSpp_Click(object sender, EventArgs e)
         {
             // Check if a row is selected
-            if (dataGridViewSppEcophysi.SelectedRows.Count > 0)
-            {
-                // Delete the selected rows
-                foreach (DataGridViewRow row in dataGridViewSppEcophysi.SelectedRows)
-                {
-                    if (!row.IsNewRow) // Ensure it is not the "new row" placeholder
-                    {
-                        dataGridViewSppEcophysi.Rows.Remove(row);
-                    }
-                }
-
-                // Update row numbers after deletion
-                //UpdateRowNumbers();
-            }
-            else
-            {
-                MessageBox.Show("Please select a row to delete.", "Delete Row", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            DGVDeleteRow(dataGridViewSppEcophysi);           
         }
 
         public static List<Dictionary<string, object>> ReadCsvAsDictionary(string filePath)
@@ -649,7 +615,7 @@ namespace LANDIS_II_Site
             //string OutputDirectory = OutputDir(cbSuccessionOption);// get the current succesion output directory
 
 
-            string InputSuccession = "Biomass";
+            
             string OutputDirectory = OutputParentDir(false);
 
 
@@ -783,7 +749,7 @@ namespace LANDIS_II_Site
 
         private void LoadRecordsCalOne(string OutputDirectory, string sitename = "Site.csv")
         {
-            string InputSuccession = "Biomass";
+            
             string OutputDirectory2 = @".\Output";
             sitename = "spp-biomass-log.csv";
 
@@ -1011,7 +977,7 @@ namespace LANDIS_II_Site
         public void SaveInputSite(string filePath = @"Inter\Site_input.csv")
         {
             //filePath = "Inter\Site_input.csv"; // Path to the file
-            string SuccessionOption = "Biomass"; // set for different succession extension
+            string SuccessionOption = "Density-Succession"; // set for different succession extension
 
             string Fieldname = " ";
 
@@ -1043,7 +1009,7 @@ namespace LANDIS_II_Site
                 ///////////////// Output Extensions
                 writer.WriteLine(strseperater + "Output Extension");
 
-                string strtemp = cbOutputBiomass.Checked ? "Yes" : "No";
+                string strtemp = cbOutputDensity.Checked ? "Yes" : "No";
                 writer.WriteLine("OutputExtension," + strtemp);
                 //writer.WriteLine("RandomSeedSet," + tbRandSeed.Text);  // 
 
@@ -1065,8 +1031,8 @@ namespace LANDIS_II_Site
                 writer.WriteLine(strseperater + "Simulation Parameters");
 
                 writer.WriteLine("SimulationYears," + tbSimYears.Text);  // simulation years
-                //writer.WriteLine("StartYear," + tbStartYr.Text);  // 
-                writer.WriteLine("TimeStep," + tbTimestep.Text);  // 
+                writer.WriteLine("TimeStep," + tbTimestep.Text);  //
+                writer.WriteLine("StartYear," + tbStartYr.Text);  // 
                 writer.WriteLine("SeedingAlgorithm," + cbSeedingAlg.Text);  // 
 
                 strtemp = cbRandSeed.Checked ? "Yes" : "No";
@@ -1080,7 +1046,8 @@ namespace LANDIS_II_Site
                 /////////////////save Ecoregion data
                 writer.WriteLine(strseperater + "Ecoregion Parameters");
                 writer.WriteLine("ClimateFile," + tbClimateFile.Text);  //
-                writer.WriteLine("AET(mm)," + tbAET.Text);  //
+                //writer.WriteLine("AET(mm)," + tbAET.Text);  //
+                writer.WriteLine("Latitude," + tbLatitude.Text);  //
 
                 // SaveDataGridViewToCsv(writer, dataGridViewLightTable, false);  // save all table data
 
@@ -1089,23 +1056,6 @@ namespace LANDIS_II_Site
                 SaveDataGridViewToCsv(writer, dataGridViewInitialComm);  // save all table data
 
 
-                /////////////////save Sufficient Light Table
-                writer.WriteLine(strseperater + "Sufficient Light Table");
-                // SaveDataGridViewToCsv(writer, dataGridViewLightTable, false);  // save all table data
-                SaveDataGridViewToCsv(writer, dataGridViewLightTable);  // save all table data
-
-                /////////////////save Minimum Biomass by Shade
-                writer.WriteLine(strseperater + "Minimum Biomass by Shade");
-                SaveDataGridViewToCsv(writer, dataGridViewMinRelativeBiomass);  // save all table data
-
-                /////////////////save FireReductionParameters
-                writer.WriteLine(strseperater + "FireReductionParameters");
-                SaveDataGridViewToCsv(writer, dataGridViewFireRemove);  // save all table data
-
-                /////////////////save HarvestReductionParameters
-                writer.WriteLine(strseperater + "HarvestReductionParameters");
-                SaveDataGridViewToCsv(writer, dataGridViewHarvestRemove);  // save all table data
-
                 ///////////////// save species life history data from the table
                 writer.WriteLine(strseperater + "Species Life History Parameters");
                 SaveDataGridViewToCsv(writer, dataGridViewSppLifeHistory);
@@ -1113,6 +1063,26 @@ namespace LANDIS_II_Site
                 //////////////// save species Ecophysiological data from the table
                 writer.WriteLine(strseperater + "Species Ecophysiological Parameters");
                 SaveDataGridViewToCsv(writer, dataGridViewSppEcophysi);
+
+                /////////////////save Disturbance Table
+                writer.WriteLine(strseperater + "Disturbance Table");
+                // SaveDataGridViewToCsv(writer, dataGridViewLightTable, false);  // save all table data
+                SaveDataGridViewToCsv(writer, dataGridViewDistubTable);  // save all table data
+
+                /////////////////save GSO threshold
+                writer.WriteLine(strseperater + "GSO threshold");                
+                writer.WriteLine("GSO1,GSO2,GSO3,GSO4");
+                writer.WriteLine(textBoxGSO1.Text+"," + textBoxGSO2.Text + 
+                    "," + textBoxGSO3.Text + "," + textBoxGSO4.Text);
+
+                /////////////////save Diameter table
+                writer.WriteLine(strseperater + "Diameter table");
+                SaveDataGridViewToCsv(writer, dataGridViewDiameterTable);  // save all table data
+
+                /////////////////save Biomass Allometry
+                writer.WriteLine(strseperater + "Biomass Allometry");
+                writer.WriteLine("minimum_DBH," +textBoxMinDBH.Text);
+                SaveDataGridViewToCsv(writer, dataGridViewMassAllo);  // save all table data
 
 
 
@@ -1154,20 +1124,6 @@ namespace LANDIS_II_Site
 
         }
 
-        private void MenuOpen_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
-                Title = "Open CSV File"
-            };
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                LoadInputFromCsv(openFileDialog.FileName);
-            }
-        }
-
         public void LoadInputFromCsv(string filePath)
         {
             try
@@ -1175,12 +1131,13 @@ namespace LANDIS_II_Site
 
                 string[] lines = File.ReadAllLines(filePath);
 
+                string searchPhrase = "<<";
+                int linelength = lines.Length;
 
                 // Succession extension
                 string[] values = lines[2].Split(','); // succession extension
                                                        // cbSuccessionOption.SelectedItem = values[1];  ZZX
-
-                string searchPhrase = "<<";
+              
 
 
 
@@ -1190,7 +1147,7 @@ namespace LANDIS_II_Site
                 int index = 0;
 
                 for (int ii = 0; ii < checkedListBoxDisturbance.Items.Count; ii++) checkedListBoxDisturbance.SetItemChecked(ii, false);
-                for (int i = startline; i < lines.Length; i++)
+                for (int i = startline; i < linelength; i++)
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
@@ -1210,7 +1167,7 @@ namespace LANDIS_II_Site
 
                 // Output extension
 
-                for (int i = startline; i < lines.Length; i++)
+                for (int i = startline; i < linelength; i++)
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
@@ -1220,13 +1177,13 @@ namespace LANDIS_II_Site
                     }
 
                     values = lines[i].Split(',');
-                    if (values[0] == "OutputExtension") cbOutputBiomass.Checked = values[1].Equals("Yes");
+                    if (values[0] == "OutputExtension") cbOutputDensity.Checked = values[1].Equals("Yes");
 
 
                 }
                 // Other extension
                 for (int ii = 0; ii < checkedListBoxExtensionOther.Items.Count; ii++) checkedListBoxExtensionOther.SetItemChecked(ii, false);
-                for (int i = startline; i < lines.Length; i++)
+                for (int i = startline; i < linelength; i++)
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
@@ -1245,7 +1202,7 @@ namespace LANDIS_II_Site
                 }
 
                 // Simulation Parameters
-                for (int i = startline; i < lines.Length; i++)
+                for (int i = startline; i < linelength; i++)
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
@@ -1255,8 +1212,9 @@ namespace LANDIS_II_Site
 
                     values = lines[i].Split(',');
                     if (values[0] == "SimulationYears") tbSimYears.Text = values[1];
-                    // if (values[0] == "StartYear") tbStartYr.Text = values[1];
                     if (values[0] == "TimeStep") tbTimestep.Text = values[1];
+                    if (values[0] == "StartYear") tbStartYr.Text = values[1];
+                    
 
                     if (values[0] == "SeedingAlgorithm") cbSeedingAlg.SelectedItem = values[1];
                     if (values[0] == "RandomSeedCheck") cbRandSeed.Checked = values[1].Equals("Yes");
@@ -1266,12 +1224,11 @@ namespace LANDIS_II_Site
 
                 }
 
-                //var record = new Dictionary<string, object>();
-
+                
                 // Ecoregion Parameters
 
                 //dataGridViewEcoPara.Rows.Clear();
-                for (int i = startline; i < lines.Length; i++)
+                for (int i = startline; i < linelength; i++)
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
@@ -1281,7 +1238,7 @@ namespace LANDIS_II_Site
 
                     values = lines[i].Split(',');
                     if (values[0] == "ClimateFile") tbClimateFile.Text = values[1];
-                    if (values[0] == "AET(mm)") tbAET.Text = values[1];
+                    if (values[0] == "Latitude") tbLatitude.Text = values[1];
 
                     // if (i > startline + 1) dataGridViewEcoPara.Rows.Add(values); // skip two lines above     
 
@@ -1292,7 +1249,7 @@ namespace LANDIS_II_Site
                 dataGridViewInitialComm.Rows.Clear();
                 dataGridViewInitialComm.Columns.Clear();
 
-                for (int i = startline; i < lines.Length; i++)
+                for (int i = startline; i < linelength; i++)
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
@@ -1310,117 +1267,15 @@ namespace LANDIS_II_Site
                     }
                     else dataGridViewInitialComm.Rows.Add(values);
                 }
-                dataGridViewInitialComm.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-                // SufficientLight table
-
-                dataGridViewLightTable.Rows.Clear();
-                dataGridViewLightTable.Columns.Clear();
-                for (int i = startline; i < lines.Length; i++)
-                {
-                    if (lines[i].Contains(searchPhrase))
-                    {
-                        startline = i + 1;  // new start line
-                        break;
-                    }
-
-                    values = lines[i].Split(',');
-                    if (i == startline)
-                    {
-                        foreach (string col in values)
-                        {
-                            dataGridViewLightTable.Columns.Add(col, col);
-                        }// first line is the headers for column names
-                    }
-                    else dataGridViewLightTable.Rows.Add(values);
-
-                }
-
-                dataGridViewLightTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
-
-                // MinRelativeBiomass table
-                /**/
-                dataGridViewMinRelativeBiomass.Rows.Clear();
-                dataGridViewMinRelativeBiomass.Columns.Clear();
-                for (int i = startline; i < lines.Length; i++)
-                {
-                    if (lines[i].Contains(searchPhrase))
-                    {
-                        startline = i + 1;  // new start line
-                        break;
-                    }
-
-                    values = lines[i].Split(',');
-                    if (i == startline)
-                    {
-                        foreach (string col in values)
-                        {
-                            dataGridViewMinRelativeBiomass.Columns.Add(col, col);
-                        }// first line is the headers for column names
-                    }
-                    else dataGridViewMinRelativeBiomass.Rows.Add(values);
-
-                }
-
-                dataGridViewMinRelativeBiomass.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
-
-                // Fire FireReductionParameters 
-                dataGridViewFireRemove.Rows.Clear();
-                dataGridViewFireRemove.Columns.Clear();
-                for (int i = startline; i < lines.Length; i++)
-                {
-                    if (lines[i].Contains(searchPhrase))
-                    {
-                        startline = i + 1;  // new start line
-                        break;
-                    }
-
-                    values = lines[i].Split(',');
-                    if (i == startline)
-                    {
-                        foreach (string col in values)
-                        {
-                            dataGridViewFireRemove.Columns.Add(col, col);
-                        }// first line is the headers for column names
-                    }
-                    else dataGridViewFireRemove.Rows.Add(values);
-
-                }
-
-                dataGridViewFireRemove.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
-
-                // HarvestReductionParameters
-                dataGridViewHarvestRemove.Rows.Clear();
-                dataGridViewHarvestRemove.Columns.Clear();
-                for (int i = startline; i < lines.Length; i++)
-                {
-                    if (lines[i].Contains(searchPhrase))
-                    {
-                        startline = i + 1;  // new start line
-                        break;
-                    }
-
-                    values = lines[i].Split(',');
-
-                    if (i == startline)
-                    {
-                        foreach (string col in values)
-                        {
-                            dataGridViewHarvestRemove.Columns.Add(col, col);
-                        }// first line is the headers for column names
-                    }
-                    else dataGridViewHarvestRemove.Rows.Add(values);
-
-                }
-
-                dataGridViewHarvestRemove.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                //dataGridViewInitialComm.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                AutoSizeColumnsToContent(dataGridViewInitialComm, padding: 6, maxColumnWidth: 200, rowHeaderWidth: 10);
 
                 // Species Life History Parameters
 
                 dataGridViewSppLifeHistory.Rows.Clear();
                 dataGridViewSppLifeHistory.Columns.Clear();
 
-                for (int i = startline; i < lines.Length; i++)
+                for (int i = startline; i < linelength; i++)
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
@@ -1438,15 +1293,15 @@ namespace LANDIS_II_Site
                     }
                     else dataGridViewSppLifeHistory.Rows.Add(values);
                 }
-                dataGridViewSppLifeHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
+                //dataGridViewSppLifeHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                AutoSizeColumnsToContent(dataGridViewSppLifeHistory, padding: 6, maxColumnWidth: 200, rowHeaderWidth: 10);
                 // Species Ecophysiological Parameters
 
                 dataGridViewSppEcophysi.Rows.Clear();
                 dataGridViewSppEcophysi.Columns.Clear();
                 //DataTable table = new DataTable();
 
-                for (int i = startline; i < lines.Length; i++)
+                for (int i = startline; i < linelength; i++)
                 {
                     if (lines[i].Contains(searchPhrase))
                     {
@@ -1466,9 +1321,115 @@ namespace LANDIS_II_Site
                     else dataGridViewSppEcophysi.Rows.Add(values);
 
                 }
-                //dataGridViewSppEcophysi.DataSource = table;
+                
                 dataGridViewSppEcophysi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                // MessageBox.Show(zzx, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AutoSizeColumnsToContent(dataGridViewSppEcophysi, padding: 6, maxColumnWidth: 200, rowHeaderWidth: 10);
+                
+
+                // Disturbance table
+
+                dataGridViewDistubTable.Rows.Clear();
+                dataGridViewDistubTable.Columns.Clear();
+                for (int i = startline; i < linelength; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i + 1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    if (i == startline)
+                    {
+                        foreach (string col in values)
+                        {
+                            dataGridViewDistubTable.Columns.Add(col, col);
+                        }// first line is the headers for column names
+                    }
+                    else dataGridViewDistubTable.Rows.Add(values);
+
+                }
+
+                //dataGridViewDistubTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+                AutoSizeColumnsToContent(dataGridViewDistubTable, padding: 6, maxColumnWidth: 200, rowHeaderWidth: 10);
+
+                // GSO threshold
+
+                for (int i = startline; i < linelength; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i + 1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    textBoxGSO1.Text = values[0];
+                    textBoxGSO2.Text = values[1];
+                    textBoxGSO3.Text = values[2];
+                    textBoxGSO4.Text = values[3];
+
+                }
+
+
+
+                // Diameter table
+                /**/
+                dataGridViewDiameterTable.Rows.Clear();
+                dataGridViewDiameterTable.Columns.Clear();
+                //comboBoxSpeciesFill();
+
+                for (int i = startline; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i + 1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    if (i == startline)
+                    {
+                        foreach (string col in values)
+                        {
+                            dataGridViewDiameterTable.Columns.Add(col, col);
+                        }// first line is the headers for column names
+                    }
+                    else dataGridViewDiameterTable.Rows.Add(values);
+
+                }
+
+                //dataGridViewDiameterTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                AutoSizeColumnsToContent(dataGridViewDiameterTable, padding: 6, maxColumnWidth: 200, rowHeaderWidth:10);
+
+                // biomass Allometry
+                dataGridViewMassAllo.Rows.Clear();
+                dataGridViewMassAllo.Columns.Clear();
+                for (int i = startline; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains(searchPhrase))
+                    {
+                        startline = i + 1;  // new start line
+                        break;
+                    }
+
+                    values = lines[i].Split(',');
+                    if (i == startline) 
+                    { textBoxMinDBH.Text = values[1]; }
+                    else if (i == startline + 1)
+                    {
+                        foreach (string col in values)
+                        {
+                            dataGridViewMassAllo.Columns.Add(col, col);
+                        }// first line is the headers for column names
+                    }
+                    else dataGridViewMassAllo.Rows.Add(values);
+
+                }
+
+                //dataGridViewHarvestRemove.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                AutoSizeColumnsToContent(dataGridViewMassAllo, padding: 6, maxColumnWidth: 200, rowHeaderWidth: 10);
+
 
             }
             catch (Exception ex)
@@ -1535,8 +1496,7 @@ namespace LANDIS_II_Site
         {
             string fileName = "site_run.bat";
             string filePath = Path.Combine(InputDirectory, fileName);
-
-            //string InterDirectory = @".\Inter";
+            
             string Sourcefile = Path.Combine(InterDirectory, fileName); ;
 
             File.Copy(Sourcefile, filePath, true);
@@ -1567,7 +1527,7 @@ namespace LANDIS_II_Site
 
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine("Species         site_SpeciesCore.txt");
+                writer.WriteLine("Species         site_Species.txt");
                 writer.WriteLine("Ecoregions      site_Ecoregions.txt");
                 writer.WriteLine("EcoregionsMap   site_EcoregionsMap.img");
                 writer.WriteLine("CellLength  100 << meters, 100 x 100 m = 1 ha");
@@ -1577,7 +1537,7 @@ namespace LANDIS_II_Site
                 writer.WriteLine(">> Succession Extension     Initialization File");
                 writer.WriteLine(">> --------------------     -------------------");
 
-                string successiontext = "Biomass Succession";
+                string successiontext = "Density Succession";
 
 
                 writer.WriteLine("\"" + successiontext + "\"" + "    site_Succession.txt");
@@ -1605,7 +1565,7 @@ namespace LANDIS_II_Site
                     writer.WriteLine(strout);
                 }
                 */
-                if (cbOutputBiomass.Checked) writer.WriteLine("\"Output Biomass\"" + "     " + "site_Output_Extension.txt");
+                if (cbOutputDensity.Checked) writer.WriteLine("\"Density Output\"" + "     " + "site_Output_Extension.txt");
                 writer.WriteLine(); // empty line
                 if (cbRandSeed.Checked) writer.WriteLine($"RandomNumberSeed  {tbRandSeed.Text}");
                 ///////////////////////////////////// end of site_Scenario.txt
@@ -1621,12 +1581,14 @@ namespace LANDIS_II_Site
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 // Write the header row
-                writer.WriteLine("LandisData  \"Biomass Succession\"");
+                writer.WriteLine("LandisData  \"Density-Succession\"");
 
                 writer.WriteLine(); // empty line
-
+                
+                writer.WriteLine("Density-Succession       Value");
                 writer.WriteLine(">>-------------------------------------");
                 writer.WriteLine($"Timestep          {tbTimestep.Text}");
+                writer.WriteLine($"StartYear          {tbStartYr.Text}");
 
                 writer.WriteLine($"SeedingAlgorithm  {cbSeedingAlg.Text}");
 
@@ -1636,58 +1598,31 @@ namespace LANDIS_II_Site
 
 
 
-                writer.WriteLine("InitialCommunities      site_InitialCommunities.csv");
+                writer.WriteLine("InitialCommunities      site_InitialCommunities.txt");
                 writer.WriteLine("InitialCommunitiesMap   site_InitialCommunitiesMap.img");
 
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine("ClimateConfigFile		site_ClimateGenerator.txt");
-
+                writer.WriteLine("DensitySpeciesParameters		site_SpeciesPhysiology.txt");
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine(">> CalibrateMode 		yes");
-                ////  LIFE HISTORY PARAMETERS
-                writer.WriteLine(">> LIFE HISTORY PARAMETERS");
-                writer.WriteLine(">>-------------------------------------");
-                writer.WriteLine(); // empty line
-                // MinRelativeBiomass
-                writer.WriteLine("MinRelativeBiomass");
-                writer.WriteLine(">> Shading %MaxBiomass");
-                writer.WriteLine(">>-------------------------------------");
-                writer.WriteLine("     eco999");
-                SaveDataGridViewToCsv(writer, dataGridViewMinRelativeBiomass, false, "   ");
+                writer.WriteLine("EcoregionParameters		site_EcoregionParameters.txt");
                 writer.WriteLine(); // empty line
 
-                // SufficientLight
-                writer.WriteLine("SufficientLight");
-                writer.WriteLine(">> ShadeTol.,Shading0,Shading1,Shading2,Shading3,Shading4,Shading5");
-                writer.WriteLine(">>-------------------------------------");
-                SaveDataGridViewToCsv(writer, dataGridViewLightTable, false, "   ");
+                writer.WriteLine("DynamicEcoregionFile		site_DynamicEcoregionInput.txt");
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine("SpeciesDataFile site_SpeciesPhysiology.csv");
+                writer.WriteLine("DynamicInputFile		site_Establishment_probability.txt");
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine("EcoregionParameters");
-                writer.WriteLine(">>	AET (mm)");
-                writer.WriteLine($"eco999   {tbAET.Text}");
+                writer.WriteLine("DiameterInputFile		site_Ecoregion_diameter_table.txt");
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine("SpeciesEcoregionDataFile   site_SppEcoregionData.csv");
+                writer.WriteLine("DisturbanceReductions		site_Disturbance_reductions.txt");
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine("FireReductionParameters");
-                writer.WriteLine(">> Severity WoodLitterRemove LitterRemove");
-                writer.WriteLine(">>-------------------------------------");
-                SaveDataGridViewToCsv(writer, dataGridViewFireRemove, false, "   ");
-                writer.WriteLine(); // empty line
-
-                writer.WriteLine("HarvestReductionParameters");
-                writer.WriteLine(">> Method WoodLitterRemove LitterRemove WoodRemove LeafRemove");
-                writer.WriteLine(">>-------------------------------------");
-                SaveDataGridViewToCsv(writer, dataGridViewHarvestRemove, false, "   ");
-                writer.WriteLine(); // empty line
-
+                writer.WriteLine("BiomassVariableFile		site_BioMassCoef.txt");
+                
                 ///////////////////////////////////// end of site_Succession.txt
                 ///
             }
@@ -1699,7 +1634,7 @@ namespace LANDIS_II_Site
         private void BuildSuccessionSpecies()
         {
             //////////////////// build site_Species.txt
-            string fileName = "site_SpeciesCore.txt";
+            string fileName = "site_Species.txt";
             string filePath = Path.Combine(InputDirectory, fileName);
             using (StreamWriter writer = new StreamWriter(filePath))
             {
@@ -1708,7 +1643,7 @@ namespace LANDIS_II_Site
 
                 writer.WriteLine(); // empty line
 
-                writer.WriteLine(">>species Longevity sex_Maturity seed_disper_Effective seed_disp_Maximum veg_ReprodProb sprout_age_Min sprout_age_Max post_fire_Regen");
+                writer.WriteLine(">>species Longevity sex_Maturity shade_Tol. fire_Tol. seed_disper_Effective seed_disp_Maximum veg_ReprodProb sprout_age_Min sprout_age_Max post_fire_Regen");
                 writer.WriteLine(">>---------------------------------------------------");
 
 
@@ -1752,87 +1687,224 @@ namespace LANDIS_II_Site
 
         private void BuildSuccessionSpeciesPhysiology()
         {
-
-
-
-
             // Choose the column names you want to include
-            // SpeciesCode,LeafLongevity,WoodDecayRate,MortalityCurve,GrowthCurve,LeafLignin,ShadeTolerance,FireTolerance,
-            string[] selectedColumns = { "SpeciesCode", "LeafLongevity", "WoodDecayRate" , "MortalityCurve",
-                                        "GrowthCurve", "LeafLignin", "ShadeTolerance", "FireTolerance"};
+
+            //////////////////// build site_SpeciesPhysiology.txt
+            // DensitySpeciesParameters SpType BiomassClass MaxDia MaxSDI TotalSeed CarbonCoef 
+            string[] selectedColumns = { "DensitySpeciesParameters", "SpType", "BiomassClass", "MaxDia",
+                                        "MaxSDI", "TotalSeed", "CarbonCoef"};
             // "ShadeTolerance", "FireTolerance","ProbEstablish","ProbMortality"};
-
-
-            //////////////////// build site_PnETSpeciesParameters.txt
-            string fileName = "site_SpeciesPhysiology.csv";
+                        
+            string fileName = "site_SpeciesPhysiology.txt";   
+            
             string filePath = Path.Combine(InputDirectory, fileName);
+
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                SaveDataGridViewToCsv(writer, SubsetDataGridView(dataGridViewSppEcophysi, selectedColumns), true, ",");
+                writer.WriteLine("LandisData  DensitySpeciesParameters");
+
+                writer.WriteLine(); // empty line
+
+                  SaveDataGridViewToCsv(writer, SubsetDataGridView(dataGridViewSppEcophysi, selectedColumns), true, " ");
+                //SaveDataGridViewToCsv(writer, dataGridViewSppEcophysi, true, " ");
+
+            }
+            //////////////////// build site_Establishment_probability.txt
+
+            string[] selectedColumns2 = { "DensitySpeciesParameters", "ProbEst" };
+            var dataGridView = SubsetDataGridView(dataGridViewSppEcophysi, selectedColumns2);
+            string sep = " ";
+
+            fileName = "site_Establishment_probability.txt";
+
+            filePath = Path.Combine(InputDirectory, fileName);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine("LandisData  \"Dynamic Input Data\"");
+
+                writer.WriteLine(); // empty line
+
+                writer.WriteLine(">> Year Landtype Species ProbEst");
+                writer.WriteLine(">>---------------------------------------------------");
+
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (!row.IsNewRow) // Skip the placeholder row
+                    {
+                        writer.Write("0   eco999 ");  // for year, landtype
+                        for (int i = 0; i < dataGridView.ColumnCount; i++)
+                        {
+                            writer.Write(row.Cells[i].Value);
+                            if (i < dataGridView.ColumnCount - 1) writer.Write(sep);
+                        }
+                        writer.WriteLine();
+                    }
+                }
+
+                //SaveDataGridViewToCsv(writer, SubsetDataGridView(dataGridViewSppEcophysi, selectedColumns), false, " ");
+                //SaveDataGridViewToCsv(writer, dataGridViewSppEcophysi, true, " ");
 
             }
 
             ///////////////////////////////////// end of site_PnETSpeciesParameters.txt
         }
-
-        private void BuildSuccessionSppEcoregionData()
+        private void BuildSuccessionDisturbanceRed()
         {
-            // Choose the column names you want to include
-            // SpeciesCode,LeafLongevity,WoodDecayRate,MortalityCurve,GrowthCurve,LeafLignin,ShadeTolerance,FireTolerance,
-            string[] selectedColumns = { "SpeciesCode", "ProbEstablish", "ProbMortality", "ANPPmax", "BiomassMax" };
-
-            var dataGridView = dataGridViewSppEcophysi;
-
-            DataGridView dataGridViewSubset = new DataGridView();
-            dataGridViewSubset = SubsetDataGridView(dataGridViewSppEcophysi, selectedColumns);
-            int insertIndex = 0;
-            dataGridViewSubset.Columns.Insert(insertIndex, new DataGridViewTextBoxColumn
-            {
-                Name = "Year",
-                HeaderText = "Year",
-                ValueType = typeof(int)
-            });
-            insertIndex = 1;
-
-            dataGridViewSubset.Columns.Insert(insertIndex, new DataGridViewTextBoxColumn
-            {
-                Name = "EcoregionName",
-                HeaderText = "EcoregionName",
-                ValueType = typeof(string)
-            });
-            //dataGridViewSubset.Columns.Add("EcoregionName", "EcoregionName");
-            foreach (DataGridViewRow row in dataGridViewSubset.Rows)
-            {
-                if (!row.IsNewRow) // skip the empty row for new input
-                {
-                    row.Cells["Year"].Value = 0;
-                    row.Cells["EcoregionName"].Value = "eco999";
-                }
-            }
-
-
-            //////////////////// build site_PnETSpeciesParameters.txt
-            string fileName = "site_SppEcoregionData.csv";
+            //////////////////// build site_Disturbance_reductions.txt
+            string fileName = "site_Disturbance_reductions.txt";
             string filePath = Path.Combine(InputDirectory, fileName);
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                SaveDataGridViewToCsv(writer, dataGridViewSubset, true, ",");
+                // Write the header row
+                writer.WriteLine("LandisData  DisturbanceReductions");
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">>---------------------------------------------------");
+                
+                writer.WriteLine("DisturbanceReductions fire wind harvest bda");            
+
+                SaveDataGridViewToCsv(writer, dataGridViewDistubTable, false, " ");
+            ///////////////////////////////////// end of site_Disturbance_reductions.txt
+    
+            }
+        }
+
+        private void BuildSuccessionGSO()
+        {
+            //////////////////// build site_DynamicEcoregionInput.txt
+            string fileName = "site_DynamicEcoregionInput.txt";
+            string filePath = Path.Combine(InputDirectory, fileName);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                // Write the header row
+                writer.WriteLine("LandisData  \"Dynamic Ecoregion Input Data\"");
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">> Year Ecoregion   GSO1    GSO2    GSO3    GSO4");
+                writer.WriteLine(">>---------------------------------------------------");
+
+                writer.WriteLine("0 eco999 " + textBoxGSO1.Text + " " + textBoxGSO2.Text + " "
+                    +textBoxGSO3.Text + " "+ textBoxGSO4.Text);
+
+                
+                ///////////////////////////////////// end of .txt
 
             }
+        }
 
-            ///////////////////////////////////// end of site_PnETSpeciesParameters.txt
+        private void BuildSuccessionDiameterTable()
+        {
+            //////////////////// build site_Ecoregion_diameter_table.txt
+            string fileName = "site_Ecoregion_diameter_table.txt";
+            string filePath = Path.Combine(InputDirectory, fileName);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                // Write the header row
+                writer.WriteLine("LandisData  \"EcoregionDiameterTable\"");
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">> Ecoregion Species  Age Diameter");
+                writer.WriteLine(">>---------------------------------------------------");
+
+                //SaveDataGridViewToCsv(writer, dataGridViewDiameterTable, false, "   ");
+                var dataGridView = dataGridViewDiameterTable;
+                string sep = " ";
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (!row.IsNewRow) // Skip the placeholder row
+                    {
+                        writer.Write("eco999 ");  // for year, landtype
+                        for (int i = 0; i < dataGridView.ColumnCount; i++)
+                        {
+                            writer.Write(row.Cells[i].Value);
+                            if (i < dataGridView.ColumnCount - 1) writer.Write(sep);
+                        }
+                        writer.WriteLine();
+                    }
+                }
+                ///////////////////////////////////// end of .txt
+
+            }
+        }
+
+        private void BuildSuccessionMassAllometry()
+        {
+            //////////////////// build site_BioMassCoef.txt
+            string fileName = "site_BioMassCoef.txt";
+            string filePath = Path.Combine(InputDirectory, fileName);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                // Write the header row
+                writer.WriteLine("LandisData  BiomassCoefficients");
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">> species classification used to calculate Biomass");
+                writer.WriteLine("Number_of_species_class 19");
+                writer.WriteLine("minimum_DBH_for_calculating_biomass  " + textBoxMinDBH.Text);
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">> V0   V1     Type of Species");
+
+                //SaveDataGridViewToCsv(writer, dataGridViewDiameterTable, false, "   ");
+                var dataGridView = dataGridViewMassAllo;
+                string sep = " ";
+                int colcount = dataGridView.ColumnCount;
+                string[] cellstr = new string[4]; // to store cell values
+
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (!row.IsNewRow) // Skip the placeholder row
+                    {
+                        
+                        for (int i = 0; i < colcount; i++)
+                        {
+                            cellstr[i] = (string)row.Cells[i].Value;                           
+                            
+                        }                        
+                        writer.WriteLine(cellstr[2] + sep + cellstr[3]+ sep +
+                            "  >>"+ cellstr[0] +"-"+cellstr[1]);
+                    }
+                }
+                ///////////////////////////////////// end of .txt
+
+            }
+        }
+        
+        private void BuildSuccessionSppEcoregionData()
+        {
+            //////////////////// build site_EcoregionParameters.txt
+            string fileName = "site_EcoregionParameters.txt";
+            string filePath = Path.Combine(InputDirectory, fileName);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+
+                // Write the header row
+                writer.WriteLine("LandisData  EcoregionParameters");
+
+                writer.WriteLine(); // empty line
+
+                writer.WriteLine("EcoregionParameters ClimateFileName Latitude");
+                writer.WriteLine("eco999 site_climate.txt " + tbLatitude.Text);
+
+                ///////////////////////////////////// end of site_EcoregionParameters.txt
+            }
         }
 
         private void BuildSuccessionInitialComm()
         {
             //////////////////// build site_InitialCommunities
-            string fileName = "site_InitialCommunities.csv";
+            string fileName = "site_InitialCommunities.txt";
             string filePath = Path.Combine(InputDirectory, fileName);
             using (StreamWriter writer = new StreamWriter(filePath))
             {
+                writer.WriteLine("LandisData  \"Initial Communities\"");
 
-                writer.WriteLine("MapCode,SpeciesName,CohortAge,CohortBiomass");
+                writer.WriteLine(); // empty line
 
+                writer.WriteLine("MapCode 10");
+
+                // Group rows by species and collect age/tree pairs
+                var grouped = new Dictionary<string, List<Tuple<string, string>>>(StringComparer.OrdinalIgnoreCase);
 
                 // Write the data rows
                 var dataGridView = dataGridViewInitialComm;
@@ -1841,19 +1913,48 @@ namespace LANDIS_II_Site
                 {
                     if (!row.IsNewRow) // Skip the placeholder row
                     {
-                        writer.Write("10,");
-                        for (int i = 0; i < dataGridView.ColumnCount; i++)
+                        string species = row.Cells["Species"].Value?.ToString().Trim();
+                        string ageLabel = row.Cells["Age"].Value?.ToString().Trim() ?? string.Empty;
+                        string treeNumber = row.Cells["TreeNumber"].Value?.ToString().Trim() ?? string.Empty;
+                        if (!grouped.TryGetValue(species, out var list))
                         {
-                            writer.Write(row.Cells[i].Value);
-                            if (i < dataGridView.ColumnCount - 1) writer.Write(",");
+                            list = new List<Tuple<string, string>>();
+                            grouped[species] = list;
                         }
-                        writer.WriteLine();
+                        list.Add(Tuple.Create(ageLabel, treeNumber));
                     }
                 }
+                        // Write out grouped species lines. Preserve insertion order by iterating rows to get species order.
+                var speciesOrder = new List<string>();
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    string species = row.Cells["Species"].Value?.ToString().Trim();
+                    if (string.IsNullOrEmpty(species)) continue;
+                    if (!speciesOrder.Contains(species, StringComparer.OrdinalIgnoreCase))
+                        speciesOrder.Add(species);
+                }
 
+                foreach (var species in speciesOrder)
+                {
+                    if (!grouped.TryGetValue(species, out var pairs) || pairs.Count == 0)
+                    {
+                        writer.WriteLine(species);
+                        continue;
+                    }
 
+                    // Optional: sort pairs by numeric age if Age column contains numeric values
+                    bool trySortByAge = pairs.All(p => int.TryParse(p.Item1, out _));
+                    if (trySortByAge)
+                    {
+                        pairs = pairs.OrderBy(p => int.Parse(p.Item1)).ToList();
+                    }
 
-                ///////////////////////////////////// end of BuildPnetSuccessionInitialComm.txt
+                    var parts = pairs.Select(p => $"{p.Item1} ({p.Item2})");
+                    writer.WriteLine($"{species} {string.Join(" ", parts)}");
+                }
+
+                ///////////////////////////////////// end of site_InitialCommunities.txt
                 ///
             }
 
@@ -1862,7 +1963,7 @@ namespace LANDIS_II_Site
         private void BuildSuccessionClimate()
         {
             //////////////////// build site_climate.txt
-            string fileName = "site_climate.csv";
+            string fileName = "site_Climate.txt";
             string filePath = Path.Combine(InputDirectory, fileName);
 
             string Sourcefile = tbClimateFile.Text;
@@ -1870,25 +1971,13 @@ namespace LANDIS_II_Site
             File.Copy(Sourcefile, filePath, true);
 
 
-            //////////////////// build site_ClimateGenerator.txt
-            fileName = "site_ClimateGenerator.txt";
-            filePath = Path.Combine(InputDirectory, fileName);
-
-
-            string InterDirectory = InterDir();// get the current succesion inter directory
-                                               //string fileName = "Site_Site.csv";
-            Sourcefile = Path.Combine(InterDirectory, fileName);
-
-
-
-            File.Copy(Sourcefile, filePath, true);
-
+ 
             ///////////////////////////////////// end of site_climate.txt
         }
 
         private void BuildSuccessionGISMap()
         {
-            string InterDirectory = InterDir();// get the current succesion inter directory
+           // string InterDirectory = InterDir();// get the current succesion inter directory
             //////////////////// EcoregionsMap.img
             string fileName = "site_EcoregionsMap.img";
             string filePath = Path.Combine(InputDirectory, fileName);
@@ -1949,9 +2038,10 @@ namespace LANDIS_II_Site
         public void BuildLandisInput()
         {
 
-            //string InputDirectory = InputDir();// get the current succesion input directory
+            
 
             BuildRunBatch();  // build the running batch file
+            
             BuildSuccessionScenario();                        // build scenario file
 
             BuildSuccessionSuccession();                      // build Succession file
@@ -1963,11 +2053,18 @@ namespace LANDIS_II_Site
 
             BuildSuccessionSpeciesPhysiology();           // build Species physiology file
             BuildSuccessionInitialComm();                     // build initial community file
+
+
             BuildSuccessionSppEcoregionData();                // build ecoregion spp file
+            BuildSuccessionDisturbanceRed();                // build DisturbanceReductions file
 
-            //
-            BuildOutputExtension();                // build ecoregion spp file
-
+            BuildSuccessionGSO();                // build GSO site_DynamicEcoregionInput file
+            BuildSuccessionDiameterTable();                // build EcoregionDiameterTable file
+            BuildSuccessionMassAllometry();                // build EcoregionDiameterTable file
+            
+                        //
+           //BuildOutputExtension();                // build site_Output_Extension file, not necessary
+                     
 
         }
 
@@ -1980,26 +2077,8 @@ namespace LANDIS_II_Site
 
         private void btDeleteCohortSpp_Click(object sender, EventArgs e)
         {
-            // Check if a row is selected
-            if (dataGridViewInitialComm.SelectedRows.Count > 0)
-            {
-                // Delete the selected rows
-                foreach (DataGridViewRow row in dataGridViewInitialComm.SelectedRows)
-                {
-                    if (!row.IsNewRow) // Ensure it is not the "new row" placeholder
-                    {
-                        dataGridViewInitialComm.Rows.Remove(row);
-                    }
-                }
-
-                // Update row numbers after deletion
-                //UpdateRowNumbers();
-            }
-            else
-            {
-                MessageBox.Show("Please select a row to delete.", "Delete Row", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
+            
+            DGVDeleteRow(dataGridViewInitialComm);           
         }
 
         private void btAddCohortAge_Click(object sender, EventArgs e)
@@ -2963,7 +3042,7 @@ namespace LANDIS_II_Site
         public void cbOutputBiomass_CheckedChanged(object sender, EventArgs e)
         {
             //OutputForm.Visible = cbOutputBiomass.Checked;
-            if (cbOutputBiomass.Checked)
+            if (cbOutputDensity.Checked)
             {
                 /*if (OutputForm == null || OutputForm.IsDisposed)
                  {
@@ -3001,5 +3080,167 @@ namespace LANDIS_II_Site
 
         }
 
+        private void comboBoxSpeciesFill(ComboBox cb)
+        {
+            // Populate comboBoxSpecies from the first column of dataGridViewSppLifeHistory (preserve order, unique)
+            cb.Items.Clear();
+            if (dataGridViewSppLifeHistory == null || dataGridViewSppLifeHistory.ColumnCount == 0)
+                return;
+
+            int firstCol = 0; // use column index 0 as the "species" column
+            var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            foreach (DataGridViewRow row in dataGridViewSppLifeHistory.Rows)
+            {
+                if (row == null || row.IsNewRow) continue;
+                var cellVal = row.Cells[firstCol].Value;
+                if (cellVal == null) continue;
+
+                string species = cellVal.ToString().Trim();
+                if (string.IsNullOrEmpty(species)) continue;
+
+                if (seen.Add(species))
+                    cb.Items.Add(species);
+            }
+
+            if (cb.Items.Count > 0)
+                cb.SelectedIndex = 0;
+        }
+        private void comboBoxSpecies_SelectedIndexChange()
+        { 
+          //  string selectedSpecies = comboBoxSpecies.Text;
+            // Filter dataGridViewDiameterTable to show only rows matching selectedSpecies
+
+
+
+        }
+
+        private void AutoSizeColumnsToContent(DataGridView dgv, int padding = 8, int maxColumnWidth = 300, int sampleRowLimit = 200, int rowHeaderWidth = 8)
+        {
+            if (dgv == null || dgv.ColumnCount == 0) return;
+
+            // Set small fixed row header width
+            dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgv.RowHeadersWidth = Math.Max(8, rowHeaderWidth); // ensure sensible minimum
+
+            // Turn off automatic sizing so our manual widths stick
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dgv.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+
+            // Use header font for header measurements
+            Font headerFont = dgv.ColumnHeadersDefaultCellStyle.Font ?? dgv.Font;
+
+            // For each column measure header + a sample of the cell values
+            for (int c = 0; c < dgv.ColumnCount; c++)
+            {
+                var col = dgv.Columns[c];
+                int bestWidth = TextRenderer.MeasureText(col.HeaderText ?? string.Empty, headerFont).Width;
+
+                int rowsToSample = Math.Min(dgv.Rows.Count, sampleRowLimit);
+                for (int r = 0; r < rowsToSample; r++)
+                {
+                    var cell = dgv.Rows[r].Cells[c];
+                    if (cell == null || cell.Value == null) continue;
+                    Font cellFont = cell.InheritedStyle.Font ?? dgv.Font;
+                    int cellWidth = TextRenderer.MeasureText(cell.Value.ToString(), cellFont).Width;
+                    if (cellWidth > bestWidth) bestWidth = cellWidth;
+                }
+
+                // Add padding and clamp to max
+                col.Width = Math.Min(maxColumnWidth, bestWidth + padding);
+                col.Resizable = DataGridViewTriState.True;
+            }
+            // Stretch the last column to fill the remaining horizontal space if columns don't fill the view.
+            // Compute available width for columns (client width minus row header and possible vertical scrollbar).
+            int clientWidth = dgv.ClientSize.Width;
+            int availableForColumns = clientWidth - dgv.RowHeadersWidth;
+
+            // Subtract scrollbar width if vertical scrollbar is visible
+            var vScroll = dgv.Controls.OfType<VScrollBar>().FirstOrDefault();
+            if (vScroll != null && vScroll.Visible)
+                availableForColumns -= SystemInformation.VerticalScrollBarWidth;
+
+            // Sum current columns width
+            int totalColumnsWidth = dgv.Columns.Cast<DataGridViewColumn>().Sum(col => col.Width);
+
+            if (availableForColumns > totalColumnsWidth && dgv.ColumnCount > 0)
+            {
+                int remaining = availableForColumns - totalColumnsWidth;
+                var lastCol = dgv.Columns[dgv.ColumnCount - 1];
+
+                // Increase last column width to fill remaining space (do not clamp here, because user requested fill)
+                lastCol.Width = lastCol.Width + remaining;
+            }
+        }
+
+        private void btAddDiameter_Click(object sender, EventArgs e)
+        {
+            dataGridViewDiameterTable.Rows.Add();
+        }
+
+        private void btDeleteDiameter_Click(object sender, EventArgs e)
+        {
+            DGVDeleteRow(dataGridViewDiameterTable);
+        }
+
+        private void DGVDeleteRow(DataGridView dgv)
+        {
+            // Check if a row is selected
+            if (dgv.SelectedRows.Count > 0)
+            {
+                // Delete the selected rows
+                foreach (DataGridViewRow row in dgv.SelectedRows)
+                {
+                    if (!row.IsNewRow) // Ensure it is not the "new row" placeholder
+                    {
+                        dgv.Rows.Remove(row);
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.", "Delete Row", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void btMassAlloReset_Click(object sender, EventArgs e)
+        {
+            // to reset mass allocation to default values
+            string fileName = "Site_BiomassAllometry.csv";
+            string filePath = Path.Combine(InterDirectory, fileName);            
+            string[] lines = File.ReadAllLines(filePath);
+
+            //string searchPhrase = "<<";
+            int linelength = lines.Length;
+            int startline = 1;
+            string[] values;
+
+            dataGridViewMassAllo.Rows.Clear();
+            dataGridViewMassAllo.Columns.Clear();
+            // biomass Allometry
+            for (int i = startline; i < lines.Length; i++)
+            {
+ 
+                values = lines[i].Split(',');
+                if (i == startline)
+                { textBoxMinDBH.Text = values[1]; }
+                else if (i == startline + 1)
+                {
+                    foreach (string col in values)
+                    {
+                        dataGridViewMassAllo.Columns.Add(col, col);
+                    }// first line is the headers for column names
+                }
+                else dataGridViewMassAllo.Rows.Add(values);
+
+            }
+
+            AutoSizeColumnsToContent(dataGridViewMassAllo, padding: 6, maxColumnWidth: 200, rowHeaderWidth: 10);
+
+
+        }
     }
 }
