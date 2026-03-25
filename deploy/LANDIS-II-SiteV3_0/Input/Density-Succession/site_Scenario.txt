@@ -9,7 +9,7 @@ CellLength  100 << meters, 100 x 100 m = 1 ha
 
 >> Succession Extension     Initialization File
 >> --------------------     -------------------
-"Density Succession"    site_Succession.txt
+"Density-Succession"    site_Succession.txt
 
 >> Disturbance Extensions     Initialization File
 >> --------------------     -------------------
@@ -18,4 +18,4 @@ CellLength  100 << meters, 100 x 100 m = 1 ha
 >> --------------------     -------------------
 "Density Output"     site_Output_Extension.txt
 
-RandomNumberSeed  6177882
+RandomNumberSeed  23

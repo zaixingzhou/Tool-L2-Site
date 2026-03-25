@@ -1599,8 +1599,10 @@ namespace LANDIS_II_Site
                 writer.WriteLine(">> Succession Extension     Initialization File");
                 writer.WriteLine(">> --------------------     -------------------");
 
-                //writer.WriteLine("\"" + InputPnETSuccession + "\"" + "    site_Succession.txt");
-                writer.WriteLine("\"" + "PnET-Succession" + "\"" + "    site_Succession.txt");   //
+                //string Succession;
+                
+                writer.WriteLine("\"" + InputPnETSuccession + "\"" + "    site_Succession.txt");
+                //writer.WriteLine("\"" + "PnET-Succession" + "\"" + "    site_Succession.txt");   //
 
                 writer.WriteLine(); // empty line
                 writer.WriteLine(">> Disturbance Extensions     Initialization File");

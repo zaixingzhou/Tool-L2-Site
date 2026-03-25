@@ -18,14 +18,14 @@ ReplicateNum,5
 ClimateFile,C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Inter\Density-Succession\site_Climate.txt
 Latitude,45
 <<<<<<<<<<<<<<<<<Initial communities
-Species,Age,TreeNumber
-querrubr,10,10
-querrubr,50,1
-pinubank,10,1
+SpeciesName,CohortAge,CohortBiomass,TreeNumber
+querrubr,10,0,10
+querrubr,50,0,1
+pinubank,10,0,1
 <<<<<<<<<<<<<<<<<Species Life History Parameters
-SpeciesCode,Longevity,sex_Maturity,shade_Tol.,fire_Tol.,seed_disper_Effective,seed_disp_Maximum,veg_ReprodProb,sprout_age_Min,sprout_age_Max,post_fire_Regen
-pinubank,100,15,1,3,20,100,0,0,0,serotiny
-querrubr,250,25,3,2,30,3000,0.5,20,200,resprout
+SpeciesCode,Longevity,sex_Maturity,seed_disper_Effective,seed_disp_Maximum,veg_ReprodProb,sprout_age_Min,sprout_age_Max,post_fire_Regen
+pinubank,100,15,20,100,0,0,0,serotiny
+querrubr,250,25,30,3000,0.5,20,200,resprout
 <<<<<<<<<<<<<<<<<Species Ecophysiological Parameters
 DensitySpeciesParameters,SpType,BiomassClass,MaxDia,MaxSDI,TotalSeed,CarbonCoef,ProbEst
 pinubank,1,17,70,1100,0,0.5,0.22

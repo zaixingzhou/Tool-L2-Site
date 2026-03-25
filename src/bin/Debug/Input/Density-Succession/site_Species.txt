@@ -2,5 +2,5 @@ LandisData  Species
 
 >>species Longevity sex_Maturity shade_Tol. fire_Tol. seed_disper_Effective seed_disp_Maximum veg_ReprodProb sprout_age_Min sprout_age_Max post_fire_Regen
 >>---------------------------------------------------
-pinubank   100   15   1   3   20   100   0   0   0   serotiny
-querrubr   250   25   3   2   30   3000   0.5   20   200   resprout
+pinubank   100   15   20   100   0   0   0   serotiny
+querrubr   250   25   30   3000   0.5   20   200   resprout

@@ -1,5 +1,4 @@
 LandisData  EcoregionParameters
 
-EcoregionParameters	 ClimateFileName Latitude
-
-eco999 	site_climate.txt		45
+EcoregionParameters ClimateFileName Latitude
+eco999 site_climate.txt 45

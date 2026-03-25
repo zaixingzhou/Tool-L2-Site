@@ -1,6 +1,4 @@
-MapCode,SpeciesName,CohortAge,CohortBiomass
-10,acerrubr,20,1800
-10,acerrubr,30,3600
-10,querrubr,15,1800
-10,querrubr,20,1800
-10,querrubr,35,9000
+MapCode,SpeciesName,CohortAge,CohortBiomass,TreeNumber
+10,querrubr,10,0,10
+10,querrubr,50,0,1
+10,pinubank,10,0,1

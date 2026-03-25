@@ -6,7 +6,7 @@ Timestep          10
 StartYear          2000
 SeedingAlgorithm  DensitySeeding
 
-InitialCommunities      site_InitialCommunities.txt
+InitialCommunities      site_InitialCommunities.csv
 InitialCommunitiesMap   site_InitialCommunitiesMap.img
 
 DensitySpeciesParameters		site_SpeciesPhysiology.txt

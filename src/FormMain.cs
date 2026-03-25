@@ -50,14 +50,25 @@ namespace LANDIS_II_Site
         {
             InitializeComponent();
 
+            // Stabilize scaling and sizing so RDP DPI doesn't push controls off-screen.
+            // Use None for no automatic scaling, or AutoScaleMode.Dpi if you want DPI scaling.
+           // this.AutoScaleMode = AutoScaleMode.None;
+         //   this.AutoSize = false;
+          //  this.StartPosition = FormStartPosition.CenterParent;
+          //  this.WindowState = FormWindowState.Normal; // ensure not maximized by default
+
+            // Make container panel behave: fill client area and show scrollbars when needed
+            //panelExtension.Dock = DockStyle.Fill;
+           // panelExtension.AutoScroll = true;
+
             // Apply the custom 3D renderer to the ToolStrip
             this.toolStrip.RenderMode = ToolStripRenderMode.Professional;
             this.toolStrip.Renderer = new ThreeDToolStripRenderer();
   
             // set default values for some components
           //  cbSuccessionOption.SelectedIndex = 0;  // PnET-Extension
-            //cbSuccessionOption.SelectedIndex = 1;  // Biomass-Extension
-            cbSuccessionOption.SelectedIndex = 2;  // Density-Extension
+            cbSuccessionOption.SelectedIndex = 1;  // Biomass-Extension
+            //cbSuccessionOption.SelectedIndex = 2;  // Density-Extension
 
 
         }
@@ -487,17 +498,20 @@ namespace LANDIS_II_Site
             
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
+          //  form.AutoScaleMode = AutoScaleMode.None; // avoid double autoscaling by parent
+          //  form.Dock = DockStyle.Fill;
 
             // Add form to panel
             panelExtension.Controls.Clear();
             panelExtension.Controls.Add(form);
+            panelExtension.AutoScroll = true;
             form.Show();
 
             // Resize panel to match form
             panelExtension.Size = form.Size;
 
             // Optional: Also resize parent form if needed
-            //this.ClientSize = panelExtension.Size;
+            this.ClientSize = panelExtension.Size;
         }
 
         private void buttonLandislog_Click(object sender, EventArgs e)

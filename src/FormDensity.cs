@@ -21,7 +21,7 @@ namespace LANDIS_II_Site
         private string InterDirectory
 
         {
-            get { return InterDir(InputSuccession); }
+            get { return InterDir(); }
         }
         private string InputDirectory
         {
@@ -56,6 +56,18 @@ namespace LANDIS_II_Site
 
             tabControlGraph.SelectedTab = tabPageCarbon; //             
 
+            // remove the graph tabs that are not ready yet (e.g., cohort and composition)
+            if (tabControlGraph != null && tabPageComp != null && tabControlGraph.TabPages.Contains(tabPageComp))
+            {
+                tabControlGraph.TabPages.Remove(tabPageComp);
+            }
+            if (tabControlGraph != null && tabPageCohorts != null && tabControlGraph.TabPages.Contains(tabPageCohorts))
+            {
+                tabControlGraph.TabPages.Remove(tabPageCohorts);
+            }
+
+
+
             checkedListBoxClimate.SetItemChecked(0, true);
             checkedListBoxCarbon.SetItemChecked(2, true);
             checkedListBoxComposition.SetItemChecked(0, true);
@@ -87,13 +99,13 @@ namespace LANDIS_II_Site
             {
                 BuildLandisInput();                    // build landis package
 
-               // RunLandis();                         // run the model in the traditional landis way
+                RunLandis();                         // run the model in the traditional landis way
 
-             ////   CopyResultsFromLandis();              //  copy the results to the sitetool output
+                CopyResultsFromLandis();              //  copy the results to the sitetool output
 
-             //   LoadResultSite();                     // load site results from the sitetool output
+                LoadResultSite();                     // load site results from the sitetool output
 
-             //   tabControlGraphSite();                // update the chart tabs
+                tabControlGraphSite();                // update the chart tabs
 
             }
             else
@@ -151,7 +163,7 @@ namespace LANDIS_II_Site
             }
             DeletNonReplicate(StoredDir);
 
-            LoadResultSiteRep();                     // load site results from the sitetool output
+            LoadResultSiteRep("spp-density-log.csv");                     // load site results from the sitetool output
 
             tabControlGraphSite();                // update the chart tabs
 
@@ -211,7 +223,7 @@ namespace LANDIS_II_Site
                 OutputDirectory = OutputParentDir(false);
                 CopyDirectory(ResultDirectory, OutputDirectory);
 
-                LoadRecordsCalOne(OutputDirectory);
+                LoadRecordsCalOne(OutputDirectory, "spp-density-log.csv");
 
             }
             else
@@ -595,12 +607,13 @@ namespace LANDIS_II_Site
         {
             string OutputDirectory = OutputDir();// get the current succesion output directory
 
-            sitename = "spp-biomass-log.csv";
+            sitename = "spp-density-log.csv";
 
             string filePath = Path.Combine(OutputDirectory, sitename);
 
             //var allresults = ReadCsvAsDictionary(filePath);
             RecordsSite = ReadCsvAsDictionary(filePath);
+
 
             //string[] keysToFind = { "AboveGroundBiomass_acerrubr", "AboveGroundBiomass_querrubr" };
 
@@ -633,7 +646,7 @@ namespace LANDIS_II_Site
                 //StoredDir.Add(StoreReplicate(i + 1)); //store sitetool output 
                 string RepDirectory = OutputDirectory + "\\Output" + (i + 1).ToString();
                 string filePath = RepDirectory;
-                sitename = "spp-biomass-log.csv";
+                //sitename = "spp-biomass-log.csv";
 
                 filePath = Path.Combine(filePath, sitename);
 
@@ -751,7 +764,7 @@ namespace LANDIS_II_Site
         {
             
             string OutputDirectory2 = @".\Output";
-            sitename = "spp-biomass-log.csv";
+            //sitename = "spp-biomass-log.csv";
 
             OutputDirectory2 = OutputDirectory;
             string filePath = Path.Combine(OutputDirectory2, sitename);
@@ -1444,7 +1457,7 @@ namespace LANDIS_II_Site
             return InputDirectory;
 
         }
-        private string InterDir(string InputSuccession = "Biomass")
+        private string InterDir()
         {
             string InterDirectory = @".\Inter";
             InterDirectory = InterDirectory + "\\" + InputSuccession;
@@ -1537,7 +1550,7 @@ namespace LANDIS_II_Site
                 writer.WriteLine(">> Succession Extension     Initialization File");
                 writer.WriteLine(">> --------------------     -------------------");
 
-                string successiontext = "Density Succession";
+                string successiontext = "Density-Succession";
 
 
                 writer.WriteLine("\"" + successiontext + "\"" + "    site_Succession.txt");
@@ -1598,7 +1611,8 @@ namespace LANDIS_II_Site
 
 
 
-                writer.WriteLine("InitialCommunities      site_InitialCommunities.txt");
+                //writer.WriteLine("InitialCommunities      site_InitialCommunities.txt");
+                writer.WriteLine("InitialCommunities      site_InitialCommunities.csv");
                 writer.WriteLine("InitialCommunitiesMap   site_InitialCommunitiesMap.img");
 
                 writer.WriteLine(); // empty line
@@ -1890,9 +1904,10 @@ namespace LANDIS_II_Site
             }
         }
 
-        private void BuildSuccessionInitialComm()
+        private void BuildSuccessionInitialComm(int v=7)
         {
             //////////////////// build site_InitialCommunities
+            //string fileName = "site_InitialCommunities.txt";
             string fileName = "site_InitialCommunities.txt";
             string filePath = Path.Combine(InputDirectory, fileName);
             using (StreamWriter writer = new StreamWriter(filePath))
@@ -1902,6 +1917,7 @@ namespace LANDIS_II_Site
                 writer.WriteLine(); // empty line
 
                 writer.WriteLine("MapCode 10");
+              
 
                 // Group rows by species and collect age/tree pairs
                 var grouped = new Dictionary<string, List<Tuple<string, string>>>(StringComparer.OrdinalIgnoreCase);
@@ -1955,6 +1971,51 @@ namespace LANDIS_II_Site
                 }
 
                 ///////////////////////////////////// end of site_InitialCommunities.txt
+                ///
+            }
+
+        }
+        private void BuildSuccessionInitialComm()
+        {
+            //////////////////// build site_InitialCommunities
+            
+            string fileName = "site_InitialCommunities.csv";
+            string filePath = Path.Combine(InputDirectory, fileName);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {               
+
+                // Write the data rows
+                var dataGridView = dataGridViewInitialComm;
+
+                //SaveDataGridViewToCsv(writer, dataGridViewSppLifeHistory);
+                
+                //write the header
+
+                writer.Write("MapCode,");
+                for (int i = 0; i < dataGridView.ColumnCount; i++)
+                {
+                    
+                    writer.Write(dataGridView.Columns[i].HeaderText);
+                    if (i < dataGridView.ColumnCount - 1) writer.Write(',');
+                }
+                writer.WriteLine();
+
+                // Write the data rows
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (!row.IsNewRow) // Skip the placeholder row
+                    {   
+                        writer.Write("10,");
+                        for (int i = 0; i < dataGridView.ColumnCount; i++)
+                        {                            
+                            writer.Write(row.Cells[i].Value);
+                            if (i < dataGridView.ColumnCount - 1) writer.Write(',');
+                        }
+                        writer.WriteLine();
+                    }
+                }
+
+                ///////////////////////////////////// end of site_InitialCommunities.csv
                 ///
             }
 
@@ -2396,14 +2457,17 @@ namespace LANDIS_II_Site
                 // Read the keys from the first line
                 string[] keys = lines[0].Trim().Split(',');
                 string[] values = lines[1].Trim().Split(',');
-                //sitevars.Add();
+                
                 // Process each data row
                 for (int i = 0; i < keys.Length; i++) // 
                 {
-                    sitevars[keys[i]] = values[i];
+
+
+                    //sitevars[keys[i]] = values[i];  // don't use the file
 
                     //records.Add(record);
                 }
+            
                 ///////////////////////////////////////////
                 // populate climate tab
                 ////////////////////////////////////////////
@@ -2423,7 +2487,7 @@ namespace LANDIS_II_Site
                     if (row.IsNewRow) continue;
 
                     // Get the value from the "Species" column
-                    var cellValue = row.Cells["Species"].Value;
+                    var cellValue = row.Cells["SpeciesName"].Value;
 
                     if (cellValue != null)
                     {
@@ -2436,14 +2500,28 @@ namespace LANDIS_II_Site
                         }
                     }
                 }
-
+                // produce a trimmed, case-insensitive unique list (preserves first-seen order)
+                var uniqueSpecies = speciesList
+                    .Where(s => !string.IsNullOrWhiteSpace(s))
+                    .Select(s => s.Trim())
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToList();
+                //uniqueSpecies.Add("Total");
+                List<string> prefix = new List<string> { "TreeNumber_", "BasalArea_" };
                 // Update all matching keys
-                foreach (var key in sitevars.Keys.ToList()) // Use ToList() to avoid modifying during iteration
+                foreach (var pref in prefix) 
                 {
-                    if (speciesList.Any(s => key.Contains(s)))
+                    //string keytotal = pref + "Total";
+
+                    foreach (var spp in uniqueSpecies) // 
                     {
+                        string key = pref + spp;
                         sitevars[key] = "2";
-                    }
+
+                    }  
+                    
+                    
+                    
                 }
 
                 tabControlGraphSiteTab(sitevars, checkedListBoxCarbon, valuesToFind);
@@ -3241,6 +3319,15 @@ namespace LANDIS_II_Site
             AutoSizeColumnsToContent(dataGridViewMassAllo, padding: 6, maxColumnWidth: 200, rowHeaderWidth: 10);
 
 
+        }
+
+
+        // Add this private handler anywhere inside the FormDensity class (near other handlers)
+        private void TabControlGraph_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            // Prevent user from switching to the disabled Composition tab
+            if (e.TabPage == tabPageComp)
+                e.Cancel = true;
         }
     }
 }

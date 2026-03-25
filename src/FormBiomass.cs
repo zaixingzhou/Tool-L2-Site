@@ -149,7 +149,7 @@ namespace LANDIS_II_Site
             }
             DeletNonReplicate(StoredDir);
 
-            LoadResultSiteRep();                     // load site results from the sitetool output
+            LoadResultSiteRep("spp-biomass-log.csv");                     // load site results from the sitetool output
 
             tabControlGraphSite();                // update the chart tabs
 
@@ -209,7 +209,7 @@ namespace LANDIS_II_Site
                 OutputDirectory = OutputParentDir(false);
                 CopyDirectory(ResultDirectory, OutputDirectory);
 
-                LoadRecordsCalOne(OutputDirectory);
+                LoadRecordsCalOne(OutputDirectory,"spp-biomass-log.csv");
 
             }
             else
@@ -666,7 +666,7 @@ namespace LANDIS_II_Site
                 //StoredDir.Add(StoreReplicate(i + 1)); //store sitetool output 
                 string RepDirectory = OutputDirectory + "\\Output" + (i + 1).ToString();
                 string filePath = RepDirectory;
-                sitename = "spp-biomass-log.csv";
+                //sitename = "spp-biomass-log.csv";
 
                 filePath = Path.Combine(filePath, sitename);
 
@@ -784,7 +784,7 @@ namespace LANDIS_II_Site
         {
             
             string OutputDirectory2 = @".\Output";
-            sitename = "spp-biomass-log.csv";
+            //sitename = "spp-biomass-log.csv";
 
             OutputDirectory2 = OutputDirectory;
             string filePath = Path.Combine(OutputDirectory2, sitename);
