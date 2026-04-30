@@ -28,6 +28,8 @@ namespace LANDIS_II_Site
         }
 
         private string OutputFolder = @"\output";
+        private string ResultSiteName;
+        private string ResultSppName;
 
         public FormBiomass()
         {
@@ -44,6 +46,10 @@ namespace LANDIS_II_Site
         private void InitializeComponentPlus()
         {
             // set default values for some components
+
+            ResultSiteName = "Biomass-succession-log.csv"; // default result file name for site level output
+            ResultSppName = "spp-biomass-log.csv"; // default result file name for species level output
+
 
             // load the example for initilization
             string fileName = "Site_input_example.csv";
@@ -149,7 +155,7 @@ namespace LANDIS_II_Site
             }
             DeletNonReplicate(StoredDir);
 
-            LoadResultSiteRep("spp-biomass-log.csv");                     // load site results from the sitetool output
+            LoadResultSiteRep(ResultSiteName);                     // load site results from the sitetool output
 
             tabControlGraphSite();                // update the chart tabs
 
@@ -209,7 +215,7 @@ namespace LANDIS_II_Site
                 OutputDirectory = OutputParentDir(false);
                 CopyDirectory(ResultDirectory, OutputDirectory);
 
-                LoadRecordsCalOne(OutputDirectory,"spp-biomass-log.csv");
+              //  LoadRecordsCalOne(OutputDirectory, ResultSiteName);
 
             }
             else
@@ -624,22 +630,29 @@ namespace LANDIS_II_Site
         List<Dictionary<string, object>> RecordsCohort = new List<Dictionary<string, object>>();
         List<Dictionary<string, object>> RecordsRef = new List<Dictionary<string, object>>();
         List<Dictionary<string, object>> RecordsCalOne = new List<Dictionary<string, object>>();
+        List<Dictionary<string, object>> RecordsCohCalOne = new List<Dictionary<string, object>>();
         public void LoadResultSite(string sitename = "Site.csv")
         {
             string OutputDirectory = OutputDir();// get the current succesion output directory
 
-            sitename = "spp-biomass-log.csv";
+            //sitename = "spp-biomass-log.csv";
+            sitename = ResultSiteName;
 
             string filePath = Path.Combine(OutputDirectory, sitename);
 
             //var allresults = ReadCsvAsDictionary(filePath);
             RecordsSite = ReadCsvAsDictionary(filePath);
 
-            //string[] keysToFind = { "AboveGroundBiomass_acerrubr", "AboveGroundBiomass_querrubr" };
+            if (checkBoxCalibration.Checked)  // if calibration, save to a different location
+            {
+                OutputDirectory = OutputParentDir(false);                
 
-            // RecordsSite = allresults
-            //           .Where(d => keysToFind.Any(key => d.ContainsKey(key)))
-            //           .ToList();
+                LoadRecordsCalOne(OutputDirectory, ResultSiteName);
+
+
+            }
+
+
 
         }
 
@@ -789,6 +802,7 @@ namespace LANDIS_II_Site
             OutputDirectory2 = OutputDirectory;
             string filePath = Path.Combine(OutputDirectory2, sitename);
             RecordsCalOne = ReadCsvAsDictionary(filePath);
+            RecordsCohCalOne= ReadCsvAsDictionary(Path.Combine(OutputDirectory2, ResultSppName));
 
         }
 
@@ -2336,7 +2350,7 @@ namespace LANDIS_II_Site
                 // populate carbon tab
                 // List of values to match
                 valuesToFind = new List<string> { "2" };   //
-                List<string> speciesList = new List<string>();
+             /*   List<string> speciesList = new List<string>();
                 foreach (DataGridViewRow row in dataGridViewInitialComm.Rows) // Get species from initial communities
                 {
                     // Skip the new row placeholder (the empty row at the end)
@@ -2365,7 +2379,7 @@ namespace LANDIS_II_Site
                         sitevars[key] = "2";
                     }
                 }
-
+             */
                 tabControlGraphSiteTab(sitevars, checkedListBoxCarbon, valuesToFind);
                 //checkedListBoxClimate.SetItemChecked(0, true);  // show default chart
 
@@ -2380,21 +2394,27 @@ namespace LANDIS_II_Site
                 // populate nitrogen tab
                 valuesToFind = new List<string> { "4" };   // 
                 tabControlGraphSiteTab(sitevars, checkedListBoxNitrogen, valuesToFind);
-
+*/
                 // populate composition tab
                 //checkedListBoxComposition.Items.Clear();
+                CohortComposition();// get the composition based on wood biomasss
                 // if (checkedListBoxComposition.Items.Count > 0) checkedListBoxComposition.SetItemChecked(0, true);  // show default chart
 
 
                 // populate cohort tab
                 // List of values to match
-                comboBoxCohortNameFill();
-*/
+               // comboBoxCohortNameFill();
+
 
                 // populate compare tab
 
                 // Clear the CheckedListBox
                 checkedListBoxCompare.Items.Clear();
+
+                valuesToFind = new List<string> { "1","2","3","4" };   // 
+                tabControlGraphSiteTab(sitevars, checkedListBoxCompare, valuesToFind);
+
+                /*
                 ICollection<string> compkeys = sitevars.Keys;// Retrieve all the keys
                 foreach (string item in compkeys)
                 {
@@ -2402,7 +2422,7 @@ namespace LANDIS_II_Site
                 }
                 //  if (checkedListBoxCompare.Items.Count > 0) checkedListBoxCompare.SetItemChecked(0, true);  // show default chart
 
-
+                */
 
                 // populate diagnosis tab
                 comboBoxCalibrationVarFill();
@@ -2481,7 +2501,6 @@ namespace LANDIS_II_Site
         // get output directory based on succession extentsion
         private string OutputDir()
         {
-
 
             string OutputDirectory = OutputParentDir();
 
@@ -2648,130 +2667,104 @@ namespace LANDIS_II_Site
 
         }
 
+        private void comboBoxCalibrationSppVar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ZedGraphControl zgc = zedGraphControlCalibration;  //  zgc pane            
+
+            var mypane = zgc.GraphPane;
+
+            mypane.Title.Text = string.Empty;
+
+            string Xvar = "Time";
+
+            mypane.CurveList.Clear();
+            // Check which item is toggled
+            string selectedItem = comboBoxCalibrationSppVar.Text;
+            Color c = Color.Red;
+
+            mypane = CreateGraph(zgc, selectedItem, RecordsCohort, Xvar, selectedItem, c, "Control");  // control
+            mypane = CreateGraph(zgc, selectedItem, RecordsCohCalOne, Xvar, selectedItem, Color.Blue, "Calibrated");  // control
+
+
+        }
+
 
         // get the species composition based on Yvar value
-        private void CohortComposition(string Yvar)
+        private void CohortComposition(string Yvar="")
         {
             List<Dictionary<string, object>> RecordscohortYvar = new List<Dictionary<string, object>>();
 
 
             //create a list of all cohorts with establishment year and last alive year in the simulation
             List<Dictionary<string, object>> Cohortlist = new List<Dictionary<string, object>>();
-            foreach (var item in comboBoxCohortName.Items)
+
+
+            RecordsCohort = LoadResultCohort(ResultSppName);
+            const string prefixagb = "AboveGroundBiomass_";
+            const string prefixpercent = "percent_";
+
+            if (RecordsCohort == null || RecordsCohort.Count == 0)
             {
-
-                Dictionary<string, object> newDic = new Dictionary<string, object>();
-                string cohortvalue = item.ToString();
-
-                var records = LoadResultCohort(cohortvalue);
-
-                string cohortkey = "cohort";
-                newDic.Add(cohortkey, cohortvalue);
-                string sppkey = "species";
-                string[] parts = cohortvalue.Split('_');
-                string sppvalue = parts[1];
-
-                string cohyearkey = "estyear";
-                string cohyear = parts[2].Split('.')[0];
-
-
-                newDic.Add(sppkey, sppvalue);
-                newDic.Add(cohyearkey, cohyear);
-
-                double endyear = records
-                        .Where(dict => dict.ContainsKey("Time")) // Ensure the key exists
-                        .Max(dict => Convert.ToDouble(dict["Time"])); // Convert to int and find max
-
-                newDic.Add("endyear", endyear);
-
-                newDic.Add("Yrpoint", null); // add for placeholder
-                newDic.Add(Yvar, null);
-                newDic.Add("Percent", null);
-
-                Cohortlist.Add(newDic);
-
+                // Nothing to do
+                return;
             }
-
-
-            // get the composition points
-            int timepoint = 5;
-            int timeinterval = Convert.ToInt32(tbSimYears.Text) / timepoint;
-            // int startyr = Convert.ToInt32(tbStartYr.Text);
-            List<int> points = new List<int>();  // the years of composition
-            for (int i = 0; i < timepoint + 1; i++)
+            // For each time-step record compute totals and percentages, then append percent_ keys to  the same record
+            foreach (var record in RecordsCohort)
             {
-                // points.Add(startyr + i * timeinterval - 1);// minus 1 to include the final year of simulation
+                // Collect keys that correspond to species biomass (do not modify dictionary while enumerating keys)
+                var agbKeys = record.Keys.Where(k => k != null && k.StartsWith(prefixagb, StringComparison.OrdinalIgnoreCase)).ToList();
+                double total = 0.0;
+                var speciesValues = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
 
-            }
-
-            // get all cohorts alive at the year of point
-            foreach (int pt in points)
-            {
-
-                // Filter dictionaries where pt is less than the max of to get the yvar value
-                var filteredList = Cohortlist
-                                    .Where(dict => dict.ContainsKey("endyear") && Convert.ToDouble(dict["endyear"]) >= pt)
-                                     .Select(d => new Dictionary<string, object>(d)) // Create a new copy
-                                     .ToList();
-
-                foreach (var coh in filteredList)
+                // Sum numeric biomass values for this time step
+                foreach (var key in agbKeys)
                 {
-                    // get the Yvar value
-                    var records = LoadResultCohort(coh["cohort"].ToString());
-
-                    var match = records
-                                .FirstOrDefault(dict => dict.ContainsKey("Time")
-                                                && int.TryParse(dict["Time"]?.ToString(), out int yr)
-                                                && yr == pt);
-                    //coh["Yrpoint"] = pt;
-                    coh[Yvar] = match[Yvar];
-
-
-                }
-
-                // get the total sum of yvar
-                double totalYar = filteredList
-                                 .Where(d => d.ContainsKey(Yvar)) // Ensure "Yvar" exists
-                                 .Sum(d => Convert.ToDouble(d[Yvar])); // Sum up Yvar values
-
-
-                // get the percentage of yvar relative to the sum
-                foreach (var dict in filteredList)
-                {
-                    if (dict.ContainsKey(Yvar))
+                    var raw = record.ContainsKey(key) ? record[key]?.ToString() : null;
+                    if (double.TryParse(raw, NumberStyles.Any, CultureInfo.InvariantCulture, out double val))
                     {
-                        double y = Convert.ToDouble(dict[Yvar]);
-                        double percentage = (y / totalYar) * 100; // Calculate percentage
-
-                        // Add the new key-value pair for AgePercentage
-                        dict["Percent"] = Math.Round(percentage, 2); // Round to 2 decimal places                        
+                        speciesValues[key] = val;
+                        total += val;
                     }
-
+                    else
+                    {
+                        speciesValues[key] = 0.0;
+                    }
                 }
 
-                // group same species
-                var comp = filteredList
-                                    .Where(d => d.ContainsKey("species") && d.ContainsKey("Percent")) // Ensure both keys exist
-                                    .GroupBy(d => d["species"].ToString()) // Group by "species"
-                                    .ToDictionary(
-                                        group => group.Key, // Group Key (species)
-                                        group => group.Sum(d => Convert.ToDouble(d["Percent"])) // Sum Percent for each group                                        
-                                      );
+                // Determine year string (fall back to "Time" or "Year" or empty)
+                string yearStr = "";
+                if (record.ContainsKey("Time")) yearStr = record["Time"]?.ToString() ?? "";
+                else if (record.ContainsKey("Year")) yearStr = record["Year"]?.ToString() ?? "";
 
-
-
-                // store all data
-                foreach (var kvp in comp)
+                // Compute percentages and append new keys to the original record
+                foreach (var kv in speciesValues)
                 {
-                    Dictionary<string, object> objectDict = new Dictionary<string, object>();
-                    objectDict["species"] = kvp.Key;
-                    objectDict["percent"] = kvp.Value;
-                    objectDict["year"] = pt;// add the year
-                    RecordscohortYvar.Add(objectDict);
+                    string agbKey = kv.Key;
+                    double val = kv.Value;
+                    double percent = (total > 0.0) ? (val / total) * 100.0 : 0.0;
+
+                    // Extract species name from key after prefix
+                    string speciesName = agbKey.Substring(prefixagb.Length);
+
+                    string percentKey = prefixpercent + speciesName;
+
+                    // Store percent as string using invariant culture with two decimals (consistent with other string values)
+                   // record[percentKey] = percent.ToString("F2", CultureInfo.InvariantCulture);
+
+                    // Also prepare composition csv row: lowercase headers expected by the composition reader
+                    var compRow = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+                    {
+                        ["year"] = yearStr,
+                        ["species"] = speciesName,
+                        ["percent"] = percent.ToString("F2", CultureInfo.InvariantCulture)
+                    };
+                    RecordscohortYvar.Add(compRow);
                 }
+            }   
 
 
-            }
+
+
 
             //var zz = RecordscohortYvar;
             // Specify the file path
@@ -2779,6 +2772,11 @@ namespace LANDIS_II_Site
 
             // Save the list of dictionaries to a CSV file
             ListDictionaryToCsv(RecordscohortYvar, filePath);
+
+            //filePath = Path.Combine(InterDirectory, "composition2.csv");
+
+            // Save the list of dictionaries to a CSV file
+           // ListDictionaryToCsv(RecordsCohort, filePath);
         }
 
 
@@ -2942,19 +2940,57 @@ namespace LANDIS_II_Site
 
             // read the data file
 
-            string OutputDirectory = OutputDir();// get the current succesion output directory
-            string fileName = "spp-biomass-log.csv";
-            string filePath = Path.Combine(OutputDirectory, fileName);
+          //  string OutputDirectory = OutputDir();// get the current succesion output directory
+           // string fileName = "spp-biomass-log.csv";
+           // string filePath = Path.Combine(OutputDirectory, fileName);
 
             comboBoxCalibrationVar.Items.Clear();
+            // Track pixel width of longest item text
+            int maxTextWidth = 0;
 
             foreach (var item in checkedListBoxCompare.Items)
             {
-                //string[] keys = item.ToString;
-                comboBoxCalibrationVar.Items.Add(item.ToString());
+                string key = Convert.ToString(item);
+                comboBoxCalibrationVar.Items.Add(key);
+                // Measure text width for the current font
+                var sz = TextRenderer.MeasureText(key, comboBoxCalibrationVar.Font);
+                if (sz.Width > maxTextWidth) maxTextWidth = sz.Width;
             }
+            comboBoxCalibrationVar.DropDownWidth = Math.Max(comboBoxCalibrationVar.DropDownWidth, maxTextWidth + 1);
             comboBoxCalibrationVar.Sorted = true; // Automatically sorts items alphabetically
             //comboBoxCalibrationVar.SelectedIndex = 0;  // set default
+
+
+            comboBoxCalibrationSppVar.Items.Clear();
+            // Track pixel width of longest item text
+            //int maxTextWidth = 0;
+            const string prefixagb = "AboveGroundBiomass_";
+        
+            // Ensure RecordsCohort has at least one record to read keys from
+            if (RecordsCohort != null && RecordsCohort.Count > 0)
+            {
+                var firstRecord = RecordsCohort.First();
+
+                // Find keys that start with the prefix and add the full key (e.g. "AboveGroundBiomass_acerrubr")
+                var agbKeys = firstRecord.Keys
+                    .Where(k => !string.IsNullOrEmpty(k) && k.StartsWith(prefixagb, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                foreach (var key in agbKeys)
+                {
+                    comboBoxCalibrationSppVar.Items.Add(key);
+                    var sz = TextRenderer.MeasureText(key, comboBoxCalibrationSppVar.Font);
+                    if (sz.Width > maxTextWidth) maxTextWidth = sz.Width;
+                }
+            }
+
+            
+            comboBoxCalibrationSppVar.DropDownWidth = Math.Max(comboBoxCalibrationSppVar.DropDownWidth, maxTextWidth + 1);
+            comboBoxCalibrationSppVar.Sorted = true; // Automatically sorts items alphabetically
+            
+
+
+
 
         }
 

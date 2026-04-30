@@ -1,4 +1,0 @@
-2026-01-14 11:39:41,736 - LANDIS-II 7.0 (7)
-2026-01-14 11:39:41,738 - 
-2026-01-14 11:39:41,787 - Loading scenario from file "site_Scenario.txt" ...
-2026-01-14 11:39:41,795 - Error: The file site_Scenario.txt does not exist

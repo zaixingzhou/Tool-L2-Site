@@ -181,7 +181,7 @@ namespace LANDIS_II_Site
             // btAddSppEcophysiPara
             // 
             this.btAddSppEcophysiPara.Location = new System.Drawing.Point(650, 16);
-            this.btAddSppEcophysiPara.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btAddSppEcophysiPara.Margin = new System.Windows.Forms.Padding(2);
             this.btAddSppEcophysiPara.Name = "btAddSppEcophysiPara";
             this.btAddSppEcophysiPara.Size = new System.Drawing.Size(73, 24);
             this.btAddSppEcophysiPara.TabIndex = 30;
@@ -194,13 +194,12 @@ namespace LANDIS_II_Site
             // 
             this.checkedListBoxDisturbance.FormattingEnabled = true;
             this.checkedListBoxDisturbance.Items.AddRange(new object[] {
+            "Harvest",
             "Fire",
             "Wind",
-            "MaximumAge",
-            "Harvest",
             "BDA"});
             this.checkedListBoxDisturbance.Location = new System.Drawing.Point(69, 34);
-            this.checkedListBoxDisturbance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxDisturbance.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBoxDisturbance.Name = "checkedListBoxDisturbance";
             this.checkedListBoxDisturbance.Size = new System.Drawing.Size(132, 49);
             this.checkedListBoxDisturbance.TabIndex = 26;
@@ -227,11 +226,12 @@ namespace LANDIS_II_Site
             // 
             // checkedListBoxExtensionOther
             // 
+            this.checkedListBoxExtensionOther.Enabled = false;
             this.checkedListBoxExtensionOther.FormattingEnabled = true;
             this.checkedListBoxExtensionOther.Items.AddRange(new object[] {
             "Climate"});
             this.checkedListBoxExtensionOther.Location = new System.Drawing.Point(69, 131);
-            this.checkedListBoxExtensionOther.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxExtensionOther.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBoxExtensionOther.Name = "checkedListBoxExtensionOther";
             this.checkedListBoxExtensionOther.Size = new System.Drawing.Size(132, 19);
             this.checkedListBoxExtensionOther.TabIndex = 28;
@@ -257,7 +257,7 @@ namespace LANDIS_II_Site
             // btClimate
             // 
             this.btClimate.Location = new System.Drawing.Point(6, 18);
-            this.btClimate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btClimate.Margin = new System.Windows.Forms.Padding(2);
             this.btClimate.Name = "btClimate";
             this.btClimate.Size = new System.Drawing.Size(76, 25);
             this.btClimate.TabIndex = 36;
@@ -372,7 +372,7 @@ namespace LANDIS_II_Site
             "UniversalDispersal",
             "DensitySeeding"});
             this.cbSeedingAlg.Location = new System.Drawing.Point(70, 78);
-            this.cbSeedingAlg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbSeedingAlg.Margin = new System.Windows.Forms.Padding(2);
             this.cbSeedingAlg.Name = "cbSeedingAlg";
             this.cbSeedingAlg.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbSeedingAlg.Size = new System.Drawing.Size(99, 21);
@@ -458,9 +458,9 @@ namespace LANDIS_II_Site
             // 
             this.groupBoxDisturance.Controls.Add(this.dataGridViewDistubTable);
             this.groupBoxDisturance.Location = new System.Drawing.Point(617, 63);
-            this.groupBoxDisturance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxDisturance.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxDisturance.Name = "groupBoxDisturance";
-            this.groupBoxDisturance.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxDisturance.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxDisturance.Size = new System.Drawing.Size(328, 112);
             this.groupBoxDisturance.TabIndex = 65;
             this.groupBoxDisturance.TabStop = false;
@@ -479,7 +479,7 @@ namespace LANDIS_II_Site
             this.Column3,
             this.Column4});
             this.dataGridViewDistubTable.Location = new System.Drawing.Point(4, 18);
-            this.dataGridViewDistubTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewDistubTable.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewDistubTable.Name = "dataGridViewDistubTable";
             this.dataGridViewDistubTable.RowHeadersWidth = 20;
             this.dataGridViewDistubTable.RowTemplate.Height = 24;
@@ -529,9 +529,9 @@ namespace LANDIS_II_Site
             this.groupBoxExtensions.Controls.Add(this.checkedListBoxDisturbance);
             this.groupBoxExtensions.Controls.Add(this.groupBox5);
             this.groupBoxExtensions.Location = new System.Drawing.Point(9, 6);
-            this.groupBoxExtensions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxExtensions.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxExtensions.Name = "groupBoxExtensions";
-            this.groupBoxExtensions.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxExtensions.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxExtensions.Size = new System.Drawing.Size(210, 169);
             this.groupBoxExtensions.TabIndex = 63;
             this.groupBoxExtensions.TabStop = false;
@@ -542,9 +542,9 @@ namespace LANDIS_II_Site
             this.groupBox5.Controls.Add(this.cbOutputDensity);
             this.groupBox5.Controls.Add(this.label6);
             this.groupBox5.Location = new System.Drawing.Point(69, 86);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(131, 32);
             this.groupBox5.TabIndex = 106;
             this.groupBox5.TabStop = false;
@@ -570,7 +570,7 @@ namespace LANDIS_II_Site
             // btDeleteSppEcophysiSpp
             // 
             this.btDeleteSppEcophysiSpp.Location = new System.Drawing.Point(651, 99);
-            this.btDeleteSppEcophysiSpp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btDeleteSppEcophysiSpp.Margin = new System.Windows.Forms.Padding(2);
             this.btDeleteSppEcophysiSpp.Name = "btDeleteSppEcophysiSpp";
             this.btDeleteSppEcophysiSpp.Size = new System.Drawing.Size(71, 24);
             this.btDeleteSppEcophysiSpp.TabIndex = 32;
@@ -582,7 +582,7 @@ namespace LANDIS_II_Site
             // btAddSppEcophysiSpp
             // 
             this.btAddSppEcophysiSpp.Location = new System.Drawing.Point(651, 72);
-            this.btAddSppEcophysiSpp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btAddSppEcophysiSpp.Margin = new System.Windows.Forms.Padding(2);
             this.btAddSppEcophysiSpp.Name = "btAddSppEcophysiSpp";
             this.btAddSppEcophysiSpp.Size = new System.Drawing.Size(71, 24);
             this.btAddSppEcophysiSpp.TabIndex = 29;
@@ -594,7 +594,7 @@ namespace LANDIS_II_Site
             // btDeleteSppEcophysiPara
             // 
             this.btDeleteSppEcophysiPara.Location = new System.Drawing.Point(651, 44);
-            this.btDeleteSppEcophysiPara.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btDeleteSppEcophysiPara.Margin = new System.Windows.Forms.Padding(2);
             this.btDeleteSppEcophysiPara.Name = "btDeleteSppEcophysiPara";
             this.btDeleteSppEcophysiPara.Size = new System.Drawing.Size(71, 24);
             this.btDeleteSppEcophysiPara.TabIndex = 32;
@@ -608,7 +608,7 @@ namespace LANDIS_II_Site
             this.dataGridViewSppEcophysi.AllowUserToAddRows = false;
             this.dataGridViewSppEcophysi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSppEcophysi.Location = new System.Drawing.Point(4, 17);
-            this.dataGridViewSppEcophysi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewSppEcophysi.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewSppEcophysi.Name = "dataGridViewSppEcophysi";
             this.dataGridViewSppEcophysi.RowHeadersWidth = 20;
             this.dataGridViewSppEcophysi.RowTemplate.Height = 24;
@@ -623,9 +623,9 @@ namespace LANDIS_II_Site
             this.groupBox1.Controls.Add(this.dataGridViewSppEcophysi);
             this.groupBox1.Controls.Add(this.btAddSppEcophysiPara);
             this.groupBox1.Location = new System.Drawing.Point(14, 324);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(728, 148);
             this.groupBox1.TabIndex = 73;
             this.groupBox1.TabStop = false;
@@ -634,7 +634,7 @@ namespace LANDIS_II_Site
             // btDeleteSppLifeHistorySpp
             // 
             this.btDeleteSppLifeHistorySpp.Location = new System.Drawing.Point(652, 99);
-            this.btDeleteSppLifeHistorySpp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btDeleteSppLifeHistorySpp.Margin = new System.Windows.Forms.Padding(2);
             this.btDeleteSppLifeHistorySpp.Name = "btDeleteSppLifeHistorySpp";
             this.btDeleteSppLifeHistorySpp.Size = new System.Drawing.Size(70, 24);
             this.btDeleteSppLifeHistorySpp.TabIndex = 32;
@@ -647,7 +647,7 @@ namespace LANDIS_II_Site
             // btAddSppLifeHistorySpp
             // 
             this.btAddSppLifeHistorySpp.Location = new System.Drawing.Point(652, 72);
-            this.btAddSppLifeHistorySpp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btAddSppLifeHistorySpp.Margin = new System.Windows.Forms.Padding(2);
             this.btAddSppLifeHistorySpp.Name = "btAddSppLifeHistorySpp";
             this.btAddSppLifeHistorySpp.Size = new System.Drawing.Size(70, 24);
             this.btAddSppLifeHistorySpp.TabIndex = 29;
@@ -673,7 +673,7 @@ namespace LANDIS_II_Site
             this.dataGridViewSppLifeHistory.AllowUserToAddRows = false;
             this.dataGridViewSppLifeHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSppLifeHistory.Location = new System.Drawing.Point(4, 17);
-            this.dataGridViewSppLifeHistory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewSppLifeHistory.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewSppLifeHistory.Name = "dataGridViewSppLifeHistory";
             this.dataGridViewSppLifeHistory.RowHeadersWidth = 20;
             this.dataGridViewSppLifeHistory.RowTemplate.Height = 24;
@@ -683,7 +683,7 @@ namespace LANDIS_II_Site
             // btAddSppLifeHistoryPara
             // 
             this.btAddSppLifeHistoryPara.Location = new System.Drawing.Point(650, 15);
-            this.btAddSppLifeHistoryPara.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btAddSppLifeHistoryPara.Margin = new System.Windows.Forms.Padding(2);
             this.btAddSppLifeHistoryPara.Name = "btAddSppLifeHistoryPara";
             this.btAddSppLifeHistoryPara.Size = new System.Drawing.Size(73, 24);
             this.btAddSppLifeHistoryPara.TabIndex = 30;
@@ -700,9 +700,9 @@ namespace LANDIS_II_Site
             this.groupBoxSppLifeHistory.Controls.Add(this.dataGridViewSppLifeHistory);
             this.groupBoxSppLifeHistory.Controls.Add(this.btAddSppLifeHistoryPara);
             this.groupBoxSppLifeHistory.Location = new System.Drawing.Point(12, 176);
-            this.groupBoxSppLifeHistory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxSppLifeHistory.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxSppLifeHistory.Name = "groupBoxSppLifeHistory";
-            this.groupBoxSppLifeHistory.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxSppLifeHistory.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxSppLifeHistory.Size = new System.Drawing.Size(730, 142);
             this.groupBoxSppLifeHistory.TabIndex = 66;
             this.groupBoxSppLifeHistory.TabStop = false;
@@ -711,7 +711,7 @@ namespace LANDIS_II_Site
             // zedGraphControlClimate
             // 
             this.zedGraphControlClimate.Location = new System.Drawing.Point(0, 2);
-            this.zedGraphControlClimate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlClimate.Margin = new System.Windows.Forms.Padding(4);
             this.zedGraphControlClimate.Name = "zedGraphControlClimate";
             this.zedGraphControlClimate.ScrollGrace = 0D;
             this.zedGraphControlClimate.ScrollMaxX = 0D;
@@ -728,9 +728,9 @@ namespace LANDIS_II_Site
             this.tabPageClimate.Controls.Add(this.checkedListBoxClimate);
             this.tabPageClimate.Controls.Add(this.zedGraphControlClimate);
             this.tabPageClimate.Location = new System.Drawing.Point(4, 22);
-            this.tabPageClimate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageClimate.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageClimate.Name = "tabPageClimate";
-            this.tabPageClimate.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageClimate.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageClimate.Size = new System.Drawing.Size(692, 254);
             this.tabPageClimate.TabIndex = 0;
             this.tabPageClimate.Tag = "";
@@ -747,7 +747,7 @@ namespace LANDIS_II_Site
             "Precip(mm/mo)",
             "PAR0"});
             this.checkedListBoxClimate.Location = new System.Drawing.Point(602, 13);
-            this.checkedListBoxClimate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxClimate.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBoxClimate.Name = "checkedListBoxClimate";
             this.checkedListBoxClimate.Size = new System.Drawing.Size(89, 105);
             this.checkedListBoxClimate.TabIndex = 43;
@@ -772,7 +772,7 @@ namespace LANDIS_II_Site
             this.tabControlGraph.Controls.Add(this.tabPageCompare);
             this.tabControlGraph.Controls.Add(this.tabPageDiagnosis);
             this.tabControlGraph.Location = new System.Drawing.Point(12, 475);
-            this.tabControlGraph.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControlGraph.Margin = new System.Windows.Forms.Padding(2);
             this.tabControlGraph.Name = "tabControlGraph";
             this.tabControlGraph.SelectedIndex = 0;
             this.tabControlGraph.Size = new System.Drawing.Size(700, 280);
@@ -784,7 +784,7 @@ namespace LANDIS_II_Site
             this.tabPageCarbon.Controls.Add(this.checkedListBoxCarbon);
             this.tabPageCarbon.Controls.Add(this.zedGraphControlCarbon);
             this.tabPageCarbon.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCarbon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageCarbon.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageCarbon.Name = "tabPageCarbon";
             this.tabPageCarbon.Size = new System.Drawing.Size(692, 254);
             this.tabPageCarbon.TabIndex = 2;
@@ -805,7 +805,7 @@ namespace LANDIS_II_Site
             "HOM",
             "GrossPsn(gC_m2_mo)"});
             this.checkedListBoxCarbon.Location = new System.Drawing.Point(602, 13);
-            this.checkedListBoxCarbon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxCarbon.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBoxCarbon.Name = "checkedListBoxCarbon";
             this.checkedListBoxCarbon.Size = new System.Drawing.Size(91, 105);
             this.checkedListBoxCarbon.TabIndex = 45;
@@ -814,7 +814,7 @@ namespace LANDIS_II_Site
             // zedGraphControlCarbon
             // 
             this.zedGraphControlCarbon.Location = new System.Drawing.Point(0, 2);
-            this.zedGraphControlCarbon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlCarbon.Margin = new System.Windows.Forms.Padding(4);
             this.zedGraphControlCarbon.Name = "zedGraphControlCarbon";
             this.zedGraphControlCarbon.ScrollGrace = 0D;
             this.zedGraphControlCarbon.ScrollMaxX = 0D;
@@ -831,7 +831,7 @@ namespace LANDIS_II_Site
             this.tabPageWater.Controls.Add(this.checkedListBoxWater);
             this.tabPageWater.Controls.Add(this.zedGraphControlWater);
             this.tabPageWater.Location = new System.Drawing.Point(4, 22);
-            this.tabPageWater.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageWater.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageWater.Name = "tabPageWater";
             this.tabPageWater.Size = new System.Drawing.Size(692, 254);
             this.tabPageWater.TabIndex = 3;
@@ -849,7 +849,7 @@ namespace LANDIS_II_Site
             "water(mm)",
             "SnowPack(mm)"});
             this.checkedListBoxWater.Location = new System.Drawing.Point(602, 16);
-            this.checkedListBoxWater.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxWater.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBoxWater.Name = "checkedListBoxWater";
             this.checkedListBoxWater.Size = new System.Drawing.Size(91, 105);
             this.checkedListBoxWater.TabIndex = 47;
@@ -857,7 +857,7 @@ namespace LANDIS_II_Site
             // zedGraphControlWater
             // 
             this.zedGraphControlWater.Location = new System.Drawing.Point(0, 2);
-            this.zedGraphControlWater.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlWater.Margin = new System.Windows.Forms.Padding(4);
             this.zedGraphControlWater.Name = "zedGraphControlWater";
             this.zedGraphControlWater.ScrollGrace = 0D;
             this.zedGraphControlWater.ScrollMaxX = 0D;
@@ -874,9 +874,9 @@ namespace LANDIS_II_Site
             this.tabPageComp.Controls.Add(this.checkedListBoxComposition);
             this.tabPageComp.Controls.Add(this.zedGraphControlComp);
             this.tabPageComp.Location = new System.Drawing.Point(4, 22);
-            this.tabPageComp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageComp.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageComp.Name = "tabPageComp";
-            this.tabPageComp.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageComp.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageComp.Size = new System.Drawing.Size(692, 254);
             this.tabPageComp.TabIndex = 7;
             this.tabPageComp.Text = "Composition";
@@ -889,15 +889,15 @@ namespace LANDIS_II_Site
             this.checkedListBoxComposition.Items.AddRange(new object[] {
             "Composition"});
             this.checkedListBoxComposition.Location = new System.Drawing.Point(597, 20);
-            this.checkedListBoxComposition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxComposition.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBoxComposition.Name = "checkedListBoxComposition";
-            this.checkedListBoxComposition.Size = new System.Drawing.Size(84, 0);
+            this.checkedListBoxComposition.Size = new System.Drawing.Size(90, 30);
             this.checkedListBoxComposition.TabIndex = 50;
             // 
             // zedGraphControlComp
             // 
             this.zedGraphControlComp.Location = new System.Drawing.Point(0, 2);
-            this.zedGraphControlComp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlComp.Margin = new System.Windows.Forms.Padding(4);
             this.zedGraphControlComp.Name = "zedGraphControlComp";
             this.zedGraphControlComp.ScrollGrace = 0D;
             this.zedGraphControlComp.ScrollMaxX = 0D;
@@ -917,7 +917,7 @@ namespace LANDIS_II_Site
             this.tabPageCohorts.Controls.Add(this.comboBoxCohortName);
             this.tabPageCohorts.Controls.Add(this.zedGraphControlCohorts);
             this.tabPageCohorts.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCohorts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageCohorts.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageCohorts.Name = "tabPageCohorts";
             this.tabPageCohorts.Size = new System.Drawing.Size(692, 254);
             this.tabPageCohorts.TabIndex = 5;
@@ -948,7 +948,7 @@ namespace LANDIS_II_Site
             this.comboBoxCohortVar.Items.AddRange(new object[] {
             "Variable 1"});
             this.comboBoxCohortVar.Location = new System.Drawing.Point(591, 87);
-            this.comboBoxCohortVar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxCohortVar.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxCohortVar.Name = "comboBoxCohortVar";
             this.comboBoxCohortVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxCohortVar.Size = new System.Drawing.Size(88, 21);
@@ -960,7 +960,7 @@ namespace LANDIS_II_Site
             this.comboBoxCohortName.Items.AddRange(new object[] {
             "Cohort 1"});
             this.comboBoxCohortName.Location = new System.Drawing.Point(591, 37);
-            this.comboBoxCohortName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxCohortName.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxCohortName.Name = "comboBoxCohortName";
             this.comboBoxCohortName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxCohortName.Size = new System.Drawing.Size(88, 21);
@@ -969,7 +969,7 @@ namespace LANDIS_II_Site
             // zedGraphControlCohorts
             // 
             this.zedGraphControlCohorts.Location = new System.Drawing.Point(0, 2);
-            this.zedGraphControlCohorts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlCohorts.Margin = new System.Windows.Forms.Padding(4);
             this.zedGraphControlCohorts.Name = "zedGraphControlCohorts";
             this.zedGraphControlCohorts.ScrollGrace = 0D;
             this.zedGraphControlCohorts.ScrollMaxX = 0D;
@@ -986,9 +986,9 @@ namespace LANDIS_II_Site
             this.tabPageCompare.Controls.Add(this.checkedListBoxCompare);
             this.tabPageCompare.Controls.Add(this.zedGraphControlCompare);
             this.tabPageCompare.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCompare.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageCompare.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageCompare.Name = "tabPageCompare";
-            this.tabPageCompare.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageCompare.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageCompare.Size = new System.Drawing.Size(692, 254);
             this.tabPageCompare.TabIndex = 6;
             this.tabPageCompare.Text = "Compare";
@@ -1004,7 +1004,7 @@ namespace LANDIS_II_Site
             "Fol(gDW)",
             "CWD(gDW_m2)"});
             this.checkedListBoxCompare.Location = new System.Drawing.Point(602, 16);
-            this.checkedListBoxCompare.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxCompare.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBoxCompare.Name = "checkedListBoxCompare";
             this.checkedListBoxCompare.Size = new System.Drawing.Size(91, 105);
             this.checkedListBoxCompare.TabIndex = 49;
@@ -1013,7 +1013,7 @@ namespace LANDIS_II_Site
             // zedGraphControlCompare
             // 
             this.zedGraphControlCompare.Location = new System.Drawing.Point(0, 2);
-            this.zedGraphControlCompare.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlCompare.Margin = new System.Windows.Forms.Padding(4);
             this.zedGraphControlCompare.Name = "zedGraphControlCompare";
             this.zedGraphControlCompare.ScrollGrace = 0D;
             this.zedGraphControlCompare.ScrollMaxX = 0D;
@@ -1031,9 +1031,9 @@ namespace LANDIS_II_Site
             this.tabPageDiagnosis.Controls.Add(this.comboBoxCalibrationVar);
             this.tabPageDiagnosis.Controls.Add(this.zedGraphControlCalibration);
             this.tabPageDiagnosis.Location = new System.Drawing.Point(4, 22);
-            this.tabPageDiagnosis.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageDiagnosis.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageDiagnosis.Name = "tabPageDiagnosis";
-            this.tabPageDiagnosis.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageDiagnosis.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageDiagnosis.Size = new System.Drawing.Size(692, 254);
             this.tabPageDiagnosis.TabIndex = 8;
             this.tabPageDiagnosis.Text = "Calibration";
@@ -1054,7 +1054,7 @@ namespace LANDIS_II_Site
             this.comboBoxCalibrationVar.Items.AddRange(new object[] {
             "Variable 1"});
             this.comboBoxCalibrationVar.Location = new System.Drawing.Point(597, 41);
-            this.comboBoxCalibrationVar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxCalibrationVar.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxCalibrationVar.Name = "comboBoxCalibrationVar";
             this.comboBoxCalibrationVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxCalibrationVar.Size = new System.Drawing.Size(88, 21);
@@ -1064,7 +1064,7 @@ namespace LANDIS_II_Site
             // zedGraphControlCalibration
             // 
             this.zedGraphControlCalibration.Location = new System.Drawing.Point(0, 2);
-            this.zedGraphControlCalibration.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zedGraphControlCalibration.Margin = new System.Windows.Forms.Padding(4);
             this.zedGraphControlCalibration.Name = "zedGraphControlCalibration";
             this.zedGraphControlCalibration.ScrollGrace = 0D;
             this.zedGraphControlCalibration.ScrollMaxX = 0D;
@@ -1092,9 +1092,9 @@ namespace LANDIS_II_Site
             this.groupBoxInitialCommunity.Controls.Add(this.dataGridViewInitialComm);
             this.groupBoxInitialCommunity.Controls.Add(this.btAddCohortSpp);
             this.groupBoxInitialCommunity.Location = new System.Drawing.Point(405, 79);
-            this.groupBoxInitialCommunity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxInitialCommunity.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxInitialCommunity.Name = "groupBoxInitialCommunity";
-            this.groupBoxInitialCommunity.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxInitialCommunity.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxInitialCommunity.Size = new System.Drawing.Size(205, 96);
             this.groupBoxInitialCommunity.TabIndex = 70;
             this.groupBoxInitialCommunity.TabStop = false;
@@ -1103,7 +1103,7 @@ namespace LANDIS_II_Site
             // btDeleteCohortSpp
             // 
             this.btDeleteCohortSpp.Location = new System.Drawing.Point(184, 39);
-            this.btDeleteCohortSpp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btDeleteCohortSpp.Margin = new System.Windows.Forms.Padding(2);
             this.btDeleteCohortSpp.Name = "btDeleteCohortSpp";
             this.btDeleteCohortSpp.Size = new System.Drawing.Size(16, 23);
             this.btDeleteCohortSpp.TabIndex = 43;
@@ -1120,7 +1120,7 @@ namespace LANDIS_II_Site
             this.CohortAge,
             this.CohortBiomass});
             this.dataGridViewInitialComm.Location = new System.Drawing.Point(4, 15);
-            this.dataGridViewInitialComm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewInitialComm.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewInitialComm.Name = "dataGridViewInitialComm";
             this.dataGridViewInitialComm.RowHeadersWidth = 20;
             this.dataGridViewInitialComm.RowTemplate.Height = 24;
@@ -1155,7 +1155,7 @@ namespace LANDIS_II_Site
             // btAddCohortSpp
             // 
             this.btAddCohortSpp.Location = new System.Drawing.Point(184, 13);
-            this.btAddCohortSpp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btAddCohortSpp.Margin = new System.Windows.Forms.Padding(2);
             this.btAddCohortSpp.Name = "btAddCohortSpp";
             this.btAddCohortSpp.Size = new System.Drawing.Size(16, 23);
             this.btAddCohortSpp.TabIndex = 40;
@@ -1189,7 +1189,7 @@ namespace LANDIS_II_Site
             this.radioButtonOnePara.AutoSize = true;
             this.radioButtonOnePara.Checked = true;
             this.radioButtonOnePara.Location = new System.Drawing.Point(9, 17);
-            this.radioButtonOnePara.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButtonOnePara.Margin = new System.Windows.Forms.Padding(2);
             this.radioButtonOnePara.Name = "radioButtonOnePara";
             this.radioButtonOnePara.Size = new System.Drawing.Size(45, 17);
             this.radioButtonOnePara.TabIndex = 44;
@@ -1208,7 +1208,7 @@ namespace LANDIS_II_Site
             this.dataGridViewTextBoxMin,
             this.dataGridViewTextBoxMax});
             this.dataGridViewDiagMulti.Location = new System.Drawing.Point(13, 54);
-            this.dataGridViewDiagMulti.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewDiagMulti.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewDiagMulti.Name = "dataGridViewDiagMulti";
             this.dataGridViewDiagMulti.RowHeadersWidth = 20;
             this.dataGridViewDiagMulti.RowTemplate.Height = 24;
@@ -1229,7 +1229,7 @@ namespace LANDIS_II_Site
             // 
             this.radioButtonMultiple.AutoSize = true;
             this.radioButtonMultiple.Location = new System.Drawing.Point(10, 34);
-            this.radioButtonMultiple.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButtonMultiple.Margin = new System.Windows.Forms.Padding(2);
             this.radioButtonMultiple.Name = "radioButtonMultiple";
             this.radioButtonMultiple.Size = new System.Drawing.Size(61, 17);
             this.radioButtonMultiple.TabIndex = 45;
@@ -1244,9 +1244,9 @@ namespace LANDIS_II_Site
             this.groupBoxDiagnosis.Controls.Add(this.radioButtonOnePara);
             this.groupBoxDiagnosis.Controls.Add(this.dataGridViewDiagMulti);
             this.groupBoxDiagnosis.Location = new System.Drawing.Point(789, 485);
-            this.groupBoxDiagnosis.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxDiagnosis.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxDiagnosis.Name = "groupBoxDiagnosis";
-            this.groupBoxDiagnosis.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxDiagnosis.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxDiagnosis.Size = new System.Drawing.Size(152, 142);
             this.groupBoxDiagnosis.TabIndex = 68;
             this.groupBoxDiagnosis.TabStop = false;
@@ -1256,7 +1256,7 @@ namespace LANDIS_II_Site
             // 
             this.radioButtonBayesian.AutoSize = true;
             this.radioButtonBayesian.Location = new System.Drawing.Point(10, 120);
-            this.radioButtonBayesian.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButtonBayesian.Margin = new System.Windows.Forms.Padding(2);
             this.radioButtonBayesian.Name = "radioButtonBayesian";
             this.radioButtonBayesian.Size = new System.Drawing.Size(119, 17);
             this.radioButtonBayesian.TabIndex = 46;
@@ -1269,7 +1269,7 @@ namespace LANDIS_II_Site
             this.checkedListBoxReference.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.checkedListBoxReference.FormattingEnabled = true;
             this.checkedListBoxReference.Location = new System.Drawing.Point(713, 711);
-            this.checkedListBoxReference.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBoxReference.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBoxReference.Name = "checkedListBoxReference";
             this.checkedListBoxReference.Size = new System.Drawing.Size(88, 32);
             this.checkedListBoxReference.TabIndex = 72;
@@ -1282,9 +1282,9 @@ namespace LANDIS_II_Site
             this.groupBox2.Controls.Add(this.dataGridViewDiameterTable);
             this.groupBox2.Cursor = System.Windows.Forms.Cursors.Default;
             this.groupBox2.Location = new System.Drawing.Point(765, 176);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(175, 177);
             this.groupBox2.TabIndex = 74;
             this.groupBox2.TabStop = false;
@@ -1293,7 +1293,7 @@ namespace LANDIS_II_Site
             // btDeleteDiameter
             // 
             this.btDeleteDiameter.Location = new System.Drawing.Point(160, 63);
-            this.btDeleteDiameter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btDeleteDiameter.Margin = new System.Windows.Forms.Padding(2);
             this.btDeleteDiameter.Name = "btDeleteDiameter";
             this.btDeleteDiameter.Size = new System.Drawing.Size(14, 23);
             this.btDeleteDiameter.TabIndex = 45;
@@ -1304,7 +1304,7 @@ namespace LANDIS_II_Site
             // btAddDiameter
             // 
             this.btAddDiameter.Location = new System.Drawing.Point(160, 26);
-            this.btAddDiameter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btAddDiameter.Margin = new System.Windows.Forms.Padding(2);
             this.btAddDiameter.Name = "btAddDiameter";
             this.btAddDiameter.Size = new System.Drawing.Size(12, 23);
             this.btAddDiameter.TabIndex = 44;
@@ -1324,7 +1324,7 @@ namespace LANDIS_II_Site
             this.Diameter});
             this.dataGridViewDiameterTable.Cursor = System.Windows.Forms.Cursors.Default;
             this.dataGridViewDiameterTable.Location = new System.Drawing.Point(4, 17);
-            this.dataGridViewDiameterTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewDiameterTable.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewDiameterTable.Name = "dataGridViewDiameterTable";
             this.dataGridViewDiameterTable.RowHeadersWidth = 20;
             this.dataGridViewDiameterTable.RowTemplate.Height = 24;
@@ -1365,9 +1365,9 @@ namespace LANDIS_II_Site
             this.groupBox4.Controls.Add(this.dataGridViewMassAllo);
             this.groupBox4.Cursor = System.Windows.Forms.Cursors.Default;
             this.groupBox4.Location = new System.Drawing.Point(765, 356);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(175, 121);
             this.groupBox4.TabIndex = 76;
             this.groupBox4.TabStop = false;
@@ -1415,7 +1415,7 @@ namespace LANDIS_II_Site
             this.Column9});
             this.dataGridViewMassAllo.Cursor = System.Windows.Forms.Cursors.Default;
             this.dataGridViewMassAllo.Location = new System.Drawing.Point(4, 36);
-            this.dataGridViewMassAllo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewMassAllo.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewMassAllo.Name = "dataGridViewMassAllo";
             this.dataGridViewMassAllo.RowHeadersWidth = 20;
             this.dataGridViewMassAllo.RowTemplate.Height = 24;
@@ -1474,9 +1474,9 @@ namespace LANDIS_II_Site
             this.groupBox6.Controls.Add(this.textBoxGSO1);
             this.groupBox6.Controls.Add(this.label3);
             this.groupBox6.Location = new System.Drawing.Point(617, 7);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox6.Size = new System.Drawing.Size(219, 55);
             this.groupBox6.TabIndex = 66;
             this.groupBox6.TabStop = false;
@@ -1575,7 +1575,7 @@ namespace LANDIS_II_Site
             this.Controls.Add(this.groupBoxInitialCommunity);
             this.Controls.Add(this.groupBoxDiagnosis);
             this.Controls.Add(this.checkedListBoxReference);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormDensity";
             this.Text = "FormBiomass";
             this.groupBoxPara.ResumeLayout(false);

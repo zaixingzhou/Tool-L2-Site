@@ -1,20 +1,20 @@
 LandisData  "Scenario"
 
-Duration  100
+Duration  300
 
-Species         site_Species.txt
+Species         site_SpeciesCore.txt
 Ecoregions      site_Ecoregions.txt
 EcoregionsMap   site_EcoregionsMap.img
 CellLength  100 << meters, 100 x 100 m = 1 ha
 
 >> Succession Extension     Initialization File
 >> --------------------     -------------------
-"Density-Succession"    site_Succession.txt
+"Biomass Succession"    site_Succession.txt
 
 >> Disturbance Extensions     Initialization File
 >> --------------------     -------------------
 
 >> Output Extensions     Initialization File
 >> --------------------     -------------------
-"Density Output"     site_Output_Extension.txt
+"Output Biomass"     site_Output_Extension.txt
 

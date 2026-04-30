@@ -2858,7 +2858,7 @@ namespace LANDIS_II_Site
             List<int> points = new List<int>();  // the years of composition
             for (int i = 0; i < timepoint + 1; i++)
             {
-                // points.Add(startyr + i * timeinterval - 1);// minus 1 to include the final year of simulation
+                 points.Add(1 + i * timeinterval - 1);// minus 1 to include the final year of simulation
 
             }
 
@@ -2933,7 +2933,7 @@ namespace LANDIS_II_Site
 
             //var zz = RecordscohortYvar;
             // Specify the file path
-            string filePath = Path.Combine(InterDirectory, "composition.csv");
+            string filePath = Path.Combine(InterDirectory, "composition2.csv");
 
             // Save the list of dictionaries to a CSV file
             ListDictionaryToCsv(RecordscohortYvar, filePath);
