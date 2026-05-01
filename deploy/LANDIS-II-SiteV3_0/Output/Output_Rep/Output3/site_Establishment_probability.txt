@@ -1,6 +1,0 @@
-LandisData  "Dynamic Input Data"
-
->> Year Landtype Species ProbEst
->>---------------------------------------------------
-0   eco999 pinubank 0.22
-0   eco999 querrubr 1.0
