@@ -103,6 +103,8 @@ namespace LANDIS_II_Site
             this.checkedListBoxCompare = new System.Windows.Forms.CheckedListBox();
             this.zedGraphControlCompare = new ZedGraph.ZedGraphControl();
             this.tabPageDiagnosis = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.comboBoxCalibrationSppVar = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.comboBoxCalibrationVar = new System.Windows.Forms.ComboBox();
             this.zedGraphControlCalibration = new ZedGraph.ZedGraphControl();
@@ -141,8 +143,6 @@ namespace LANDIS_II_Site
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonResetInput = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.comboBoxCalibrationSppVar = new System.Windows.Forms.ComboBox();
             this.groupBoxPara.SuspendLayout();
             this.groupBoxEcoPara.SuspendLayout();
             this.groupBoxSppGeneric.SuspendLayout();
@@ -344,7 +344,8 @@ namespace LANDIS_II_Site
             this.cbSeedingAlg.FormattingEnabled = true;
             this.cbSeedingAlg.Items.AddRange(new object[] {
             "WardSeedDispersal",
-            "UniversalDispersal "});
+            "UniversalDispersal",
+            "NoDispersal"});
             this.cbSeedingAlg.Location = new System.Drawing.Point(70, 78);
             this.cbSeedingAlg.Margin = new System.Windows.Forms.Padding(2);
             this.cbSeedingAlg.Name = "cbSeedingAlg";
@@ -1045,6 +1046,28 @@ namespace LANDIS_II_Site
             this.tabPageDiagnosis.Text = "Calibration";
             this.tabPageDiagnosis.UseVisualStyleBackColor = true;
             // 
+            // label14
+            // 
+            this.label14.Location = new System.Drawing.Point(605, 85);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(67, 19);
+            this.label14.TabIndex = 57;
+            this.label14.Text = "Spp Variable";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBoxCalibrationSppVar
+            // 
+            this.comboBoxCalibrationSppVar.FormattingEnabled = true;
+            this.comboBoxCalibrationSppVar.Items.AddRange(new object[] {
+            "Variable 1"});
+            this.comboBoxCalibrationSppVar.Location = new System.Drawing.Point(597, 106);
+            this.comboBoxCalibrationSppVar.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxCalibrationSppVar.Name = "comboBoxCalibrationSppVar";
+            this.comboBoxCalibrationSppVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBoxCalibrationSppVar.Size = new System.Drawing.Size(88, 21);
+            this.comboBoxCalibrationSppVar.TabIndex = 56;
+            this.comboBoxCalibrationSppVar.SelectedIndexChanged += new System.EventHandler(this.comboBoxCalibrationSppVar_SelectedIndexChanged);
+            // 
             // label11
             // 
             this.label11.Location = new System.Drawing.Point(605, 20);
@@ -1471,28 +1494,6 @@ namespace LANDIS_II_Site
             this.buttonResetInput.Text = "Reset Input";
             this.buttonResetInput.UseVisualStyleBackColor = true;
             this.buttonResetInput.Click += new System.EventHandler(this.buttonResetInput_Click);
-            // 
-            // label14
-            // 
-            this.label14.Location = new System.Drawing.Point(605, 85);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(67, 19);
-            this.label14.TabIndex = 57;
-            this.label14.Text = "Spp Variable";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // comboBoxCalibrationSppVar
-            // 
-            this.comboBoxCalibrationSppVar.FormattingEnabled = true;
-            this.comboBoxCalibrationSppVar.Items.AddRange(new object[] {
-            "Variable 1"});
-            this.comboBoxCalibrationSppVar.Location = new System.Drawing.Point(597, 106);
-            this.comboBoxCalibrationSppVar.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBoxCalibrationSppVar.Name = "comboBoxCalibrationSppVar";
-            this.comboBoxCalibrationSppVar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.comboBoxCalibrationSppVar.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxCalibrationSppVar.TabIndex = 56;
-            this.comboBoxCalibrationSppVar.SelectedIndexChanged += new System.EventHandler(this.comboBoxCalibrationSppVar_SelectedIndexChanged);
             // 
             // FormBiomass
             // 

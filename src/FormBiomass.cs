@@ -2087,9 +2087,9 @@ namespace LANDIS_II_Site
                 {
                     if (key.Contains('_'))
                     {
-                        string[] para = key.Split('_');
-                        Color c = colorPalette[i];
-                        string item = para[0] + "_ref";
+                        //string[] para = key.Split('_');
+                        //Color c = colorPalette[i];
+                        //string item = para[0] + "_ref";
                         //CreateGraphRef(RecordsRef, Xvar, key, c,para[1]);// create dot graph
                         checkedListBoxReference.Items.Add(key);
                     }
@@ -2898,15 +2898,16 @@ namespace LANDIS_II_Site
             if (e.NewValue == CheckState.Checked)
             {
                 Color c = colorPalette[e.Index];
-                string[] para = selectedItem.Split('_');
-                CreateGraphRef(RecordsRef, Xvar, selectedItem, c, para[1]);// create dot graph
+                string[] para = selectedItem.Split('_');                
+                CreateGraphRef(RecordsRef, Xvar, selectedItem, c, para[para.Length - 1]);// create dot graph
             }
             else
             {
                 // Clear Data
                 string[] para = selectedItem.Split('_');
+                //string para = selectedItem;
 
-                ZedGraphControl zgc = MatchZedGraph(para[1]);
+                ZedGraphControl zgc = MatchZedGraph(para[para.Length - 1]);
                 GraphPane myPane = zgc.GraphPane;
 
                 CurveItem curve = myPane.CurveList[selectedItem];

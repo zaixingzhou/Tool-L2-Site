@@ -2829,7 +2829,7 @@ namespace LANDIS_II_Site
             {
                 Color c = colorPalette[e.Index];
                 string[] para = selectedItem.Split('_');
-                CreateGraphRef(RecordsRef, Xvar, selectedItem, c, para[1]);// create dot graph
+                CreateGraphRef(RecordsRef, Xvar, selectedItem, c, para[para.Length - 1]);// create dot graph
             }
             else
             {

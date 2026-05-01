@@ -370,7 +370,8 @@ namespace LANDIS_II_Site
             this.cbSeedingAlg.Items.AddRange(new object[] {
             "WardSeedDispersal",
             "UniversalDispersal",
-            "DensitySeeding"});
+            "DensitySeeding",
+            "NoDispersal"});
             this.cbSeedingAlg.Location = new System.Drawing.Point(70, 78);
             this.cbSeedingAlg.Margin = new System.Windows.Forms.Padding(2);
             this.cbSeedingAlg.Name = "cbSeedingAlg";

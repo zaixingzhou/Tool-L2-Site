@@ -1194,7 +1194,8 @@ namespace LANDIS_II_Site
             this.cbSeedingAlg.FormattingEnabled = true;
             this.cbSeedingAlg.Items.AddRange(new object[] {
             "WardSeedDispersal",
-            "UniversalDispersal "});
+            "UniversalDispersal",
+            "NoDispersal"});
             this.cbSeedingAlg.Location = new System.Drawing.Point(70, 94);
             this.cbSeedingAlg.Margin = new System.Windows.Forms.Padding(2);
             this.cbSeedingAlg.Name = "cbSeedingAlg";
