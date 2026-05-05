@@ -16,6 +16,7 @@ namespace LANDIS_II_Site
     public partial class FormBiomass : Form
     {
         public FormOutputBiomass OutputForm = new FormOutputBiomass();
+        public FormDistHarvest DistHarvest = new FormDistHarvest();
 
         private string InterDirectory
 
@@ -76,6 +77,7 @@ namespace LANDIS_II_Site
             //cbOutputBiomass.Checked = false;
             //cbOutputBiomass_CheckedChanged(cbOutputBiomass, EventArgs.Empty);  // manurally set
             //OutputForm.Hide();// hide it when open the app
+
         }
 
 
@@ -1026,7 +1028,7 @@ namespace LANDIS_II_Site
             //filePath = "Inter\Site_input.csv"; // Path to the file
             string SuccessionOption = "Biomass"; // set for different succession extension
 
-            string Fieldname = " ";
+            string Fieldname = null;
 
             using (StreamWriter writer = new StreamWriter(filePath))
             {
@@ -1128,6 +1130,26 @@ namespace LANDIS_II_Site
                 SaveDataGridViewToCsv(writer, dataGridViewSppEcophysi);
 
 
+                //////////////// save disturbance extension input
+                foreach (var item in checkedListBoxDisturbance.CheckedItems)
+                {
+                    
+                    string value = item.ToString();
+                    writer.WriteLine(strseperater + $"Disturbance Parameters for {value}");
+                    if (value == "Harvest") 
+                    {
+                        writer.WriteLine($"Timestep,{DistHarvest.tbTimestep.Text}");
+                        SaveDataGridViewToCsv(writer, DistHarvest.dataGridViewDistHarvest);
+                    }
+                }
+
+                //////////////// save output extension input
+                if (cbOutputBiomass.Checked)
+                {
+                    writer.WriteLine(strseperater + $"Output Parameters for Output Biomass");
+                    writer.WriteLine($"Timestep,{OutputForm.tbTimestep.Text}");                    
+                    
+                }
 
             }
             //MessageBox.Show("Data saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1483,6 +1505,59 @@ namespace LANDIS_II_Site
                 dataGridViewSppEcophysi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 // MessageBox.Show(zzx, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                // Disturbance extension parameters
+                foreach (var item in checkedListBoxDisturbance.CheckedItems)
+                {
+                    string value = item.ToString();
+                    if (value == "Harvest")
+                    {
+                        DistHarvest.dataGridViewDistHarvest.Rows.Clear();
+                        DistHarvest.dataGridViewDistHarvest.Columns.Clear();              
+                        for (int i = startline; i < lines.Length; i++)
+                        {
+                            if (lines[i].Contains(searchPhrase))
+                            {
+                                startline = i + 1;  // new start line
+                                break;
+                            }
+                            values = lines[i].Split(',');
+                            if (values[0] == "Timestep") DistHarvest.tbTimestep.Text = values[1];
+
+                            // Harvest table
+                            if (values[0] == "Prescription") 
+                            {
+                                foreach (string col in values)
+                                {
+                                    DistHarvest.dataGridViewDistHarvest.Columns.Add(col, col);
+                                
+                                }// first line is the headers for column names                           
+                            
+                            }
+                            if (i > startline+1)DistHarvest.dataGridViewDistHarvest.Rows.Add(values);                           
+                                                    }
+                    } 
+
+                }
+
+                // output extension parameters
+                if (cbOutputBiomass.Checked)
+                {
+                    // Output extension parameters
+                    for (int i = startline; i < lines.Length; i++)
+                    {
+                        if (lines[i].Contains(searchPhrase))
+                        {
+                            startline = i + 1;  // new start line
+                            break;
+                        }
+                        values = lines[i].Split(',');
+                        if (values[0] == "Timestep") OutputForm.tbTimestep.Text = values[1];
+                    }
+                }
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -1601,8 +1676,20 @@ namespace LANDIS_II_Site
                 foreach (var item in checkedListBoxDisturbance.CheckedItems)
                 {
                     string value = item.ToString();
-                    string strout = "\"" + value + "\"" + "     " + "site_" + value + ".txt";
+                    if (value == "Harvest")
+                    {
+                        successiontext = "Biomass Harvest";
+                        BuildHarvestExtension(); // build the harvest extension input files
+                    }
+                    else if (value == "Fire")
+                    { 
+                        successiontext = "Fire";
+                        //BuildHarvestExtension(); // build the Fire extension input files
+                    }
+                    string strout = "\"" + successiontext + "\"" + "    site_" + value + ".txt";
                     writer.WriteLine(strout);
+
+
                 }
 
                 // if (cbRandSeed.Checked) writer.WriteLine($"DisturbancesRandomOrder  {tbRandSeed.Text}");
@@ -1952,6 +2039,80 @@ namespace LANDIS_II_Site
 
                 writer.WriteLine($"DeadPools   {OutputForm.comboBoxDeadPool.Text}"); // empty line
                 writer.WriteLine("MapNames  outputs/biomass/biomass-{pool}-{timestep}.tif"); // empty line
+            }
+
+
+            ///////////////////////////////////// end of
+
+        }
+
+        private void BuildHarvestExtension()
+        {
+            //////////////////// site_Harvest.txt
+            string fileName = "site_Harvest.txt";
+            string filePath = Path.Combine(InputDirectory, fileName);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+
+                // Write the header row
+                writer.WriteLine("LandisData  \"Biomass Harvest\"");
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">>----------------");
+                writer.WriteLine(">> REQUIRED INPUTS");
+                writer.WriteLine(">>----------------");
+
+                writer.WriteLine($"Timestep   {DistHarvest.tbTimestep.Text}"); //            
+                writer.WriteLine("ManagementAreas   ./site_EcoregionsMap.img"); // 
+                writer.WriteLine("Stands            ./site_EcoregionsMap.img"); //
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">>-------------------------");
+                writer.WriteLine(">> HARVESTING PRESCRIPTIONS");
+                writer.WriteLine(">>-------------------------");
+
+                int currentCount = DistHarvest.dataGridViewDistHarvest.RowCount;
+                int currentColCount = DistHarvest.dataGridViewDistHarvest.ColumnCount;
+                for (int i = 0; i < currentCount; i++) // exclude the new row for input
+                {
+                    string prescription = DistHarvest.dataGridViewDistHarvest.Rows[i].Cells["Prescription"].Value?.ToString();
+                    writer.WriteLine($"Prescription  {prescription}");
+                    for (int j = 1; j < currentColCount - 3; j++)
+                    {
+                        string colname = DistHarvest.dataGridViewDistHarvest.Rows[i].Cells[j].Value?.ToString();
+                        string colheader = DistHarvest.dataGridViewDistHarvest.Columns[j].HeaderText;
+                        writer.WriteLine($"{colheader}  {colname}");
+                    }
+                    
+                }
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">>---------------------------");
+                writer.WriteLine(">> HARVESTING IMPLEMENTATION ");
+                writer.WriteLine(">>---------------------------");
+                writer.WriteLine("HarvestImplementations");
+                writer.WriteLine(">>  MgmtArea Prescription  HarvestArea  BeginTime  EndTime");
+
+                for (int i = 0; i < currentCount; i++)
+                {
+                    string prescription = DistHarvest.dataGridViewDistHarvest.Rows[i].Cells["Prescription"].Value?.ToString();
+                    string harvestArea = DistHarvest.dataGridViewDistHarvest.Rows[i].Cells["HarvestArea"].Value?.ToString();
+                    string beginTime = DistHarvest.dataGridViewDistHarvest.Rows[i].Cells["BeginTime"].Value?.ToString();
+                    string endTime = DistHarvest.dataGridViewDistHarvest.Rows[i].Cells["EndTime"].Value?.ToString();
+                    writer.WriteLine($"999  {prescription}  {harvestArea} {beginTime} {endTime}");
+                }
+
+
+
+                writer.WriteLine(); // empty line
+                writer.WriteLine(">>---------------------------");
+                writer.WriteLine(">>   OUTPUTS");
+                writer.WriteLine(">>---------------------------");
+                             
+                writer.WriteLine("PrescriptionMaps    harvest/base-harvest-prescripts-{timestep}.img"); // 
+                //writer.WriteLine("BiomassMaps    harvest/biomass-removed-{timestep}.tif"); // 
+                writer.WriteLine("EventLog            harvest/base-harvest-event-log.csv"); // 
+                writer.WriteLine("SummaryLog     harvest/base-harvest-summary-log.csv"); // 
             }
 
 
@@ -3036,6 +3197,44 @@ namespace LANDIS_II_Site
             LoadInputFromCsv(FileExample);
 
         }
+
+
+        private void checkedListBoxDisturbance_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+
+            var myclb = checkedListBoxDisturbance;
+            Form myForm = null; 
+            // Check which item is toggled
+            string selectedItem = myclb.Items[e.Index].ToString();
+
+            if (selectedItem == "Harvest")
+            {
+                myForm = DistHarvest;
+            }
+            else return; // no form mapped for this item, exit the method
+
+
+            if (myForm == null)
+            {
+                // no form mapped for this item
+                return;
+            }
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                myForm.StartPosition = FormStartPosition.CenterScreen;
+                if (!myForm.Visible) myForm.Show();
+                myForm.BringToFront();
+
+            }
+            else
+            {
+                if (myForm.Visible) myForm.Hide();
+
+            }
+
+        }
+
 
     }
 }

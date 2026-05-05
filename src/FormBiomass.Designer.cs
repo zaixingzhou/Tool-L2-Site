@@ -198,6 +198,7 @@ namespace LANDIS_II_Site
             this.checkedListBoxDisturbance.Name = "checkedListBoxDisturbance";
             this.checkedListBoxDisturbance.Size = new System.Drawing.Size(132, 49);
             this.checkedListBoxDisturbance.TabIndex = 26;
+            this.checkedListBoxDisturbance.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxDisturbance_ItemCheck);
             // 
             // label12
             // 

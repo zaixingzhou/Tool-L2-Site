@@ -13,9 +13,10 @@ CellLength  100 << meters, 100 x 100 m = 1 ha
 
 >> Disturbance Extensions     Initialization File
 >> --------------------     -------------------
+"Biomass Harvest"    site_Harvest.txt
 
 >> Output Extensions     Initialization File
 >> --------------------     -------------------
 "Output Biomass"     site_Output_Extension.txt
 
-RandomNumberSeed  617788279
+RandomNumberSeed  60

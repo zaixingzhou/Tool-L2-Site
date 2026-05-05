@@ -306,7 +306,8 @@ namespace LANDIS_II_Site
                    
                     if (strSuccession == "PnET-Succession") GUIPnET.LoadInputFromCsv(filename);
                     if (strSuccession == "Biomass") GUIBiomass.LoadInputFromCsv(filename);
-                    
+                    if (strSuccession == "Density-Succession") GUIDensity.LoadInputFromCsv(filename);
+
 
 
                 }
@@ -467,6 +468,7 @@ namespace LANDIS_II_Site
             else
             {
                 GUIBiomass.OutputForm.Hide();
+                GUIBiomass.DistHarvest.Hide();
                 if (selectedItem == "PnET-Succession") GUI_PnET();
                 if (selectedItem == "PnET-CN-Succession") GUI_PnET();
                 if (selectedItem == "Density-Succession") GUI_Density();

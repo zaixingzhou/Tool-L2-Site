@@ -2,11 +2,12 @@ LANDIS-II-Site-input
 <<<<<<<<<<<<<<<<<Succession Extension
 SuccessionExtension,Biomass
 <<<<<<<<<<<<<<<<<Disturbance Extension
+Disturb0,Harvest
 <<<<<<<<<<<<<<<<<Output Extension
 OutputExtension,Yes
 <<<<<<<<<<<<<<<<<Other Extension
 <<<<<<<<<<<<<<<<<Simulation Parameters
-SimulationYears,100
+SimulationYears,300
 TimeStep,10
 SeedingAlgorithm,WardSeedDispersal
 RandomSeedCheck,Yes
