@@ -178,32 +178,48 @@ namespace LANDIS_II_Site
             string batFilePath = InputDirectory + "\\site_run.bat";
 
             // Create a new process
-            Process process = new Process
+            using (Process process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = batFilePath,   // Specify the .bat file
-                    UseShellExecute = false, // Do not use the OS shell
-                    CreateNoWindow = true,   // Hide the command prompt window
-                    RedirectStandardOutput = true, // Capture the output
-                    RedirectStandardError = true   // Capture error messages
+                    FileName = batFilePath,   // .bat file
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
                 }
-            };
+            })
+            {
+                try
+                {
+                    process.Start();
 
-            // Start the process
-            process.Start();
+                    // Read outputs (before waiting, to avoid deadlocks on long outputs)
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
 
-            // Optionally, read the output
-            string output = process.StandardOutput.ReadToEnd();
-            string error = process.StandardError.ReadToEnd();
+                    process.WaitForExit();
 
-            // Wait for the process to finish
-            //process.WaitForExit();
+                    // Check exit code
+                    if (process.ExitCode != 0)
+                    {
+                        throw new Exception(
+                            $"Batch file failed with exit code {process.ExitCode}\nError: {output}"
+                        );
+                    }
 
-            // Display the output or errors in a message box
-            //MessageBox.Show($"Output:\n{output}\n\nError:\n{error}", "Batch File Execution");
-
-            // MessageBox.Show($"Model running ends", "Batch File Execution");         
+                    // Console.WriteLine("Batch file ran successfully.");
+                    // Console.WriteLine(output);
+                }
+                catch (Exception ex)
+                {
+                    //Console.WriteLine("Caught an error: " + ex.Message);
+                    //MessageBox.Show($"Output:\n{output}\n\nError:\n{error}", "Batch File Execution");
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Stop execution here:
+                    // Environment.Exit(1); //if you want to terminate the app
+                }
+            }
 
 
         }
