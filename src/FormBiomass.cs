@@ -1213,19 +1213,7 @@ namespace LANDIS_II_Site
 
         }
 
-        private void MenuOpen_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
-                Title = "Open CSV File"
-            };
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                LoadInputFromCsv(openFileDialog.FileName);
-            }
-        }
 
         public void LoadInputFromCsv(string filePath)
         {
@@ -1339,7 +1327,7 @@ namespace LANDIS_II_Site
                     }
 
                     values = lines[i].Split(',');
-                    if (values[0] == "ClimateFile") tbClimateFile.Text = values[1];
+                    if (values[0] == "ClimateFile")tbClimateFile.Text = values[1];
                     if (values[0] == "AET(mm)") tbAET.Text = values[1];
 
                     // if (i > startline + 1) dataGridViewEcoPara.Rows.Add(values); // skip two lines above     

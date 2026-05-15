@@ -14,7 +14,7 @@ RandomSeedSet,1000
 ReplicateCheck,No
 ReplicateNum,30
 <<<<<<<<<<<<<<<<<Ecoregion Parameters
-ClimateFile,C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Inter\Biomass\site_climate.csv
+ClimateFile,.\Inter\Biomass\site_climate.csv
 AET(mm),601
 <<<<<<<<<<<<<<<<<Initial communities
 Species,Age,Biomass
