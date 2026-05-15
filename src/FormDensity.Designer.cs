@@ -139,7 +139,6 @@ namespace LANDIS_II_Site
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonResetInput = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBoxGSO4 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -1454,16 +1453,6 @@ namespace LANDIS_II_Site
             this.Column9.MinimumWidth = 6;
             this.Column9.Name = "Column9";
             // 
-            // buttonResetInput
-            // 
-            this.buttonResetInput.Location = new System.Drawing.Point(872, 728);
-            this.buttonResetInput.Name = "buttonResetInput";
-            this.buttonResetInput.Size = new System.Drawing.Size(73, 28);
-            this.buttonResetInput.TabIndex = 77;
-            this.buttonResetInput.Text = "Reset Input";
-            this.buttonResetInput.UseVisualStyleBackColor = true;
-            this.buttonResetInput.Click += new System.EventHandler(this.buttonResetInput_Click);
-            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.textBoxGSO4);
@@ -1561,7 +1550,6 @@ namespace LANDIS_II_Site
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 774);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.buttonResetInput);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBoxPara);
@@ -1703,7 +1691,6 @@ namespace LANDIS_II_Site
         private System.Windows.Forms.CheckBox cbOutputDensity;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button buttonResetInput;
         private System.Windows.Forms.TextBox tbStartYr;
         private System.Windows.Forms.Label labelStartYr;
         private System.Windows.Forms.TextBox tbLatitude;

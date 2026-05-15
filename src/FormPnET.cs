@@ -2918,12 +2918,14 @@ namespace LANDIS_II_Site
         }
 
 
-        private void buttonResetInput_Click(object sender, EventArgs e)
+        public void ResetInput()
         {
+            // load the example for initilization
             string fileName = "Site_input_example.csv";
             string FileExample = Path.Combine(InterDirectory, fileName);
             LoadInputFromCsv(FileExample);
 
         }
+
     }
 }

@@ -61,6 +61,7 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelExtension = new System.Windows.Forms.Panel();
+            this.buttonResetInput = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -75,8 +76,8 @@
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1249, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(937, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -206,7 +207,7 @@
             this.toolStripButtonUserGuide});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1249, 25);
+            this.toolStrip.Size = new System.Drawing.Size(937, 25);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -268,30 +269,30 @@
             "PnET-Succession",
             "Biomass",
             "Density-Succession"});
-            this.cbSuccessionOption.Location = new System.Drawing.Point(99, 73);
-            this.cbSuccessionOption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbSuccessionOption.Location = new System.Drawing.Point(74, 59);
+            this.cbSuccessionOption.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbSuccessionOption.Name = "cbSuccessionOption";
             this.cbSuccessionOption.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cbSuccessionOption.Size = new System.Drawing.Size(224, 24);
+            this.cbSuccessionOption.Size = new System.Drawing.Size(169, 21);
             this.cbSuccessionOption.TabIndex = 3;
             this.cbSuccessionOption.SelectedIndexChanged += new System.EventHandler(this.cbSuccessionOption_SelectedIndexChanged);
             // 
             // labelSuccession
             // 
-            this.labelSuccession.Location = new System.Drawing.Point(2, 72);
+            this.labelSuccession.Location = new System.Drawing.Point(2, 58);
             this.labelSuccession.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.labelSuccession.Name = "labelSuccession";
-            this.labelSuccession.Size = new System.Drawing.Size(92, 28);
+            this.labelSuccession.Size = new System.Drawing.Size(69, 23);
             this.labelSuccession.TabIndex = 25;
             this.labelSuccession.Text = "Succession";
             this.labelSuccession.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // buttonRunModel
             // 
-            this.buttonRunModel.Location = new System.Drawing.Point(351, 70);
-            this.buttonRunModel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonRunModel.Location = new System.Drawing.Point(263, 57);
+            this.buttonRunModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonRunModel.Name = "buttonRunModel";
-            this.buttonRunModel.Size = new System.Drawing.Size(103, 29);
+            this.buttonRunModel.Size = new System.Drawing.Size(77, 24);
             this.buttonRunModel.TabIndex = 43;
             this.buttonRunModel.Text = "Run";
             this.toolTip.SetToolTip(this.buttonRunModel, "Run the model");
@@ -300,10 +301,10 @@
             // 
             // buttonLandislog
             // 
-            this.buttonLandislog.Location = new System.Drawing.Point(501, 71);
-            this.buttonLandislog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonLandislog.Location = new System.Drawing.Point(376, 58);
+            this.buttonLandislog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonLandislog.Name = "buttonLandislog";
-            this.buttonLandislog.Size = new System.Drawing.Size(116, 29);
+            this.buttonLandislog.Size = new System.Drawing.Size(87, 24);
             this.buttonLandislog.TabIndex = 50;
             this.buttonLandislog.Text = "Landis-log";
             this.toolTip.SetToolTip(this.buttonLandislog, "Landis-log");
@@ -312,17 +313,31 @@
             // 
             // panelExtension
             // 
-            this.panelExtension.Location = new System.Drawing.Point(2, 104);
+            this.panelExtension.Location = new System.Drawing.Point(2, 84);
+            this.panelExtension.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelExtension.Name = "panelExtension";
-            this.panelExtension.Size = new System.Drawing.Size(1222, 422);
+            this.panelExtension.Size = new System.Drawing.Size(916, 343);
             this.panelExtension.TabIndex = 49;
+            // 
+            // buttonResetInput
+            // 
+            this.buttonResetInput.Location = new System.Drawing.Point(788, 57);
+            this.buttonResetInput.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonResetInput.Name = "buttonResetInput";
+            this.buttonResetInput.Size = new System.Drawing.Size(87, 24);
+            this.buttonResetInput.TabIndex = 51;
+            this.buttonResetInput.Text = "Reset Input";
+            this.toolTip.SetToolTip(this.buttonResetInput, "Landis-log");
+            this.buttonResetInput.UseVisualStyleBackColor = true;
+            this.buttonResetInput.Click += new System.EventHandler(this.buttonResetInput_Click);
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1249, 570);
+            this.ClientSize = new System.Drawing.Size(937, 463);
+            this.Controls.Add(this.buttonResetInput);
             this.Controls.Add(this.buttonLandislog);
             this.Controls.Add(this.cbSuccessionOption);
             this.Controls.Add(this.labelSuccession);
@@ -331,7 +346,7 @@
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormMain";
             this.Text = "LANDIS-II-SiteV3.0";
             this.menuStrip.ResumeLayout(false);
@@ -376,6 +391,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemLUI;
         private System.Windows.Forms.Panel panelExtension;
         private System.Windows.Forms.Button buttonLandislog;
+        private System.Windows.Forms.Button buttonResetInput;
     }
 }
 

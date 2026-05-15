@@ -135,7 +135,6 @@ namespace LANDIS_II_Site
             this.btDeleteSppEcophysiPara = new System.Windows.Forms.Button();
             this.dataGridViewSppEcophysi = new System.Windows.Forms.DataGridView();
             this.btAddSppEcophysiPara = new System.Windows.Forms.Button();
-            this.buttonResetInput = new System.Windows.Forms.Button();
             this.groupBoxDiagnosis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDiagMulti)).BeginInit();
             this.groupBoxInitialCommunity.SuspendLayout();
@@ -1418,22 +1417,11 @@ namespace LANDIS_II_Site
             this.btAddSppEcophysiPara.UseVisualStyleBackColor = true;
             this.btAddSppEcophysiPara.Click += new System.EventHandler(this.btAddSppEcophysiPara_Click);
             // 
-            // buttonResetInput
-            // 
-            this.buttonResetInput.Location = new System.Drawing.Point(804, 446);
-            this.buttonResetInput.Name = "buttonResetInput";
-            this.buttonResetInput.Size = new System.Drawing.Size(88, 27);
-            this.buttonResetInput.TabIndex = 61;
-            this.buttonResetInput.Text = "Reset Input";
-            this.buttonResetInput.UseVisualStyleBackColor = true;
-            this.buttonResetInput.Click += new System.EventHandler(this.buttonResetInput_Click);
-            // 
             // FormPnET
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 773);
-            this.Controls.Add(this.buttonResetInput);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxDiagnosis);
             this.Controls.Add(this.checkedListBoxReference);
@@ -1588,6 +1576,5 @@ namespace LANDIS_II_Site
         private System.Windows.Forms.Button btAddSppEcophysiPara;
         private System.Windows.Forms.CheckBox checkBoxPnETCN;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button buttonResetInput;
     }
 }

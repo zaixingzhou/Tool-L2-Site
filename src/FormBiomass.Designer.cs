@@ -142,7 +142,6 @@ namespace LANDIS_II_Site
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonResetInput = new System.Windows.Forms.Button();
             this.groupBoxPara.SuspendLayout();
             this.groupBoxEcoPara.SuspendLayout();
             this.groupBoxSppGeneric.SuspendLayout();
@@ -337,7 +336,7 @@ namespace LANDIS_II_Site
             this.tbRandSeed.Name = "tbRandSeed";
             this.tbRandSeed.Size = new System.Drawing.Size(72, 20);
             this.tbRandSeed.TabIndex = 29;
-            this.tbRandSeed.Text = "617788279";
+            this.tbRandSeed.Text = "1000";
             this.tbRandSeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // cbSeedingAlg
@@ -1486,22 +1485,11 @@ namespace LANDIS_II_Site
             this.Column10.MinimumWidth = 6;
             this.Column10.Name = "Column10";
             // 
-            // buttonResetInput
-            // 
-            this.buttonResetInput.Location = new System.Drawing.Point(823, 639);
-            this.buttonResetInput.Name = "buttonResetInput";
-            this.buttonResetInput.Size = new System.Drawing.Size(73, 28);
-            this.buttonResetInput.TabIndex = 77;
-            this.buttonResetInput.Text = "Reset Input";
-            this.buttonResetInput.UseVisualStyleBackColor = true;
-            this.buttonResetInput.Click += new System.EventHandler(this.buttonResetInput_Click);
-            // 
             // FormBiomass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 774);
-            this.Controls.Add(this.buttonResetInput);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -1668,7 +1656,6 @@ namespace LANDIS_II_Site
         private System.Windows.Forms.CheckBox cbOutputBiomass;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button buttonResetInput;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox comboBoxCalibrationSppVar;
     }

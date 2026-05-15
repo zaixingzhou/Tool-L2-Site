@@ -539,6 +539,23 @@ namespace LANDIS_II_Site
 
         }
 
+        private void buttonResetInput_Click(object sender, EventArgs e)
+        {
+            if (InputSuccession == "Biomass")
+            {
+                GUIBiomass.ResetInput();
+            }
+            if (InputSuccession == "PnET-Succession")
+            {
+                GUIPnET.ResetInput();
+            }
+            if (InputSuccession == "Density-Succession")
+            {
+                GUIDensity.ResetInput();
+
+            }
+
+        }
     }
 }
 

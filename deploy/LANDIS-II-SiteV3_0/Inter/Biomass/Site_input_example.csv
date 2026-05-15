@@ -10,7 +10,7 @@ SimulationYears,300
 TimeStep,10
 SeedingAlgorithm,WardSeedDispersal
 RandomSeedCheck,Yes
-RandomSeedSet,617788279
+RandomSeedSet,1000
 ReplicateCheck,No
 ReplicateNum,30
 <<<<<<<<<<<<<<<<<Ecoregion Parameters
