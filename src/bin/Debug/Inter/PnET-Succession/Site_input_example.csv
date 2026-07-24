@@ -15,7 +15,7 @@ RandomSeedSet,617788279
 ReplicateCheck,No
 ReplicateNum,10
 <<<<<<<<<<<<<<<<<Ecoregion Parameters
-ClimateFile,C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Inter\PnET-Succession\site_climate_example.txt
+ClimateFile,.\Inter\PnET-Succession\site_climate_example.txt
 Latitude,42
 <<<<<<<<<<<<<<<<<Initial communities
 Species,Age1,Age2,Age3

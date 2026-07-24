@@ -41,7 +41,6 @@
             this.MenuSaveOutput = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBuildLandisInput = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuScenarios = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemLUI = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuUserGuide = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,10 +57,10 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.buttonRunModel = new System.Windows.Forms.Button();
             this.buttonLandislog = new System.Windows.Forms.Button();
+            this.buttonResetInput = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panelExtension = new System.Windows.Forms.Panel();
-            this.buttonResetInput = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -145,7 +144,6 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuBuildLandisInput,
-            this.MenuScenarios,
             this.ToolStripMenuItemLUI});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
@@ -157,13 +155,6 @@
             this.MenuBuildLandisInput.Size = new System.Drawing.Size(231, 22);
             this.MenuBuildLandisInput.Text = "&Build LANDIS Input Package...";
             this.MenuBuildLandisInput.Click += new System.EventHandler(this.MenuBuildLandisInput_Click);
-            // 
-            // MenuScenarios
-            // 
-            this.MenuScenarios.Name = "MenuScenarios";
-            this.MenuScenarios.Size = new System.Drawing.Size(231, 22);
-            this.MenuScenarios.Text = "&Scenarios";
-            this.MenuScenarios.Click += new System.EventHandler(this.MenuScenarios_Click);
             // 
             // ToolStripMenuItemLUI
             // 
@@ -270,7 +261,7 @@
             "Biomass",
             "Density-Succession"});
             this.cbSuccessionOption.Location = new System.Drawing.Point(74, 59);
-            this.cbSuccessionOption.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbSuccessionOption.Margin = new System.Windows.Forms.Padding(2);
             this.cbSuccessionOption.Name = "cbSuccessionOption";
             this.cbSuccessionOption.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbSuccessionOption.Size = new System.Drawing.Size(169, 21);
@@ -290,7 +281,7 @@
             // buttonRunModel
             // 
             this.buttonRunModel.Location = new System.Drawing.Point(263, 57);
-            this.buttonRunModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRunModel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRunModel.Name = "buttonRunModel";
             this.buttonRunModel.Size = new System.Drawing.Size(77, 24);
             this.buttonRunModel.TabIndex = 43;
@@ -302,7 +293,7 @@
             // buttonLandislog
             // 
             this.buttonLandislog.Location = new System.Drawing.Point(376, 58);
-            this.buttonLandislog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLandislog.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLandislog.Name = "buttonLandislog";
             this.buttonLandislog.Size = new System.Drawing.Size(87, 24);
             this.buttonLandislog.TabIndex = 50;
@@ -310,14 +301,6 @@
             this.toolTip.SetToolTip(this.buttonLandislog, "Landis-log");
             this.buttonLandislog.UseVisualStyleBackColor = true;
             this.buttonLandislog.Click += new System.EventHandler(this.buttonLandislog_Click);
-            // 
-            // panelExtension
-            // 
-            this.panelExtension.Location = new System.Drawing.Point(2, 84);
-            this.panelExtension.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.panelExtension.Name = "panelExtension";
-            this.panelExtension.Size = new System.Drawing.Size(916, 343);
-            this.panelExtension.TabIndex = 49;
             // 
             // buttonResetInput
             // 
@@ -330,6 +313,14 @@
             this.toolTip.SetToolTip(this.buttonResetInput, "Landis-log");
             this.buttonResetInput.UseVisualStyleBackColor = true;
             this.buttonResetInput.Click += new System.EventHandler(this.buttonResetInput_Click);
+            // 
+            // panelExtension
+            // 
+            this.panelExtension.Location = new System.Drawing.Point(2, 84);
+            this.panelExtension.Margin = new System.Windows.Forms.Padding(2);
+            this.panelExtension.Name = "panelExtension";
+            this.panelExtension.Size = new System.Drawing.Size(916, 343);
+            this.panelExtension.TabIndex = 49;
             // 
             // FormMain
             // 
@@ -346,7 +337,7 @@
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormMain";
             this.Text = "LANDIS-II-SiteV3.0";
             this.menuStrip.ResumeLayout(false);
@@ -387,7 +378,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonExportOutput;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.Button buttonRunModel;
-        private System.Windows.Forms.ToolStripMenuItem MenuScenarios;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemLUI;
         private System.Windows.Forms.Panel panelExtension;
         private System.Windows.Forms.Button buttonLandislog;

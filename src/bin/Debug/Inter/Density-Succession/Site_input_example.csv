@@ -15,7 +15,7 @@ RandomSeedSet,6177882
 ReplicateCheck,No
 ReplicateNum,5
 <<<<<<<<<<<<<<<<<Ecoregion Parameters
-ClimateFile,C:\Users\zzhou\Documents\GitHub\Tool-L2-Site-ZZ\src\bin\Debug\Inter\Density-Succession\site_Climate.txt
+ClimateFile,.\Inter\Density-Succession\site_Climate.txt
 Latitude,45
 <<<<<<<<<<<<<<<<<Initial communities
 SpeciesName,CohortAge,CohortBiomass,TreeNumber

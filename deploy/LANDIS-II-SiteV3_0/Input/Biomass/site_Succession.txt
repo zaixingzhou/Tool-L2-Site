@@ -2,7 +2,7 @@ LandisData  "Biomass Succession"
 
 >>-------------------------------------
 Timestep          10
-SeedingAlgorithm  WardSeedDispersal
+SeedingAlgorithm  UniversalDispersal
 
 InitialCommunities      site_InitialCommunities.csv
 InitialCommunitiesMap   site_InitialCommunitiesMap.img
