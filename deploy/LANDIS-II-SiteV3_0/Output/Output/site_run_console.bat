@@ -6,8 +6,9 @@ echo Current Directory: %CD%
 cd /d "%~dp0"
 echo Changed to Batch File Directory: %CD%
 
-REM rmdir /s /q output
+rmdir /s /q output
 
-call landis-ii-8 site_Scenario.txt
+REM call landis-ii-8 site_Scenario.txt
+dotnet C:\Users\zzhou\Documents\GitHub\PnET_CN_Succession\Zhou_PnETCN\Core-Model-v7\Tool-Console\src\bin\Debug\Landis.console.dll site_Scenario.txt
 
 pause
