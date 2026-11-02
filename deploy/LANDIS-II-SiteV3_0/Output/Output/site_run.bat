@@ -1,14 +1,24 @@
 @echo off
 
-REM call landis-ii-7 EMS_scenario_pnet.txt
 echo Current Directory: %CD%
 
 cd /d "%~dp0"
-echo Changed to Batch File Directory: %CD%
+echo Changed Directory: %CD%
 
-rmdir /s /q output
+echo Checking LANDIS-II command...
+where landis-ii-8
 
-REM call landis-ii-8 site_Scenario.txt
-dotnet C:\Users\zzhou\Documents\GitHub\PnET_CN_Succession\Zhou_PnETCN\Core-Model-v7\Tool-Console\src\bin\Debug\Landis.console.dll site_Scenario.txt
+echo Running LANDIS-II...
+call landis-ii-8 site_Scenario.txt
 
-exit
+set LANDIS_EXIT=%ERRORLEVEL%
+
+echo LANDIS-II Exit Code: %LANDIS_EXIT%
+
+if not "%LANDIS_EXIT%"=="0" (
+    echo LANDIS-II simulation failed!
+) else (
+    echo LANDIS-II simulation completed successfully.
+)
+
+exit /b %LANDIS_EXIT%
